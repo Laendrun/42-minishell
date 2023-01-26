@@ -9,9 +9,13 @@ BI_DIR = builtins/
 # Libraries
 LIBFT  = libs/libft/
 
-BI_SRC = $(addprefix $(BI_DIR),	)
+BI_SRC = $(addprefix $(BI_DIR),	msh_env.c \
+								)
 
 SRC =	main.c \
+		msh_init.c \
+		msh_env_lst.c \
+		msh_free.c \
 
 OBJ := $(SRC:%.c=%.o)
 BI_OBJ := $(BI_SRC:%.c=%.o)

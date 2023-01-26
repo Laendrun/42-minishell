@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   msh_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/26 13:05:50 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/26 14:09:48 by saeby            ###   ########.fr       */
+/*   Created: 2023/01/26 14:05:37 by saeby             #+#    #+#             */
+/*   Updated: 2023/01/26 14:08:00 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int ac, char **av, char **env)
+int	msh_env(t_msh_data *m_data)
 {
-	char		*rl;
-	t_msh_data	m_data;
+	t_env_list	*tmp;
 
-	(void) ac;
-	(void) av;
-	msh_init(&m_data, env);
-	printf("\e[1;1H\e[2J");
-	while (1)
+	tmp = m_data->env;
+	while (tmp)
 	{
-		rl_on_new_line();
-		rl = readline(m_data.prompt);
-		add_history(rl);
-		if (ft_strncmp(rl, "exit", 5) == 0)
-			break ;
-		// lexer
-		// parser
-		// free the token before going to next line
+		printf("%s=%s\n", tmp->key, tmp->val);
+		tmp = tmp->next;
 	}
-	msh_free_env(m_data.env);
 	return (SUCCESS);
 }
