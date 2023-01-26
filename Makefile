@@ -19,11 +19,12 @@ SRC =	main.c \
 		msh_lexer.c \
 		msh_lex_quotes.c \
 		msh_lex_operator.c \
-		msh_lex_spec.c \
-		msh_lex_dollar.c \
 		msh_lex_symbol.c \
+		msh_lex_dollar.c \
+		msh_lex_word.c \
 		msh_free.c \
 		msh_is.c \
+		msh_utils.c \
 
 OBJ := $(SRC:%.c=%.o)
 BI_OBJ := $(BI_SRC:%.c=%.o)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_lexer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:12:32 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/26 16:57:06 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/26 20:30:29 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ int	msh_lex(t_msh_data *m_data, char *line)
 		else if (line[i] && (msh_isoperator(line[i])))
 			msh_lex_operator(m_data, line, &i);
 		else if (line[i] && (msh_isspec(line[i])))
-			msh_lex_spec_char(m_data, line, &i);
+			msh_lex_symbol(m_data, line, &i);
 		else if (line[i] && line[i] == '$')
 			msh_lex_dollar(m_data, line, &i);
 		else if (line[i] && ft_isalnum(line[i]))
-			msh_lex_symbol(m_data, line, &i);
+			msh_lex_word(m_data, line, &i);
 		else
 		{
 			printf("unmanaged char: %c\n", line[i]);

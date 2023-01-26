@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:35:46 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/26 14:42:18 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/26 20:29:58 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	msh_init(t_msh_data *m_data, char **env)
 	// init default values
 	m_data->name = "shellusion";
 	m_data->prompt = "shellusion-0.1> ";
+	m_data->env = NULL;
+	m_data->tokens = NULL;
 	// init environment
 	msh_env_init(m_data, env);
 	return (SUCCESS);

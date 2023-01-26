@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:06:06 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/26 16:57:49 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/26 21:03:18 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,32 +19,34 @@
 # include "libft.h"
 
 # define SUCCESS 0
+# define ERROR 1
 
 enum	e_token_types
 {
 	MSH_SEP = 100, // separator => isspace
-	MSH_STR, // string
-	MSH_SYMB, //symbol => text not between quote
-	MSH_DQUOTE, // double quote
-	MSH_SQUOTE, // single quote
-	MSH_PIPE, // pipe
-	MSH_DPIPE, // double pipe
-	MSH_LT, // <
-	MSH_DLT, // <<
-	MSH_GT, // >
-	MSH_DGT, // >>
-	MSH_AMP, // &
-	MSH_DAMP, // &&
-	MSH_DOLLAR, // $
-	MSH_L_BR, // (
-	MSH_R_BR, // )
-	MSH_L_CBR, // {
-	MSH_R_CBR, // }
-	MSH_L_SBR, // [
-	MSH_R_SBR, // ]
-	MSH_MINUS, // -
-	MSH_DMINUS, // --
-	MSH_END
+	MSH_STR, // string / 101
+	MSH_WORD, //word => text not between quote / 102
+	MSH_SYMBOL, // symbol => special characters (. .. , ! + _ @) / 103
+	MSH_DQUOTE, // double quote / 104
+	MSH_SQUOTE, // single quote / 105
+	MSH_PIPE, // pipe / 106
+	MSH_DPIPE, // double pipe / 107
+	MSH_LT, // < / 108
+	MSH_DLT, // << / 109
+	MSH_GT, // > / 110
+	MSH_DGT, // >> / 111
+	MSH_AMP, // & / 112
+	MSH_DAMP, // && / 113
+	MSH_DOLLAR, // $ / 114
+	MSH_L_BR, // ( / 115
+	MSH_R_BR, // ) / 116
+	MSH_L_CBR, // { / 117
+	MSH_R_CBR, // } / 118
+	MSH_L_SBR, // [ / 119
+	MSH_R_SBR, // ] / 120
+	MSH_MINUS, // - / 121
+	MSH_DMINUS, // -- / 122
+	MSH_END // end of line / 123
 };
 
 // ----------------------------------------------
@@ -115,15 +117,15 @@ int			msh_get_op_type(int c);
 int			msh_get_double_op_type(int type);
 
 // ----------------------------------------------
-// msh_lex_spec.c
-// ----------------------------------------------
-int			msh_lex_spec_char(t_msh_data *m_data, char *line, unsigned int *i);
-int			msh_get_spec_type(int c);
-
-// ----------------------------------------------
 // msh_lex_symbol.c
 // ----------------------------------------------
 int			msh_lex_symbol(t_msh_data *m_data, char *line, unsigned int *i);
+int			msh_get_spec_type(int c);
+
+// ----------------------------------------------
+// msh_lex_word.c
+// ----------------------------------------------
+int			msh_lex_word(t_msh_data *m_data, char *line, unsigned int *i);
 
 // ----------------------------------------------
 // msh_lex_dollar.c
@@ -142,6 +144,11 @@ void		msh_free_tok(t_msh_data *m_data);
 int			msh_isspace(int c);
 int			msh_isoperator(int c);
 int			msh_isspec(int c);
+
+// ----------------------------------------------
+// msh_utils.c
+// ----------------------------------------------
+char		*msh_chrdup(int c);
 
 // ----------------------------------------------
 // builtins/msh_env.c
