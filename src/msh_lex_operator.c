@@ -6,13 +6,13 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:35:28 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/26 15:43:26 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/26 16:27:50 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// &, <, >, |, <<, >>, &&, ||
+// &, <, >, |, <<, >>, &&, ||, -
 
 int	msh_lex_operator(t_msh_data *m_data, char *line, unsigned int *i)
 {
@@ -40,6 +40,8 @@ int			msh_get_op_type(int c)
 		return (MSH_LT);
 	if (c == '>')
 		return (MSH_GT);
+	if (c == '-')
+		return (MSH_MINUS);
 	return (MSH_PIPE);
 }
 
@@ -51,5 +53,7 @@ int			msh_get_double_op_type(int type)
 		return (MSH_DLT);
 	if (type == MSH_GT)
 		return (MSH_DGT);
+	if (type == MSH_MINUS)
+		return (MSH_DMINUS);
 	return (MSH_DPIPE);
 }

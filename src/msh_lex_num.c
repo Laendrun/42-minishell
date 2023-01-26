@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_is.c                                           :+:      :+:    :+:   */
+/*   msh_lex_num.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/26 14:34:05 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/26 16:28:47 by saeby            ###   ########.fr       */
+/*   Created: 2023/01/26 16:19:55 by saeby             #+#    #+#             */
+/*   Updated: 2023/01/26 16:29:15 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	msh_isspace(int c)
+int	msh_lex_num(t_msh_data *m_data, char *line, unsigned int *i)
 {
-	return (c == 9 || c == 10 || c == 11 || c == 12 || c == 13 || c == 32);
-}
+	unsigned int	t;
 
-int	msh_isoperator(int c)
-{
-	return (c == 38 || c == 60 || c == 62 || c == 124 || c == 45);
-}
-
-int	msh_isspec(int c)
-{
-	return (c == 40 || c == 41 || c == 123 || c == 125 || c == 91 || c == 93);
+	t = *i;
+	while (ft_isdigit(line[*i]))
+		*i += 1;
+	msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(MSH_NUM, ft_substr(line, t, *i - t)));
+	return (SUCCESS);
 }

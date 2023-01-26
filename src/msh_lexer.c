@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:12:32 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/26 15:57:30 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/26 16:26:55 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int	msh_lex(t_msh_data *m_data, char *line)
 			msh_lex_dollar(m_data, line, &i);
 		else if (line[i] && ft_isalpha(line[i]))
 			msh_lex_symbol(m_data, line, &i);
+		else if (line[i] && ft_isdigit(line[i]))
+			msh_lex_num(m_data, line, &i);
 		else
 		{
 			printf("unmanaged char: %c\n", line[i]);

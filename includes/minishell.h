@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:06:06 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/26 15:53:40 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/26 16:30:31 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,11 @@
 enum	e_token_types
 {
 	MSH_SEP = 100,
+	MSH_STR,
+	MSH_NUM,
+	MSH_SYMB,
 	MSH_DQUOTE,
 	MSH_SQUOTE,
-	MSH_STR,
 	MSH_PIPE,
 	MSH_DPIPE,
 	MSH_LT,
@@ -34,8 +36,6 @@ enum	e_token_types
 	MSH_DGT,
 	MSH_AMP,
 	MSH_DAMP,
-	MSH_SYMB,
-	MSH_PARAM,
 	MSH_DOLLAR,
 	MSH_L_BR,
 	MSH_R_BR,
@@ -43,6 +43,8 @@ enum	e_token_types
 	MSH_R_CBR,
 	MSH_L_SBR,
 	MSH_R_SBR,
+	MSH_MINUS,
+	MSH_DMINUS,
 	MSH_END
 };
 
@@ -128,6 +130,11 @@ int			msh_lex_symbol(t_msh_data *m_data, char *line, unsigned int *i);
 // msh_lex_dollar.c
 // ----------------------------------------------
 int			msh_lex_dollar(t_msh_data *m_data, char *line, unsigned int *i);
+
+// ----------------------------------------------
+// msh_lex_dollar.c
+// ----------------------------------------------
+int			msh_lex_num(t_msh_data *m_data, char *line, unsigned int *i);
 
 // ----------------------------------------------
 // msh_free.c
