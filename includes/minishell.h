@@ -6,7 +6,7 @@
 /*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:06:06 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/26 21:03:18 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/26 22:17:00 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,8 +151,36 @@ int			msh_isspec(int c);
 char		*msh_chrdup(int c);
 
 // ----------------------------------------------
+// msh_env_utils.c
+// ----------------------------------------------
+char		*msh_get_env(t_msh_data *m_data, char *key);
+int			msh_replace_val(t_msh_data *m_data, char *key, char *new_val);
+t_env_list	*msh_env_ptr(t_msh_data *m_data, char *key);
+
+// ----------------------------------------------
 // builtins/msh_env.c
 // ----------------------------------------------
 int			msh_env(t_msh_data *m_data);
+
+// ----------------------------------------------
+// builtins/msh_pwd.c
+// ----------------------------------------------
+int			msh_pwd(t_msh_data *m_data);
+char		*msh_getpwd(t_msh_data *m_data);
+
+// ----------------------------------------------
+// builtins/msh_cd.c
+// ----------------------------------------------
+int			msh_cd(t_msh_data *m_data, char *new_path);
+
+// ----------------------------------------------
+// builtins/msh_exit.c
+// ----------------------------------------------
+void		msh_exit(t_msh_data *m_data, int exit_code);
+
+// ----------------------------------------------
+// builtins/msh_clear.c
+// ----------------------------------------------
+int			msh_clear(t_msh_data *m_data);
 
 #endif

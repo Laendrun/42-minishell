@@ -10,6 +10,10 @@ BI_DIR = builtins/
 LIBFT  = libs/libft/
 
 BI_SRC = $(addprefix $(BI_DIR),	msh_env.c \
+								msh_cd.c \
+								msh_pwd.c \
+								msh_exit.c \
+								msh_clear.c \
 								)
 
 SRC =	main.c \
@@ -25,6 +29,7 @@ SRC =	main.c \
 		msh_free.c \
 		msh_is.c \
 		msh_utils.c \
+		msh_env_utils.c \
 
 OBJ := $(SRC:%.c=%.o)
 BI_OBJ := $(BI_SRC:%.c=%.o)

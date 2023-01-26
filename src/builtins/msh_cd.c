@@ -1,41 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   msh_cd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/26 13:05:50 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/26 22:17:26 by saeby            ###   ########.fr       */
+/*   Created: 2023/01/26 21:23:18 by saeby             #+#    #+#             */
+/*   Updated: 2023/01/26 22:14:28 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int ac, char **av, char **env)
+int	msh_cd(t_msh_data *m_data, char *new_path)
 {
-	char		*rl;
-	t_msh_data	m_data;
+	(void) m_data;
+	char	*dir;
 
-	(void) ac;
-	(void) av;
-	msh_init(&m_data, env);
-	printf("\e[1;1H\e[2J");
-	while (1)
+	dir = new_path;
+	if (dir[0] != '/')
 	{
-		rl_on_new_line();
-		rl = readline(m_data.prompt);
-		add_history(rl);
-		if (ft_strncmp(rl, "exit", 5) == 0)
-			break ;
-		if (ft_strncmp(rl, "clear", 5) == 0)
-			msh_clear(&m_data);
-		msh_lex(&m_data, rl);
-		// parser
-		msh_free_tok(&m_data);
+		ft_strjoin("/", dir);
+		ft_strjoin(msh_getpwd(m_data), dir);
 	}
-	free(rl);
-	msh_free_tok(&m_data);
-	msh_free_env(&m_data);
+	if (chdir(dir) != 0)
+		ft_putstr_fd("Not found.\n", 2);
+	msh_replace_val(m_data, "PWD", getcwd(NULL, 0));
 	return (SUCCESS);
 }
