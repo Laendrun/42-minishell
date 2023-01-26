@@ -15,7 +15,15 @@ BI_SRC = $(addprefix $(BI_DIR),	msh_env.c \
 SRC =	main.c \
 		msh_init.c \
 		msh_env_lst.c \
+		msh_tok_lst.c \
+		msh_lexer.c \
+		msh_lex_quotes.c \
+		msh_lex_operator.c \
+		msh_lex_spec.c \
+		msh_lex_dollar.c \
+		msh_lex_symbol.c \
 		msh_free.c \
+		msh_is.c \
 
 OBJ := $(SRC:%.c=%.o)
 BI_OBJ := $(BI_SRC:%.c=%.o)

@@ -1,41 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_free.c                                         :+:      :+:    :+:   */
+/*   msh_is.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/26 13:59:57 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/26 15:02:24 by saeby            ###   ########.fr       */
+/*   Created: 2023/01/26 14:34:05 by saeby             #+#    #+#             */
+/*   Updated: 2023/01/26 15:46:07 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	msh_free_env(t_msh_data *m_data)
+int	msh_isspace(int c)
 {
-	t_env_list	*tmp;
-
-	while (m_data->env)
-	{
-		tmp = m_data->env->next;
-		free(m_data->env->key);
-		free(m_data->env->val);
-		free(m_data->env);
-		m_data->env = tmp;
-	}
+	return (c == 9 || c == 10 || c == 11 || c == 12 || c == 13 || c == 32);
 }
 
-void	msh_free_tok(t_msh_data *m_data)
+int	msh_isoperator(int c)
 {
-	t_tok_list	*tmp;
+	return (c == 38 || c == 60 || c == 62 || c == 124);
+}
 
-	while (m_data->tokens)
-	{
-		tmp = m_data->tokens->next;
-		if (m_data->tokens->val)
-			free(m_data->tokens->val);
-		free(m_data->tokens);
-		m_data->tokens = tmp;
-	}
+int	msh_isspec(int c)
+{
+	return (c == 40 || c == 41 || c == 123 || c == 125 || c == 91 || c == 93);
 }

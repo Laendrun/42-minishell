@@ -1,41 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_free.c                                         :+:      :+:    :+:   */
+/*   msh_lex_symbol.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/26 13:59:57 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/26 15:02:24 by saeby            ###   ########.fr       */
+/*   Created: 2023/01/26 15:50:11 by saeby             #+#    #+#             */
+/*   Updated: 2023/01/26 15:50:25 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	msh_free_env(t_msh_data *m_data)
+int	msh_lex_symbol(t_msh_data *m_data, char *line, unsigned int *i)
 {
-	t_env_list	*tmp;
+	unsigned int	t;
 
-	while (m_data->env)
-	{
-		tmp = m_data->env->next;
-		free(m_data->env->key);
-		free(m_data->env->val);
-		free(m_data->env);
-		m_data->env = tmp;
-	}
-}
-
-void	msh_free_tok(t_msh_data *m_data)
-{
-	t_tok_list	*tmp;
-
-	while (m_data->tokens)
-	{
-		tmp = m_data->tokens->next;
-		if (m_data->tokens->val)
-			free(m_data->tokens->val);
-		free(m_data->tokens);
-		m_data->tokens = tmp;
-	}
+	t = *i;
+	while (ft_isalnum(line[*i]))
+		*i += 1;
+	msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(MSH_SYMB, ft_substr(line, t, *i - t)));
+	return (SUCCESS);
 }

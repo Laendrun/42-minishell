@@ -1,40 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   msh_lex_spec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/26 13:05:50 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/26 14:47:03 by saeby            ###   ########.fr       */
+/*   Created: 2023/01/26 15:46:25 by saeby             #+#    #+#             */
+/*   Updated: 2023/01/26 15:48:53 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int ac, char **av, char **env)
-{
-	char		*rl;
-	t_msh_data	m_data;
+// (, ), {, }, [, ]
 
-	(void) ac;
-	(void) av;
-	msh_init(&m_data, env);
-	printf("\e[1;1H\e[2J");
-	while (1)
-	{
-		rl_on_new_line();
-		rl = readline(m_data.prompt);
-		add_history(rl);
-		if (ft_strncmp(rl, "exit", 5) == 0)
-			break ;
-		msh_lex(&m_data, rl);
-		// parser
-		// free the token before going to next line
-		msh_free_tok(&m_data);
-	}
-	free(rl);
-	msh_free_tok(&m_data);
-	msh_free_env(&m_data);
+int	msh_lex_spec_char(t_msh_data *m_data, char *line, unsigned int *i)
+{
+	int	st;
+
+	st = msh_get_spec_type(line[*i]);
+	msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(st, 0));
+	*i += 1;
 	return (SUCCESS);
+}
+
+int	msh_get_spec_type(int c)
+{
+	if (c == '(')
+		return (MSH_L_BR);
+	if (c == ')')
+		return (MSH_R_BR);
+	if (c == '{')
+		return (MSH_L_CBR);
+	if (c == '}')
+		return (MSH_R_CBR);
+	if (c == '[')
+		return (MSH_L_SBR);
+	return (MSH_R_SBR);
 }

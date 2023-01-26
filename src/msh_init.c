@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:35:46 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/26 13:56:46 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/26 14:42:18 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ int	msh_env_init(t_msh_data *m_data, char **env)
 	{
 		tmp = ft_split(*env, '=');
 		msh_env_lstaddb(&m_data->env, msh_env_lstnew(ft_strdup(tmp[0]), ft_strdup(tmp[1])));
+		free(tmp[0]);
+		free(tmp[1]);
+		free(tmp);
 		env++;
 	}
 	return (SUCCESS);
