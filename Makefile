@@ -22,7 +22,6 @@ SRC =	main.c \
 		msh_lex_spec.c \
 		msh_lex_dollar.c \
 		msh_lex_symbol.c \
-		msh_lex_num.c \
 		msh_free.c \
 		msh_is.c \
 

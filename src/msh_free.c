@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:59:57 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/26 15:02:24 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/26 16:44:15 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ void	msh_free_tok(t_msh_data *m_data)
 	while (m_data->tokens)
 	{
 		tmp = m_data->tokens->next;
-		if (m_data->tokens->val)
-			free(m_data->tokens->val);
+		free(m_data->tokens->val);
 		free(m_data->tokens);
 		m_data->tokens = tmp;
 	}

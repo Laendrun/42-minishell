@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:06:06 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/26 16:30:31 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/26 16:57:49 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,29 +22,28 @@
 
 enum	e_token_types
 {
-	MSH_SEP = 100,
-	MSH_STR,
-	MSH_NUM,
-	MSH_SYMB,
-	MSH_DQUOTE,
-	MSH_SQUOTE,
-	MSH_PIPE,
-	MSH_DPIPE,
-	MSH_LT,
-	MSH_DLT,
-	MSH_GT,
-	MSH_DGT,
-	MSH_AMP,
-	MSH_DAMP,
-	MSH_DOLLAR,
-	MSH_L_BR,
-	MSH_R_BR,
-	MSH_L_CBR,
-	MSH_R_CBR,
-	MSH_L_SBR,
-	MSH_R_SBR,
-	MSH_MINUS,
-	MSH_DMINUS,
+	MSH_SEP = 100, // separator => isspace
+	MSH_STR, // string
+	MSH_SYMB, //symbol => text not between quote
+	MSH_DQUOTE, // double quote
+	MSH_SQUOTE, // single quote
+	MSH_PIPE, // pipe
+	MSH_DPIPE, // double pipe
+	MSH_LT, // <
+	MSH_DLT, // <<
+	MSH_GT, // >
+	MSH_DGT, // >>
+	MSH_AMP, // &
+	MSH_DAMP, // &&
+	MSH_DOLLAR, // $
+	MSH_L_BR, // (
+	MSH_R_BR, // )
+	MSH_L_CBR, // {
+	MSH_R_CBR, // }
+	MSH_L_SBR, // [
+	MSH_R_SBR, // ]
+	MSH_MINUS, // -
+	MSH_DMINUS, // --
 	MSH_END
 };
 
@@ -130,11 +129,6 @@ int			msh_lex_symbol(t_msh_data *m_data, char *line, unsigned int *i);
 // msh_lex_dollar.c
 // ----------------------------------------------
 int			msh_lex_dollar(t_msh_data *m_data, char *line, unsigned int *i);
-
-// ----------------------------------------------
-// msh_lex_dollar.c
-// ----------------------------------------------
-int			msh_lex_num(t_msh_data *m_data, char *line, unsigned int *i);
 
 // ----------------------------------------------
 // msh_free.c
