@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_is.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby>                              +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:34:05 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/27 14:38:18 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/27 17:28:13 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,18 @@ int	msh_isspec(int c)
 	t = (t || c == 46 || c == 64 || c == 43 || c == 33 || c == 63 || c == 94);
 	t = (t || c == 42 || c == 35 || c == 95 || c == 59 || c == 58 || c == 61);
 	t = (t || c == 44 || c == 47 || c == 37 || c == 92 || c == 36);
+	return (t);
+}
+
+int	msh_is_builtin(char *str)
+{
+	int	t;
+
+	t = !ft_strncmp("env", str, 4);
+	t = !ft_strncmp("pwd", str, 4) || t;
+	t = !ft_strncmp("cd", str, 3) || t;
+	t = !ft_strncmp("export", str, 7) || t;
+	t = !ft_strncmp("unset", str, 6) || t;
+	t = !ft_strncmp("exit", str, 5) || t;
 	return (t);
 }

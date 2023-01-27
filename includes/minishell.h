@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby>                              +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:06:06 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/27 16:22:35 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/27 17:37:51 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,12 @@ int			msh_lex_word(t_msh_data *m_data, char *line, unsigned int *i);
 int			msh_lex_dollar(t_msh_data *m_data, char *line, unsigned int *i);
 
 // ----------------------------------------------
+// msh_parser.c
+// ----------------------------------------------
+int			msh_parser(t_msh_data *m_data);
+int			msh_exec_builtin(char *str, t_msh_data *m_data);
+
+// ----------------------------------------------
 // syntax/msh_synt_simpl.c
 // ----------------------------------------------
 int			msh_simplify_tokens(t_msh_data *m_data);
@@ -149,6 +155,7 @@ char		*msh_par_from_tok(char *val);
 // ----------------------------------------------
 void		msh_free_env(t_msh_data *m_data);
 void		msh_free_tok(t_msh_data *m_data);
+void		msh_free_simpl_tok(t_msh_data *m_data);
 
 // ----------------------------------------------
 // msh_is.c
@@ -156,6 +163,7 @@ void		msh_free_tok(t_msh_data *m_data);
 int			msh_isspace(int c);
 int			msh_isoperator(int c);
 int			msh_isspec(int c);
+int			msh_is_builtin(char *str);
 
 // ----------------------------------------------
 // msh_utils.c

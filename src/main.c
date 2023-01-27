@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby>                              +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:05:50 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/27 14:30:20 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/27 17:41:38 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ int	main(int ac, char **av, char **env)
 		msh_lex(&m_data, rl);
 		msh_simplify_tokens(&m_data);
 		// parser
+		msh_parser(&m_data);
 		msh_free_tok(&m_data);
+		msh_free_simpl_tok(&m_data);
 	}
 	free(rl);
 	msh_free_tok(&m_data);

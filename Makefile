@@ -34,6 +34,7 @@ SRC =	main.c \
 		msh_env_lst.c \
 		msh_tok_lst.c \
 		msh_lexer.c \
+		msh_parser.c \
 		msh_free.c \
 		msh_is.c \
 		msh_utils.c \
