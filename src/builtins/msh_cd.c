@@ -6,7 +6,7 @@
 /*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 21:23:18 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/26 22:14:28 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/27 13:20:53 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	msh_cd(t_msh_data *m_data, char *new_path)
 	}
 	if (chdir(dir) != 0)
 		ft_putstr_fd("Not found.\n", 2);
-	msh_replace_val(m_data, "PWD", getcwd(NULL, 0));
+	msh_setpwd(m_data, getcwd(NULL, 0));
+	//msh_replace_val(m_data, "PWD", getcwd(NULL, 0));
 	return (SUCCESS);
 }

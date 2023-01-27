@@ -5,6 +5,8 @@ OBJ_DIR = objs/
 INC_DIR = includes
 SRC_DIR = src/
 BI_DIR = builtins/
+LEX_DIR = lexer/
+PARS_DIR = parser/
 
 # Libraries
 LIBFT  = libs/libft/
@@ -16,16 +18,20 @@ BI_SRC = $(addprefix $(BI_DIR),	msh_env.c \
 								msh_clear.c \
 								)
 
+LEX_SRC	= $(addprefix $(LEX_DIR),	msh_lex_dollar.c \
+									msh_lex_operator.c \
+									msh_lex_quotes.c \
+									msh_lex_symbol.c \
+									msh_lex_word.c \
+									)
+
+PARS_SRC = $(addprefix $(PARS_DIR), )
+
 SRC =	main.c \
 		msh_init.c \
 		msh_env_lst.c \
 		msh_tok_lst.c \
 		msh_lexer.c \
-		msh_lex_quotes.c \
-		msh_lex_operator.c \
-		msh_lex_symbol.c \
-		msh_lex_dollar.c \
-		msh_lex_word.c \
 		msh_free.c \
 		msh_is.c \
 		msh_utils.c \
@@ -33,9 +39,11 @@ SRC =	main.c \
 
 OBJ := $(SRC:%.c=%.o)
 BI_OBJ := $(BI_SRC:%.c=%.o)
+LEX_OBJ := $(LEX_SRC:%.c=%.o)
+PARS_OBJ := $(PARS_SRC:%.c=%.o)
 
-SRCS = $(addprefix $(SRC_DIR), $(SRC) $(BI_SRC))
-OBJS = $(addprefix $(OBJ_DIR), $(OBJ) $(BI_OBJ))
+SRCS = $(addprefix $(SRC_DIR), $(SRC) $(BI_SRC) $(LEX_SRC) $(PARS_SRC))
+OBJS = $(addprefix $(OBJ_DIR), $(OBJ) $(BI_OBJ) $(LEX_OBJ) $(PARS_OBJ))
 
 CCFLAGS = -Wall -Wextra -Werror
 
@@ -64,6 +72,8 @@ re: fclean all
 $(OBJ_DIR):
 	@mkdir $(OBJ_DIR)
 	@mkdir $(OBJ_DIR)/$(BI_DIR)
+	@mkdir $(OBJ_DIR)/$(LEX_DIR)
+	@mkdir $(OBJ_DIR)/$(PARS_DIR)
 
 libft:
 	make -C $(LIBFT)
