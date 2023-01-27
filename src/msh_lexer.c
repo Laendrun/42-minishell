@@ -6,7 +6,7 @@
 /*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:12:32 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/26 20:30:29 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/27 14:38:39 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ int	msh_lex(t_msh_data *m_data, char *line)
 			msh_lex_operator(m_data, line, &i);
 		else if (line[i] && (msh_isspec(line[i])))
 			msh_lex_symbol(m_data, line, &i);
-		else if (line[i] && line[i] == '$')
-			msh_lex_dollar(m_data, line, &i);
 		else if (line[i] && ft_isalnum(line[i]))
 			msh_lex_word(m_data, line, &i);
 		else

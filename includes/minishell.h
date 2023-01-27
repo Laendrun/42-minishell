@@ -6,7 +6,7 @@
 /*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:06:06 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/27 13:15:55 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/27 16:22:35 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ enum	e_token_types
 	MSH_R_SBR, // ] / 120
 	MSH_MINUS, // - / 121
 	MSH_DMINUS, // -- / 122
-	MSH_END // end of line / 123
+	MSH_END, // end of line / 123
+	MSH_FILENAME, // MSH_WORD.MSH_WORD / 124
+	MSH_PARAM // MSH_MINUSMSH_WORD / 125
 };
 
 // ----------------------------------------------
@@ -73,6 +75,7 @@ typedef struct	s_msh_data
 	char				*prompt;
 	t_env_list			*env;
 	t_tok_list			*tokens;
+	t_tok_list			*simpl_tok;
 }	t_msh_data;
 
 // ----------------------------------------------
@@ -103,34 +106,43 @@ int			msh_env_lstsize(t_env_list *lst);
 int			msh_lex(t_msh_data *m_data, char *line);
 
 // ----------------------------------------------
-// msh_lex_quotes.c
+// lexer/msh_lex_quotes.c
 // ----------------------------------------------
 int			msh_lex_quotes(t_msh_data *m_data, char *line, unsigned int *i);
 int			msh_lex_squote(t_msh_data *m_data, char *line, unsigned int *i);
 int			msh_lex_dquote(t_msh_data *m_data, char *line, unsigned int *i);
 
 // ----------------------------------------------
-// msh_lex_operator.c
+// lexer/msh_lex_operator.c
 // ----------------------------------------------
 int			msh_lex_operator(t_msh_data *m_data, char *line, unsigned int *i);
 int			msh_get_op_type(int c);
 int			msh_get_double_op_type(int type);
 
 // ----------------------------------------------
-// msh_lex_symbol.c
+// lexer/msh_lex_symbol.c
 // ----------------------------------------------
 int			msh_lex_symbol(t_msh_data *m_data, char *line, unsigned int *i);
 int			msh_get_spec_type(int c);
 
 // ----------------------------------------------
-// msh_lex_word.c
+// lexer/msh_lex_word.c
 // ----------------------------------------------
 int			msh_lex_word(t_msh_data *m_data, char *line, unsigned int *i);
 
 // ----------------------------------------------
-// msh_lex_dollar.c
+// lexer/msh_lex_dollar.c
 // ----------------------------------------------
 int			msh_lex_dollar(t_msh_data *m_data, char *line, unsigned int *i);
+
+// ----------------------------------------------
+// syntax/msh_synt_simpl.c
+// ----------------------------------------------
+int			msh_simplify_tokens(t_msh_data *m_data);
+char		*msh_fn_from_tok(char *fn, char *ext);
+t_tok_list	*msh_simpl_word(t_msh_data *m_data, t_tok_list *token, t_tok_list *next);
+t_tok_list	*msh_simpl_minus(t_msh_data *m_data, t_tok_list *token, t_tok_list *next);
+char		*msh_par_from_tok(char *val);
 
 // ----------------------------------------------
 // msh_free.c
