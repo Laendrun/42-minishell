@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_synt_simpl.c                                   :+:      :+:    :+:   */
+/*   msh_lex_simpl.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 14:26:53 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/27 16:53:42 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/28 08:38:24 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int	msh_simplify_tokens(t_msh_data *m_data)
 			tmp = msh_simpl_word(m_data, tmp, next);
 		else if (tmp->type == MSH_MINUS)
 			tmp = msh_simpl_minus(m_data, tmp, next);
+		else if (tmp->type == MSH_SYMBOL)
+			tmp = msh_simpl_symbol(m_data, tmp, next);
 		else
 		{
 			msh_tok_lstaddb(&m_data->simpl_tok, msh_tok_lstnew(tmp->type, tmp->val));
@@ -83,20 +85,36 @@ t_tok_list	*msh_simpl_minus(t_msh_data *m_data, t_tok_list *token, t_tok_list *n
 	}
 }
 
-char	*msh_par_from_tok(char *val)
+t_tok_list	*msh_simpl_symbol(t_msh_data *m_data, t_tok_list *token, t_tok_list *next)
 {
-	char	*res;
+	char	*path;
 
-	res = "-";
-	res = ft_strjoin(res, val);
-	return (res);
-}
+	path = ft_strdup("");
+	if (!ft_strncmp(token->val, ".", 2) || !ft_strncmp(token->val, "..", 3)
+		|| !ft_strncmp(token->val, "/", 2) || !ft_strncmp(token->val, "~", 2))
+	{
+		path = ft_strjoin(path, token->val);
+		token = next;
+		next = next->next;
+	}
 
-char	*msh_fn_from_tok(char *fn, char *ext)
-{
-	char	*res;
-
-	res = ft_strjoin(fn, ".");
-	res = ft_strjoin(res, ext);
-	return (res);
+	while (token->type == MSH_WORD || token->type == MSH_SYMBOL)
+	{
+		if (token->type == MSH_WORD)
+			path = ft_strjoin(path, token->val);
+		else if (token->type == MSH_SYMBOL)
+		{
+			if (!ft_strncmp(token->val, "..", 3) || !ft_strncmp(token->val, ".", 2)
+				|| !ft_strncmp(token->val, "/", 2))
+				path = ft_strjoin(path, token->val);
+			else
+				break ;
+		}
+		else 
+			break ;
+		token = next;
+		next = next->next;
+	}
+	msh_tok_lstaddb(&m_data->simpl_tok, msh_tok_lstnew(MSH_PATH, path));
+	return (token);
 }

@@ -23,11 +23,13 @@ LEX_SRC	= $(addprefix $(LEX_DIR),	msh_lex_operator.c \
 									msh_lex_quotes.c \
 									msh_lex_symbol.c \
 									msh_lex_word.c \
+									msh_lex_simpl.c \
+									msh_lex_simpl_helper.c \
 									)
 
 PARS_SRC = $(addprefix $(PARS_DIR), )
 
-SYNT_SRC = $(addprefix $(SYNT_DIR), msh_synt_simpl.c)
+SYNT_SRC = $(addprefix $(SYNT_DIR), )
 
 SRC =	main.c \
 		msh_init.c \
