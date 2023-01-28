@@ -6,7 +6,7 @@
 /*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:12:32 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/27 14:38:39 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/28 09:46:30 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	print_tok(t_msh_data *m_data)
 	t_tok_list	*token;
 
 	token = m_data->tokens;
+	printf("Original tokens: \n");
 	while (token)
 	{
 		printf("Type: %d - Value: %s\n", token->type, token->val);
@@ -61,7 +62,6 @@ int	msh_lex(t_msh_data *m_data, char *line)
 	}
 	// add END token
 	msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(MSH_END, 0));
-	print_tok(m_data);
-	// print all tokens to check they are correct
+	//print_tok(m_data);
 	return (SUCCESS);
 }

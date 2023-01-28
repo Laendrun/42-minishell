@@ -6,7 +6,7 @@
 /*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:34:05 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/28 07:28:18 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/28 09:29:49 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,17 @@ int	msh_is_builtin(char *str)
 	t = !ft_strncmp("export", str, 7) || t;
 	t = !ft_strncmp("unset", str, 6) || t;
 	t = !ft_strncmp("exit", str, 5) || t;
+	return (t);
+}
+
+int	msh_is_path_comp(t_tok_list *token)
+{
+	int	t;
+	
+	t = token->type == MSH_WORD;
+	t = t || (token->type == MSH_SYMBOL && !ft_strncmp(token->val, ".", 2));
+	t = t || (token->type == MSH_SYMBOL && !ft_strncmp(token->val, "..", 3));
+	t = t || (token->type == MSH_SYMBOL && !ft_strncmp(token->val, "/", 2));
+	t = t || (token->type == MSH_SYMBOL && !ft_strncmp(token->val, "~", 2));
 	return (t);
 }

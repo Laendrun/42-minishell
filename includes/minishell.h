@@ -6,7 +6,7 @@
 /*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:06:06 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/28 07:49:24 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/28 09:33:37 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ int			msh_lex_word(t_msh_data *m_data, char *line, unsigned int *i);
 int			msh_simplify_tokens(t_msh_data *m_data);
 t_tok_list	*msh_simpl_word(t_msh_data *m_data, t_tok_list *token, t_tok_list *next);
 t_tok_list	*msh_simpl_minus(t_msh_data *m_data, t_tok_list *token, t_tok_list *next);
-t_tok_list	*msh_simpl_symbol(t_msh_data *m_data, t_tok_list *token, t_tok_list *next);
+t_tok_list	*msh_simpl_path(t_msh_data *m_data, t_tok_list *token, t_tok_list *next);
 
 // ----------------------------------------------
 // lexer/msh_lex_simpl_helper.c
@@ -164,6 +164,7 @@ int			msh_isspace(int c);
 int			msh_isoperator(int c);
 int			msh_isspec(int c);
 int			msh_is_builtin(char *str);
+int			msh_is_path_comp(t_tok_list *token);
 
 // ----------------------------------------------
 // msh_utils.c
