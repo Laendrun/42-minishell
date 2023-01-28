@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 17:18:50 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/27 17:35:41 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/28 10:13:06 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	msh_parser(t_msh_data *m_data)
 {
 	t_tok_list	*tmp;
 
-	tmp = m_data->simpl_tok;
+	tmp = m_data->s_tok;
 	while (tmp->type == MSH_SEP)
 		tmp = tmp->next;
 	if (tmp->type == MSH_WORD)

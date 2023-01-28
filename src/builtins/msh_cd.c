@@ -6,7 +6,7 @@
 /*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 21:23:18 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/27 14:48:45 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/28 10:08:47 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	msh_cd(t_msh_data *m_data, char *new_path)
 {
-	(void) m_data;
 	char	*dir;
 
 	dir = new_path;
@@ -26,6 +25,5 @@ int	msh_cd(t_msh_data *m_data, char *new_path)
 	if (chdir(dir) != 0)
 		ft_putstr_fd("Not found.\n", 2);
 	msh_setpwd(m_data, getcwd(NULL, 0));
-	//msh_replace_val(m_data, "PWD", getcwd(NULL, 0));
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:35:46 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/27 14:36:56 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/28 10:12:51 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	msh_init(t_msh_data *m_data, char **env)
 	m_data->prompt = "shellusion-0.1> ";
 	m_data->env = NULL;
 	m_data->tokens = NULL;
-	m_data->simpl_tok = NULL;
+	m_data->s_tok = NULL;
 	// init environment
 	msh_env_init(m_data, env);
 	return (SUCCESS);

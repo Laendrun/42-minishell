@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_lex_quotes.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:48:25 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/26 15:12:37 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/28 10:35:12 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,29 +22,35 @@ int	msh_lex_quotes(t_msh_data *m_data, char *line, unsigned int *i)
 int	msh_lex_squote(t_msh_data *m_data, char *line, unsigned int *i)
 {
 	unsigned int	t;
+	char			*tmp;
 
 	t = *i;
-	msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(MSH_SQUOTE, 0)); // adding the first quote token
+	msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(MSH_SQUOTE, 0));
 	*i += 1;
 	while (ft_isprint(line[*i]) && line[*i] != '\'')
 		*i += 1;
-	msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(MSH_STR, ft_substr(line, t + 1, *i - (t + 1))));
+	tmp = ft_substr(line, t + 1, *i - (t + 1));
+	msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(MSH_STR, ft_strdup(tmp)));
 	msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(MSH_SQUOTE, 0));
 	*i += 1;
+	free(tmp);
 	return (SUCCESS);
 }
 
 int	msh_lex_dquote(t_msh_data *m_data, char *line, unsigned int *i)
 {
 	unsigned int	t;
+	char			*tmp;
 
 	t = *i;
-	msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(MSH_DQUOTE, 0)); // adding the first quote token
+	msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(MSH_DQUOTE, 0));
 	*i += 1;
 	while (ft_isprint(line[*i]) && !(line[*i] == '\"' && line[*i - 1] != '\\'))
 		*i += 1;
-	msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(MSH_STR, ft_substr(line, t + 1, *i - (t + 1))));
+	tmp = ft_substr(line, t + 1, *i - (t + 1));
+	msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(MSH_STR, ft_strdup(tmp)));
 	msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(MSH_DQUOTE, 0));
 	*i += 1;
+	free(tmp);
 	return (SUCCESS);
 }

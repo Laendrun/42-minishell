@@ -6,7 +6,7 @@
 /*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:06:06 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/28 09:33:37 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/28 10:30:50 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,37 @@
 
 enum	e_token_types
 {
-	MSH_SEP = 100, // separator => isspace
+	MSH_SEP = 100,
+	MSH_STR,
+	MSH_WORD,
+	MSH_SYMBOL,
+	MSH_DQUOTE,
+	MSH_SQUOTE,
+	MSH_PIPE,
+	MSH_DPIPE,
+	MSH_LT,
+	MSH_DLT,
+	MSH_GT,
+	MSH_DGT,
+	MSH_AMP,
+	MSH_DAMP,
+	MSH_DOLLAR,
+	MSH_L_BR,
+	MSH_R_BR,
+	MSH_L_CBR,
+	MSH_R_CBR,
+	MSH_L_SBR,
+	MSH_R_SBR,
+	MSH_MINUS,
+	MSH_DMINUS,
+	MSH_END,
+	MSH_FILENAME,
+	MSH_PARAM,
+	MSH_PATH
+};
+
+/*
+	MSH_SEP // separator => isspace / 100
 	MSH_STR, // string / 101
 	MSH_WORD, //word => text not between quote / 102
 	MSH_SYMBOL, // symbol => special characters (. .. , ! + _ @) / 103
@@ -50,12 +80,12 @@ enum	e_token_types
 	MSH_FILENAME, // MSH_WORD.MSH_WORD / 124
 	MSH_PARAM, // MSH_MINUSMSH_WORD / 125
 	MSH_PATH // .. . / 126
-};
+*/
 
 // ----------------------------------------------
 // Structures
 // ----------------------------------------------
-typedef struct	s_env_list
+typedef struct s_env_list
 {
 	char				*key;
 	char				*val;
@@ -63,20 +93,20 @@ typedef struct	s_env_list
 	struct s_env_list	*prev;
 }	t_env_list;
 
-typedef struct	s_tok_list
+typedef struct s_tok_list
 {
 	int					type;
 	char				*val;
 	struct s_tok_list	*next;
 }	t_tok_list;
 
-typedef struct	s_msh_data
+typedef struct s_msh_data
 {
 	char				*name;
 	char				*prompt;
 	t_env_list			*env;
 	t_tok_list			*tokens;
-	t_tok_list			*simpl_tok;
+	t_tok_list			*s_tok;
 }	t_msh_data;
 
 // ----------------------------------------------
@@ -118,7 +148,7 @@ int			msh_lex_dquote(t_msh_data *m_data, char *line, unsigned int *i);
 // ----------------------------------------------
 int			msh_lex_operator(t_msh_data *m_data, char *line, unsigned int *i);
 int			msh_get_op_type(int c);
-int			msh_get_double_op_type(int type);
+int			msh_dop_type(int type);
 
 // ----------------------------------------------
 // lexer/msh_lex_symbol.c
@@ -133,10 +163,10 @@ int			msh_lex_word(t_msh_data *m_data, char *line, unsigned int *i);
 // ----------------------------------------------
 // lexer/msh_lex_simpl.c
 // ----------------------------------------------
-int			msh_simplify_tokens(t_msh_data *m_data);
-t_tok_list	*msh_simpl_word(t_msh_data *m_data, t_tok_list *token, t_tok_list *next);
-t_tok_list	*msh_simpl_minus(t_msh_data *m_data, t_tok_list *token, t_tok_list *next);
-t_tok_list	*msh_simpl_path(t_msh_data *m_data, t_tok_list *token, t_tok_list *next);
+int			msh_simplify_tokens(t_msh_data *m_d);
+t_tok_list	*msh_simpl_word(t_msh_data *m_d, t_tok_list *tok, t_tok_list *ne);
+t_tok_list	*msh_simpl_minus(t_msh_data *m_d, t_tok_list *tok, t_tok_list *ne);
+t_tok_list	*msh_simpl_path(t_msh_data *m_d, t_tok_list *tok, t_tok_list *ne);
 
 // ----------------------------------------------
 // lexer/msh_lex_simpl_helper.c

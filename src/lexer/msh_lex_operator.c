@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_lex_operator.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:35:28 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/26 16:27:50 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/28 10:30:37 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	msh_lex_operator(t_msh_data *m_data, char *line, unsigned int *i)
 	nt = msh_get_op_type(line[*i + 1]);
 	if (ct == nt)
 	{
-		msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(msh_get_double_op_type(ct), 0));
+		msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(msh_dop_type(ct), 0));
 		*i += 2;
 		return (SUCCESS);
 	}
@@ -32,7 +32,7 @@ int	msh_lex_operator(t_msh_data *m_data, char *line, unsigned int *i)
 	return (SUCCESS);
 }
 
-int			msh_get_op_type(int c)
+int	msh_get_op_type(int c)
 {
 	if (c == '&')
 		return (MSH_AMP);
@@ -45,7 +45,7 @@ int			msh_get_op_type(int c)
 	return (MSH_PIPE);
 }
 
-int			msh_get_double_op_type(int type)
+int	msh_dop_type(int type)
 {
 	if (type == MSH_AMP)
 		return (MSH_DAMP);
