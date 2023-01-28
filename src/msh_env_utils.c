@@ -6,7 +6,7 @@
 /*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 21:29:27 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/26 22:06:56 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/28 11:06:22 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	msh_replace_val(t_msh_data *m_data, char *key, char *new_val)
 
 	var = msh_env_ptr(m_data, key);
 	if (!var)
-		return (1); // Error -> key not found
+		return (1);
 	tmp = var->val;
 	var->val = ft_strdup(new_val);
 	free(tmp);

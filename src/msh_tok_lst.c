@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_tok_lst.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:24:56 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/26 14:31:28 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/28 11:00:35 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ t_tok_list	*msh_tok_lstnew(int type, char *val)
 	return (new);
 }
 
-void		msh_tok_lstaddb(t_tok_list **lst, t_tok_list *new)
+void	msh_tok_lstaddb(t_tok_list **lst, t_tok_list *new)
 {
 	t_tok_list	*tmp;
 
 	if (!new)
-		return;
+		return ;
 	if (!*lst)
 	{
 		*lst = new;
@@ -47,7 +47,7 @@ t_tok_list	*msh_tok_lstlast(t_tok_list *lst)
 	return (lst);
 }
 
-int			msh_tok_lstsize(t_tok_list *lst)
+int	msh_tok_lstsize(t_tok_list *lst)
 {
 	t_tok_list	*tmp;
 	int			i;

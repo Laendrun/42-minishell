@@ -6,7 +6,7 @@
 /*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 17:18:50 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/28 10:13:06 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/28 11:06:05 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	msh_parser(t_msh_data *m_data)
 		tmp = tmp->next;
 	if (tmp->type == MSH_WORD)
 	{
-		// check if word is a builtin
 		if (msh_is_builtin(tmp->val))
 			msh_exec_builtin(tmp->val, m_data);
 	}
@@ -41,7 +40,9 @@ int	msh_exec_builtin(char *str, t_msh_data *m_data)
 	else if (!ft_strncmp("unset", str, 6))
 		printf("Not implemented yet! (unset)\n");
 	else if (!ft_strncmp("exit", str, 5))
-		printf("Implemented but not used yet so we can check the leaks at exit.\n");
-
+	{
+		printf("Implemented but not used yet");
+		printf(" so we can check the leaks at exit.\n");
+	}
 	return (SUCCESS);
 }

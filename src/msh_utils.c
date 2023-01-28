@@ -6,7 +6,7 @@
 /*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 20:54:27 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/26 20:56:08 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/28 11:01:14 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*msh_chrdup(int c)
 	res = malloc(2 * sizeof(char));
 	if (!res)
 		return (NULL);
-	res[0] = c,
+	res[0] = c;
 	res[1] = 0;
 	return (res);
 }

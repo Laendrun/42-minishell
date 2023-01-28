@@ -6,7 +6,7 @@
 /*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:12:32 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/28 10:55:10 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/28 10:59:10 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,9 @@ int	msh_lex(t_msh_data *m_data, char *line)
 		else if (line[i] && ft_isalnum(line[i]))
 			msh_lex_word(m_data, line, &i);
 		else
-		{
-			printf("unmanaged char: %c\n", line[i]);
 			i++;
-		}
 	}
 	msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(MSH_END, 0));
+	msh_simplify_tokens(m_data);
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:59:57 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/28 10:13:25 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/28 11:00:09 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	msh_free_simpl_tok(t_msh_data *m_data)
 		tmp = m_data->s_tok->next;
 		m_data->s_tok->val = NULL;
 		free(m_data->s_tok->val);
-		//free(m_data->simpl_tok);
 		m_data->s_tok = tmp;
 	}
 }
