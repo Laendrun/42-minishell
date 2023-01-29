@@ -6,7 +6,7 @@
 /*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 14:26:53 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/28 10:53:40 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/28 20:39:58 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,15 @@ int	msh_simplify_tokens(t_msh_data *m_d)
 
 t_tok_list	*msh_simpl_word(t_msh_data *m_d, t_tok_list *tok, t_tok_list *ne)
 {
-	int		s;
+	char	*new;
+	/*int		s;
 	int		p;
 	int		n;
-	char	*new;
 
 	s = ne->type == MSH_SYMBOL;
 	p = !ft_strncmp(".", ne->val, 2);
-	n = ne->next->type == MSH_WORD;
-	if (s && p && n)
+	n = ne->next->type == MSH_WORD;*/
+	if (ne->type == MSH_SYMBOL && !ft_strncmp(".", ne->val, 2) && ne->next->type == MSH_WORD)
 	{
 		new = msh_fn_from_tok(tok->val, ne->next->val);
 		msh_tok_lstaddb(&m_d->s_tok, msh_tok_lstnew(MSH_FILENAME, new));
