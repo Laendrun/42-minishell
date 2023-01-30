@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_is.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby>                              +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:34:05 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/28 11:08:18 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/30 15:04:32 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,7 @@ int	msh_is_path_comp(t_tok_list *token)
 	t = (t || (token->type == MSH_SYMBOL && !ft_strncmp(token->val, "..", 3)));
 	t = (t || (token->type == MSH_SYMBOL && !ft_strncmp(token->val, "/", 2)));
 	t = (t || (token->type == MSH_SYMBOL && !ft_strncmp(token->val, "~", 2)));
+	t = (t || (token->type == MSH_SYMBOL && !ft_strncmp(token->val, "_", 2)));
+	t = (t || (token->type == MSH_SYMBOL && !ft_strncmp(token->val, "-", 2)));
 	return (t);
 }

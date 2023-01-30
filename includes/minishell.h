@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby>                              +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:06:06 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/28 10:30:50 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/30 15:57:52 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ enum	e_token_types
 	MSH_END,
 	MSH_FILENAME,
 	MSH_PARAM,
-	MSH_PATH
+	MSH_PATH,
+	MSH_VAR,
+	MSH_DELIM
 };
 
 /*
@@ -80,6 +82,8 @@ enum	e_token_types
 	MSH_FILENAME, // MSH_WORD.MSH_WORD / 124
 	MSH_PARAM, // MSH_MINUSMSH_WORD / 125
 	MSH_PATH // .. . / 126
+	MSH_VAR // $WORD / 127
+	MSH_DELIM // symbol|word after here_doc // 128
 */
 
 // ----------------------------------------------

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby>                              +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 17:18:50 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/28 11:06:05 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/30 14:54:53 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	msh_parser(t_msh_data *m_data)
 
 int	msh_exec_builtin(char *str, t_msh_data *m_data)
 {
-	if (!ft_strncmp("env", str, 4))
+	if (ft_strncmp("env", str, 4) == 0)
 		msh_env(m_data);
 	else if (!ft_strncmp("pwd", str, 4))
 		msh_pwd(m_data);

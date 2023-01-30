@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_lex_simpl.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby>                              +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 14:26:53 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/28 20:39:58 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/30 15:23:21 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ void	print_simpl_tok(t_msh_data *m_data)
 
 int	msh_simplify_tokens(t_msh_data *m_d)
 {
+	// if type == << set next token(s) to type delim
+	// if type != << set $WORD to type VAR
+
 	t_tok_list	*tmp;
 	t_tok_list	*next;
 	t_tok_list	*new;
@@ -64,7 +67,7 @@ t_tok_list	*msh_simpl_word(t_msh_data *m_d, t_tok_list *tok, t_tok_list *ne)
 	/*int		s;
 	int		p;
 	int		n;
-
+	
 	s = ne->type == MSH_SYMBOL;
 	p = !ft_strncmp(".", ne->val, 2);
 	n = ne->next->type == MSH_WORD;*/
