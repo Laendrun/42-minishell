@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:34:05 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/30 15:04:32 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/30 17:28:49 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,17 @@ int	msh_is_path_comp(t_tok_list *token)
 	t = (t || (token->type == MSH_SYMBOL && !ft_strncmp(token->val, "~", 2)));
 	t = (t || (token->type == MSH_SYMBOL && !ft_strncmp(token->val, "_", 2)));
 	t = (t || (token->type == MSH_SYMBOL && !ft_strncmp(token->val, "-", 2)));
+	return (t);
+}
+
+int	msh_is_envvar_comp(t_tok_list *token)
+{
+	int	t;
+	
+	t = token->type != MSH_DLT;
+	t = (t || token->type != MSH_LT);
+	t = (t || token->type != MSH_DGT);
+	t = (t || token->type != MSH_GT);
+	t = (t || ft_strncmp(token->val, "$", 2));
 	return (t);
 }
