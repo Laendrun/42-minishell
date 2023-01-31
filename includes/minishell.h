@@ -187,6 +187,16 @@ int			msh_parser(t_msh_data *m_data);
 int			msh_exec_builtin(char *str, t_msh_data *m_data);
 
 // ----------------------------------------------
+// msh_expand_var.c
+// ----------------------------------------------
+
+int	msh_expand_var(t_msh_data *m_d);
+int	msh_replace_var_in_var(t_msh_data *m_d);
+int	msh_replace_var_in_str(t_msh_data *m_d);
+int	msh_flag_in_str_var(t_msh_data *m_d, t_tok_list *str_tok);
+int	msh_malloc_new_str(t_msh_data *m_d, t_tok_list *str_tok, int flg[3]);
+
+// ----------------------------------------------
 // msh_free.c
 // ----------------------------------------------
 void		msh_free_env(t_msh_data *m_data);
@@ -207,6 +217,7 @@ int			msh_is_envvar_comp(t_tok_list *token);
 // msh_utils.c
 // ----------------------------------------------
 char		*msh_chrdup(int c);
+void		print_simpl_tok(t_msh_data *m_data);
 
 // ----------------------------------------------
 // msh_env_utils.c

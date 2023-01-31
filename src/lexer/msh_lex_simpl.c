@@ -62,6 +62,7 @@ int	msh_simplify_tokens(t_msh_data *m_d)
 		}
 	}
 	print_simpl_tok(m_d);
+	msh_expand_var(m_d);
 	return (SUCCESS);
 }
 
