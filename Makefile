@@ -53,6 +53,7 @@ SRC =	main.c \
 		msh_is.c \
 		msh_utils.c \
 		msh_env_utils.c \
+		msh_terminate.c \
 
 OBJ := $(SRC:%.c=%.o)
 BI_OBJ := $(BI_SRC:%.c=%.o)
