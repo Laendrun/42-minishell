@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:06:06 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/30 17:21:25 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/31 10:54:32 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,5 +253,15 @@ void		msh_exit(t_msh_data *m_data, int exit_code);
 // builtins/msh_clear.c
 // ----------------------------------------------
 int			msh_clear(t_msh_data *m_data);
+
+// ----------------------------------------------
+// builtins/msh_export.c
+// ----------------------------------------------
+int			msh_export(t_msh_data *m_d, char *key, char *val);
+
+// ----------------------------------------------
+// builtins/msh_unset.c
+// ----------------------------------------------
+int	msh_unset(t_msh_data *m_d, char *key);
 
 #endif
