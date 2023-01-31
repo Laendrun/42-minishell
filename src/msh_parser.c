@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 17:18:50 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/30 14:54:53 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/31 10:53:58 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ int	msh_exec_builtin(char *str, t_msh_data *m_data)
 	else if (!ft_strncmp("cd", str, 3))
 		msh_cd(m_data, "/");
 	else if (!ft_strncmp("export", str, 7))
-		printf("Not implemented yet! (export)\n");
+		msh_export(m_data, "TMP", msh_env_lstlast(m_data->env)->val);
 	else if (!ft_strncmp("unset", str, 6))
-		printf("Not implemented yet! (unset)\n");
+		msh_unset(m_data, "TMP");
 	else if (!ft_strncmp("exit", str, 5))
 	{
 		printf("Implemented but not used yet");
