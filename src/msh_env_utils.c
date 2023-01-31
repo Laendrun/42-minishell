@@ -54,7 +54,8 @@ char	*msh_get_env(t_msh_data *m_data, char *key)
 			return (tmp->val);
 		tmp = tmp->next;
 	}
-	return (NULL);
+	// return (NULL);
+	return ("");
 }
 
 int	msh_replace_val(t_msh_data *m_data, char *key, char *new_val)
