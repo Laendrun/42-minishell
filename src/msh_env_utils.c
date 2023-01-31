@@ -15,8 +15,8 @@
 /*
 Loop/browse through the env linked list to
 find the value associated with the
-key provided provided and 
-return the length of the string value.
+key provided and return
+the length of the string value.
 */
 
 int	msh_get_env_var_len(t_msh_data *m_data, char *key)
@@ -40,7 +40,7 @@ int	msh_get_env_var_len(t_msh_data *m_data, char *key)
 /*
 Loop/browse through the env linked list to
 find the value associated with the
-key provided provided.
+key provided.
 */
 
 char	*msh_get_env(t_msh_data *m_data, char *key)

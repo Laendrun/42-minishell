@@ -41,6 +41,8 @@ int	msh_malloc_new_str(t_msh_data *m_d, t_tok_list *str_tok, int flg[3])
 	return (SUCCESS);
 }
 
+
+//
 int	msh_flag_in_str_var(t_msh_data *m_d, t_tok_list *str_tok)
 {
 	int	i;
@@ -49,7 +51,7 @@ int	msh_flag_in_str_var(t_msh_data *m_d, t_tok_list *str_tok)
 	i = -1;
 	while (str_tok->val[++i])
 	{
-		if (str_tok->val[i] == '$' && str_tok->val[i + 1] != 0)
+		if (str_tok->val[i] == '$' && str_tok->val[i + 1] != 0 && str_tok->val[i - 1] != '\\')
 		{
 			flags[0] = i;
 			i++;
@@ -66,7 +68,7 @@ int	msh_flag_in_str_var(t_msh_data *m_d, t_tok_list *str_tok)
 	msh_malloc_new_str(m_d, str_tok, flags);
 	i = -1;
 	while (str_tok->val[++i])
-		if (str_tok->val[i] == '$')
+		if (str_tok->val[i] == '$' && str_tok->val[i - 1] != '\\')
 			msh_flag_in_str_var(m_d, str_tok);
 	return (SUCCESS);
 }
