@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:06:06 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/31 10:54:32 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/31 11:32:20 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,7 +217,6 @@ int			msh_is_envvar_comp(t_tok_list *token);
 // msh_utils.c
 // ----------------------------------------------
 char		*msh_chrdup(int c);
-void		print_simpl_tok(t_msh_data *m_data);
 
 // ----------------------------------------------
 // msh_env_utils.c
@@ -226,6 +225,12 @@ int			msh_get_env_var_len(t_msh_data *m_data, char *key);
 char		*msh_get_env(t_msh_data *m_data, char *key);
 int			msh_replace_val(t_msh_data *m_data, char *key, char *new_val);
 t_env_list	*msh_env_ptr(t_msh_data *m_data, char *key);
+
+// ----------------------------------------------
+// debug/msh_print_utils.c
+// ----------------------------------------------
+void		print_simpl_tok(t_msh_data *m_data);
+void		print_tok(t_msh_data *m_data);
 
 // ----------------------------------------------
 // builtins/msh_env.c

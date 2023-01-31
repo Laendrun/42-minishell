@@ -6,24 +6,11 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:12:32 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/30 16:49:09 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/31 11:32:03 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	print_tok(t_msh_data *m_data)
-{
-	t_tok_list	*token;
-
-	token = m_data->tokens;
-	printf("Original tokens: \n");
-	while (token)
-	{
-		printf("Type: %d - Value: %s\n", token->type, token->val);
-		token = token->next;
-	}
-}
 
 /* if line and line[i] isspace => add separator token
 * keep advancing in the string while line[i] isspace

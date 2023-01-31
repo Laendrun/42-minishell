@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 14:26:53 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/30 17:42:05 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/31 11:31:24 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,6 @@
 // word sep minus word symbol word sep minus word sep word symbol word end
 // goal tokens
 // word sep param sep filename sep param path
-
-void	print_simpl_tok(t_msh_data *m_data)
-{
-	t_tok_list	*token;
-
-	printf("Simplified tokens: \n");
-	token = m_data->s_tok;
-	while (token)
-	{
-		printf("Type: %d - Value: %s\n", token->type, token->val);
-		token = token->next;
-	}
-}
 
 int	msh_simplify_tokens(t_msh_data *m_d)
 {
