@@ -57,7 +57,7 @@ enum	e_token_types
 /*
 	MSH_SEP // separator => isspace / 100
 	MSH_STR, // string / 101
-	MSH_WORD, //word => text not between quote / 102
+	MSH_WORD, // word => text not between quote / 102
 	MSH_SYMBOL, // symbol => special characters (. .. , ! + _ @) / 103
 	MSH_DQUOTE, // double quote / 104
 	MSH_SQUOTE, // single quote / 105
@@ -211,6 +211,7 @@ char		*msh_chrdup(int c);
 // ----------------------------------------------
 // msh_env_utils.c
 // ----------------------------------------------
+int			msh_get_env_var_len(t_msh_data *m_data, char *key);
 char		*msh_get_env(t_msh_data *m_data, char *key);
 int			msh_replace_val(t_msh_data *m_data, char *key, char *new_val);
 t_env_list	*msh_env_ptr(t_msh_data *m_data, char *key);

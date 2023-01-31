@@ -12,6 +12,37 @@
 
 #include "minishell.h"
 
+/*
+Loop/browse through the env linked list to
+find the value associated with the
+key provided provided and 
+return the length of the string value.
+*/
+
+int	msh_get_env_var_len(t_msh_data *m_data, char *key)
+{
+	t_env_list	*tmp;
+	int			len;
+
+	tmp = m_data->env;
+	while (tmp)
+	{
+		if (ft_strncmp(tmp->key, key, ft_strlen(key) + 1) == 0)
+		{
+			len = ft_strlen(tmp->val);
+			return (len);
+		}
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
+/*
+Loop/browse through the env linked list to
+find the value associated with the
+key provided provided.
+*/
+
 char	*msh_get_env(t_msh_data *m_data, char *key)
 {
 	t_env_list	*tmp;
