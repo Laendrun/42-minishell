@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:06:06 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/31 13:39:06 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/31 14:16:22 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,10 @@ int			msh_get_env_var_len(t_msh_data *m_data, char *key);
 char		*msh_get_env(t_msh_data *m_data, char *key);
 int			msh_replace_val(t_msh_data *m_data, char *key, char *new_val);
 t_env_list	*msh_env_ptr(t_msh_data *m_data, char *key);
+
+// ----------------------------------------------
+// msh_terminate.c
+// ----------------------------------------------
+void		msh_terminate(t_msh_data *m_data);
 
 #endif

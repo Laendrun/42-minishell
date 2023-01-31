@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_lex_symbol.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby>                              +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:46:25 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/28 10:38:31 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/31 14:52:23 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	msh_lex_symbol(t_msh_data *m_data, char *line, unsigned int *i)
 {
 	t_tok_list	*t;
 
-	if (line[*i] == line[*i + 1])
+	if (line[*i] == line[*i + 1] && line[*i] != '$')
 	{
 		t = msh_tok_lstnew(MSH_SYMBOL, ft_substr(line, *i, 2));
 		msh_tok_lstaddb(&m_data->tokens, t);

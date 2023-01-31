@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 18:51:04 by egauthey          #+#    #+#             */
-/*   Updated: 2023/01/31 13:40:10 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/31 14:51:49 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ int	msh_flag_in_str_var(t_msh_data *m_d, t_tok_list *str_tok)
 	int flags[3];
 
 	i = -1;
+	flags[0] = 0;
+	flags[1] = 0;
+	flags[2] = 0;
 	while (str_tok->val[++i])
 	{
 		if (str_tok->val[i] == '$' && str_tok->val[i + 1] != 0 && str_tok->val[i - 1] != '\\')
@@ -80,7 +83,7 @@ int	msh_replace_var_in_str(t_msh_data *m_d)
 	cur = m_d->s_tok;
 	while (cur->next != NULL)
 	{
-		if (cur->type == MSH_STR)
+		if (cur->type == MSH_STR && cur->next->type == MSH_DQUOTE)
 			msh_flag_in_str_var(m_d, cur);
 		cur = cur->next;
 	}
