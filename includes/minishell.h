@@ -43,6 +43,7 @@ t_tok_list	*msh_tok_lstnew(int type, char *val);
 void		msh_tok_lstaddb(t_tok_list **lst, t_tok_list *new);
 t_tok_list	*msh_tok_lstlast(t_tok_list *lst);
 int			msh_tok_lstsize(t_tok_list *lst);
+t_tok_list	*msh_remove_tok(t_tok_list *lst, t_tok_list *tok_to_remove);
 
 // ----------------------------------------------
 // msh_init.c

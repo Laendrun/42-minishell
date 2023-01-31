@@ -20,6 +20,7 @@ t_tok_list	*msh_tok_lstnew(int type, char *val)
 	new->type = type;
 	new->val = val;
 	new->next = NULL;
+	new->prev = NULL;
 	return (new);
 }
 
@@ -36,6 +37,7 @@ void	msh_tok_lstaddb(t_tok_list **lst, t_tok_list *new)
 	}
 	tmp = msh_tok_lstlast(*lst);
 	tmp->next = new;
+	new->prev = tmp;
 }
 
 t_tok_list	*msh_tok_lstlast(t_tok_list *lst)
@@ -60,4 +62,22 @@ int	msh_tok_lstsize(t_tok_list *lst)
 		i++;
 	}
 	return (i);
+}
+
+//remove a given token from the double linked token list
+// NOT TESTED !!
+
+t_tok_list	*msh_remove_tok(t_tok_list *lst, t_tok_list *tok_to_remove)
+{
+	if (!lst || !tok_to_remove)
+		return (0);
+	if (lst == tok_to_remove)
+		lst = tok_to_remove->next;
+	if (tok_to_remove->next != NULL)
+		tok_to_remove->next->prev = tok_to_remove->prev;
+	if (tok_to_remove->prev != NULL)
+		tok_to_remove->prev->next = tok_to_remove->next;
+	free(tok_to_remove->val);
+	free(tok_to_remove);
+	return (lst);
 }

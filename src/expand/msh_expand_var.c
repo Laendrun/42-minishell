@@ -41,8 +41,6 @@ int	msh_malloc_new_str(t_msh_data *m_d, t_tok_list *str_tok, int flg[3])
 	return (SUCCESS);
 }
 
-
-//
 int	msh_flag_in_str_var(t_msh_data *m_d, t_tok_list *str_tok)
 {
 	int	i;

@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_terminate.c                                    :+:      :+:    :+:   */
+/*   msh_escape_char.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/31 14:15:34 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/31 14:24:00 by saeby            ###   ########.fr       */
+/*   Created: 2022/11/21 18:51:04 by egauthey          #+#    #+#             */
+/*   Updated: 2023/01/31 13:40:10 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	msh_terminate(t_msh_data *m_data)
+// character that can be escaped in bash :
+// \	$	`	"
+
+int	msh_escape_char(t_msh_data *m_d)
 {
-	if (m_data->env)
-		msh_free_env(m_data);
-	if (m_data->s_tok)
-		msh_free_simpl_tok(m_data);
-	if (m_data->tokens)
-		msh_free_tok(m_data);
+	t_tok_list	*cur;
+
+	cur = m_d->s_tok;
+	while (cur->next != NULL)
+	{
+		if ((cur->type == MSH_DQUOTE || cur->type == MSH_SQUOTE) && (cur->prev->type == MSH_WORD || cur->prev->type == MSH_STR))
+		{
+			
+		}
+		cur = cur->next;
+	}
+
+	return (SUCCESS);
 }
-
-//to be freed
-
-// in msh_malloc_new_str there are 2 malloc that needs to be freed 

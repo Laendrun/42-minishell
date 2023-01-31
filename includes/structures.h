@@ -26,6 +26,7 @@ typedef struct s_tok_list
 	int					type;
 	char				*val;
 	struct s_tok_list	*next;
+	struct s_tok_list	*prev;
 }				t_tok_list;
 
 typedef struct s_msh_data

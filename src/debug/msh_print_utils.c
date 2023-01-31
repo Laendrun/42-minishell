@@ -37,3 +37,19 @@ void	print_tok(t_msh_data *m_data)
 		token = token->next;
 	}
 }
+
+// //reverse order to test prev
+// void	print_simpl_tok(t_msh_data *m_data)
+// {
+// 	t_tok_list	*token;
+
+// 	printf("%sSimplified tokens: \n%s", YELLOW, RESET);
+// 	token = m_data->s_tok;
+// 	token = msh_tok_lstlast(token);
+
+// 	while (token)
+// 	{
+// 		printf("Type: %d - Value: %s\n", token->type, token->val);
+// 		token = token->prev;
+// 	}
+// }
