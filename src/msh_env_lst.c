@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_env_lst.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby>                              +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:43:47 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/28 10:59:59 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/31 11:09:21 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_env_list	*msh_env_lstnew(char *key, char *val)
 
 void	msh_env_lstaddb(t_env_list **lst, t_env_list *new)
 {
-	t_env_list	*tmp;
+	t_env_list	*last;
 
 	if (!new)
 		return ;
@@ -35,9 +35,9 @@ void	msh_env_lstaddb(t_env_list **lst, t_env_list *new)
 		*lst = new;
 		return ;
 	}
-	tmp = msh_env_lstlast(*lst);
-	tmp->next = new;
-	tmp->prev = tmp;
+	last = msh_env_lstlast(*lst);
+	last->next = new;
+	new->prev = last;
 }
 
 t_env_list	*msh_env_lstlast(t_env_list *lst)
