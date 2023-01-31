@@ -33,7 +33,9 @@ LEX_SRC	= $(addprefix $(LEX_DIR),	msh_lex_operator.c \
 
 PARS_SRC = $(addprefix $(PARS_DIR), )
 
-SYNT_SRC = $(addprefix $(SYNT_DIR), )
+SYNT_SRC = $(addprefix $(SYNT_DIR),	msh_check_syntax.c \
+									msh_syntax_helper.c \
+									)
 
 EXPAND_SRC = $(addprefix $(EXPAND_DIR),	msh_expand_var.c \
 										)

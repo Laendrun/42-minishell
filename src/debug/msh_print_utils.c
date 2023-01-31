@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:31:08 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/31 11:32:08 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/31 13:39:42 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	print_simpl_tok(t_msh_data *m_data)
 {
 	t_tok_list	*token;
 
-	printf("Simplified tokens: \n");
+	printf("%sSimplified tokens: \n%s", YELLOW, RESET);
 	token = m_data->s_tok;
 	while (token)
 	{
@@ -30,7 +30,7 @@ void	print_tok(t_msh_data *m_data)
 	t_tok_list	*token;
 
 	token = m_data->tokens;
-	printf("Original tokens: \n");
+	printf("%sOriginal tokens: \n%s", YELLOW, RESET);
 	while (token)
 	{
 		printf("Type: %d - Value: %s\n", token->type, token->val);

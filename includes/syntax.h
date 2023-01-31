@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:41:11 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/31 11:43:50 by saeby            ###   ########.fr       */
+/*   Updated: 2023/01/31 13:20:06 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,7 @@ int			msh_check_syntax(t_msh_data *m_d);
 // syntax/msh_syntax_helper.c
 // ----------------------------------------------
 int			msh_count_quotes(t_msh_data *m_d);
+int			msh_count_dquote(t_msh_data *m_d);
+int			msh_count_squote(t_msh_data *m_d);
 
 #endif
