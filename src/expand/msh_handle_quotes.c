@@ -12,6 +12,30 @@
 
 #include "minishell.h"
 
+int	merge_str_wrd(t_msh_data *m_d)
+{
+	t_tok_list	*cur;
+	int			len;
+	char		*new_val;
+
+	cur = m_d->s_tok;
+	while (cur)
+	{
+		if ((cur->type == MSH_STR || cur->type == MSH_WORD) && (cur->next->type == MSH_STR || cur->next->type == MSH_WORD))
+		{
+			len = ft_strlen(cur->val) + ft_strlen(cur->next->val);
+			new_val = malloc(sizeof(char) * (len + 1));
+			new_val = ft_strjoin(cur->val, cur->next->val);
+			// free(cur->val); // causes double free somtimes
+			cur->val = new_val;
+			cur->type = MSH_STR;
+			msh_remove_tok(&m_d->s_tok, cur->next);
+		}
+		cur = cur->next;
+	}
+	return (SUCCESS);
+}
+
 int	msh_handle_quotes(t_msh_data *m_d)
 {
 	t_tok_list	*cur;
@@ -19,23 +43,29 @@ int	msh_handle_quotes(t_msh_data *m_d)
 	cur = m_d->s_tok;
 	while (cur)
 	{
+		if (cur->type == MSH_DQUOTE || cur->type == MSH_SQUOTE)
+			msh_remove_tok(&m_d->s_tok, cur);
+		cur = cur->next;
+	}
+	merge_str_wrd(m_d);
+	return (SUCCESS);
+}
 
+		// MOST PROBABLY TO BE TRASHED BUT TOOK ME SO LONG TO FIGURE IT OUT 
 		// SEG FAULT WHY ????
 		// case simple & double quotes
 		// case double & simple quotes
 		// case double double quotes & double simple quotes
 		// if (cur->type == MSH_STR && cur->next->next->next != NULL && cur->next->next->next->next != NULL && cur->next->next != NULL)
 		// {
-		// 		if (cur->type == MSH_STR && cur->next->next->next->type == MSH_STR)
+		// 		if (cur->next->next->next->type == MSH_STR)
 		// 		{
-		// 			printf("suis passe la !");
 		// 			msh_remove_tok(&m_d->s_tok, cur->next->next->next->next);
 		// 			msh_remove_tok(&m_d->s_tok, cur->next->next);
 		// 			msh_remove_tok(&m_d->s_tok, cur->next);
 		// 			msh_remove_tok(&m_d->s_tok, cur->prev);
 		// 		}
 		// }
-
 
 		// if (cur->type == MSH_SQUOTE && cur->next->next->next != NULL && cur->prev->prev != NULL && cur->next != NULL)
 		// {
@@ -50,15 +80,16 @@ int	msh_handle_quotes(t_msh_data *m_d)
 		// }
 
 
-		// case single or double quotes then no quotes
-		if (cur->type == MSH_STR && cur->next->next != NULL && cur->next != NULL && cur->prev != NULL)
-		{
-			if (cur->type == MSH_STR && cur->next->next->type == MSH_WORD)
-			{
-				msh_remove_tok(&m_d->s_tok, cur->next);
-				msh_remove_tok(&m_d->s_tok, cur->prev);
-			}
-		}
+		// // case single or double quotes then no quotes
+		// else if (cur->type == MSH_STR && cur->next->next != NULL && cur->next != NULL && cur->prev != NULL)
+		// {
+		// 	if (cur->next->next->type == MSH_WORD)
+		// 	{
+		// 		printf("suis passe la !2\n");
+		// 		msh_remove_tok(&m_d->s_tok, cur->next);
+		// 		msh_remove_tok(&m_d->s_tok, cur->prev);
+		// 	}
+		// }
 
 		
 		
@@ -88,19 +119,13 @@ int	msh_handle_quotes(t_msh_data *m_d)
 		// 	}
 		// }
 		
-		// function that tries to unite the 2 above but again SEGFAULT fuck
-		// if (cur->type == MSH_STR && cur->prev->prev != NULL && cur->next != NULL && cur->prev != NULL)
+		// // function that tries to unite the 2 above but again SEGFAULT fuck
+		// else if (cur->type == MSH_STR && cur->prev->prev != NULL && cur->next != NULL && cur->prev != NULL)
 		// {
-		// 	if (cur->type == MSH_STR && cur->prev->prev->type == MSH_WORD)
+		// 	if (cur->prev->prev->type == MSH_WORD)
 		// 	{
+		// 		printf("suis passe la !3\n");
 		// 		msh_remove_tok(&m_d->s_tok, cur->next);
 		// 		msh_remove_tok(&m_d->s_tok, cur->prev);
 		// 	}
 		// }
-		
-		cur = cur->next;
-	}
-	return (SUCCESS);
-}
-
-
