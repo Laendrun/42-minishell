@@ -52,7 +52,6 @@ int	msh_handle_quotes(t_msh_data *m_d)
 }
 
 		// MOST PROBABLY TO BE TRASHED BUT TOOK ME SO LONG TO FIGURE IT OUT 
-		// SEG FAULT WHY ????
 		// case simple & double quotes
 		// case double & simple quotes
 		// case double double quotes & double simple quotes
