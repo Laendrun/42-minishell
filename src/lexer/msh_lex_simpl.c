@@ -48,10 +48,12 @@ int	msh_simplify_tokens(t_msh_data *m_d)
 			tmp = tmp->next;
 		}
 	}
-	print_simpl_tok(m_d);
+	// print_simpl_tok(m_d);
 	msh_expand_var(m_d);
+	print_simpl_tok(m_d);
 	// msh_escape_char(m_d);
-	// msh_handles_quotes(m_d);
+	msh_handle_quotes(m_d);
+	print_simpl_tok(m_d);
 	return (SUCCESS);
 }
 

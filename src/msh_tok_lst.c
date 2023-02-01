@@ -65,19 +65,19 @@ int	msh_tok_lstsize(t_tok_list *lst)
 }
 
 //remove a given token from the double linked token list
-// NOT TESTED !!
 
-t_tok_list	*msh_remove_tok(t_tok_list *lst, t_tok_list *tok_to_remove)
+t_tok_list *msh_remove_tok(t_tok_list **lst, t_tok_list *tok_to_remove)
 {
-	if (!lst || !tok_to_remove)
-		return (0);
-	if (lst == tok_to_remove)
-		lst = tok_to_remove->next;
+	if (!(*lst) || !tok_to_remove)
+		return (NULL);
+	if (*lst == tok_to_remove)
+		*lst = tok_to_remove->next;
 	if (tok_to_remove->next != NULL)
 		tok_to_remove->next->prev = tok_to_remove->prev;
 	if (tok_to_remove->prev != NULL)
 		tok_to_remove->prev->next = tok_to_remove->next;
 	free(tok_to_remove->val);
 	free(tok_to_remove);
-	return (lst);
+	return (*lst);
 }
+

@@ -43,7 +43,7 @@ t_tok_list	*msh_tok_lstnew(int type, char *val);
 void		msh_tok_lstaddb(t_tok_list **lst, t_tok_list *new);
 t_tok_list	*msh_tok_lstlast(t_tok_list *lst);
 int			msh_tok_lstsize(t_tok_list *lst);
-t_tok_list	*msh_remove_tok(t_tok_list *lst, t_tok_list *tok_to_remove);
+t_tok_list *msh_remove_tok(t_tok_list **lst, t_tok_list *tok_to_remove);
 
 // ----------------------------------------------
 // msh_init.c
@@ -79,6 +79,7 @@ int	msh_replace_var_in_var(t_msh_data *m_d);
 int	msh_replace_var_in_str(t_msh_data *m_d);
 int	msh_flag_in_str_var(t_msh_data *m_d, t_tok_list *str_tok);
 int	msh_malloc_new_str(t_msh_data *m_d, t_tok_list *str_tok, int flg[3]);
+int	msh_handle_quotes(t_msh_data *m_d);
 
 // ----------------------------------------------
 // msh_free.c

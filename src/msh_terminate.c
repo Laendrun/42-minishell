@@ -22,6 +22,6 @@ void	msh_terminate(t_msh_data *m_data)
 		msh_free_tok(m_data);
 }
 
-//to be freed
+//TO BE FREED
 
 // in msh_malloc_new_str there are 2 malloc that needs to be freed 

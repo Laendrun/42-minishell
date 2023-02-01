@@ -17,17 +17,7 @@
 
 int	msh_escape_char(t_msh_data *m_d)
 {
-	t_tok_list	*cur;
-
-	cur = m_d->s_tok;
-	while (cur->next != NULL)
-	{
-		if ((cur->type == MSH_DQUOTE || cur->type == MSH_SQUOTE) && (cur->prev->type == MSH_WORD || cur->prev->type == MSH_STR))
-		{
-			
-		}
-		cur = cur->next;
-	}
+	
 
 	return (SUCCESS);
 }

@@ -38,6 +38,7 @@ SYNT_SRC = $(addprefix $(SYNT_DIR),	msh_check_syntax.c \
 									)
 
 EXPAND_SRC = $(addprefix $(EXPAND_DIR),	msh_expand_var.c \
+										msh_handle_quotes.c \
 										)
 
 DEBUG_SRC = $(addprefix $(DEBUG_DIR),	msh_print_utils.c \

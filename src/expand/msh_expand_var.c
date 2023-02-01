@@ -30,7 +30,7 @@ int	msh_malloc_new_str(t_msh_data *m_d, t_tok_list *str_tok, int flg[3])
 	replaced_var = msh_get_env(m_d, s_part[1]);
 	free(s_part[1]);
 	str_joined[0] = ft_strjoin(s_part[0], replaced_var);
-	// free(replaced_var); //does not like being freed sometimes !
+	// 	free(replaced_var); //does not like being freed sometimes !
 	str_joined[1] = ft_strjoin(str_joined[0], s_part[2]);
 	// free(str_tok->val); //does not like being freed sometimes !
 	str_tok->val = ft_strdup(str_joined[1]);
@@ -117,6 +117,5 @@ int	msh_expand_var(t_msh_data *m_d)
 {
 	msh_replace_var_in_var(m_d);
 	msh_replace_var_in_str(m_d);
-	print_simpl_tok(m_d);
 	return(SUCCESS);
 }
