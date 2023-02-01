@@ -18,6 +18,5 @@
 int	msh_escape_char(t_msh_data *m_d)
 {
 	
-
 	return (SUCCESS);
 }
