@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_escape_char.c                                :+:      :+:    :+:   */
+/*   msh_escape_char.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -14,8 +14,6 @@
 
 // character that can be escaped in bash :
 // \	$	`	"
-
-
 
 int	escape_backslash(t_tok_list *cur)
 {

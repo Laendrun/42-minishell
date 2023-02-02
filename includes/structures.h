@@ -29,13 +29,24 @@ typedef struct s_tok_list
 	struct s_tok_list	*prev;
 }				t_tok_list;
 
+typedef struct s_cmd_list
+{
+	char				*cmd;
+	char				**args;
+	struct s_cmd_list	*next;
+	struct s_cmd_list	*prev;
+}				t_cmd;
+
 typedef struct s_msh_data
 {
-	char				*name;
-	char				*prompt;
-	t_env_list			*env;
-	t_tok_list			*tokens;
-	t_tok_list			*s_tok;
+	char			*name;
+	char			*prompt;
+	int				*pid;
+	int				*fd;
+	t_env_list		*env;
+	t_tok_list		*tokens;
+	t_tok_list		*s_tok;
+	t_cmd			*cmds;
 }				t_msh_data;
 
 #endif

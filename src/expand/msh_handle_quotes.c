@@ -26,7 +26,7 @@ int	merge_str_wrd(t_msh_data *m_d)
 			len = ft_strlen(cur->val) + ft_strlen(cur->next->val);
 			new_val = malloc(sizeof(char) * (len + 1));
 			new_val = ft_strjoin(cur->val, cur->next->val);
-			// free(cur->val); // causes double free somtimes
+			// free(cur->val); // causes double free sometimes
 			cur->val = new_val;
 			cur->type = MSH_STR;
 			msh_remove_tok(&m_d->s_tok, cur->next);

@@ -52,7 +52,7 @@ int	msh_flag_in_str_var(t_msh_data *m_d, t_tok_list *str_tok)
 	flags[2] = 0;
 	while (str_tok->val[++i])
 	{
-		if (str_tok->val[i] == '$' && str_tok->val[i + 1] != 0 && str_tok->val[i - 1] != '\\')
+		if (str_tok->val[i] == '$' && str_tok->val[i + 1] != 0 && str_tok->val[i - 1] != '\\' /*&& str_tok->val[i + 1] != '$'*/)
 		{
 			flags[0] = i;
 			i++;
