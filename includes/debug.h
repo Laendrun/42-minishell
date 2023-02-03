@@ -19,5 +19,6 @@
 // ----------------------------------------------
 void		print_simpl_tok(t_msh_data *m_data);
 void		print_tok(t_msh_data *m_data);
+void		print_env_strarray(t_msh_data *m_d);
 
 #endif

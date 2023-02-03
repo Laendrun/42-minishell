@@ -38,6 +38,20 @@ void	print_tok(t_msh_data *m_data)
 	}
 }
 
+void	print_env_strarray(t_msh_data *m_d)
+{
+	char	**env;
+	int		i;
+
+	env = msh_make_env_str(m_d);
+	i = 0;
+	while (env[i])
+	{
+		printf("%s\n", env[i]);
+		i++;
+	}
+}
+
 // //reverse order to test prev
 // void	print_simpl_tok(t_msh_data *m_data)
 // {

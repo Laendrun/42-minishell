@@ -12,6 +12,10 @@
 
 #include "minishell.h"
 
+// to create commands we need to provide good format for execve function:
+// 1. cmd with path (char *)
+// 2. cmd with args (char **)
+// 3. env (char**)
 
 
 // int	msh_create_commmands(t_msh_data *m_d)
@@ -27,3 +31,28 @@
 // 	}
 // 	return (SUCCESS);
 // }
+
+char	**msh_make_env_str(t_msh_data *m_d)
+{
+	int i;
+	int size;
+	t_env_list *tmp;
+
+	i = 0;
+	tmp = m_d->env;
+	size = msh_env_lstsize(m_d->env);
+	char **env_str = malloc(sizeof(char *) * (size + 1));
+	if (!env_str)
+		return NULL;
+	while (tmp)
+	{
+		env_str[i] = malloc(strlen(tmp->key) + strlen(tmp->val) + 2);
+		ft_strcpy(env_str[i], tmp->key);
+		ft_strcat(env_str[i], "=");
+		ft_strcat(env_str[i], tmp->val);
+		i++;
+		tmp = tmp->next;
+	}
+	env_str[size] = 0;
+	return (env_str);
+}
