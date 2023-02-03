@@ -18,20 +18,9 @@
 // 3. env (char**)
 
 
-// int	msh_create_commmands(t_msh_data *m_d)
-// {
-// 	t_tok_list	*cur;
 
-// 	cur = m_d->s_tok;
-// 	while (cur)
-// 	{
-// 		if (cur->type == MSH_PIPE || cur->type == MSH_END)
-// 			msh_remove_tok(&m_d->s_tok, cur);
-// 		cur = cur->next;
-// 	}
-// 	return (SUCCESS);
-// }
 
+// make env list back into into a double array of strings with reduced malloc !
 char	**msh_make_env_str(t_msh_data *m_d)
 {
 	int i;
@@ -56,3 +45,125 @@ char	**msh_make_env_str(t_msh_data *m_d)
 	env_str[size] = 0;
 	return (env_str);
 }
+
+// !! Calibred on DPIPE and PIPE !! to be changed once we have done the correction
+void	calculate_nb_cmds(t_msh_data *m_d)
+{
+	t_tok_list	*cur;
+	int			cpt;
+
+	cpt = 0;
+	cur = m_d->s_tok;
+	while (cur)
+	{
+		if (cur->type == MSH_PIPE || cur->type == MSH_END || cur->type == MSH_DPIPE)
+			cpt++;
+		cur = cur->next;
+	}
+	m_d->nb_cmd = cpt;
+}
+
+// !! Calibred on DPIPE !! to be changed once we have done the correction
+t_tok_list **create_array_of_toklst(t_msh_data *m_d)
+{
+	t_tok_list	*cur;
+	t_tok_list	**array;
+	int			i;
+
+	i = 0;
+	array = (t_tok_list **)malloc(sizeof(t_tok_list *) * m_d->nb_cmd);
+	cur = m_d->s_tok;
+	while (cur)
+	{
+		array[i] = cur;
+		while (cur->next && cur->type != MSH_DPIPE)
+			cur = cur->next;
+		if (cur->next !=  NULL)
+		{
+			cur = cur->next;
+			cur->prev->next = NULL;
+			//the connection with prev is still there and the list is still connected I guess
+			i++;
+		}
+		else
+			break;
+	}
+	return (array);
+}
+
+int	get_nb_args(t_tok_list *d)
+{
+	int			cpt;
+	t_tok_list	*tmp;
+
+	cpt = 0;
+	tmp = d;
+	while (tmp)
+	{
+		if (tmp->type == MSH_VAR || tmp->type == MSH_WORD || tmp->type == MSH_STR || tmp->type == MSH_PARAM)
+			cpt++;
+		tmp = tmp->next;
+	}
+
+	return (cpt);
+}
+
+int	create_cmd_lst(t_msh_data *m_d, int i)
+{
+	t_cmd		*new;
+	char		**args;
+	int			nb_arg;
+	t_tok_list	*tmp;
+	int 		j;
+
+	nb_arg = get_nb_args(m_d->trunc_lst[i]);
+	// printf("%d\n", nb_arg);
+	args = ft_calloc(sizeof(char *), (nb_arg + 1));
+	tmp = m_d->trunc_lst[i];
+	j = 0;
+	while (tmp)
+	{
+		if (tmp->type == MSH_VAR || tmp->type == MSH_WORD || tmp->type == MSH_STR || tmp->type == MSH_PARAM)
+		{
+			args[j] = ft_calloc(sizeof(char), (ft_strlen(tmp->val) + 1));
+			args[j] = tmp->val;
+			printf("%s\n", args[j]);
+			j++;
+		}
+		tmp = tmp->next;
+	}
+	new = msh_cmd_lstnew(NULL, args);
+	msh_cmd_lstaddb(&m_d->cmds, new);
+	return (SUCCESS);
+}
+
+int	msh_create_commmands(t_msh_data *m_d)
+{
+	int	i;
+
+	calculate_nb_cmds(m_d);
+	m_d->trunc_lst = create_array_of_toklst(m_d);
+	i = 0;
+	// printf("nb cmd : %d\n", m_d->nb_cmd);
+	while (i < m_d->nb_cmd)
+	{
+		print_tok_trunclst(m_d->trunc_lst[i]);
+		create_cmd_lst(m_d, i);
+		i++;
+	}
+	// print_array_lst(m_d);
+	// i = 0;
+	// while(m_d->cmds)
+	// {
+	// 	i = 0;
+	// 	while (m_d->cmds->args[i])
+	// 	{
+	// 		printf("%d : %s\n", i, m_d->cmds->args[i]);
+	// 		i++;
+	// 	}
+	// 	m_d->cmds = m_d->cmds->next;
+	// }
+	return (SUCCESS);
+}
+
+

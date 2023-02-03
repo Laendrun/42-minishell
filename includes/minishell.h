@@ -71,6 +71,15 @@ int			msh_parser(t_msh_data *m_data);
 int			msh_exec_builtin(char *str, t_msh_data *m_data);
 
 // ----------------------------------------------
+// msh_cmds_lst.c
+// ----------------------------------------------
+
+t_cmd	*msh_cmd_lstnew(char *cmd, char **args);
+void	msh_cmd_lstaddb(t_cmd **lst, t_cmd *new);
+t_cmd	*msh_cmd_lstlast(t_cmd *lst);
+int		msh_cmd_lstsize(t_cmd *lst);
+
+// ----------------------------------------------
 // msh_expand_var.c
 // ----------------------------------------------
 
@@ -82,6 +91,7 @@ int	msh_malloc_new_str(t_msh_data *m_d, t_tok_list *str_tok, int flg[3]);
 int	msh_handle_quotes(t_msh_data *m_d);
 int	msh_escape_char(t_msh_data *m_d);
 char	**msh_make_env_str(t_msh_data *m_d);
+int	msh_create_commmands(t_msh_data *m_d);
 
 // ----------------------------------------------
 // msh_free.c

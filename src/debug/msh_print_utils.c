@@ -52,6 +52,29 @@ void	print_env_strarray(t_msh_data *m_d)
 	}
 }
 
+void	print_tok_trunclst(t_tok_list *d)
+{
+	t_tok_list	*token;
+
+	printf("%strunc token list: \n%s", YELLOW, RESET);
+	token = d;
+	while (token)
+	{
+		printf("Type: %d - Value: %s\n", token->type, token->val);
+		token = token->next;
+	}
+}
+
+void	print_array_lst(t_msh_data *m_d)
+{
+	int	i = 0;
+	while(i < m_d->nb_cmd)
+	{
+		print_tok_trunclst(m_d->ar_lst[i]);
+		i++;
+	}
+}
+
 // //reverse order to test prev
 // void	print_simpl_tok(t_msh_data *m_data)
 // {

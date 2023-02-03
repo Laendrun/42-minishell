@@ -21,6 +21,8 @@ int	msh_init(t_msh_data *m_data, char **env)
 	m_data->s_tok = NULL;
 	m_data->fd = NULL;
 	m_data->pid = NULL;
+	m_data->nb_cmd = 0;
+	m_data->trunc_lst = NULL;
 	m_data->cmds = NULL;
 	msh_env_init(m_data, env);
 	return (SUCCESS);

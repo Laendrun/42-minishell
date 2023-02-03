@@ -43,9 +43,11 @@ typedef struct s_msh_data
 	char			*prompt;
 	int				*pid;
 	int				*fd;
+	int				nb_cmd;
 	t_env_list		*env;
 	t_tok_list		*tokens;
 	t_tok_list		*s_tok;
+	t_tok_list		**trunc_lst;
 	t_cmd			*cmds;
 }				t_msh_data;
 

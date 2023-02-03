@@ -53,8 +53,7 @@ int	msh_simplify_tokens(t_msh_data *m_d)
 	msh_escape_char(m_d);
 	msh_handle_quotes(m_d);
 	print_simpl_tok(m_d);
-	//print_env_strarray(m_d);
-	// msh_create_commmands(m_d);
+	msh_create_commmands(m_d);
 	return (SUCCESS);
 }
 

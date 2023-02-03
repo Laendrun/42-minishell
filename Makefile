@@ -41,6 +41,7 @@ EXPAND_SRC = $(addprefix $(EXPAND_DIR),	msh_expand_var.c \
 										msh_handle_quotes.c \
 										msh_escape_char.c \
 										msh_create_commands.c \
+										msh_cmds_lst.c \
 										)
 
 DEBUG_SRC = $(addprefix $(DEBUG_DIR),	msh_print_utils.c \

@@ -12,6 +12,7 @@
 
 #include "minishell.h"
 
+// pas sur qu'il faut merge les 2 en 1 seul token
 int	merge_str_wrd(t_msh_data *m_d)
 {
 	t_tok_list	*cur;
