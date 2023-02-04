@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:05:50 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/31 14:22:31 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/04 12:37:36 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	main(int ac, char **av, char **env)
 		if (ft_strncmp(rl, "clear", 5) == 0)
 			msh_clear(&m_data);
 		msh_lex(&m_data, rl);
-		msh_check_syntax(&m_data);
 		msh_parser(&m_data);
 		msh_free_tok(&m_data);
 		msh_free_simpl_tok(&m_data);
