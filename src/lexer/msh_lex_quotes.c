@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:48:25 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/04 13:35:09 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/04 14:09:57 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,13 @@ int	msh_lex_dquote(t_msh_data *m_data, char *line, unsigned int *i)
 		*i += 1;
 	if (line[*i] != '\"')
 	{
-		*i = t + 1;
+		tmp = ft_substr(line, t + 1, *i - (t + 1));
+		msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(MSH_STR, ft_strdup(tmp)));
 		return (ERROR);
 	}
 	tmp = ft_substr(line, t + 1, *i - (t + 1));
 	msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(MSH_STR, ft_strdup(tmp)));
 	msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(MSH_DQUOTE, 0));
 	*i += 1;
-	free(tmp);
 	return (SUCCESS);
 }
