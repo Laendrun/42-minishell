@@ -22,6 +22,13 @@ int	msh_init(t_msh_data *m_data, char **env)
 	m_data->fd = NULL;
 	m_data->pid = NULL;
 	m_data->nb_cmd = 0;
+	m_data->process = 0;
+	m_data->path = NULL;
+	m_data->infile = -1;
+	m_data->heredoc = -1;
+	m_data->outfile_app = -1;
+	m_data->outfile_trunc = -1;
+	m_data->env_upd = NULL;
 	m_data->trunc_lst = NULL;
 	m_data->cmds = NULL;
 	msh_env_init(m_data, env);
@@ -43,5 +50,11 @@ int	msh_env_init(t_msh_data *m_data, char **env)
 		free(tmp);
 		env++;
 	}
+	return (SUCCESS);
+}
+
+msh_pipex_init(t_msh_data *m_data)
+{
+
 	return (SUCCESS);
 }

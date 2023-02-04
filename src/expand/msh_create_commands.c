@@ -17,20 +17,18 @@
 // 2. cmd with args (char **)
 // 3. env (char**)
 
-
-
-
 // make env list back into into a double array of strings with reduced malloc !
-char	**msh_make_env_str(t_msh_data *m_d)
+char	**msh_make_env_tabstr(t_msh_data *m_d)
 {
-	int i;
-	int size;
+	int			i;
+	int			size;
 	t_env_list *tmp;
+	char 		**env_str;
 
 	i = 0;
 	tmp = m_d->env;
 	size = msh_env_lstsize(m_d->env);
-	char **env_str = malloc(sizeof(char *) * (size + 1));
+	env_str = malloc(sizeof(char *) * (size + 1));
 	if (!env_str)
 		return NULL;
 	while (tmp)
@@ -140,6 +138,9 @@ int	msh_create_commmands(t_msh_data *m_d)
 	int	i;
 
 	calculate_nb_cmds(m_d);
+	m_d-> env_upd = msh_make_env_tabstr(m_d);
+	m_d->pid = malloc(sizeof(int) * m_d->nb_cmd);
+	m_d->fd = malloc(sizeof(int) * (m_d->nb_cmd - 1) * 2);
 	m_d->trunc_lst = create_array_of_toklst(m_d);
 	i = 0;
 	// printf("nb cmd : %d\n", m_d->nb_cmd);

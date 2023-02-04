@@ -37,6 +37,19 @@ typedef struct s_cmd_list
 	struct s_cmd_list	*prev;
 }				t_cmd;
 
+// typedef struct s_pipex
+// {
+// 	int		*pid;
+// 	int		*fd;
+// 	int		nb_cmd;
+// 	int		process;
+// 	int		infile;
+// 	int		heredoc;
+// 	int		outfile_app;
+// 	int		outfile_trunc;
+// 	char	**env_upd;
+// }			t_pipex;
+
 typedef struct s_msh_data
 {
 	char			*name;
@@ -44,6 +57,13 @@ typedef struct s_msh_data
 	int				*pid;
 	int				*fd;
 	int				nb_cmd;
+	int				process;
+	char			**path;
+	int				infile;
+	int				heredoc;
+	int				outfile_app;
+	int				outfile_trunc;
+	char			**env_upd;
 	t_env_list		*env;
 	t_tok_list		*tokens;
 	t_tok_list		*s_tok;

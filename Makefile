@@ -10,6 +10,7 @@ PARS_DIR = parser/
 SYNT_DIR = syntax/
 EXPAND_DIR = expand/
 DEBUG_DIR = debug/
+PIPEX_DIR = pipex/
 
 # Libraries
 LIBFT  = libs/libft/
@@ -43,6 +44,8 @@ EXPAND_SRC = $(addprefix $(EXPAND_DIR),	msh_expand_var.c \
 										msh_create_commands.c \
 										msh_cmds_lst.c \
 										)
+
+PIPEX_SRC = $(addprefix $(EXPAND_DIR), )
 
 DEBUG_SRC = $(addprefix $(DEBUG_DIR),	msh_print_utils.c \
 										)

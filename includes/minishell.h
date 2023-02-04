@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/errno.h>
 # include "libft.h"
 # include "syntax.h"
 # include "lexer.h"
@@ -90,7 +91,7 @@ int	msh_flag_in_str_var(t_msh_data *m_d, t_tok_list *str_tok);
 int	msh_malloc_new_str(t_msh_data *m_d, t_tok_list *str_tok, int flg[3]);
 int	msh_handle_quotes(t_msh_data *m_d);
 int	msh_escape_char(t_msh_data *m_d);
-char	**msh_make_env_str(t_msh_data *m_d);
+char	**msh_make_env_tabstr(t_msh_data *m_d);
 int	msh_create_commmands(t_msh_data *m_d);
 
 // ----------------------------------------------

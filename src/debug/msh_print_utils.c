@@ -64,17 +64,17 @@ void	print_tok_trunclst(t_tok_list *d)
 		token = token->next;
 	}
 }
-/*
+
 void	print_array_lst(t_msh_data *m_d)
 {
 	int	i = 0;
 	while(i < m_d->nb_cmd)
 	{
-		print_tok_trunclst(m_d->ar_lst[i]);
+		print_tok_trunclst(m_d->trunc_lst[i]);
 		i++;
 	}
 }
-*/
+
 
 // //reverse order to test prev
 // void	print_simpl_tok(t_msh_data *m_data)
