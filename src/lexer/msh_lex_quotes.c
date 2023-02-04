@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:48:25 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/31 13:31:34 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/04 11:25:09 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	msh_lex_dquote(t_msh_data *m_data, char *line, unsigned int *i)
 	t = *i;
 	msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(MSH_DQUOTE, 0));
 	*i += 1;
-	while (ft_isprint(line[*i]) && !(line[*i] == '\"' && line[*i - 1] != '\\'))
+	while (ft_isprint(line[*i]) && line[*i] != '\"')
 		*i += 1;
 	if (line[*i] != '\"')
 	{
