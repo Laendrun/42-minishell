@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 20:54:27 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/04 15:00:58 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/04 15:42:10 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ int	msh_error(t_msh_data *m_d, int err_code, char *err_mes, char *sup)
 {
 	(void) sup;
 	msh_set_gcode(err_code);
-	printf("%s%s: %s%s\n", RED, m_d->name, err_mes, RESET);
+	ft_putstr_fd(RED, 2);
+	ft_putstr_fd(m_d->name, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd(err_mes, 2);
+	ft_putstr_fd(RESET, 2);
+	ft_putstr_fd("\n", 2);
 	return (err_code);
 }
