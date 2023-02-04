@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Makefile                                           :+:      :+:    :+:   */
+/*   msh_pipex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egauthey <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 18:51:04 by egauthey          #+#    #+#             */
-/*   Updated: 2022/11/21 18:51:06 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/04 16:56:16 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ int	pipex(t_msh_data *m_d)
 		m_d->process++;
 	}
 	close_fd_tab(m_d->fd, 2 * (m_d->nb_cmd - 1), m_d);
-	waitpid(-1, &status, 0);
+	while (m_d->process--)
+		wait(&status);
 	free(m_d->pid);
 	return (WEXITSTATUS(status));
 }
