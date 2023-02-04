@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 18:51:04 by egauthey          #+#    #+#             */
-/*   Updated: 2023/02/04 12:51:17 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/04 15:57:00 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ int	create_cmd_lst(t_msh_data *m_d, int i)
 		{
 			args[j] = ft_calloc(sizeof(char), (ft_strlen(tmp->val) + 1));
 			args[j] = tmp->val;
-			printf("%s\n", args[j]);
+			//printf("%s\n", args[j]);
 			j++;
 		}
 		tmp = tmp->next;
@@ -147,7 +147,7 @@ int	msh_create_commmands(t_msh_data *m_d)
 	// printf("nb cmd : %d\n", m_d->nb_cmd);
 	while (i < m_d->nb_cmd)
 	{
-		print_tok_trunclst(m_d->trunc_lst[i]);
+		//print_tok_trunclst(m_d->trunc_lst[i]);
 		create_cmd_lst(m_d, i);
 		i++;
 	}
