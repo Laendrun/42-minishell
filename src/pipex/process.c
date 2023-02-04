@@ -24,17 +24,15 @@ void	f_pre_duplicate(t_msh_data *m_d)
 {
 	if (m_d->process == 0)
 	{
-		if (m_d->infile == -1)
+		if (m_d->infile == -1 || m_d->heredoc == -1)
 		{
-			// f_duplicate(m_d->here_doc[0], d->fd[1], d);
-			// if (close(d->here_doc[0]) < 0)
-			// 	f_error("Close error :", strerror(errno), m_d);
+			f_duplicate(STDIN_FILENO, m_d->fd[1], m_d);
 		}
 		else
 			f_duplicate(m_d->infile, m_d->fd[1], m_d);
 	}
 	else if (m_d->process == m_d->nb_cmd - 1)
-		f_duplicate(m_d->fd[(2 * m_d->process) - 2], m_d->outfile_app, m_d);
+		f_duplicate(m_d->fd[(2 * m_d->process) - 2], STDOUT_FILENO, m_d);
 	else
 		f_duplicate(m_d->fd[(2 * m_d->process) - 2],
 			m_d->fd[(2 * m_d->process) + 1], m_d);
@@ -45,7 +43,7 @@ void	f_pre_duplicate(t_msh_data *m_d)
 
 void	pip_no_exec(char *s)
 {
-	ft_putstr_fd("pipex: ", STDERR_FILENO);
+	ft_putstr_fd("shellusion: ", STDERR_FILENO);
 	ft_putstr_fd(s, STDERR_FILENO);
 	ft_putstr_fd(" : command not found.\n", STDERR_FILENO);
 	exit(1);
