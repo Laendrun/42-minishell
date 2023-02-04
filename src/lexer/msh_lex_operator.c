@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_lex_operator.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby>                              +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:35:28 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/28 10:30:37 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/04 11:10:47 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	msh_lex_operator(t_msh_data *m_data, char *line, unsigned int *i)
 
 	ct = msh_get_op_type(line[*i]);
 	nt = msh_get_op_type(line[*i + 1]);
+
 	if (ct == nt)
 	{
 		msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(msh_dop_type(ct), 0));
@@ -42,7 +43,9 @@ int	msh_get_op_type(int c)
 		return (MSH_GT);
 	if (c == '-')
 		return (MSH_MINUS);
-	return (MSH_PIPE);
+	if (c == '|')
+		return (MSH_PIPE);
+	return (-10);
 }
 
 int	msh_dop_type(int type)
@@ -55,5 +58,7 @@ int	msh_dop_type(int type)
 		return (MSH_DGT);
 	if (type == MSH_MINUS)
 		return (MSH_DMINUS);
-	return (MSH_DPIPE);
+	if (type == MSH_PIPE)
+		return (MSH_DPIPE);
+	return (-10);
 }

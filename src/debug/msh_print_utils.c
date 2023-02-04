@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:31:08 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/31 13:39:42 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/04 11:04:19 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	print_tok_trunclst(t_tok_list *d)
 		token = token->next;
 	}
 }
-
+/*
 void	print_array_lst(t_msh_data *m_d)
 {
 	int	i = 0;
@@ -74,6 +74,7 @@ void	print_array_lst(t_msh_data *m_d)
 		i++;
 	}
 }
+*/
 
 // //reverse order to test prev
 // void	print_simpl_tok(t_msh_data *m_data)
