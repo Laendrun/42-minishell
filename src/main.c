@@ -6,11 +6,13 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:05:50 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/04 12:37:36 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/04 15:00:27 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	g_code = 0;
 
 int	main(int ac, char **av, char **env)
 {
@@ -40,4 +42,14 @@ int	main(int ac, char **av, char **env)
 	msh_free_env(&m_data);*/
 	msh_terminate(&m_data);
 	return (SUCCESS);
+}
+
+int	msh_get_gcode(void)
+{
+	return (g_code);
+}
+
+void	msh_set_gcode(int val)
+{
+	g_code = val;
 }

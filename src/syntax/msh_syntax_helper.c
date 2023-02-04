@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:38:59 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/31 13:27:31 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/04 14:57:10 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 int	msh_count_quotes(t_msh_data *m_d)
 {
-	msh_count_dquote(m_d);
-	msh_count_squote(m_d);
+	if (msh_count_dquote(m_d) != 0)
+		return (ERROR);
+	if (msh_count_squote(m_d) != 0)
+		return (ERROR);
 	return (SUCCESS);
 }
 
@@ -33,7 +35,7 @@ int	msh_count_dquote(t_msh_data *m_d)
 		tmp = tmp->next;
 	}
 	if (count % 2 == 1)
-		printf("%sSyntax error: odd number of double quotes.%s\n", RED, RESET);
+		return (msh_error(m_d, ERR_SYNT, "syntax error caused by odd number of double quote", NULL));
 	return (SUCCESS);
 }
 
@@ -51,6 +53,6 @@ int	msh_count_squote(t_msh_data *m_d)
 		tmp = tmp->next;
 	}
 	if (count % 2 == 1)
-		printf("%sSyntax error: odd number of single quotes.%s\n", RED, RESET);
+		return (msh_error(m_d, ERR_SYNT, "syntax error caused by odd number of single quote", NULL));
 	return (SUCCESS);
 }
