@@ -111,6 +111,7 @@ void	f_fork(t_msh_data *m_d);
 void	f_error(char *str, char *erno, t_msh_data *d);
 void	free_tab_char(char **str);
 void	close_fd_tab(int *fd, int size, t_msh_data *d);
+char	**pip_get_path(char **env);
 
 // ----------------------------------------------
 // msh_free.c

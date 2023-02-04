@@ -138,10 +138,11 @@ int	msh_create_commmands(t_msh_data *m_d)
 	int	i;
 
 	calculate_nb_cmds(m_d);
-	m_d-> env_upd = msh_make_env_tabstr(m_d);
+	m_d->env_upd = msh_make_env_tabstr(m_d);
 	m_d->pid = malloc(sizeof(int) * m_d->nb_cmd);
 	m_d->fd = malloc(sizeof(int) * (m_d->nb_cmd - 1) * 2);
 	m_d->trunc_lst = create_array_of_toklst(m_d);
+	m_d->path = pip_get_path(m_d->env_upd);
 	i = 0;
 	// printf("nb cmd : %d\n", m_d->nb_cmd);
 	while (i < m_d->nb_cmd)
