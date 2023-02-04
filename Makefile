@@ -45,7 +45,10 @@ EXPAND_SRC = $(addprefix $(EXPAND_DIR),	msh_expand_var.c \
 										msh_cmds_lst.c \
 										)
 
-PIPEX_SRC = $(addprefix $(EXPAND_DIR), )
+PIPEX_SRC = $(addprefix $(PIPEX_DIR),	msh_pipex.c \
+										process.c \
+										utils.c \
+										)
 
 DEBUG_SRC = $(addprefix $(DEBUG_DIR),	msh_print_utils.c \
 										)
@@ -69,9 +72,10 @@ PARS_OBJ := $(PARS_SRC:%.c=%.o)
 SYNT_OBJ := $(SYNT_SRC:%.c=%.o)
 EXPAND_OBJ := $(EXPAND_SRC:%.c=%.o)
 DEBUG_OBJ := $(DEBUG_SRC:%.c=%.o)
+PIPEX_OBJ := $(PIPEX_SRC:%.c=%.o)
 
-SRCS = $(addprefix $(SRC_DIR), $(SRC) $(BI_SRC) $(LEX_SRC) $(PARS_SRC) $(SYNT_SRC) $(EXPAND_SRC) $(DEBUG_SRC))
-OBJS = $(addprefix $(OBJ_DIR), $(OBJ) $(BI_OBJ) $(LEX_OBJ) $(PARS_OBJ) $(SYNT_OBJ) $(EXPAND_OBJ) $(DEBUG_OBJ))
+SRCS = $(addprefix $(SRC_DIR), $(SRC) $(BI_SRC) $(LEX_SRC) $(PARS_SRC) $(SYNT_SRC) $(EXPAND_SRC) $(DEBUG_SRC) $(PIPEX_SRC))
+OBJS = $(addprefix $(OBJ_DIR), $(OBJ) $(BI_OBJ) $(LEX_OBJ) $(PARS_OBJ) $(SYNT_OBJ) $(EXPAND_OBJ) $(DEBUG_OBJ) $(PIPEX_OBJ)) 
 
 CCFLAGS = -Wall -Wextra -Werror
 
@@ -105,6 +109,7 @@ $(OBJ_DIR):
 	@mkdir $(OBJ_DIR)/$(SYNT_DIR)
 	@mkdir $(OBJ_DIR)/$(EXPAND_DIR)
 	@mkdir $(OBJ_DIR)/$(DEBUG_DIR)
+	@mkdir $(OBJ_DIR)/$(PIPEX_DIR)
 
 libft:
 	make -C $(LIBFT)

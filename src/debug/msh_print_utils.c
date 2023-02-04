@@ -43,7 +43,7 @@ void	print_env_strarray(t_msh_data *m_d)
 	char	**env;
 	int		i;
 
-	env = msh_make_env_str(m_d);
+	env = msh_make_env_tabstr(m_d);
 	i = 0;
 	while (env[i])
 	{

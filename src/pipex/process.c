@@ -26,21 +26,21 @@ void	f_pre_duplicate(t_msh_data *m_d)
 	{
 		if (m_d->infile == -1)
 		{
-			f_duplicate(d->here_doc[0], d->fd[1], d);
-			if (close(d->here_doc[0]) < 0)
-				f_error("Close error :", strerror(errno), m_d);
+			// f_duplicate(m_d->here_doc[0], d->fd[1], d);
+			// if (close(d->here_doc[0]) < 0)
+			// 	f_error("Close error :", strerror(errno), m_d);
 		}
 		else
-			f_duplicate(d->infile, d->fd[1], m_d);
+			f_duplicate(m_d->infile, m_d->fd[1], m_d);
 	}
 	else if (m_d->process == m_d->nb_cmd - 1)
-		f_duplicate(m_d->fd[(2 * m_d->process) - 2], m_d->outfile, m_d);
+		f_duplicate(m_d->fd[(2 * m_d->process) - 2], m_d->outfile_app, m_d);
 	else
 		f_duplicate(m_d->fd[(2 * m_d->process) - 2],
 			m_d->fd[(2 * m_d->process) + 1], m_d);
-	close_fd_tab(m_d->fd, 2 * (d->ac - 1), m_d);
+	close_fd_tab(m_d->fd, 2 * (m_d->nb_cmd - 1), m_d);
 	close(m_d->infile);
-	close(m_d->outfile);
+	close(m_d->outfile_app);
 }
 
 void	pip_no_exec(char *s)
@@ -86,7 +86,7 @@ char	**pip_get_path(char **env)
 
 void	child_process(t_msh_data *m_d)
 {
-	char	**args;
+	// char	**args;
 
 	f_pre_duplicate(m_d);
 	// args = ft_split(m_d->av[d->process + 2], ' '); //need to be adapted

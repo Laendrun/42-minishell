@@ -52,9 +52,3 @@ int	msh_env_init(t_msh_data *m_data, char **env)
 	}
 	return (SUCCESS);
 }
-
-msh_pipex_init(t_msh_data *m_data)
-{
-
-	return (SUCCESS);
-}

@@ -33,7 +33,7 @@ int	pipex(t_msh_data *m_d)
 	}
 	close_fd_tab(m_d->fd, 2 * (m_d->nb_cmd - 1), m_d);
 	waitpid(-1, &status, 0);
-	free(d->pid);
+	free(m_d->pid);
 	return (WEXITSTATUS(status));
 }
 

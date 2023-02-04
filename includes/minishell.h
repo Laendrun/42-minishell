@@ -102,6 +102,17 @@ char	**msh_make_env_tabstr(t_msh_data *m_d);
 int	msh_create_commmands(t_msh_data *m_d);
 
 // ----------------------------------------------
+// msh_pipex.c
+// ----------------------------------------------
+
+int	msh_pipex(t_msh_data *m_d);
+int	pipex(t_msh_data *m_d);
+void	f_fork(t_msh_data *m_d);
+void	f_error(char *str, char *erno, t_msh_data *d);
+void	free_tab_char(char **str);
+void	close_fd_tab(int *fd, int size, t_msh_data *d);
+
+// ----------------------------------------------
 // msh_free.c
 // ----------------------------------------------
 void		msh_free_env(t_msh_data *m_data);
