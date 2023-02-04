@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:06:06 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/31 14:16:22 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/04 15:00:37 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include "builtins.h"
 # include "tokens.h"
 # include "debug.h"
+# include "errors.h"
 
 # define SUCCESS 0
 # define ERROR 1
@@ -35,6 +36,12 @@
 # define MAGENTA "\033[0;95m"
 # define CYAN "\033[0;96m"
 # define WHITE "\033[0;97m"
+
+// ----------------------------------------------
+// main.c
+// ----------------------------------------------
+void	msh_set_gcode(int val);
+int		msh_get_gcode(void);
 
 // ----------------------------------------------
 // msh_tok_list.c
@@ -114,6 +121,7 @@ int			msh_is_envvar_comp(t_tok_list *token);
 // msh_utils.c
 // ----------------------------------------------
 char		*msh_chrdup(int c);
+int			msh_error(t_msh_data *m_d, int err_code, char *err_mes, char *sup);
 
 // ----------------------------------------------
 // msh_env_utils.c
