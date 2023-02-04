@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_terminate.c                                    :+:      :+:    :+:   */
+/*   msh_free2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/31 14:15:34 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/04 19:56:58 by saeby            ###   ########.fr       */
+/*   Created: 2023/02/04 19:33:23 by saeby             #+#    #+#             */
+/*   Updated: 2023/02/04 19:54:20 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	msh_terminate(t_msh_data *m_data)
+void	msh_free_upd(t_msh_data *m_data)
 {
-	if (m_data->s_tok)
-		msh_free_simpl_tok(m_data);
-	if (m_data->tokens)
-		msh_free_tok(m_data);
-	if (m_data->cmds)
-		msh_free_cmds(m_data);
-	if (m_data->trunc_lst)
-		msh_free_trunc_lst(m_data);
-	free(m_data->env_upd);
-	if (m_data->env)
-		msh_free_env(m_data);
+	printf("msh_free_upd\n");
+	t_env_list	*tmp;
+	int			i;
+
+	tmp = m_data->env;
+	i = 0;
+	while (tmp)
+	{
+		printf("%s\n", m_data->env_upd[i]);
+		i++;
+		tmp = tmp->next;
+	}
 }
-
-//TO BE FREED
-
-// in msh_malloc_new_str there are 2 malloc that needs to be freed 

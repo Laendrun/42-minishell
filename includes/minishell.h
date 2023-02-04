@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:06:06 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/04 15:53:37 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/04 18:44:07 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include "lexer.h"
 # include "builtins.h"
 # include "tokens.h"
+# include "free.h"
 # include "debug.h"
 # include "errors.h"
 
@@ -115,13 +116,6 @@ void	f_error(char *str, char *erno, t_msh_data *d);
 void	free_tab_char(char **str);
 void	close_fd_tab(int *fd, int size, t_msh_data *d);
 char	**pip_get_path(char **env);
-
-// ----------------------------------------------
-// msh_free.c
-// ----------------------------------------------
-void		msh_free_env(t_msh_data *m_data);
-void		msh_free_tok(t_msh_data *m_data);
-void		msh_free_simpl_tok(t_msh_data *m_data);
 
 // ----------------------------------------------
 // msh_is.c

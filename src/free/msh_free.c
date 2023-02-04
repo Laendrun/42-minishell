@@ -6,7 +6,7 @@
 /*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:59:57 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/28 11:00:09 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/04 19:33:16 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,31 @@ void	msh_free_simpl_tok(t_msh_data *m_data)
 		m_data->s_tok->val = NULL;
 		free(m_data->s_tok->val);
 		m_data->s_tok = tmp;
+	}
+}
+
+void	msh_free_cmds(t_msh_data *m_data)
+{
+	t_cmd	*tmp;
+
+	while (m_data->cmds)
+	{
+		tmp = m_data->cmds->next;
+		printf("%s\n", m_data->cmds->cmd);
+		//free(m_data->cmds);
+		m_data->cmds = tmp;
+	}
+}
+
+void	msh_free_trunc_lst(t_msh_data *m_data)
+{ // free this
+	//t_tok_list	*tmp;
+	int			i;
+
+	i = 0;
+	while (i < m_data->nb_cmd)
+	{
+		printf("%s\n", m_data->trunc_lst[i]->val);
+		i++;
 	}
 }
