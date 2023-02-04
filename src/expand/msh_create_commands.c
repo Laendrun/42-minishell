@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 18:51:04 by egauthey          #+#    #+#             */
-/*   Updated: 2023/01/31 13:40:10 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/04 12:51:17 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ char	**msh_make_env_str(t_msh_data *m_d)
 	return (env_str);
 }
 
-// !! Calibred on DPIPE and PIPE !! to be changed once we have done the correction
 void	calculate_nb_cmds(t_msh_data *m_d)
 {
 	t_tok_list	*cur;
@@ -56,14 +55,13 @@ void	calculate_nb_cmds(t_msh_data *m_d)
 	cur = m_d->s_tok;
 	while (cur)
 	{
-		if (cur->type == MSH_PIPE || cur->type == MSH_END || cur->type == MSH_DPIPE)
+		if (cur->type == MSH_PIPE || cur->type == MSH_END)
 			cpt++;
 		cur = cur->next;
 	}
 	m_d->nb_cmd = cpt;
 }
 
-// !! Calibred on DPIPE !! to be changed once we have done the correction
 t_tok_list **create_array_of_toklst(t_msh_data *m_d)
 {
 	t_tok_list	*cur;
@@ -76,7 +74,7 @@ t_tok_list **create_array_of_toklst(t_msh_data *m_d)
 	while (cur)
 	{
 		array[i] = cur;
-		while (cur->next && cur->type != MSH_DPIPE)
+		while (cur->next && cur->type != MSH_PIPE)
 			cur = cur->next;
 		if (cur->next !=  NULL)
 		{
@@ -123,7 +121,7 @@ int	create_cmd_lst(t_msh_data *m_d, int i)
 	j = 0;
 	while (tmp)
 	{
-		if (tmp->type == MSH_VAR || tmp->type == MSH_WORD || tmp->type == MSH_STR || tmp->type == MSH_PARAM)
+		if (tmp->type == MSH_VAR || tmp->type == MSH_WORD || tmp->type == MSH_STR || tmp->type == MSH_PARAM || tmp->type == MSH_FILENAME || tmp->type == MSH_PATH)
 		{
 			args[j] = ft_calloc(sizeof(char), (ft_strlen(tmp->val) + 1));
 			args[j] = tmp->val;

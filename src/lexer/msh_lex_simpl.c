@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 14:26:53 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/04 12:37:31 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/04 13:21:41 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ int	msh_simplify_tokens(t_msh_data *m_d)
 		}
 	}
 	msh_expand_var(m_d);
-	msh_check_syntax(m_d);
 	print_simpl_tok(m_d);
 	msh_escape_char(m_d);
 	msh_handle_quotes(m_d);
+	msh_check_syntax(m_d);
 	print_simpl_tok(m_d);
 	msh_create_commmands(m_d);
 	return (SUCCESS);
