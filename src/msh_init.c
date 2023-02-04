@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby>                              +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:35:46 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/28 10:57:48 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/04 15:52:56 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,20 @@ int	msh_env_init(t_msh_data *m_data, char **env)
 		env++;
 	}
 	return (SUCCESS);
+}
+
+void	msh_pip_reset(t_msh_data *m_data)
+{
+	m_data->fd = NULL;
+	m_data->pid = NULL;
+	m_data->nb_cmd = 0;
+	m_data->process = 0;
+	m_data->path = NULL;
+	m_data->infile = -1;
+	m_data->heredoc = -1;
+	m_data->outfile_app = -1;
+	m_data->outfile_trunc = -1;
+	m_data->env_upd = NULL;
+	m_data->trunc_lst = NULL;
+	m_data->cmds = NULL;
 }

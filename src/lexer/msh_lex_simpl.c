@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 14:26:53 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/04 15:01:52 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/04 15:53:23 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	msh_simplify_tokens(t_msh_data *m_d)
 	// print_simpl_tok(m_d);
 	msh_create_commmands(m_d);
 	msh_pipex(m_d);
+	msh_pip_reset(m_d);
 	return (SUCCESS);
 }
 

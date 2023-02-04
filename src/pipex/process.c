@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egauthey <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 18:51:04 by egauthey          #+#    #+#             */
-/*   Updated: 2022/11/21 18:51:06 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/04 16:00:15 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	f_pre_duplicate(t_msh_data *m_d)
 
 void	pip_no_exec(char *s)
 {
-	ft_putstr_fd("pipex: ", STDERR_FILENO);
+	ft_putstr_fd("shellusion: ", STDERR_FILENO);
 	ft_putstr_fd(s, STDERR_FILENO);
 	ft_putstr_fd(" : command not found.\n", STDERR_FILENO);
 	exit(1);
