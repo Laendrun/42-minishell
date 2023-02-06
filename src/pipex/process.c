@@ -33,7 +33,15 @@ void	f_pre_duplicate(t_msh_data *m_d)
 			f_duplicate(m_d->infile, m_d->fd[1], m_d);
 		}
 		else if (m_d->heredoc == 1)
-			f_duplicate(m_d->hdoc[0], m_d->fd[1], m_d);
+		{
+			if (m_d->nb_cmd == 1)
+			{
+				f_duplicate(m_d->hdoc[0], STDOUT_FILENO, m_d);
+				close(m_d->hdoc[0]);
+			}
+			else
+				f_duplicate(m_d->hdoc[0], m_d->fd[1], m_d);
+		}
 		else
 			f_duplicate(STDIN_FILENO, m_d->fd[1], m_d);
 	}

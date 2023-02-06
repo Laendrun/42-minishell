@@ -78,7 +78,7 @@ void	f_here_doc(t_msh_data *m_d)
 	{
 		if (ft_strncmp(m_d->delim, line, (ft_strlen(m_d->delim) + 1)) == 0)
 			break ;
-		ft_putstr_fd(line, m_d->hdoc[1]);
+		ft_putstr_fd(ft_strcat(line, "\n"), m_d->hdoc[1]);
 		line = readline(">");
 	}
 	if (close(m_d->hdoc[1]) < 0)
@@ -104,9 +104,33 @@ int	check_if_heredoc(t_msh_data *m_d)
 	return (SUCCESS);
 }
 
+int	check_if_ambiguous_redirection(t_msh_data *m_d)
+{
+	t_tok_list	*tmp;
+	int			i;
+
+	i = 1;
+	while (i < m_d->nb_cmd - 1)
+	{
+		tmp = m_d->trunc_lst[i];
+		while (tmp)
+		{
+			if (tmp->type == MSH_GT || tmp->type == MSH_DGT || tmp->type == MSH_LT || tmp->type == MSH_DLT)
+			{
+				printf("ambiguous redirection.\n");
+				return (ERROR);
+			}
+			tmp = tmp->next;
+		}
+		i++;
+	}
+	return (SUCCESS);
+}
+
 int	msh_redir_op(t_msh_data *m_d)
 {
-	// check_if_ambiguous_redirection(m_d)
+	if (m_d->nb_cmd > 2)
+		check_if_ambiguous_redirection(m_d);
 	check_if_heredoc(m_d);
 	check_if_infile(m_d);
 	check_if_outfile_app(m_d);
