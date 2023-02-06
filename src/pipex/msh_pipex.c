@@ -34,8 +34,8 @@ int	pipex(t_msh_data *m_d)
 	close_fd_tab(m_d->fd, 2 * (m_d->nb_cmd - 1), m_d);
 	while (m_d->process--)
 		wait(&status);
-	close(m_d->outfile_app);
-	close(m_d->infile);
+	// close(m_d->hdoc[0]);
+	// close(m_d->infile);
 	free(m_d->pid);
 	return (WEXITSTATUS(status));
 }

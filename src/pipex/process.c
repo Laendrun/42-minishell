@@ -15,9 +15,9 @@
 void	f_duplicate(int in, int out, t_msh_data *m_d)
 {
 	if (dup2(in, STDIN_FILENO) < 0)
-		f_error("Dup2 error :", strerror(errno), m_d);
+		f_error("Dup2 error : ", strerror(errno), m_d);
 	if (dup2(out, STDOUT_FILENO) < 0)
-		f_error("Dup2 error :", strerror(errno), m_d);
+		f_error("Dup2 error : ", strerror(errno), m_d);
 	// if (m_d->heredoc == 1)
 	// 	if (close(m_d->hdoc[0]) < 0)
 	// 		f_error("Close error :", strerror(errno), m_d);
@@ -29,8 +29,13 @@ void	f_pre_duplicate(t_msh_data *m_d)
 	{
 		if (m_d->infile != -1)
 		{
-			printf("venu infile\n");
-			f_duplicate(m_d->infile, m_d->fd[1], m_d);
+			if (m_d->nb_cmd == 1)
+			{
+				f_duplicate(m_d->infile, STDOUT_FILENO, m_d);
+				close(m_d->infile);
+			}
+			else
+				f_duplicate(m_d->infile, m_d->fd[1], m_d);
 		}
 		else if (m_d->heredoc == 1)
 		{

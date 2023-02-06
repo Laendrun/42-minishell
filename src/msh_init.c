@@ -15,7 +15,7 @@
 int	msh_init(t_msh_data *m_data, char **env)
 {
 	m_data->name = "shellusion";
-	m_data->prompt = "shellusion-0.1> ";
+	m_data->prompt = "shellusion-0.6> ";
 	m_data->env = NULL;
 	m_data->tokens = NULL;
 	m_data->s_tok = NULL;

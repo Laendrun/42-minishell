@@ -132,8 +132,8 @@ int	msh_redir_op(t_msh_data *m_d)
 	if (m_d->nb_cmd > 2)
 		check_if_ambiguous_redirection(m_d);
 	check_if_heredoc(m_d);
-	check_if_infile(m_d);
-	check_if_outfile_app(m_d);
-	check_if_outfile_trunc(m_d);
+	// check_if_infile(m_d);
+	// check_if_outfile_app(m_d);
+	// check_if_outfile_trunc(m_d);
 	return (SUCCESS);
 }
