@@ -22,7 +22,7 @@ int	check_if_outfile_trunc(t_msh_data *m_d)
 		if (tmp->type == MSH_GT && (tmp->next->next->type == MSH_WORD || tmp->next->next->type == MSH_FILENAME))
 		{
 			m_d->outfile_trunc = open(tmp->next->next->val, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-			printf("open trunc : %d\n", m_d->outfile_trunc);
+			// printf("open trunc : %d\n", m_d->outfile_trunc);
 			break ;
 		}
 		tmp = tmp->next;

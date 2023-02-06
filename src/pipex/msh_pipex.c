@@ -32,10 +32,14 @@ int	pipex(t_msh_data *m_d)
 		m_d->process++;
 	}
 	close_fd_tab(m_d->fd, 2 * (m_d->nb_cmd - 1), m_d);
+	// close(m_d->outfile_app);
 	while (m_d->process--)
-		wait(&status);
+	{
+		// printf("process : %d \n", m_d->process);
+		waitpid(m_d->pid[m_d->process], &status, 0);
+		printf("status : %d\n", status);
+	}
 	free(m_d->pid);
-	close(m_d->outfile_app);
 	return (WEXITSTATUS(status));
 }
 
