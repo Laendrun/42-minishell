@@ -41,7 +41,7 @@ int	check_if_outfile_app(t_msh_data *m_d)
 		if (tmp->type == MSH_DGT && (tmp->next->next->type == MSH_WORD || tmp->next->next->type == MSH_FILENAME))
 		{
 			m_d->outfile_app = open(tmp->next->next->val, O_CREAT | O_WRONLY | O_APPEND, 0644);
-			printf("open : %d\n", m_d->outfile_app);
+			// printf("open : %d\n", m_d->outfile_app);
 			break ;
 		}
 		tmp = tmp->next;
@@ -132,8 +132,8 @@ int	msh_redir_op(t_msh_data *m_d)
 	if (m_d->nb_cmd > 2)
 		check_if_ambiguous_redirection(m_d);
 	check_if_heredoc(m_d);
-	// check_if_infile(m_d);
-	// check_if_outfile_app(m_d);
-	// check_if_outfile_trunc(m_d);
+	check_if_infile(m_d);
+	check_if_outfile_app(m_d);
+	check_if_outfile_trunc(m_d);
 	return (SUCCESS);
 }
