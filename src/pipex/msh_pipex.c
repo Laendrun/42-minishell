@@ -35,6 +35,7 @@ int	pipex(t_msh_data *m_d)
 	while (m_d->process--)
 		wait(&status);
 	close(m_d->outfile_app);
+	close(m_d->infile);
 	free(m_d->pid);
 	return (WEXITSTATUS(status));
 }

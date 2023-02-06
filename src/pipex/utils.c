@@ -12,33 +12,7 @@
 
 #include "minishell.h"
 
-// 	void	f_here_doc(t_msh_data *m_d)
-// {
-// 	char	*line;cat
-// 	char	*lim;
 
-// 	lim = ft_strjoin(d->av[2], "\n");
-// 	if (pipe(d->here_doc) < 0)
-// 		f_error("Error creating pipe :", strerror(errno), d);
-// 	// prob with get next line ...
-// 	line = get_next_line(0);
-// 	while (line)
-// 	{
-// 		if (ft_strncmp(lim, line, (ft_strlen(d->av[2]) + 1)) == 0)
-// 		{
-// 			free(line);
-// 			break ;
-// 		}
-// 		ft_putstr_fd(line, d->here_doc[1]);
-// 		free(line);
-// 		line = get_next_line(0);
-// 	}
-// 	free(lim);
-// 	if (line)
-// 		free(line);
-// 	if (close(d->here_doc[1]) < 0)
-// 		f_error("Close error :", strerror(errno), d);
-// }
 
 
 // void	f_here_doc(t_pipex *d)
