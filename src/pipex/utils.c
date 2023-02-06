@@ -12,9 +12,9 @@
 
 #include "minishell.h"
 
-// 	void	f_here_doc(t_pipex *d)
+// 	void	f_here_doc(t_msh_data *m_d)
 // {
-// 	char	*line;
+// 	char	*line;cat
 // 	char	*lim;
 
 // 	lim = ft_strjoin(d->av[2], "\n");
@@ -33,20 +33,6 @@
 // 		free(line);
 // 		line = get_next_line(0);
 // 	}
-// 	// while (1)
-// 	// {
-// 	// 	line = get_next_line(0);
-// 	// 	printf("passe ici\n");
-// 	// 	if (line == NULL)
-// 	// 	{
-// 	// 		ft_putstr_fd("\n", 1);
-// 	// 		break ;
-// 	// 	}
-// 	// 	if (ft_strncmp(lim, line, (ft_strlen(d->av[2]) + 1)) == 0)
-// 	// 		break ;
-// 	// 	ft_putstr_fd(line, d->here_doc[1]);
-// 	// 	free(line);
-// 	// }
 // 	free(lim);
 // 	if (line)
 // 		free(line);

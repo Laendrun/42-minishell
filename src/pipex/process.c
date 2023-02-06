@@ -18,27 +18,41 @@ void	f_duplicate(int in, int out, t_msh_data *m_d)
 		f_error("Dup2 error :", strerror(errno), m_d);
 	if (dup2(out, STDOUT_FILENO) < 0)
 		f_error("Dup2 error :", strerror(errno), m_d);
+	// if (m_d->heredoc == 1)
+	// 	if (close(m_d->hdoc[0]) < 0)
+	// 		f_error("Close error :", strerror(errno), m_d);
 }
 
 void	f_pre_duplicate(t_msh_data *m_d)
 {
 	if (m_d->process == 0)
 	{
-		if (m_d->infile == -1 || m_d->heredoc == -1)
-		{
-			f_duplicate(STDIN_FILENO, m_d->fd[1], m_d);
-		}
-		else
+		if (m_d->infile != -1)
 			f_duplicate(m_d->infile, m_d->fd[1], m_d);
+		else if (m_d->heredoc == 1)
+			f_duplicate(m_d->hdoc[0], m_d->fd[1], m_d);
+		else
+			f_duplicate(STDIN_FILENO, m_d->fd[1], m_d);
 	}
 	else if (m_d->process == m_d->nb_cmd - 1)
-		f_duplicate(m_d->fd[(2 * m_d->process) - 2], STDOUT_FILENO, m_d);
+	{
+		if (m_d->outfile_app != -1)
+		{
+			// printf("venu la\n");
+			f_duplicate(m_d->fd[(2 * m_d->process) - 2], m_d->outfile_app, m_d);
+			close(m_d->outfile_app);
+		}
+		else if (m_d->outfile_trunc != -1)
+			f_duplicate(m_d->fd[(2 * m_d->process) - 2], m_d->outfile_trunc, m_d);
+		else
+			f_duplicate(m_d->fd[(2 * m_d->process) - 2], STDOUT_FILENO, m_d);
+	}
 	else
 		f_duplicate(m_d->fd[(2 * m_d->process) - 2],
 			m_d->fd[(2 * m_d->process) + 1], m_d);
 	close_fd_tab(m_d->fd, 2 * (m_d->nb_cmd - 1), m_d);
-	close(m_d->infile);
-	close(m_d->outfile_app);
+	// close(m_d->infile);
+	// close(m_d->outfile_app);
 }
 
 void	pip_no_exec(char *s)

@@ -41,6 +41,7 @@ EXPAND_SRC = $(addprefix $(EXPAND_DIR),	msh_expand_var.c \
 										msh_escape_char.c \
 										msh_create_commands.c \
 										msh_cmds_lst.c \
+										msh_redir_op.c \
 										)
 
 PIPEX_SRC = $(addprefix $(PIPEX_DIR),	msh_pipex.c \

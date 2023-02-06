@@ -104,6 +104,7 @@ int	msh_handle_quotes(t_msh_data *m_d);
 int	msh_escape_char(t_msh_data *m_d);
 char	**msh_make_env_tabstr(t_msh_data *m_d);
 int	msh_create_commmands(t_msh_data *m_d);
+int	msh_redir_op(t_msh_data *m_d);
 
 // ----------------------------------------------
 // msh_pipex.c

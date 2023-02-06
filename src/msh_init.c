@@ -26,6 +26,7 @@ int	msh_init(t_msh_data *m_data, char **env)
 	m_data->path = NULL;
 	m_data->infile = -1;
 	m_data->heredoc = -1;
+	m_data->delim = NULL;
 	m_data->outfile_app = -1;
 	m_data->outfile_trunc = -1;
 	m_data->env_upd = NULL;
