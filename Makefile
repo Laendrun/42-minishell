@@ -66,6 +66,7 @@ SRC =	main.c \
 		msh_utils.c \
 		msh_env_utils.c \
 		msh_terminate.c \
+		msh_set_signals.c \
 
 OBJ := $(SRC:%.c=%.o)
 BI_OBJ := $(BI_SRC:%.c=%.o)

@@ -13,6 +13,8 @@
 #include "minishell.h"
 
 static int	g_code = 0;
+// I think we should use extern int insted of static int
+// extern int are defined in the header file
 
 int	main(int ac, char **av, char **env)
 {
@@ -25,6 +27,7 @@ int	main(int ac, char **av, char **env)
 	printf("\e[1;1H\e[2J");
 	while (1)
 	{
+		msh_set_signals();
 		rl_on_new_line();
 		rl = readline(m_data.prompt);
 		add_history(rl);
