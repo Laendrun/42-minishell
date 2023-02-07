@@ -119,7 +119,8 @@ int	create_cmd_lst(t_msh_data *m_d, int i)
 	j = 0;
 	while (tmp)
 	{
-		if (tmp->type == MSH_VAR || tmp->type == MSH_WORD || tmp->type == MSH_STR || tmp->type == MSH_PARAM || tmp->type == MSH_FILENAME || tmp->type == MSH_PATH)
+		if (tmp->type == MSH_VAR || tmp->type == MSH_WORD || tmp->type == MSH_STR 
+			|| tmp->type == MSH_PARAM /*|| tmp->type == MSH_FILENAME*/ || tmp->type == MSH_PATH)
 		{
 			args[j] = ft_calloc(sizeof(char), (ft_strlen(tmp->val) + 1));
 			args[j] = tmp->val;

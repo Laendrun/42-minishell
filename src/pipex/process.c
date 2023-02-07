@@ -53,13 +53,12 @@ void	f_pre_duplicate(t_msh_data *m_d)
 		{
 			// dprintf(2, "venu out app\n");
 			f_duplicate(m_d->fd[(2 * m_d->process) - 2], m_d->outfile_app, m_d);
-			close(m_d->outfile_app);
 		}
 		else if (m_d->outfile_trunc != -1)
 		{
 			// printf("venu out trunc\n");
 			f_duplicate(m_d->fd[(2 * m_d->process) - 2], m_d->outfile_trunc, m_d);
-			close(m_d->outfile_trunc);
+			// close(m_d->outfile_trunc);
 		}
 		else
 			f_duplicate(m_d->fd[(2 * m_d->process) - 2], STDOUT_FILENO, m_d);
