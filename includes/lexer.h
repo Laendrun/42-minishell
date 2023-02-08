@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:41:59 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/31 11:43:29 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/08 11:40:39 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ t_tok_list	*msh_simpl_minus(t_msh_data *m_d, t_tok_list *tok, t_tok_list *ne);
 t_tok_list	*msh_simpl_path(t_msh_data *m_d, t_tok_list *tok, t_tok_list *ne);
 t_tok_list	*msh_set_delim(t_msh_data *m_d, t_tok_list *tok, t_tok_list *ne);
 t_tok_list	*msh_set_var(t_msh_data *m_d, t_tok_list *tok, t_tok_list *ne);
+t_tok_list	*msh_set_redir(t_msh_data *m_d, t_tok_list *tok, t_tok_list *ne);
 
 // ----------------------------------------------
 // lexer/msh_lex_simpl_helper.c

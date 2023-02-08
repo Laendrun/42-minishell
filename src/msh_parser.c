@@ -17,9 +17,9 @@ int	msh_parser(t_msh_data *m_data)
 	t_tok_list	*tmp;
 
 	tmp = m_data->s_tok;
-	while (tmp->type == SEP)
+	while (tmp->type == MSH_SEP)
 		tmp = tmp->next;
-	if (tmp->type == WORD)
+	if (tmp->type == MSH_WORD)
 	{
 		if (msh_is_builtin(tmp->val))
 			msh_exec_builtin(tmp->val, m_data);

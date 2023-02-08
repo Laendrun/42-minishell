@@ -124,8 +124,6 @@ void	f_error(char *str, char *erno, t_msh_data *d);
 void	free_tab_char(char **str);
 void	close_fd_tab(int *fd, int size, t_msh_data *d);
 char	**pip_get_path(char **env);
-void	free_t_cmd(t_msh_data *d);
-void	free_trunc_list(t_msh_data *d);
 
 // ----------------------------------------------
 // msh_is.c

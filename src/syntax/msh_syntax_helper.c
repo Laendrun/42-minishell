@@ -30,7 +30,7 @@ int	msh_count_dquote(t_msh_data *m_d)
 	tmp = m_d->s_tok;
 	while (tmp)
 	{
-		if (tmp->type == DQUOTE)
+		if (tmp->type == MSH_DQUOTE)
 			count++;
 		tmp = tmp->next;
 	}
@@ -48,7 +48,7 @@ int	msh_count_squote(t_msh_data *m_d)
 	tmp = m_d->s_tok;
 	while (tmp)
 	{
-		if (tmp->type == SQUOTE)
+		if (tmp->type == MSH_SQUOTE)
 			count++;
 		tmp = tmp->next;
 	}

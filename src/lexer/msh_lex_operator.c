@@ -36,29 +36,29 @@ int	msh_lex_operator(t_msh_data *m_data, char *line, unsigned int *i)
 int	msh_get_op_type(int c)
 {
 	if (c == '&')
-		return (AMP);
+		return (MSH_AMP);
 	if (c == '<')
-		return (LT);
+		return (MSH_LT);
 	if (c == '>')
-		return (GT);
+		return (MSH_GT);
 	if (c == '-')
-		return (MINUS);
+		return (MSH_MINUS);
 	if (c == '|')
-		return (PIPE);
+		return (MSH_PIPE);
 	return (-10);
 }
 
 int	msh_dop_type(int type)
 {
-	if (type == AMP)
-		return (DAMP);
-	if (type == LT)
-		return (DLT);
-	if (type == GT)
-		return (DGT);
-	if (type == MINUS)
-		return (DMINUS);
-	if (type == PIPE)
-		return (DPIPE);
+	if (type == MSH_AMP)
+		return (MSH_DAMP);
+	if (type == MSH_LT)
+		return (MSH_DLT);
+	if (type == MSH_GT)
+		return (MSH_DGT);
+	if (type == MSH_MINUS)
+		return (MSH_DMINUS);
+	if (type == MSH_PIPE)
+		return (MSH_DPIPE);
 	return (-10);
 }

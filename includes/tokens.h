@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:46:09 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/31 11:46:44 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/08 11:47:11 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,67 +16,67 @@
 
 enum	e_token_types
 {
-	SEP = 100,
-	STR,
-	WORD,
-	SYMBOL,
-	DQUOTE,
-	SQUOTE,
-	PIPE,
-	DPIPE,
-	LT,
-	DLT,
-	GT,
-	DGT,
-	AMP,
-	DAMP,
-	DOLLAR,
-	L_BR,
-	R_BR,
-	L_CBR,
-	R_CBR,
-	L_SBR,
-	R_SBR,
-	MINUS,
-	DMINUS,
-	END,
-	FILENAME,
-	PARAM,
-	PATH,
-	VAR,
-	DELIM
+	MSH_SEP = 100,
+	MSH_STR,
+	MSH_WORD,
+	MSH_SYMBOL,
+	MSH_DQUOTE,
+	MSH_SQUOTE,
+	MSH_PIPE,
+	MSH_DPIPE,
+	MSH_LT,
+	MSH_DLT,
+	MSH_GT,
+	MSH_DGT,
+	MSH_AMP,
+	MSH_DAMP,
+	MSH_DOLLAR,
+	MSH_L_BR,
+	MSH_R_BR,
+	MSH_L_CBR,
+	MSH_R_CBR,
+	MSH_L_SBR,
+	MSH_R_SBR,
+	MSH_MINUS,
+	MSH_DMINUS,
+	MSH_END,
+	MSH_FILENAME,
+	MSH_PARAM,
+	MSH_PATH,
+	MSH_VAR,
+	MSH_DELIM
 };
 
 /*
-	SEP // separator => isspace / 100
-	STR, // string / 101
-	WORD, // word => text not between quote / 102
-	SYMBOL, // symbol => special characters (. .. , ! + _ @) / 103
-	DQUOTE, // double quote / 104
-	SQUOTE, // single quote / 105
-	PIPE, // pipe / 106
-	DPIPE, // double pipe / 107
-	LT, // < / 108
-	DLT, // << / 109
-	GT, // > / 110
-	DGT, // >> / 111
-	AMP, // & / 112
-	DAMP, // && / 113
-	DOLLAR, // $ / 114
-	L_BR, // ( / 115
-	R_BR, // ) / 116
-	L_CBR, // { / 117
-	R_CBR, // } / 118
-	L_SBR, // [ / 119
-	R_SBR, // ] / 120
-	MINUS, // - / 121
-	DMINUS, // -- / 122
-	END, // end of line / 123
-	FILENAME, // MSH_WORD.MSH_WORD / 124
-	PARAM, // MSH_MINUSMSH_WORD / 125
-	PATH // .. . / 126
-	VAR // $WORD / 127
-	DELIM // symbol|word after here_doc // 128
+	MSH_SEP // separator => isspace / 100
+	MSH_STR, // string / 101
+	MSH_WORD, // word => text not between quote / 102
+	MSH_SYMBOL, // symbol => special characters (. .. , ! + _ @) / 103
+	MSH_DQUOTE, // double quote / 104
+	MSH_SQUOTE, // single quote / 105
+	MSH_PIPE, // pipe / 106
+	MSH_DPIPE, // double pipe / 107
+	MSH_LT, // < / 108
+	MSH_DLT, // << / 109
+	MSH_GT, // > / 110
+	MSH_DGT, // >> / 111
+	MSH_AMP, // & / 112
+	MSH_DAMP, // && / 113
+	MSH_DOLLAR, // $ / 114
+	MSH_L_BR, // ( / 115
+	MSH_R_BR, // ) / 116
+	MSH_L_CBR, // { / 117
+	MSH_R_CBR, // } / 118
+	MSH_L_SBR, // [ / 119
+	MSH_R_SBR, // ] / 120
+	MSH_MINUS, // - / 121
+	MSH_DMINUS, // -- / 122
+	MSH_END, // end of line / 123
+	MSH_FILENAME, // MSH_WORD.MSH_WORD / 124
+	MSH_PARAM, // MSH_MINUSMSH_WORD / 125
+	MSH_PATH // .. . / 126
+	MSH_VAR // $WORD / 127
+	MSH_DELIM // symbol|word after here_doc // 128
 */
 
 #endif

@@ -48,30 +48,3 @@ void	close_fd_tab(int *fd, int size, t_msh_data *d)
 	}
 	free(fd);
 }
-
-void	free_t_cmd(t_msh_data *d)
-{
-	t_cmd	*tmp;
-
-	tmp = d->cmds;
-	while(tmp)
-	{
-		free_tab_char(tmp->args);
-		tmp = tmp->next;
-	}
-	free(d->cmds);
-}
-
-void	free_trunc_list(t_msh_data *d)
-{
-	t_tok_list	*tmp;
-	int			i;
-
-	tmp = *(d->trunc_lst);
-	i = 0;
-	while (i < d->nb_cmd)
-	{
-		free(d->trunc_lst[i]);
-		i++;
-	}
-}
