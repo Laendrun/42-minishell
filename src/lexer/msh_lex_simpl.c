@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 14:26:53 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/08 11:50:44 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/08 16:56:41 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ t_tok_list	*msh_simpl_word(t_msh_data *m_d, t_tok_list *tok, t_tok_list *ne)
 	if (ne->type == SYMBOL && !ft_strncmp(".", ne->val, 2) && ne->next->type == WORD)
 	{
 		new = msh_fn_from_tok(tok->val, ne->next->val);
-		msh_tok_lstaddb(&m_d->s_tok, msh_tok_lstnew(FILENAME, new));
+		msh_tok_lstaddb(&m_d->s_tok, msh_tok_lstnew(WORD, new));
 		return (ne->next->next);
 	}
 	else
