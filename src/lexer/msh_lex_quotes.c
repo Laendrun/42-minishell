@@ -25,7 +25,7 @@ int	msh_lex_squote(t_msh_data *m_data, char *line, unsigned int *i)
 	char			*tmp;
 
 	t = *i;
-	msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(MSH_SQUOTE, 0));
+	msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(SQUOTE, 0));
 	*i += 1;
 	while (ft_isprint(line[*i]) && line[*i] != '\'')
 		*i += 1;
@@ -35,8 +35,8 @@ int	msh_lex_squote(t_msh_data *m_data, char *line, unsigned int *i)
 		return (SUCCESS);
 	}
 	tmp = ft_substr(line, t + 1, *i - (t + 1));
-	msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(MSH_STR, ft_strdup(tmp)));
-	msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(MSH_SQUOTE, 0));
+	msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(STR, ft_strdup(tmp)));
+	msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(SQUOTE, 0));
 	*i += 1;
 	free(tmp);
 	return (SUCCESS);
@@ -48,19 +48,19 @@ int	msh_lex_dquote(t_msh_data *m_data, char *line, unsigned int *i)
 	char			*tmp;
 
 	t = *i;
-	msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(MSH_DQUOTE, 0));
+	msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(DQUOTE, 0));
 	*i += 1;
 	while (ft_isprint(line[*i]) && !(line[*i] == '\"' && line[*i - 1] != '\\'))
 		*i += 1;
 	if (line[*i] != '\"')
 	{
 		tmp = ft_substr(line, t + 1, *i - (t + 1));
-		msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(MSH_STR, ft_strdup(tmp)));
+		msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(STR, ft_strdup(tmp)));
 		return (ERROR);
 	}
 	tmp = ft_substr(line, t + 1, *i - (t + 1));
-	msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(MSH_STR, ft_strdup(tmp)));
-	msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(MSH_DQUOTE, 0));
+	msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(STR, ft_strdup(tmp)));
+	msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(DQUOTE, 0));
 	*i += 1;
 	return (SUCCESS);
 }

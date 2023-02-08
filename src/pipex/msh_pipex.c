@@ -39,6 +39,10 @@ int	pipex(t_msh_data *m_d)
 		// printf("status : %d\n", status);
 	}
 	free(m_d->pid);
+	free_tab_char(m_d->path);
+	free_tab_char(m_d->env_upd);
+	free_t_cmd(m_d);
+	// free_trunc_list(m_d);
 	return (WEXITSTATUS(status));
 }
 

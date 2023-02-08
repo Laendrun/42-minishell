@@ -22,14 +22,14 @@ int	merge_str_wrd(t_msh_data *m_d)
 	cur = m_d->s_tok;
 	while (cur)
 	{
-		if ((cur->type == MSH_STR || cur->type == MSH_WORD) && (cur->next->type == MSH_STR || cur->next->type == MSH_WORD))
+		if ((cur->type == STR || cur->type == WORD) && (cur->next->type == STR || cur->next->type == WORD))
 		{
 			len = ft_strlen(cur->val) + ft_strlen(cur->next->val);
 			new_val = malloc(sizeof(char) * (len + 1));
 			new_val = ft_strjoin(cur->val, cur->next->val);
 			// free(cur->val); // causes double free sometimes
 			cur->val = new_val;
-			cur->type = MSH_STR;
+			cur->type = STR;
 			msh_remove_tok(&m_d->s_tok, cur->next);
 		}
 		cur = cur->next;
@@ -44,7 +44,7 @@ int	msh_handle_quotes(t_msh_data *m_d)
 	cur = m_d->s_tok;
 	while (cur)
 	{
-		if (cur->type == MSH_DQUOTE || cur->type == MSH_SQUOTE)
+		if (cur->type == DQUOTE || cur->type == SQUOTE)
 			msh_remove_tok(&m_d->s_tok, cur);
 		cur = cur->next;
 	}
