@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 14:26:53 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/08 11:46:55 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/08 11:50:44 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	msh_simplify_tokens(t_msh_data *m_d)
 			tmp = msh_simpl_path(m_d, tmp, next);
 		else if (tmp->type == MSH_DLT)
 			tmp = msh_set_delim(m_d, tmp, next);
-		else if (tmp->type == LT || tmp->type == GT || tmp->type == DGT)
+		else if (tmp->type == MSH_LT || tmp->type == MSH_GT || tmp->type == MSH_DGT)
 			tmp = msh_set_redir(m_d, tmp, next);
 		else if (!ft_strncmp(tmp->val, "$", 2))
 			tmp = msh_set_var(m_d, tmp, next);
@@ -169,16 +169,16 @@ t_tok_list	*msh_set_redir(t_msh_data *m_d, t_tok_list *tok, t_tok_list *ne)
 	msh_tok_lstaddb(&m_d->s_tok, msh_tok_lstnew(tok->type, tok->val));
 	new = ft_strdup("");
 	tok = ne;
-	while (tok->type == SEP)
+	while (tok->type == MSH_SEP)
 		tok = tok->next;
 	ne = tok->next;
-	while (tok->type == WORD || tok->type == SYMBOL)
+	while (tok->type == MSH_WORD || tok->type == MSH_SYMBOL)
 	{
 		new = ft_strjoin(new, tok->val);
 		tok = ne;
 		ne = tok->next;
 	}
 	if (new)
-		msh_tok_lstaddb(&m_d->s_tok, msh_tok_lstnew(FILENAME, new));
+		msh_tok_lstaddb(&m_d->s_tok, msh_tok_lstnew(MSH_FILENAME, new));
 	return (tok);
 }
