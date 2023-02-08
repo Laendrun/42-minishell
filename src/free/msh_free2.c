@@ -3,30 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   msh_free2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby>                              +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 19:33:23 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/04 19:54:20 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/08 17:14:11 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	msh_free_upd(t_msh_data *m_data)
-{
-	printf("msh_free_upd\n");
-	t_env_list	*tmp;
-	int			i;
-
-	tmp = m_data->env;
-	i = 0;
-	while (tmp)
-	{
-		printf("%s\n", m_data->env_upd[i]);
-		i++;
-		tmp = tmp->next;
-	}
-}
 
 void	free_t_cmd(t_msh_data *d)
 {
@@ -55,7 +39,6 @@ void	free_trunc_list(t_msh_data *d)
 	}
 }
 
-
 void	f_error(char *str, char *erno, t_msh_data *d)
 {
 	ft_putstr_fd(str, 2);
@@ -81,15 +64,16 @@ void	free_tab_char(char **tab)
 
 	i = 0;
 	if (!tab)
-		return ;
-	while (tab[i])
 	{
-		if (tab[i])
+		while (tab[i])
 		{
-			free_ptr(tab[i]);
-			tab[i] = NULL;
+			if (tab[i])
+			{
+				free_ptr(tab[i]);
+				tab[i] = NULL;
+			}
+			i++;
 		}
-		i++;
 	}
 	free(tab);
 	tab = NULL;
