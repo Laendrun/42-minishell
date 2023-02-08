@@ -55,7 +55,7 @@ int	msh_simplify_tokens(t_msh_data *m_d)
 		return (ERROR);
 	msh_escape_char(m_d);
 	msh_handle_quotes(m_d);
-	print_simpl_tok(m_d);
+	// print_simpl_tok(m_d);
 	msh_create_commmands(m_d);
 	msh_redir_op(m_d);
 	msh_pipex(m_d);

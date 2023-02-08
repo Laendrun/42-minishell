@@ -22,6 +22,9 @@ void	msh_free_tok(t_msh_data *m_data);
 void	msh_free_simpl_tok(t_msh_data *m_data);
 void	msh_free_cmds(t_msh_data *m_data);
 void	msh_free_trunc_lst(t_msh_data *m_data);
+void	f_error(char *str, char *erno, t_msh_data *d);
+void	free_tab_char(char **str);
+void	close_fd_tab(int *fd, int size, t_msh_data *d);
 
 // ----------------------------------------------
 // free/msh_free2.c

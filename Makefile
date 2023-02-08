@@ -11,6 +11,7 @@ EXPAND_DIR = expand/
 DEBUG_DIR = debug/
 PIPEX_DIR = pipex/
 FREE_DIR = free/
+PARS_DIR = parsing/
 
 # Libraries
 LIBFT  = libs/libft/
@@ -39,10 +40,12 @@ SYNT_SRC = $(addprefix $(SYNT_DIR),	msh_check_syntax.c \
 EXPAND_SRC = $(addprefix $(EXPAND_DIR),	msh_expand_var.c \
 										msh_handle_quotes.c \
 										msh_escape_char.c \
-										msh_create_commands.c \
-										msh_cmds_lst.c \
-										msh_redir_op.c \
 										)
+
+PARS_SRC = $(addprefix $(PARS_DIR),	msh_create_commands.c \
+									msh_cmds_lst.c \
+									msh_redir_op.c \
+									)
 
 PIPEX_SRC = $(addprefix $(PIPEX_DIR),	msh_pipex.c \
 										process.c \
@@ -76,9 +79,10 @@ EXPAND_OBJ := $(EXPAND_SRC:%.c=%.o)
 DEBUG_OBJ := $(DEBUG_SRC:%.c=%.o)
 PIPEX_OBJ := $(PIPEX_SRC:%.c=%.o)
 FREE_OBJ := $(FREE_SRC:%.c=%.o)
+PARS_OBJ := $(PARS_SRC:%.c=%.o)
 
-SRCS = $(addprefix $(SRC_DIR), $(SRC) $(BI_SRC) $(LEX_SRC) $(SYNT_SRC) $(EXPAND_SRC) $(DEBUG_SRC) $(PIPEX_SRC) $(FREE_SRC))
-OBJS = $(addprefix $(OBJ_DIR), $(OBJ) $(BI_OBJ) $(LEX_OBJ) $(SYNT_OBJ) $(EXPAND_OBJ) $(DEBUG_OBJ) $(PIPEX_OBJ) $(FREE_OBJ)) 
+SRCS = $(addprefix $(SRC_DIR), $(SRC) $(BI_SRC) $(LEX_SRC) $(SYNT_SRC) $(EXPAND_SRC) $(DEBUG_SRC) $(PIPEX_SRC) $(FREE_SRC) $(PARS_SRC))
+OBJS = $(addprefix $(OBJ_DIR), $(OBJ) $(BI_OBJ) $(LEX_OBJ) $(SYNT_OBJ) $(EXPAND_OBJ) $(DEBUG_OBJ) $(PIPEX_OBJ) $(FREE_OBJ) $(PARS_OBJ)) 
 
 CCFLAGS = -Wall -Wextra -Werror
 
@@ -113,6 +117,7 @@ $(OBJ_DIR):
 	@mkdir $(OBJ_DIR)/$(DEBUG_DIR)
 	@mkdir $(OBJ_DIR)/$(PIPEX_DIR)
 	@mkdir $(OBJ_DIR)/$(FREE_DIR)
+	@mkdir $(OBJ_DIR)/$(PARS_DIR)
 
 libft:
 	make -C $(LIBFT)
