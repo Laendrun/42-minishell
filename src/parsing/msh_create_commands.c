@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_create_commands.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 18:51:04 by egauthey          #+#    #+#             */
-/*   Updated: 2023/02/04 15:57:00 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/08 19:57:01 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,8 +122,8 @@ int	create_cmd_lst(t_msh_data *m_d, int i)
 		if (tmp->type == VAR || tmp->type == WORD || tmp->type == STR 
 			|| tmp->type == PARAM /*|| tmp->type == MSH_FILENAME*/ || tmp->type == PATH)
 		{
-			args[j] = ft_calloc(sizeof(char), (ft_strlen(tmp->val) + 1));
-			args[j] = tmp->val;
+			// args[j] = ft_calloc(sizeof(char), (ft_strlen(tmp->val) + 1));
+			args[j] = ft_strdup(tmp->val);
 			//printf("%s\n", args[j]);
 			j++;
 		}
