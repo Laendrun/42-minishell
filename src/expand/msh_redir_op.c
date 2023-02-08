@@ -19,9 +19,9 @@ int	check_if_outfile_trunc(t_msh_data *m_d)
 	tmp = m_d->trunc_lst[m_d->nb_cmd - 1];
 	while (tmp)
 	{
-		if (tmp->type == GT && (tmp->next->next->type == WORD || tmp->next->next->type == FILENAME))
+		if (tmp->type == GT && (tmp->next->type == FILENAME))
 		{
-			m_d->outfile_trunc = open(tmp->next->next->val, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+			m_d->outfile_trunc = open(tmp->next->val, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 			// printf("open trunc : %d\n", m_d->outfile_trunc);
 			break ;
 		}
@@ -38,9 +38,9 @@ int	check_if_outfile_app(t_msh_data *m_d)
 	while (tmp)
 	{
 		// printf("type : %d val : %s\n", tmp->type, tmp->val);
-		if (tmp->type == DGT && (tmp->next->next->type == WORD || tmp->next->next->type == FILENAME))
+		if (tmp->type == DGT && (tmp->next->type == FILENAME))
 		{
-			m_d->outfile_app = open(tmp->next->next->val, O_CREAT | O_WRONLY | O_APPEND, 0644);
+			m_d->outfile_app = open(tmp->next->val, O_CREAT | O_WRONLY | O_APPEND, 0644);
 			// printf("open : %d\n", m_d->outfile_app);
 			break ;
 		}
@@ -57,9 +57,9 @@ int	check_if_infile(t_msh_data *m_d)
 	while (tmp)
 	{
 		// printf("type : %d val : %s\n", tmp->type, tmp->val);
-		if (tmp->type == LT && (tmp->next->next->type == WORD || tmp->next->next->type == FILENAME))
+		if (tmp->type == LT && (tmp->next->type == FILENAME))
 		{
-			m_d->infile = open(tmp->next->next->val, O_RDONLY);
+			m_d->infile = open(tmp->next->val, O_RDONLY);
 			break ;
 		}
 		tmp = tmp->next;
