@@ -41,18 +41,17 @@ void	free_t_cmd(t_msh_data *d)
 	free(d->cmds);
 }
 
-void	free_trunc_list(t_msh_data *d)
+void	free_trunc_list(t_tok_list **trunc_lst, int len)
 {
-	t_tok_list	*tmp;
-	int			i;
+	int i;
 
-	tmp = *(d->trunc_lst);
 	i = 0;
-	while (i < d->nb_cmd)
+	while (i < len)
 	{
-		free(d->trunc_lst[i]);
+		free(trunc_lst[i]);
 		i++;
 	}
+	free(trunc_lst);
 }
 
 
@@ -80,19 +79,37 @@ void	free_tab_char(char **tab)
 	int	i;
 
 	i = 0;
-	if (!tab)
-		return ;
-	while (tab[i])
+	if (tab)
 	{
-		if (tab[i])
+		while (tab[i])
 		{
-			free_ptr(tab[i]);
-			tab[i] = NULL;
+			if (tab[i])
+			{
+				free_ptr(tab[i]);
+				tab[i] = NULL;
+			}
+			i++;
 		}
-		i++;
+		free(tab);
+		tab = NULL;
 	}
-	free(tab);
-	tab = NULL;
+
+	// int	i;
+
+	// i = 0;
+	// if (!tab)
+	// 	return ;
+	// while (tab[i])
+	// {
+	// 	if (tab[i])
+	// 	{
+	// 		free_ptr(tab[i]);
+	// 		tab[i] = NULL;
+	// 	}
+	// 	i++;
+	// }
+	// free(tab);
+	// tab = NULL;
 }
 
 void	close_fd_tab(int *fd, int size, t_msh_data *d)
