@@ -44,22 +44,17 @@ void	f_pre_duplicate(t_msh_data *m_d)
 			else
 				f_duplicate(m_d->hdoc[0], m_d->fd[1], m_d);
 		}
+		else if (m_d->nb_cmd == 1)
+			return ;
 		else
 			f_duplicate(STDIN_FILENO, m_d->fd[1], m_d);
 	}
 	else if (m_d->process == m_d->nb_cmd - 1)
 	{
 		if (m_d->outfile_app != -1)
-		{
-			// dprintf(2, "venu out app\n");
 			f_duplicate(m_d->fd[(2 * m_d->process) - 2], m_d->outfile_app, m_d);
-		}
 		else if (m_d->outfile_trunc != -1)
-		{
-			// printf("venu out trunc\n");
 			f_duplicate(m_d->fd[(2 * m_d->process) - 2], m_d->outfile_trunc, m_d);
-			// close(m_d->outfile_trunc);
-		}
 		else
 			f_duplicate(m_d->fd[(2 * m_d->process) - 2], STDOUT_FILENO, m_d);
 	}
@@ -114,14 +109,9 @@ char	**pip_get_path(char **env)
 
 void	child_process(t_msh_data *m_d)
 {
-	// char	**args;
-
 	f_pre_duplicate(m_d);
-	// args = ft_split(m_d->av[d->process + 2], ' '); //need to be adapted
 	m_d->cmds->args[0] = pip_get_exec(m_d->cmds->args[0], m_d->path);
-	// args[0] = pip_get_exec(args[0], m_d->path);
 	execve(m_d->cmds->args[0], m_d->cmds->args, m_d->env_upd);
-	// execve(args[0], args, m_d->env_upd);
 }
 
 void	f_fork(t_msh_data *m_d)
