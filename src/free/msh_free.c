@@ -12,6 +12,7 @@
 
 #include "minishell.h"
 
+// works a priori
 void	msh_free_env(t_msh_data *m_data)
 {
 	t_env_list	*tmp;

@@ -30,6 +30,7 @@ int	msh_malloc_new_str(t_msh_data *m_d, t_tok_list *str_tok, int flg[3])
 	replaced_var = msh_get_env(m_d, s_part[1]);
 	free(s_part[1]);
 	str_joined[0] = ft_strjoin(s_part[0], replaced_var);
+	// if (replaced_var)
 	// 	free(replaced_var); //does not like being freed sometimes !
 	str_joined[1] = ft_strjoin(str_joined[0], s_part[2]);
 	// free(str_tok->val); //does not like being freed sometimes !
@@ -79,7 +80,7 @@ int	msh_replace_var_in_str(t_msh_data *m_d)
 	t_tok_list	*cur;
 
 	cur = m_d->s_tok;
-	while (cur->next != NULL)
+	while (cur->next)
 	{
 		if (cur->type == STR && cur->next->type == DQUOTE)
 			msh_flag_in_str_var(m_d, cur);
@@ -106,6 +107,7 @@ int	msh_replace_var_in_var(t_msh_data *m_d)
 			new_val = ft_calloc(sizeof(char), (msh_get_env_var_len(m_d,cur->val) + 1));
 			new_val = msh_get_env(m_d,cur->val);
 			free(cur->val);
+			// cur->val = NULL;
 			cur->val = new_val;
 		}
 		cur = cur->next;

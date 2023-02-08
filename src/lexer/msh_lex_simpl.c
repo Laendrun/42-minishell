@@ -50,6 +50,7 @@ int	msh_simplify_tokens(t_msh_data *m_d)
 			tmp = tmp->next;
 		}
 	}
+	
 	msh_expand_var(m_d);
 	if (msh_check_syntax(m_d) != 0)
 		return (ERROR);

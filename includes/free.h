@@ -24,7 +24,10 @@ void	msh_free_cmds(t_msh_data *m_data);
 void	msh_free_trunc_lst(t_msh_data *m_data);
 void	f_error(char *str, char *erno, t_msh_data *d);
 void	free_tab_char(char **str);
+void	free_ptr(void *ptr);
 void	close_fd_tab(int *fd, int size, t_msh_data *d);
+void	free_trunc_list(t_msh_data *d);
+void	free_t_cmd(t_msh_data *d);
 
 // ----------------------------------------------
 // free/msh_free2.c

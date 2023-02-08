@@ -31,7 +31,7 @@ int	main(int ac, char **av, char **env)
 		rl_on_new_line();
 		rl = readline(m_data.prompt);
 		add_history(rl);
-		if (ft_strncmp(rl, "exit", 5) == 0)
+		if (ft_strncmp(rl, "exit2", 6) == 0)
 			break ;
 		if (ft_strncmp(rl, "clear", 5) == 0)
 			msh_clear(&m_data);
@@ -40,10 +40,10 @@ int	main(int ac, char **av, char **env)
 		msh_free_tok(&m_data);
 		msh_free_simpl_tok(&m_data);
 	}
-	free(rl);
-	/*msh_free_tok(&m_data);
-	msh_free_env(&m_data);*/
-	msh_terminate(&m_data);
+	//free(rl);
+	// msh_free_tok(&m_data);
+	msh_free_env(&m_data);
+	// msh_terminate(&m_data);
 	return (SUCCESS);
 }
 

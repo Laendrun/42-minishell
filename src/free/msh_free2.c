@@ -28,6 +28,34 @@ void	msh_free_upd(t_msh_data *m_data)
 	}
 }
 
+void	free_t_cmd(t_msh_data *d)
+{
+	t_cmd	*tmp;
+
+	tmp = d->cmds;
+	while(tmp)
+	{
+		free_tab_char(tmp->args);
+		tmp = tmp->next;
+	}
+	free(d->cmds);
+}
+
+void	free_trunc_list(t_msh_data *d)
+{
+	t_tok_list	*tmp;
+	int			i;
+
+	tmp = *(d->trunc_lst);
+	i = 0;
+	while (i < d->nb_cmd)
+	{
+		free(d->trunc_lst[i]);
+		i++;
+	}
+}
+
+
 void	f_error(char *str, char *erno, t_msh_data *d)
 {
 	ft_putstr_fd(str, 2);
@@ -38,17 +66,33 @@ void	f_error(char *str, char *erno, t_msh_data *d)
 	exit(0);
 }
 
-void	free_tab_char(char **str)
+void	free_ptr(void *ptr)
+{
+	if (ptr != NULL)
+	{
+		free(ptr);
+		ptr = NULL;
+	}
+}
+
+void	free_tab_char(char **tab)
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
+	if (!tab)
+		return ;
+	while (tab[i])
 	{
-		free(str[i]);
+		if (tab[i])
+		{
+			free_ptr(tab[i]);
+			tab[i] = NULL;
+		}
 		i++;
 	}
-	free(str);
+	free(tab);
+	tab = NULL;
 }
 
 void	close_fd_tab(int *fd, int size, t_msh_data *d)
