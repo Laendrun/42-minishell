@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby>                              +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:42:59 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/04 19:34:26 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/08 18:01:39 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@ void	f_error(char *str, char *erno, t_msh_data *d);
 void	free_tab_char(char **str);
 void	free_ptr(void *ptr);
 void	close_fd_tab(int *fd, int size, t_msh_data *d);
-void	free_trunc_list(t_msh_data *d);
+void	free_trunc_list(t_tok_list **trunc_lst, int len);
+// void	free_trunc_list(t_msh_data *d);
 void	free_t_cmd(t_msh_data *d);
+void	free_args(char **tab);
 
 // ----------------------------------------------
 // free/msh_free2.c

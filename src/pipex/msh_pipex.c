@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 18:51:04 by egauthey          #+#    #+#             */
-/*   Updated: 2023/02/08 11:46:42 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/08 17:59:50 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ int	pipex(t_msh_data *m_d)
 		// printf("status : %d\n", status);
 	}
 	free(m_d->pid);
-	// free_tab_char(m_d->path);
-	// free_tab_char(m_d->env_upd);
-	// free_t_cmd(m_d);
+	free_tab_char(m_d->path);
+	free_tab_char(m_d->env_upd);
+	free_t_cmd(m_d);
 	// free_trunc_list(m_d);
 	return (WEXITSTATUS(status));
 }

@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 19:33:23 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/08 17:14:11 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/08 18:02:52 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	free_t_cmd(t_msh_data *d)
 	tmp = d->cmds;
 	while(tmp)
 	{
-		free_tab_char(tmp->args);
+		free_args(tmp->args);
 		tmp = tmp->next;
 	}
 	free(d->cmds);
@@ -76,23 +76,27 @@ void	free_tab_char(char **tab)
 		free(tab);
 		tab = NULL;
 	}
+}
 
-	// int	i;
+void	free_args(char **tab)
+{
+	int	i;
 
-	// i = 0;
-	// if (!tab)
-	// 	return ;
-	// while (tab[i])
-	// {
-	// 	if (tab[i])
-	// 	{
-	// 		free_ptr(tab[i]);
-	// 		tab[i] = NULL;
-	// 	}
-	// 	i++;
-	// }
-	// free(tab);
-	// tab = NULL;
+	i = 1;
+	if (tab)
+	{
+		while (tab[i])
+		{
+			if (tab[i])
+			{
+				free_ptr(tab[i]);
+				tab[i] = NULL;
+			}
+			i++;
+		}
+		free(tab);
+		tab = NULL;
+	}
 }
 
 void	close_fd_tab(int *fd, int size, t_msh_data *d)
