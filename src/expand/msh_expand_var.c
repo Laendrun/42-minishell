@@ -81,7 +81,7 @@ int	msh_replace_var_in_str(t_msh_data *m_d)
 	cur = m_d->s_tok;
 	while (cur->next != NULL)
 	{
-		if (cur->type == MSH_STR && cur->next->type == MSH_DQUOTE)
+		if (cur->type == STR && cur->next->type == DQUOTE)
 			msh_flag_in_str_var(m_d, cur);
 		cur = cur->next;
 	}
@@ -101,7 +101,7 @@ int	msh_replace_var_in_var(t_msh_data *m_d)
 	cur = m_d->s_tok;
 	while (cur->next != NULL)
 	{
-		if (cur->type == MSH_VAR)
+		if (cur->type == VAR)
 		{
 			new_val = ft_calloc(sizeof(char), (msh_get_env_var_len(m_d,cur->val) + 1));
 			new_val = msh_get_env(m_d,cur->val);

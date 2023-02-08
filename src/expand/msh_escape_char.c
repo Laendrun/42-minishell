@@ -51,7 +51,7 @@ int	msh_escape_char(t_msh_data *m_d)
 	cur = m_d->s_tok;
 	while (cur)
 	{
-		if (cur->type == MSH_STR && cur->prev->type == MSH_DQUOTE)
+		if (cur->type == STR && cur->prev->type == DQUOTE)
 			escape_backslash(cur);
 		cur = cur->next;
 	}

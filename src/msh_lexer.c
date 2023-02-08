@@ -31,7 +31,7 @@ int	msh_lex(t_msh_data *m_data, char *line)
 	while (line && line[i])
 	{
 		if (line && msh_isspace(line[i]))
-			msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(MSH_SEP, 0));
+			msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(SEP, 0));
 		while (line[i] && msh_isspace(line[i]))
 			i++;
 		if (line[i] && (line[i] == '\'' || line[i] == '\"'))
@@ -46,7 +46,7 @@ int	msh_lex(t_msh_data *m_data, char *line)
 			i++;
 	}
 	free(line);
-	msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(MSH_END, 0));
+	msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(END, 0));
 	// print_tok(m_data);
 	msh_simplify_tokens(m_data);
 	return (SUCCESS);

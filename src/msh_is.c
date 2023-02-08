@@ -54,13 +54,13 @@ int	msh_is_path_comp(t_tok_list *token)
 {
 	int	t;
 
-	t = token->type == MSH_WORD;
-	t = (t || (token->type == MSH_SYMBOL && !ft_strncmp(token->val, ".", 2)));
-	t = (t || (token->type == MSH_SYMBOL && !ft_strncmp(token->val, "..", 3)));
-	t = (t || (token->type == MSH_SYMBOL && !ft_strncmp(token->val, "/", 2)));
-	t = (t || (token->type == MSH_SYMBOL && !ft_strncmp(token->val, "~", 2)));
-	t = (t || (token->type == MSH_SYMBOL && !ft_strncmp(token->val, "_", 2)));
-	t = (t || (token->type == MSH_SYMBOL && !ft_strncmp(token->val, "-", 2)));
+	t = token->type == WORD;
+	t = (t || (token->type == SYMBOL && !ft_strncmp(token->val, ".", 2)));
+	t = (t || (token->type == SYMBOL && !ft_strncmp(token->val, "..", 3)));
+	t = (t || (token->type == SYMBOL && !ft_strncmp(token->val, "/", 2)));
+	t = (t || (token->type == SYMBOL && !ft_strncmp(token->val, "~", 2)));
+	t = (t || (token->type == SYMBOL && !ft_strncmp(token->val, "_", 2)));
+	t = (t || (token->type == SYMBOL && !ft_strncmp(token->val, "-", 2)));
 	return (t);
 }
 
@@ -68,10 +68,10 @@ int	msh_is_envvar_comp(t_tok_list *token)
 {
 	int	t;
 	
-	t = token->type != MSH_DLT;
-	t = (t || token->type != MSH_LT);
-	t = (t || token->type != MSH_DGT);
-	t = (t || token->type != MSH_GT);
+	t = token->type != DLT;
+	t = (t || token->type != LT);
+	t = (t || token->type != DGT);
+	t = (t || token->type != GT);
 	t = (t || ft_strncmp(token->val, "$", 2));
 	return (t);
 }

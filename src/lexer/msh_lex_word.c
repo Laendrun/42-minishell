@@ -21,7 +21,7 @@ int	msh_lex_word(t_msh_data *m_data, char *line, unsigned int *i)
 	while (ft_isalnum(line[*i]))
 		*i += 1;
 	tmp = ft_substr(line, t, *i - t);
-	msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(MSH_WORD, ft_strdup(tmp)));
+	msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(WORD, ft_strdup(tmp)));
 	free(tmp);
 	return (SUCCESS);
 }

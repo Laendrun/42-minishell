@@ -31,15 +31,15 @@ int	msh_simplify_tokens(t_msh_data *m_d)
 	while (tmp)
 	{
 		next = tmp->next;
-		if (tmp->type == MSH_WORD && ft_strncmp(next->val, "/", 2))
+		if (tmp->type == WORD && ft_strncmp(next->val, "/", 2))
 			tmp = msh_simpl_word(m_d, tmp, next);
-		else if (tmp->type == MSH_MINUS)
+		else if (tmp->type == MINUS)
 			tmp = msh_simpl_minus(m_d, tmp, next);
 		else if (msh_is_path_comp(tmp))
 			tmp = msh_simpl_path(m_d, tmp, next);
-		else if (tmp->type == MSH_DLT)
+		else if (tmp->type == DLT)
 			tmp = msh_set_delim(m_d, tmp, next);
-		else if (tmp->type == MSH_LT || tmp->type == MSH_GT || tmp->type == MSH_DGT)
+		else if (tmp->type == LT || tmp->type == GT || tmp->type == DGT)
 			tmp = msh_set_redir(m_d, tmp, next);
 		else if (!ft_strncmp(tmp->val, "$", 2))
 			tmp = msh_set_var(m_d, tmp, next);
@@ -67,10 +67,10 @@ t_tok_list	*msh_simpl_word(t_msh_data *m_d, t_tok_list *tok, t_tok_list *ne)
 {
 	char	*new;
 
-	if (ne->type == MSH_SYMBOL && !ft_strncmp(".", ne->val, 2) && ne->next->type == MSH_WORD)
+	if (ne->type == SYMBOL && !ft_strncmp(".", ne->val, 2) && ne->next->type == WORD)
 	{
 		new = msh_fn_from_tok(tok->val, ne->next->val);
-		msh_tok_lstaddb(&m_d->s_tok, msh_tok_lstnew(MSH_FILENAME, new));
+		msh_tok_lstaddb(&m_d->s_tok, msh_tok_lstnew(FILENAME, new));
 		return (ne->next->next);
 	}
 	else
@@ -85,10 +85,10 @@ t_tok_list	*msh_simpl_minus(t_msh_data *m_d, t_tok_list *tok, t_tok_list *ne)
 {
 	char	*new;
 
-	if (tok->type == MSH_MINUS && ne->type == MSH_WORD)
+	if (tok->type == MINUS && ne->type == WORD)
 	{
 		new = msh_par_from_tok(ne->val);
-		msh_tok_lstaddb(&m_d->s_tok, msh_tok_lstnew(MSH_PARAM, new));
+		msh_tok_lstaddb(&m_d->s_tok, msh_tok_lstnew(PARAM, new));
 		return (ne->next);
 	}
 	else
@@ -105,15 +105,15 @@ t_tok_list	*msh_simpl_path(t_msh_data *m_d, t_tok_list *tok, t_tok_list *ne)
 	path = ft_strdup("");
 	while (msh_is_path_comp(tok))
 	{
-		if (tok->type == MSH_WORD)
+		if (tok->type == WORD)
 			path = ft_strjoin(path, tok->val);
-		if (tok->type == MSH_SYMBOL)
+		if (tok->type == SYMBOL)
 				path = ft_strjoin(path, tok->val);
 		tok = ne;
 		ne = ne->next;
 	}
 	if (path)
-		msh_tok_lstaddb(&m_d->s_tok, msh_tok_lstnew(MSH_PATH, path));
+		msh_tok_lstaddb(&m_d->s_tok, msh_tok_lstnew(PATH, path));
 	return (tok);
 }
 
@@ -126,17 +126,17 @@ t_tok_list	*msh_set_delim(t_msh_data *m_d, t_tok_list *tok, t_tok_list *ne)
 	tok = ne;
 	ne = tok->next;
 
-	while (tok->type == MSH_SEP)
+	while (tok->type == SEP)
 		tok = tok->next;
 	ne = tok->next;
-	while (tok->type == MSH_WORD || tok->type == MSH_SYMBOL)
+	while (tok->type == WORD || tok->type == SYMBOL)
 	{
 		new = ft_strjoin(new, tok->val);
 		tok = ne;
 		ne = tok->next;
 	}
 	if (new)
-		msh_tok_lstaddb(&m_d->s_tok, msh_tok_lstnew(MSH_DELIM, new));
+		msh_tok_lstaddb(&m_d->s_tok, msh_tok_lstnew(DELIM, new));
 	return (tok);
 }
 
@@ -151,14 +151,14 @@ t_tok_list	*msh_set_var(t_msh_data *m_d, t_tok_list *tok, t_tok_list *ne)
 	new = ft_strdup("");
 	tok = ne;
 	ne = tok->next;
-	while (tok->type == MSH_WORD || (tok->type == MSH_SYMBOL && ft_strncmp(tok->val, "$", 2)))
+	while (tok->type == WORD || (tok->type == SYMBOL && ft_strncmp(tok->val, "$", 2)))
 	{
 		new = ft_strjoin(new, tok->val);
 		tok = ne;
 		ne = tok->next;
 	}
 	if (new)
-		msh_tok_lstaddb(&m_d->s_tok, msh_tok_lstnew(MSH_VAR, new));
+		msh_tok_lstaddb(&m_d->s_tok, msh_tok_lstnew(VAR, new));
 	return (tok);
 }
 
@@ -169,16 +169,16 @@ t_tok_list	*msh_set_redir(t_msh_data *m_d, t_tok_list *tok, t_tok_list *ne)
 	msh_tok_lstaddb(&m_d->s_tok, msh_tok_lstnew(tok->type, tok->val));
 	new = ft_strdup("");
 	tok = ne;
-	while (tok->type == MSH_SEP)
+	while (tok->type == SEP)
 		tok = tok->next;
 	ne = tok->next;
-	while (tok->type == MSH_WORD || tok->type == MSH_SYMBOL)
+	while (tok->type == WORD || tok->type == SYMBOL)
 	{
 		new = ft_strjoin(new, tok->val);
 		tok = ne;
 		ne = tok->next;
 	}
 	if (new)
-		msh_tok_lstaddb(&m_d->s_tok, msh_tok_lstnew(MSH_FILENAME, new));
+		msh_tok_lstaddb(&m_d->s_tok, msh_tok_lstnew(FILENAME, new));
 	return (tok);
 }
