@@ -6,24 +6,13 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:12:32 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/08 11:17:48 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/09 16:12:47 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/* if line and line[i] isspace => add separator token
-* keep advancing in the string while line[i] isspace
-* if line[i] == ' or " => take care of single quote and double
-* quote that act differently
-* if line[i] isope => lex operator, take care of double operator (< <<)
-* if line[i] ispec => lex special chars
-* if line[i] isalpha => lex symbol
-* if line[i] == - => lex param
-* else => print line[i] to see what I forgot
-*/
-
-int	msh_lex(t_msh_data *m_data, char *line)
+/*int	msh_lex(t_msh_data *m_data, char *line)
 {
 	unsigned int	i;
 
@@ -49,5 +38,82 @@ int	msh_lex(t_msh_data *m_data, char *line)
 	msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(END, 0));
 	// print_tok(m_data);
 	msh_simplify_tokens(m_data);
+	return (SUCCESS);
+}*/
+
+int	msh_lex_pipe(t_msh_data *m_d, char *line, unsigned int *i)
+{
+	(void) line;
+	msh_tok_lstaddb(&m_d->tokens, msh_tok_lstnew(PIPE, 0));
+	*i += 1;
+	return (SUCCESS);
+}
+
+int	msh_lex_vars(t_msh_data *m_d, char *line, unsigned int *i)
+{
+	unsigned int	t;
+
+	*i += 1;
+	t = *i;
+	while (line[*i] && !msh_isspace(line[*i]))
+		*i += 1;
+	msh_tok_lstaddb(&m_d->tokens, msh_tok_lstnew(VAR, ft_substr(line, t, *i - t)));
+	return (SUCCESS);
+}
+
+int	msh_lex_redir(t_msh_data *m_d, char *line, unsigned int *i)
+{
+	unsigned int	t;
+	char			*tmp;
+	int				ct;
+	int				nt;
+
+	nt = msh_get_op_type(line[*i + 1]);
+	ct = msh_get_op_type(line[*i]);
+	if (ct == nt)
+	{
+		msh_tok_lstaddb(&m_d->tokens, msh_tok_lstnew(msh_dop_type(ct), 0));
+		*i += 2;
+	}
+	else
+	{
+		msh_tok_lstaddb(&m_d->tokens, msh_tok_lstnew(ct, 0));
+		*i += 1;
+	}
+	while (msh_isspace(line[*i]) && line[*i])
+		*i += 1;
+	t = *i;
+	while (!msh_isspace(line[*i]) && line[*i]
+		&& line[*i] != '|' && line[*i] != '<' && line[*i] != '>')
+		*i += 1;
+	tmp = ft_substr(line, t, *i - t);
+	msh_tok_lstaddb(&m_d->tokens, msh_tok_lstnew(REDIR, ft_strdup(tmp)));
+	free(tmp);
+	return (SUCCESS);
+}
+
+int	msh_lex(t_msh_data *m_d, char *line)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (line && line[i])
+	{
+		while (line[i] && msh_isspace(line[i]))
+			i++;
+		if (line[i] && (line[i] == '\'' || line[i] == '\"'))
+			msh_lex_quotes(m_d, line, &i);
+		else if (line[i] && (line[i] == '<' || line[i] == '>'))
+			msh_lex_redir(m_d, line, &i);
+		else if (line[i] && line[i] == '$')
+			msh_lex_vars(m_d, line, &i);
+		else if (line[i] && line[i] == '|')
+			msh_lex_pipe(m_d, line, &i);
+		else
+			msh_lex_word(m_d, line, &i);
+	}
+	free(line);
+	msh_tok_lstaddb(&m_d->tokens, msh_tok_lstnew(END, 0));
+	print_tok(m_d);
 	return (SUCCESS);
 }
