@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 18:51:04 by egauthey          #+#    #+#             */
-/*   Updated: 2023/02/04 13:13:29 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/09 16:34:07 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	check_if_outfile_trunc(t_msh_data *m_d)
 	tmp = m_d->trunc_lst[m_d->nb_cmd - 1];
 	while (tmp)
 	{
-		if (tmp->type == GT && (tmp->next->type == FILENAME))
+		if (tmp->type == GT && (tmp->next->type == REDIR))
 		{
 			m_d->outfile_trunc = open(tmp->next->val, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 			// printf("open trunc : %d\n", m_d->outfile_trunc);
@@ -38,7 +38,7 @@ int	check_if_outfile_app(t_msh_data *m_d)
 	while (tmp)
 	{
 		// printf("type : %d val : %s\n", tmp->type, tmp->val);
-		if (tmp->type == DGT && (tmp->next->type == FILENAME))
+		if (tmp->type == DGT && (tmp->next->type == REDIR))
 		{
 			m_d->outfile_app = open(tmp->next->val, O_CREAT | O_WRONLY | O_APPEND, 0644);
 			// printf("open : %d\n", m_d->outfile_app);
@@ -57,7 +57,7 @@ int	check_if_infile(t_msh_data *m_d)
 	while (tmp)
 	{
 		// printf("type : %d val : %s\n", tmp->type, tmp->val);
-		if (tmp->type == LT && (tmp->next->type == FILENAME))
+		if (tmp->type == LT && (tmp->next->type == REDIR))
 		{
 			m_d->infile = open(tmp->next->val, O_RDONLY);
 			break ;
@@ -92,7 +92,7 @@ int	check_if_heredoc(t_msh_data *m_d)
 	tmp = m_d->trunc_lst[0];
 	while (tmp)
 	{
-		if (tmp->type == DLT && tmp->next->type == DELIM)
+		if (tmp->type == DLT && tmp->next->type == REDIR)
 		{
 			m_d->heredoc = 1;
 			m_d->delim = tmp->next->val;

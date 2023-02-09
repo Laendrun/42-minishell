@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:12:32 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/09 16:23:03 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/09 16:37:57 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ int	msh_lex(t_msh_data *m_d, char *line)
 	i = 0;
 	while (line && line[i])
 	{
+		if (line && msh_isspace(line[i]))
+			msh_tok_lstaddb(&m_d->tokens, msh_tok_lstnew(SEP, 0));
 		while (line[i] && msh_isspace(line[i]))
 			i++;
 		if (line[i] && (line[i] == '\'' || line[i] == '\"'))
@@ -114,6 +116,13 @@ int	msh_lex(t_msh_data *m_d, char *line)
 	}
 	free(line);
 	msh_tok_lstaddb(&m_d->tokens, msh_tok_lstnew(END, 0));
-	print_tok(m_d);
+	msh_expand_var(m_d);
+	msh_escape_char(m_d);
+	msh_handle_quotes(m_d);
+	msh_create_commmands(m_d);
+	msh_redir_op(m_d);
+	// print_tok(m_d);
+	msh_pipex(m_d);
+	msh_pip_reset(m_d);
 	return (SUCCESS);
 }
