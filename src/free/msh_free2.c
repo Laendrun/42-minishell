@@ -6,7 +6,7 @@
 /*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 19:33:23 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/09 15:38:04 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/09 21:18:43 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,37 @@ void	free_lst_in_trunc(t_msh_data *m_d)
 	// free(m_d->trunc_lst);
 }
 
+void	free_ptr(void *ptr)
+{
+	if (ptr != NULL)
+	{
+		free(ptr);
+		ptr = NULL;
+	}
+}
 
+void	free_tab_char(char **tab)
+{
+	int	i;
+
+	i = 0;
+	if (!tab)
+		return ;
+	while (tab[i])
+	{
+		// printf("%s\n", tab[i]);
+		free_ptr(tab[i]);
+		tab[i] = NULL;
+		i++;
+	}
+	free(tab);
+	tab = NULL;
+}
 
 void	free_t_cmd(t_msh_data *d)
 {
 	t_cmd	*tmp;
+	t_cmd	*to_free;
 
 	tmp = d->cmds;
 	if (!tmp)
@@ -53,12 +79,13 @@ void	free_t_cmd(t_msh_data *d)
 		if (tmp->args != NULL)
 		{
 			free_tab_char(tmp->args);
-			// free_args(tmp->args);
 			tmp->args = NULL;
 		}
+		to_free = tmp;
 		tmp = tmp->next;
+		free(to_free);
 	}
-	free(d->cmds);
+	d->cmds = NULL;
 }
 
 void	free_trunc_list(t_tok_list **trunc_lst, int len)
@@ -87,33 +114,6 @@ void	f_error(char *str, char *erno, t_msh_data *d)
 	if (d->pid)
 		free(d->pid);
 	exit(0);
-}
-
-void	free_ptr(void *ptr)
-{
-	if (ptr != NULL)
-	{
-		free(ptr);
-		ptr = NULL;
-	}
-}
-
-void	free_tab_char(char **tab)
-{
-	int	i;
-
-	i = 0;
-	if (!tab)
-		return ;
-	while (tab[i])
-	{
-		// printf("%s\n", tab[i]);
-		free_ptr(tab[i]);
-		tab[i] = NULL;
-		i++;
-	}
-	free(tab);
-	tab = NULL;
 }
 
 void	free_args(char **tab)

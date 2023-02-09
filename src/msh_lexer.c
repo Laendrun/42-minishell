@@ -6,7 +6,7 @@
 /*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:12:32 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/09 18:46:06 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/09 21:00:58 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ int	msh_lex(t_msh_data *m_d, char *line)
 	msh_expand_var(m_d);
 	msh_escape_char(m_d);
 	msh_handle_quotes(m_d);
-	print_tok(m_d);
+	// print_tok(m_d);
 	msh_err_near_token(m_d);
-	print_tok(m_d);
+	// print_tok(m_d);
 	msh_create_commmands(m_d);
 	msh_redir_op(m_d);
 	msh_pipex(m_d);

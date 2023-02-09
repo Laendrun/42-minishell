@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_create_commands.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 18:51:04 by egauthey          #+#    #+#             */
-/*   Updated: 2023/02/09 16:33:38 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/09 21:01:19 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ t_tok_list **create_array_of_toklst(t_msh_data *m_d)
 		if (cur->next !=  NULL)
 		{
 			cur = cur->next;
-			cur->prev->next = NULL;
+			// cur->prev->next = NULL;
 			//the connection with prev is still there and the list is still connected I guess
 			i++;
 		}
@@ -119,6 +119,8 @@ int	create_cmd_lst(t_msh_data *m_d, int i)
 	j = 0;
 	while (tmp)
 	{
+		if (tmp->type == PIPE || tmp->type == END)
+			break ;
 		if (tmp->type == VAR || tmp->type == WORD || tmp->type == STR)
 		{
 			// args[j] = ft_calloc(sizeof(char), (ft_strlen(tmp->val) + 1));
