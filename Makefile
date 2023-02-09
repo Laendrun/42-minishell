@@ -50,7 +50,6 @@ PARS_SRC = $(addprefix $(PARS_DIR),	msh_create_commands.c \
 
 PIPEX_SRC = $(addprefix $(PIPEX_DIR),	msh_pipex.c \
 										process.c \
-										utils.c \
 										)
 
 DEBUG_SRC = $(addprefix $(DEBUG_DIR),	msh_print_utils.c \

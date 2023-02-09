@@ -3,14 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   msh_free2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 19:33:23 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/08 18:02:52 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/09 15:38:04 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	msh_free_trunc(t_tok_list *trunc)
+{
+	t_tok_list	*tmp;
+ 
+	while (trunc)
+	{
+		tmp = trunc->next;
+		free(trunc->val);
+		trunc->val = NULL;
+		free(trunc);
+		trunc = NULL;
+		trunc = tmp;
+	}
+}
+ 
+void	free_lst_in_trunc(t_msh_data *m_d)
+{
+	int i = 0;
+	while (i < m_d->nb_cmd)
+	{
+		print_tok_trunclst(m_d->trunc_lst[i]);
+		// msh_free_trunc(m_d->trunc_lst[i]);
+		i++;
+	}
+	// free(m_d->trunc_lst);
+}
+
+
 
 void	free_t_cmd(t_msh_data *d)
 {

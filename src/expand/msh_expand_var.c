@@ -26,14 +26,13 @@ int	msh_malloc_new_str(t_msh_data *m_d, t_tok_list *str_tok, int flg[3])
 	s_part[0] = ft_substr(str_tok->val, 0, flg[0]);
 	s_part[1] = ft_substr(str_tok->val, (flg[0] + 1), (flg[1] - flg[0] - 1));
 	s_part[2] = ft_substr(str_tok->val, flg[1], (flg[2] - flg[1]));
-	replaced_var = ft_calloc(sizeof(char), (msh_get_env_var_len(m_d, s_part[1]) + 1));
 	replaced_var = msh_get_env(m_d, s_part[1]);
 	free(s_part[1]);
 	str_joined[0] = ft_strjoin(s_part[0], replaced_var);
-	// if (replaced_var)
-	// 	free(replaced_var); //does not like being freed sometimes !
 	str_joined[1] = ft_strjoin(str_joined[0], s_part[2]);
-	// free(str_tok->val); //does not like being freed sometimes !
+	// if (str_tok->val != NULL)
+	// 	free(str_tok->val); //does not like being freed sometimes !
+	str_tok->val = NULL;
 	str_tok->val = ft_strdup(str_joined[1]);
 	free(str_joined[0]);
 	free(str_joined[1]);
