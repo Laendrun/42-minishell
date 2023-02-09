@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_pipex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 18:51:04 by egauthey          #+#    #+#             */
-/*   Updated: 2023/02/08 17:59:50 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/09 15:21:59 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	pipex(t_msh_data *m_d)
 			tmp = tmp->next;
 		m_d->process++;
 	}
+	// if (m_d->fd != NULL)
+	// 	free(m_d->fd);
 	close_fd_tab(m_d->fd, 2 * (m_d->nb_cmd - 1), m_d);
 	while (m_d->process--)
 	{
@@ -43,7 +45,6 @@ int	pipex(t_msh_data *m_d)
 	free(m_d->pid);
 	free_tab_char(m_d->path);
 	free_tab_char(m_d->env_upd);
-
 	// t_cmd *tmp2;
 	// tmp2 = m_d->cmds;
 	// while(tmp2)
@@ -58,7 +59,8 @@ int	pipex(t_msh_data *m_d)
 	// }
 
 	free_t_cmd(m_d);
-	free(m_d->trunc_lst);
+	free_lst_in_trunc(m_d);
+	// free(m_d->trunc_lst);
 	return (WEXITSTATUS(status));
 }
 
