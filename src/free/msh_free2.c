@@ -6,7 +6,7 @@
 /*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 19:33:23 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/09 21:18:43 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/09 21:40:55 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,24 +86,6 @@ void	free_t_cmd(t_msh_data *d)
 		free(to_free);
 	}
 	d->cmds = NULL;
-}
-
-void	free_trunc_list(t_tok_list **trunc_lst, int len)
-{
-	// int i;
-
-	(void)len;
-
-	// i = 0;
-	// if (len > 1)
-	// {
-	// 	while (i < len)
-	// 	{
-	// 		free(trunc_lst[i]);
-	// 		i++;
-	// 	}
-	// }
-	free(trunc_lst);
 }
 
 void	f_error(char *str, char *erno, t_msh_data *d)

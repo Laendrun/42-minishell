@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:05:50 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/09 17:03:27 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/10 00:03:14 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,15 @@ int	main(int ac, char **av, char **env)
 	printf("\e[1;1H\e[2J");
 	while (1)
 	{
-		// msh_set_signals();
+		msh_set_signals();
 		rl_on_new_line();
 		rl = readline(m_data.prompt);
 		add_history(rl);
-		if (ft_strncmp(rl, "exit2", 6) == 0)
+		if (rl == 0 || ft_strncmp(rl, "exit2", 6) == 0)
+		{
+			write(1, "\n", 1);
 			break ;
+		}
 		if (ft_strncmp(rl, "clear", 5) == 0)
 			msh_clear(&m_data);
 		msh_lex(&m_data, rl);
