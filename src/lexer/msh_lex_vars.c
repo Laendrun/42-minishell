@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_lex_word.c                                     :+:      :+:    :+:   */
+/*   msh_lex_vars.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/26 15:50:11 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/09 14:27:11 by saeby            ###   ########.fr       */
+/*   Created: 2023/02/09 14:04:54 by saeby             #+#    #+#             */
+/*   Updated: 2023/02/09 14:05:09 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	msh_lex_word(t_msh_data *m_data, char *line, unsigned int *i)
+int	msh_lex_vars(t_msh_data *m_d, char *line, unsigned int *i)
 {
 	unsigned int	t;
-	char			*tmp;
 
+	*i += 1; // to skip the $ character
 	t = *i;
-	while (!msh_isspace(line[*i]) && line[*i] 
-		&& line[*i] != '|' && line[*i] != '<' && line[*i] != '>')
+	while (line[*i] && !msh_isspace(line[*i]))
 		*i += 1;
-	tmp = ft_substr(line, t, *i - t);
-	msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(WORD, ft_strdup(tmp)));
-	free(tmp);
+	msh_tok_lstaddb(&m_d->tokens, msh_tok_lstnew(VAR, ft_substr(line, t, *i - t)));
 	return (SUCCESS);
 }

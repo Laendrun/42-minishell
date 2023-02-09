@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 18:51:04 by egauthey          #+#    #+#             */
-/*   Updated: 2023/02/04 13:33:24 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/09 14:11:31 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	msh_replace_var_in_str(t_msh_data *m_d)
 {
 	t_tok_list	*cur;
 
-	cur = m_d->s_tok;
+	cur = m_d->tokens;
 	while (cur->next)
 	{
 		if (cur->type == STR && cur->next->type == DQUOTE)
@@ -99,7 +99,7 @@ int	msh_replace_var_in_var(t_msh_data *m_d)
 	t_tok_list	*cur;
 	char		*new_val;
 
-	cur = m_d->s_tok;
+	cur = m_d->tokens;
 	while (cur->next != NULL)
 	{
 		if (cur->type == VAR)

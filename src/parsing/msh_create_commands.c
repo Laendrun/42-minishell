@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_create_commands.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby>                              +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 18:51:04 by egauthey          #+#    #+#             */
-/*   Updated: 2023/02/08 19:57:01 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/09 15:05:17 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	calculate_nb_cmds(t_msh_data *m_d)
 	int			cpt;
 
 	cpt = 0;
-	cur = m_d->s_tok;
+	cur = m_d->tokens;
 	while (cur)
 	{
 		if (cur->type == PIPE || cur->type == END)
@@ -68,7 +68,7 @@ t_tok_list **create_array_of_toklst(t_msh_data *m_d)
 
 	i = 0;
 	array = (t_tok_list **)malloc(sizeof(t_tok_list *) * m_d->nb_cmd);
-	cur = m_d->s_tok;
+	cur = m_d->tokens;
 	while (cur)
 	{
 		array[i] = cur;
@@ -96,7 +96,7 @@ int	get_nb_args(t_tok_list *d)
 	tmp = d;
 	while (tmp)
 	{
-		if (tmp->type == VAR || tmp->type == WORD || tmp->type == STR || tmp->type == PARAM)
+		if (tmp->type == VAR || tmp->type == WORD || tmp->type == STR)
 			cpt++;
 		tmp = tmp->next;
 	}
@@ -119,8 +119,7 @@ int	create_cmd_lst(t_msh_data *m_d, int i)
 	j = 0;
 	while (tmp)
 	{
-		if (tmp->type == VAR || tmp->type == WORD || tmp->type == STR 
-			|| tmp->type == PARAM || tmp->type == PATH)
+		if (tmp->type == VAR || tmp->type == WORD || tmp->type == STR)
 		{
 			// args[j] = ft_calloc(sizeof(char), (ft_strlen(tmp->val) + 1));
 			args[j] = ft_strdup(tmp->val);

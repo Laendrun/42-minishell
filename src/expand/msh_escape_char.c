@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 18:51:04 by egauthey          #+#    #+#             */
-/*   Updated: 2023/01/31 13:40:10 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/09 14:12:19 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	msh_escape_char(t_msh_data *m_d)
 {
 	t_tok_list	*cur;
 
-	cur = m_d->s_tok;
+	cur = m_d->tokens;
 	while (cur)
 	{
 		if (cur->type == STR && cur->prev->type == DQUOTE)

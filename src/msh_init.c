@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby>                              +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:35:46 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/04 19:31:15 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/09 15:17:42 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,5 @@ void	msh_pip_reset(t_msh_data *m_data)
 	m_data->env_upd = NULL;
 	m_data->trunc_lst = NULL;
 	m_data->cmds = NULL;
-	msh_free_cmds(m_data);
+	//msh_free_cmds(m_data);
 }

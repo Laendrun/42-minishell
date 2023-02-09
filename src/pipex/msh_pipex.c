@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 18:51:04 by egauthey          #+#    #+#             */
-/*   Updated: 2023/02/08 17:59:50 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/09 15:02:06 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	pipex(t_msh_data *m_d)
 	// }
 
 	free_t_cmd(m_d);
-	free(m_d->trunc_lst);
+	//free(m_d->trunc_lst);
 	return (WEXITSTATUS(status));
 }
 

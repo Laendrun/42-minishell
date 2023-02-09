@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 17:18:50 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/31 10:53:58 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/09 13:09:30 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ int	msh_parser(t_msh_data *m_data)
 	if (tmp->type == WORD)
 	{
 		if (msh_is_builtin(tmp->val))
-			msh_exec_builtin(tmp->val, m_data);
+			msh_exec_builtin(m_data);
 	}
 	return (SUCCESS);
 }
 
-int	msh_exec_builtin(char *str, t_msh_data *m_data)
+/*int	msh_exec_builtin(char *str, t_msh_data *m_data)
 {
 	if (ft_strncmp("env", str, 4) == 0)
 		msh_env(m_data);
@@ -45,4 +45,4 @@ int	msh_exec_builtin(char *str, t_msh_data *m_data)
 		printf(" so we can check the leaks at exit.\n");
 	}
 	return (SUCCESS);
-}
+}*/
