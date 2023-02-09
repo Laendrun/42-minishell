@@ -119,7 +119,8 @@ int	msh_redir_op(t_msh_data *m_d);
 
 int	msh_pipex(t_msh_data *m_d);
 int	pipex(t_msh_data *m_d);
-void	f_fork(t_msh_data *m_d);
+// void	f_fork(t_msh_data *m_d);
+void	f_fork(t_msh_data *m_d, t_cmd *tmp);
 // void	f_error(char *str, char *erno, t_msh_data *d);
 // void	free_tab_char(char **str);
 // void	close_fd_tab(int *fd, int size, t_msh_data *d);

@@ -27,7 +27,7 @@ int	main(int ac, char **av, char **env)
 	printf("\e[1;1H\e[2J");
 	while (1)
 	{
-		msh_set_signals();
+		// msh_set_signals();
 		rl_on_new_line();
 		rl = readline(m_data.prompt);
 		add_history(rl);
@@ -42,8 +42,9 @@ int	main(int ac, char **av, char **env)
 	}
 	//free(rl);
 	// msh_free_tok(&m_data);
-	msh_free_env(&m_data);
+	// msh_free_env(&m_data);
 	// msh_terminate(&m_data);
+	exit(SUCCESS);
 	return (SUCCESS);
 }
 

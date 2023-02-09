@@ -17,9 +17,16 @@ void	free_t_cmd(t_msh_data *d)
 	t_cmd	*tmp;
 
 	tmp = d->cmds;
+	if (!tmp)
+		return ;
 	while(tmp)
 	{
-		free_args(tmp->args);
+		if (tmp->args != NULL)
+		{
+			free_tab_char(tmp->args);
+			// free_args(tmp->args);
+			tmp->args = NULL;
+		}
 		tmp = tmp->next;
 	}
 	free(d->cmds);
@@ -29,11 +36,16 @@ void	free_trunc_list(t_tok_list **trunc_lst, int len)
 {
 	int i;
 
+	(void)len;
+
 	i = 0;
-	while (i < len)
+	if (len > 1)
 	{
-		free(trunc_lst[i]);
-		i++;
+		while (i < len)
+		{
+			free(trunc_lst[i]);
+			i++;
+		}
 	}
 	free(trunc_lst);
 }
@@ -62,20 +74,17 @@ void	free_tab_char(char **tab)
 	int	i;
 
 	i = 0;
-	if (tab)
+	if (!tab)
+		return ;
+	while (tab[i])
 	{
-		while (tab[i])
-		{
-			if (tab[i])
-			{
-				free_ptr(tab[i]);
-				tab[i] = NULL;
-			}
-			i++;
-		}
-		free(tab);
-		tab = NULL;
+		// printf("%s\n", tab[i]);
+		free_ptr(tab[i]);
+		tab[i] = NULL;
+		i++;
 	}
+	free(tab);
+	tab = NULL;
 }
 
 void	free_args(char **tab)

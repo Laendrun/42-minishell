@@ -120,17 +120,19 @@ int	create_cmd_lst(t_msh_data *m_d, int i)
 	while (tmp)
 	{
 		if (tmp->type == VAR || tmp->type == WORD || tmp->type == STR 
-			|| tmp->type == PARAM /*|| tmp->type == MSH_FILENAME*/ || tmp->type == PATH)
+			|| tmp->type == PARAM || tmp->type == PATH)
 		{
 			// args[j] = ft_calloc(sizeof(char), (ft_strlen(tmp->val) + 1));
 			args[j] = ft_strdup(tmp->val);
-			//printf("%s\n", args[j]);
+			// args[j] = tmp->val;
+			// printf("%s\n", args[j]);
 			j++;
 		}
 		tmp = tmp->next;
 	}
 	new = msh_cmd_lstnew(NULL, args);
 	msh_cmd_lstaddb(&m_d->cmds, new);
+	// free_tab_char(args);
 	return (SUCCESS);
 }
 
@@ -148,21 +150,22 @@ int	msh_create_commmands(t_msh_data *m_d)
 	// printf("nb cmd : %d\n", m_d->nb_cmd);
 	while (i < m_d->nb_cmd)
 	{
-		//print_tok_trunclst(m_d->trunc_lst[i]);
+		// print_tok_trunclst(m_d->trunc_lst[i]);
 		create_cmd_lst(m_d, i);
 		i++;
 	}
 	// print_array_lst(m_d);
-	// i = 0;
-	// while(m_d->cmds)
+	// t_cmd *tmp;
+	// tmp = m_d->cmds;
+	// while(tmp)
 	// {
 	// 	i = 0;
-	// 	while (m_d->cmds->args[i])
+	// 	while (tmp->args[i])
 	// 	{
-	// 		printf("%d : %s\n", i, m_d->cmds->args[i]);
+	// 		printf("%d : %s\n", i, tmp->args[i]);
 	// 		i++;
 	// 	}
-	// 	m_d->cmds = m_d->cmds->next;
+	// 	tmp = tmp->next;
 	// }
 	return (SUCCESS);
 }
