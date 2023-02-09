@@ -16,7 +16,8 @@ PARS_DIR = parsing/
 # Libraries
 LIBFT  = libs/libft/
 
-BI_SRC = $(addprefix $(BI_DIR),	msh_env.c \
+BI_SRC = $(addprefix $(BI_DIR),	msh_exec_builtins.c \
+								msh_env.c \
 								msh_cd.c \
 								msh_pwd.c \
 								msh_exit.c \
