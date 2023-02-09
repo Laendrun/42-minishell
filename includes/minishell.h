@@ -6,7 +6,7 @@
 /*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:06:06 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/04 18:44:07 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/08 21:02:30 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ int			msh_lex(t_msh_data *m_data, char *line);
 // msh_parser.c
 // ----------------------------------------------
 int			msh_parser(t_msh_data *m_data);
-int			msh_exec_builtin(char *str, t_msh_data *m_data);
 
 // ----------------------------------------------
 // msh_cmds_lst.c

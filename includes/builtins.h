@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:44:48 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/31 11:45:18 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/08 21:01:58 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,10 @@ int			msh_export(t_msh_data *m_d, char *key, char *val);
 // builtins/msh_unset.c
 // ----------------------------------------------
 int	msh_unset(t_msh_data *m_d, char *key);
+
+// ----------------------------------------------
+// builtins/msh_exec_builtins.c
+// ----------------------------------------------
+int	msh_exec_builtin(t_msh_data *m_d);
 
 #endif
