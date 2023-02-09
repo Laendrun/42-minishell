@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_free.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby>                              +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:59:57 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/04 19:33:16 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/09 17:02:33 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,6 @@ void	msh_free_tok(t_msh_data *m_data)
 		free(m_data->tokens);
 		m_data->tokens = NULL;
 		m_data->tokens = tmp;
-	}
-}
-
-void	msh_free_simpl_tok(t_msh_data *m_data)
-{
-	t_tok_list	*tmp;
-
-	while (m_data->s_tok)
-	{
-		tmp = m_data->s_tok->next;
-		m_data->s_tok->val = NULL;
-		free(m_data->s_tok->val);
-		m_data->s_tok = tmp;
 	}
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby>                              +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:35:46 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/04 19:31:15 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/09 17:01:52 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	msh_init(t_msh_data *m_data, char **env)
 	m_data->prompt = "shellusion-0.6> ";
 	m_data->env = NULL;
 	m_data->tokens = NULL;
-	m_data->s_tok = NULL;
 	m_data->fd = NULL;
 	m_data->pid = NULL;
 	m_data->nb_cmd = 0;

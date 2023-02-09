@@ -6,13 +6,13 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:38:07 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/04 14:59:52 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/09 17:03:10 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	msh_check_syntax(t_msh_data *m_d)
-{
-	return (msh_count_quotes(m_d));
-}
+// int	msh_check_syntax(t_msh_data *m_d)
+// {
+// 	return (msh_count_quotes(m_d));
+// }

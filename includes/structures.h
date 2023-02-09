@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:42:54 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/04 16:03:19 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/09 17:01:28 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ typedef struct s_msh_data
 	char			**env_upd;
 	t_env_list		*env;
 	t_tok_list		*tokens;
-	t_tok_list		*s_tok;
 	t_tok_list		**trunc_lst;
 	t_cmd			*cmds;
 }				t_msh_data;

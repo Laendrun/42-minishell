@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby>                              +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:06:06 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/08 21:02:30 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/09 16:52:17 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,6 @@ int			msh_isspace(int c);
 int			msh_isoperator(int c);
 int			msh_isspec(int c);
 int			msh_is_builtin(char *str);
-int			msh_is_path_comp(t_tok_list *token);
 int			msh_is_envvar_comp(t_tok_list *token);
 
 // ----------------------------------------------

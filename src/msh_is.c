@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:34:05 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/30 17:28:49 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/09 16:52:08 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,20 +47,6 @@ int	msh_is_builtin(char *str)
 	t = (!ft_strncmp("export", str, 7) || t);
 	t = (!ft_strncmp("unset", str, 6) || t);
 	t = (!ft_strncmp("exit", str, 5) || t);
-	return (t);
-}
-
-int	msh_is_path_comp(t_tok_list *token)
-{
-	int	t;
-
-	t = token->type == WORD;
-	t = (t || (token->type == SYMBOL && !ft_strncmp(token->val, ".", 2)));
-	t = (t || (token->type == SYMBOL && !ft_strncmp(token->val, "..", 3)));
-	t = (t || (token->type == SYMBOL && !ft_strncmp(token->val, "/", 2)));
-	t = (t || (token->type == SYMBOL && !ft_strncmp(token->val, "~", 2)));
-	t = (t || (token->type == SYMBOL && !ft_strncmp(token->val, "_", 2)));
-	t = (t || (token->type == SYMBOL && !ft_strncmp(token->val, "-", 2)));
 	return (t);
 }
 

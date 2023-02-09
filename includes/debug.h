@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:47:18 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/31 11:47:44 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/09 17:02:09 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 // ----------------------------------------------
 // debug/msh_print_utils.c
 // ----------------------------------------------
-void		print_simpl_tok(t_msh_data *m_data);
 void		print_tok(t_msh_data *m_data);
 void		print_env_strarray(t_msh_data *m_d);
 void		print_array_lst(t_msh_data *m_d);

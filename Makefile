@@ -26,12 +26,11 @@ BI_SRC = $(addprefix $(BI_DIR),	msh_exec_builtins.c \
 								msh_unset.c \
 								)
 
-LEX_SRC	= $(addprefix $(LEX_DIR),	msh_lex_operator.c \
+LEX_SRC	= $(addprefix $(LEX_DIR),	msh_lex_pipe.c \
 									msh_lex_quotes.c \
-									msh_lex_symbol.c \
+									msh_lex_redir.c \
+									msh_lex_vars.c \
 									msh_lex_word.c \
-									msh_lex_simpl.c \
-									msh_lex_simpl_helper.c \
 									)
 
 SYNT_SRC = $(addprefix $(SYNT_DIR),	msh_check_syntax.c \

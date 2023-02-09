@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_terminate.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby>                              +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 14:15:34 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/04 19:56:58 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/09 17:02:24 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	msh_terminate(t_msh_data *m_data)
 {
-	if (m_data->s_tok)
-		msh_free_simpl_tok(m_data);
 	if (m_data->tokens)
 		msh_free_tok(m_data);
 	if (m_data->cmds)
