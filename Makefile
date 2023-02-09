@@ -40,6 +40,7 @@ SYNT_SRC = $(addprefix $(SYNT_DIR),	msh_check_syntax.c \
 EXPAND_SRC = $(addprefix $(EXPAND_DIR),	msh_expand_var.c \
 										msh_handle_quotes.c \
 										msh_escape_char.c \
+										msh_error_near_token.c \
 										)
 
 PARS_SRC = $(addprefix $(PARS_DIR),	msh_create_commands.c \

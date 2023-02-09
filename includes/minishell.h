@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:06:06 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/09 16:52:17 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/09 18:45:19 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ int	msh_escape_char(t_msh_data *m_d);
 char	**msh_make_env_tabstr(t_msh_data *m_d);
 int	msh_create_commmands(t_msh_data *m_d);
 int	msh_redir_op(t_msh_data *m_d);
+int	msh_err_near_token(t_msh_data *d);
 
 // ----------------------------------------------
 // msh_pipex.c

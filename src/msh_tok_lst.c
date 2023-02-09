@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_tok_lst.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby>                              +#+  +:+       +#+        */
+/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:24:56 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/28 11:00:35 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/09 18:48:24 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ t_tok_list *msh_remove_tok(t_tok_list **lst, t_tok_list *tok_to_remove)
 		tok_to_remove->prev->next = tok_to_remove->next;
 	// free(tok_to_remove->val); //causes free when nothing probably because no value in
 	// maybe try this :
-	// if (tok_to_remove->val != NULL)
-	// 	free(tok_to_remove->val)
+	if (tok_to_remove->val != NULL)
+		free(tok_to_remove->val);
 	free(tok_to_remove);
 	return (*lst);
 }
