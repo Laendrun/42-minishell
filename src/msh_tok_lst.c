@@ -76,7 +76,10 @@ t_tok_list *msh_remove_tok(t_tok_list **lst, t_tok_list *tok_to_remove)
 		tok_to_remove->next->prev = tok_to_remove->prev;
 	if (tok_to_remove->prev != NULL)
 		tok_to_remove->prev->next = tok_to_remove->next;
-	// free(tok_to_remove->val); //causes double free in merge_str_wrd() but not in 
+	// free(tok_to_remove->val); //causes free when nothing probably because no value in
+	// maybe try this :
+	// if (tok_to_remove->val != NULL)
+	// 	free(tok_to_remove->val)
 	free(tok_to_remove);
 	return (*lst);
 }

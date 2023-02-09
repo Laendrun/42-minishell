@@ -16,7 +16,9 @@ t_cmd	*msh_cmd_lstnew(char *cmd, char **args)
 {
 	t_cmd	*new;
 
-	new = (t_cmd *) malloc(sizeof(t_cmd));
+	new = malloc(sizeof(t_cmd));
+	if (!new)
+		return NULL;
 	new->cmd = cmd;
 	new->args = args;
 	new->next = NULL;
@@ -28,8 +30,6 @@ void	msh_cmd_lstaddb(t_cmd **lst, t_cmd *new)
 {
 	t_cmd	*tmp;
 
-	if (!new)
-		return ;
 	if (!*lst)
 	{
 		*lst = new;
@@ -43,7 +43,7 @@ void	msh_cmd_lstaddb(t_cmd **lst, t_cmd *new)
 t_cmd	*msh_cmd_lstlast(t_cmd *lst)
 {
 	if (!lst)
-		return (0);
+		return NULL;
 	while (lst->next)
 		lst = lst->next;
 	return (lst);

@@ -107,18 +107,18 @@ char	**pip_get_path(char **env)
 	return (paths);
 }
 
-void	child_process(t_msh_data *m_d)
+void	child_process(t_msh_data *m_d, t_cmd *tmp)
 {
 	f_pre_duplicate(m_d);
-	m_d->cmds->args[0] = pip_get_exec(m_d->cmds->args[0], m_d->path);
-	execve(m_d->cmds->args[0], m_d->cmds->args, m_d->env_upd);
+	tmp->args[0] = pip_get_exec(tmp->args[0], m_d->path);
+	execve(tmp->args[0], tmp->args, m_d->env_upd);
 }
 
-void	f_fork(t_msh_data *m_d)
+void	f_fork(t_msh_data *m_d, t_cmd *tmp)
 {
 	m_d->pid[m_d->process] = fork();
 	if (m_d->pid[m_d->process] < 0)
 		f_error("Fork error : ", strerror(errno), m_d);
 	if (!m_d->pid[m_d->process])
-		child_process(m_d);
+		child_process(m_d, tmp);
 }

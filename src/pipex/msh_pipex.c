@@ -16,6 +16,7 @@ int	pipex(t_msh_data *m_d)
 {
 	int		status;
 	int		i;
+	t_cmd	*tmp;
 
 	i = 0;
 	while (i < m_d->nb_cmd - 1)
@@ -24,11 +25,12 @@ int	pipex(t_msh_data *m_d)
 			f_error("Error creating pipe :", strerror(errno), m_d);
 		i++;
 	}
+	tmp = m_d->cmds;
 	while (m_d->process < m_d->nb_cmd)
 	{
-		f_fork(m_d);
-		if (m_d->cmds->next != NULL)
-			m_d->cmds = m_d->cmds->next;
+		f_fork(m_d, tmp);
+		if (tmp->next != NULL)
+			tmp = tmp->next;
 		m_d->process++;
 	}
 	close_fd_tab(m_d->fd, 2 * (m_d->nb_cmd - 1), m_d);
@@ -41,8 +43,22 @@ int	pipex(t_msh_data *m_d)
 	free(m_d->pid);
 	free_tab_char(m_d->path);
 	free_tab_char(m_d->env_upd);
+
+	// t_cmd *tmp2;
+	// tmp2 = m_d->cmds;
+	// while(tmp2)
+	// {
+	// 	i = 0;
+	// 	while (tmp2->args[i])
+	// 	{
+	// 		printf("%d : %s\n", i, tmp2->args[i]);
+	// 		i++;
+	// 	}
+	// 	tmp2 = tmp2->next;
+	// }
+
 	free_t_cmd(m_d);
-	// free_trunc_list(m_d);
+	free(m_d->trunc_lst);
 	return (WEXITSTATUS(status));
 }
 
