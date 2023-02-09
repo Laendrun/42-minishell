@@ -14,42 +14,6 @@
 
 t_cmd	*msh_cmd_lstnew(char *cmd, char **args)
 {
-	// t_cmd	*new;
-	// int		i;
-	// int		argc;
-	// char	**new_args;
-
-	// new = malloc(sizeof(t_cmd));
-	// if (!new)
-	// 	return NULL;
-
-	// argc = 0;
-	// while (args[argc] != NULL)
-	// 	argc++;
-	// new_args = malloc(sizeof(char *) * (argc + 1));
-	// if (!new_args)
-	// {
-	// 	free(new);
-	// 	return NULL;
-	// }
-	// for (i = 0; i < argc; i++)
-	// {
-	// 	new_args[i] = strdup(args[i]);
-	// 	if (!new_args[i])
-	// 	{
-	// 		while (--i >= 0)
-	// 			free(new_args[i]);
-	// 		free(new_args);
-	// 		free(new);
-	// 		return NULL;
-	// 	}
-	// }
-	// new_args[argc] = NULL;
-	// new->cmd = cmd;
-	// new->args = new_args;
-	// new->next = NULL;
-	// new->prev = NULL;
-	// return (new);
 	t_cmd	*new;
 
 	new = malloc(sizeof(t_cmd));

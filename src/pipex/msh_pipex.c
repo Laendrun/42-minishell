@@ -58,7 +58,7 @@ int	pipex(t_msh_data *m_d)
 	// }
 
 	free_t_cmd(m_d);
-	// free_trunc_list(m_d->trunc_lst, m_d->nb_cmd);
+	free(m_d->trunc_lst);
 	return (WEXITSTATUS(status));
 }
 

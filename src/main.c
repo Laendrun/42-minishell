@@ -24,7 +24,7 @@ int	main(int ac, char **av, char **env)
 	(void) ac;
 	(void) av;
 	msh_init(&m_data, env);
-	printf("\e[1;1H\e[2J");
+	// printf("\e[1;1H\e[2J");
 	while (1)
 	{
 		// msh_set_signals();

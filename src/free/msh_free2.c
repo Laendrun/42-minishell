@@ -34,19 +34,19 @@ void	free_t_cmd(t_msh_data *d)
 
 void	free_trunc_list(t_tok_list **trunc_lst, int len)
 {
-	int i;
+	// int i;
 
 	(void)len;
 
-	i = 0;
-	if (len > 1)
-	{
-		while (i < len)
-		{
-			free(trunc_lst[i]);
-			i++;
-		}
-	}
+	// i = 0;
+	// if (len > 1)
+	// {
+	// 	while (i < len)
+	// 	{
+	// 		free(trunc_lst[i]);
+	// 		i++;
+	// 	}
+	// }
 	free(trunc_lst);
 }
 
