@@ -6,7 +6,7 @@
 /*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 18:51:04 by egauthey          #+#    #+#             */
-/*   Updated: 2023/02/10 18:54:00 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/10 21:39:05 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,6 @@ int	pipex(t_msh_data *m_d)
 int	msh_pipex(t_msh_data *m_d)
 {
 	msh_set_gcode(pipex(m_d));
-	printf("error code : %d\n", msh_get_gcode());
+	// printf("error code : %d\n", msh_get_gcode());
 	return (msh_get_gcode());
 }
