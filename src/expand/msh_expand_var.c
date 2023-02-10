@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 18:51:04 by egauthey          #+#    #+#             */
-/*   Updated: 2023/02/09 16:30:01 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/10 18:05:57 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,11 @@ int	msh_replace_var_in_var(t_msh_data *m_d)
 		{
 			new_val = ft_calloc(sizeof(char), (msh_get_env_var_len(m_d,cur->val) + 1));
 			new_val = msh_get_env(m_d,cur->val);
+			if (!new_val[0])
+			{
+				free(new_val);
+				return (0);
+			}
 			free(cur->val);
 			// cur->val = NULL;
 			cur->val = new_val;
