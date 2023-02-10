@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:35:46 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/09 17:01:52 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/10 16:10:12 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ int	msh_init(t_msh_data *m_data, char **env)
 	m_data->nb_cmd = 0;
 	m_data->process = 0;
 	m_data->path = NULL;
-	m_data->infile = -1;
-	m_data->heredoc = -1;
-	m_data->delim = NULL;
-	m_data->outfile_app = -1;
-	m_data->outfile_trunc = -1;
+	// m_data->infile = -1;
+	// m_data->heredoc = -1;
+	// m_data->delim = NULL;
+	// m_data->outfile_app = -1;
+	// m_data->outfile_trunc = -1;
 	m_data->env_upd = NULL;
 	m_data->trunc_lst = NULL;
 	m_data->cmds = NULL;
@@ -60,10 +60,10 @@ void	msh_pip_reset(t_msh_data *m_data)
 	m_data->nb_cmd = 0;
 	m_data->process = 0;
 	m_data->path = NULL;
-	m_data->infile = -1;
-	m_data->heredoc = -1;
-	m_data->outfile_app = -1;
-	m_data->outfile_trunc = -1;
+	// m_data->infile = -1;
+	// m_data->heredoc = -1;
+	// m_data->outfile_app = -1;
+	// m_data->outfile_trunc = -1;
 	m_data->env_upd = NULL;
 	m_data->trunc_lst = NULL;
 	m_data->cmds = NULL;

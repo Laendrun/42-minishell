@@ -6,7 +6,7 @@
 /*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:42:54 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/10 10:54:38 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/10 16:11:59 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ typedef struct s_msh_data
 	int				nb_cmd;
 	int				process;
 	char			**path;
-	int				infile;
-	int				heredoc;
-	char			*delim;
-	int				hdoc[2];
-	int				outfile_app;
-	int				outfile_trunc;
+	// int				infile;
+	// int				heredoc;
+	// char			*delim;
+	// int				hdoc[2];
+	// int				outfile_app;
+	// int				outfile_trunc;
 	char			**env_upd;
 	t_env_list		*env;
 	t_tok_list		*tokens;
