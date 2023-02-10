@@ -6,7 +6,7 @@
 /*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 10:48:47 by egauthey          #+#    #+#             */
-/*   Updated: 2023/02/10 15:02:11 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/10 17:24:54 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	f_duplicate(int in, int out, t_msh_data *m_d)
 {
 	if (dup2(in, STDIN_FILENO) < 0)
-		f_error("Dup2 error : ", strerror(errno), m_d);
+		f_error("Dup2 error in : ", strerror(errno), m_d);
 	if (dup2(out, STDOUT_FILENO) < 0)
-		f_error("Dup2 error : ", strerror(errno), m_d);
+		f_error("Dup2 error out: ", strerror(errno), m_d);
 }
 
 void	f_pre_duplicate(t_msh_data *m_d, t_cmd *tmp)
@@ -86,8 +86,6 @@ void	f_pre_duplicate(t_msh_data *m_d, t_cmd *tmp)
 			f_duplicate(m_d->fd[(2 * m_d->process) - 2], m_d->fd[(2 * m_d->process) + 1], m_d);
 	}
 	close_fd_tab(m_d->fd, 2 * (m_d->nb_cmd - 1), m_d);
-	// close(m_d->infile);
-	// close(m_d->outfile_app);
 }
 
 void	pip_no_exec(char *s)
@@ -134,15 +132,28 @@ char	**pip_get_path(char **env)
 void	child_process(t_msh_data *m_d, t_cmd *tmp)
 {
 	f_pre_duplicate(m_d, tmp);
-	tmp->args[0] = pip_get_exec(tmp->args[0], m_d->path);
-	execve(tmp->args[0], tmp->args, m_d->env_upd);
+	if (!msh_is_builtin(tmp->args[0]))
+	{
+		tmp->args[0] = pip_get_exec(tmp->args[0], m_d->path);
+		execve(tmp->args[0], tmp->args, m_d->env_upd);
+	}
+	else
+	{
+		msh_exec_builtin(m_d);
+		// close_fd_tab_builtin(m_d->fd, 2 * (m_d->nb_cmd - 1), m_d);
+	}
 }
 
 void	f_fork(t_msh_data *m_d, t_cmd *tmp)
 {
-	m_d->pid[m_d->process] = fork();
-	if (m_d->pid[m_d->process] < 0)
-		f_error("Fork error : ", strerror(errno), m_d);
-	if (!m_d->pid[m_d->process])
-		child_process(m_d, tmp);
+	if (m_d->nb_cmd == 1 && msh_is_builtin(tmp->args[0]))
+		msh_exec_builtin(m_d);
+	else
+	{
+		m_d->pid[m_d->process] = fork();
+		if (m_d->pid[m_d->process] < 0)
+			f_error("Fork error : ", strerror(errno), m_d);
+		if (!m_d->pid[m_d->process])
+			child_process(m_d, tmp);
+	}
 }

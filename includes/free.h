@@ -6,7 +6,7 @@
 /*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:42:59 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/09 15:22:23 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/10 17:17:07 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	free_trunc_list(t_tok_list **trunc_lst, int len);
 void	free_lst_in_trunc(t_msh_data *m_d);
 void	free_t_cmd(t_msh_data *d);
 void	free_args(char **tab);
+void	close_fd_tab_builtin(int *fd, int size, t_msh_data *d);
 
 // ----------------------------------------------
 // free/msh_free2.c
