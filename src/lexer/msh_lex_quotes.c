@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_lex_quotes.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:48:25 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/04 14:38:52 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/10 20:58:10 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,6 @@ int	msh_lex_dquote(t_msh_data *m_data, char *line, unsigned int *i)
 	msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(STR, ft_strdup(tmp)));
 	msh_tok_lstaddb(&m_data->tokens, msh_tok_lstnew(DQUOTE, 0));
 	*i += 1;
+	free(tmp);
 	return (SUCCESS);
 }

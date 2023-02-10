@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_escape_char.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 18:51:04 by egauthey          #+#    #+#             */
-/*   Updated: 2023/02/09 16:31:42 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/10 21:09:26 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	msh_escape_char(t_msh_data *m_d)
 	cur = m_d->tokens;
 	while (cur)
 	{
-		if (cur->type == STR && cur->prev->type == DQUOTE)
+		if ((cur->type == STR && cur->prev->type == DQUOTE) || cur->type == WORD)
 			escape_backslash(cur);
 		cur = cur->next;
 	}

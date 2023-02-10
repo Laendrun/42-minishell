@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_pipex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 18:51:04 by egauthey          #+#    #+#             */
-/*   Updated: 2023/02/10 18:08:52 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/10 21:39:05 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,12 @@ int	pipex(t_msh_data *m_d)
 
 	free_t_cmd(m_d);
 	free(m_d->trunc_lst);
-	return (status);
+	return (WEXITSTATUS(status));
 }
 
 int	msh_pipex(t_msh_data *m_d)
 {
 	msh_set_gcode(pipex(m_d));
+	// printf("error code : %d\n", msh_get_gcode());
 	return (msh_get_gcode());
 }
