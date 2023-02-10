@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_env_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby>                              +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 21:29:27 by saeby             #+#    #+#             */
-/*   Updated: 2023/01/28 11:06:22 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/10 17:55:40 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ char	*msh_get_env(t_msh_data *m_data, char *key)
 	while (tmp)
 	{
 		if (ft_strncmp(tmp->key, key, ft_strlen(key) + 1) == 0)
-			return (tmp->val);
+			return (ft_strdup(tmp->val));
 		tmp = tmp->next;
 	}
 	// return (NULL);
-	return ("");
+	return (ft_strdup(""));
 }
 
 int	msh_replace_val(t_msh_data *m_data, char *key, char *new_val)
