@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 21:23:18 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/10 19:38:03 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/10 22:47:13 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	msh_cd(t_msh_data *m_d, t_cmd *cmd)
 {
 	char		*dir;
 
-	printf("%sBUILTIN CD%s\n", RED, RESET);
 	dir = msh_get_env(m_d, "HOME");
 	if (count_args(cmd) == 2)
 	{
@@ -37,5 +36,7 @@ int	msh_cd(t_msh_data *m_d, t_cmd *cmd)
 		write(2, "\n", 1);
 	}
 	msh_setpwd(m_d, getcwd(NULL, 0));
-	return(SUCCESS);
+	if (m_d->nb_cmd == 1)
+		return(SUCCESS);
+	exit(SUCCESS);
 }

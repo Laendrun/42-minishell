@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_unset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby>                              +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 10:46:44 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/09 10:40:06 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/10 22:46:39 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,14 @@ int	msh_unset(t_msh_data *m_d, char *key)
 		free(var->val);
 		free(var);
 		// delete key from env
-		return (SUCCESS);
+		if (m_d->nb_cmd == 1)
+			return (SUCCESS);
+		exit(SUCCESS);
 	}
 	// do nothing
-	return (SUCCESS);
+	if (m_d->nb_cmd == 1)
+		return (SUCCESS);
+	exit(SUCCESS);
 }
 /*
 	var = msh_env_ptr(m_data, key);

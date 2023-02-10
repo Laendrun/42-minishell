@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_clear.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby>                              +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 22:15:40 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/09 10:39:44 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/10 22:45:08 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	msh_clear(t_msh_data *m_data)
 {
-	(void) m_data;
 	printf("\e[1;1H\e[2J");
-	return (SUCCESS);
+	if (m_data->nb_cmd)
+		return (SUCCESS);
+	exit(SUCCESS);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_pwd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby>                              +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 21:25:56 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/09 10:39:58 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/10 22:45:51 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 int	msh_pwd(t_msh_data *m_data)
 {
 	printf("%s\n", msh_get_env(m_data, "PWD"));
-	return (SUCCESS);
+	if (m_data->nb_cmd == 1)
+		return (SUCCESS);
+	exit(SUCCESS);
 }
 
 char	*msh_getpwd(t_msh_data *m_data)

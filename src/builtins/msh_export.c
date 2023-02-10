@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 10:24:41 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/10 22:36:26 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/10 22:45:31 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,9 @@ int	msh_export(t_msh_data *m_d, t_cmd *cmd)
 		replace(m_d, key, val);
 	else
 		create(m_d, key, val);
-	return (SUCCESS);
+	if (m_d->nb_cmd == 1)
+		return (SUCCESS);
+	exit(SUCCESS);
 }
 
 // 1. take a substring from 0 to the first = without the =

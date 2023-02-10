@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:05:37 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/10 19:24:58 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/10 22:44:35 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,7 @@ int	msh_env(t_msh_data *m_d, t_cmd *cmd)
 		printf("%s=%s\n", tmp->key, tmp->val);
 		tmp = tmp->next;
 	}
-	return (SUCCESS);
+	if (m_d->nb_cmd == 1)
+		return (SUCCESS);
+	exit(SUCCESS);
 }
