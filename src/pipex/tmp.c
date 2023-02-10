@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tmp.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 10:48:47 by egauthey          #+#    #+#             */
-/*   Updated: 2023/02/10 17:24:54 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/10 18:24:12 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ void	child_process(t_msh_data *m_d, t_cmd *tmp)
 	}
 	else
 	{
-		msh_exec_builtin(m_d);
+		msh_exec_builtin(tmp, m_d);
 		// close_fd_tab_builtin(m_d->fd, 2 * (m_d->nb_cmd - 1), m_d);
 	}
 }
@@ -147,7 +147,7 @@ void	child_process(t_msh_data *m_d, t_cmd *tmp)
 void	f_fork(t_msh_data *m_d, t_cmd *tmp)
 {
 	if (m_d->nb_cmd == 1 && msh_is_builtin(tmp->args[0]))
-		msh_exec_builtin(m_d);
+		msh_exec_builtin(tmp, m_d);
 	else
 	{
 		m_d->pid[m_d->process] = fork();

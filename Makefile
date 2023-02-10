@@ -91,12 +91,14 @@ CCFLAGS = -Wall -Wextra -Werror
 all: libft $(NAME)
 
 $(NAME): $(SRCS) $(OBJ_DIR) $(OBJS)
+#	gcc $(CCFLAGS) $(OBJS) -L$(LIBFT) -lft -lreadline -o $(NAME)
 	gcc $(CCFLAGS) $(OBJS) -L$(LIBFT) -L$(HOME)/.brew/Cellar/readline/8.2.1/lib -lft -lreadline -o $(NAME)
 
 debug: $(SRCS) $(OBJ_DIR) $(OBJS)
 	gcc $(CCFLAGS) -fsanitize=address -g3 $(OBJS) -L$(LIBFT) -lft -lreadline -o $(NAME)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
+#	gcc $(CCFLAGS) -I$(INC_DIR) -I$(LIBFT) $< -c -o $@
 	gcc $(CCFLAGS) -I$(INC_DIR) -I$(LIBFT) -I$(HOME)/.brew/Cellar/readline/8.2.1/include $< -c -o $@
 
 clean:

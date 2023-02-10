@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_set_signals.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 20:54:27 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/10 15:15:45 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/10 19:15:47 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ void	handle_sigint(int sig)
 // 	write(1, "exit\n", 6);
 // 	exit(1);
 // }
+
+
+// if in child +> silence these motherfucking signals
+// write a function to set the signal handlers to be "nothing"
+// so they will finally shut and let us work in peace
 
 void	nothing(int v)
 {
