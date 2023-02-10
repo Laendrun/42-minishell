@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_cmds_lst.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 18:51:04 by egauthey          #+#    #+#             */
-/*   Updated: 2023/01/31 13:40:10 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/10 11:56:24 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ t_cmd	*msh_cmd_lstnew(char *cmd, char **args)
 		return NULL;
 	new->cmd = cmd;
 	new->args = args;
+	new->infile = -1;
+	new->heredoc = -1;
+	new->out_app = -1;
+	new->out_trunc = -1;
+	new->delim = NULL;
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);

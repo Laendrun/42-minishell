@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_print_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:31:08 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/09 17:02:04 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/10 11:59:54 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void	print_array_lst(t_msh_data *m_d)
 		i++;
 	}
 }
+
+
 
 
 // //reverse order to test prev

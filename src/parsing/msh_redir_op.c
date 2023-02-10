@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_redir_op.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 18:51:04 by egauthey          #+#    #+#             */
-/*   Updated: 2023/02/09 16:34:07 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/10 10:59:04 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,8 +129,8 @@ int	check_if_ambiguous_redirection(t_msh_data *m_d)
 
 int	msh_redir_op(t_msh_data *m_d)
 {
-	if (m_d->nb_cmd > 2)
-		check_if_ambiguous_redirection(m_d);
+	// if (m_d->nb_cmd > 2)
+	// 	check_if_ambiguous_redirection(m_d);
 	check_if_heredoc(m_d);
 	check_if_infile(m_d);
 	check_if_outfile_app(m_d);

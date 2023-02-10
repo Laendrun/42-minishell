@@ -46,10 +46,12 @@ EXPAND_SRC = $(addprefix $(EXPAND_DIR),	msh_expand_var.c \
 PARS_SRC = $(addprefix $(PARS_DIR),	msh_create_commands.c \
 									msh_cmds_lst.c \
 									msh_redir_op.c \
+									tmp_pars.c \
 									)
 
 PIPEX_SRC = $(addprefix $(PIPEX_DIR),	msh_pipex.c \
 										process.c \
+										tmp.c \
 										)
 
 DEBUG_SRC = $(addprefix $(DEBUG_DIR),	msh_print_utils.c \
@@ -89,13 +91,13 @@ CCFLAGS = -Wall -Wextra -Werror
 all: libft $(NAME)
 
 $(NAME): $(SRCS) $(OBJ_DIR) $(OBJS)
-	gcc $(CCFLAGS) $(OBJS) -I/Users/egauthey/.brew/Cellar/readline/8.2.1/include  -L$(LIBFT) -L/Users/egauthey/.brew/Cellar/readline/8.2.1/lib -lft -lreadline -o $(NAME)
+	gcc $(CCFLAGS) $(OBJS) -L$(LIBFT) -L/Users/egauthey/.brew/Cellar/readline/8.2.1/lib -lft -lreadline -o $(NAME)
 
 debug: $(SRCS) $(OBJ_DIR) $(OBJS)
 	gcc $(CCFLAGS) -fsanitize=address -g3 $(OBJS) -L$(LIBFT) -lft -lreadline -o $(NAME)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	gcc $(CCFLAGS) -I$(INC_DIR) -I$(LIBFT) $< -c -o $@
+	gcc $(CCFLAGS) -I$(INC_DIR) -I$(LIBFT) -I/Users/egauthey/.brew/Cellar/readline/8.2.1/include $< -c -o $@
 
 clean:
 	rm -f $(OBJS)

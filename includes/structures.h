@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:42:54 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/09 17:01:28 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/10 10:54:38 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,15 @@ typedef struct s_cmd_list
 {
 	char				*cmd;
 	char				**args;
+	int					infile;
+	int					heredoc;
+	char				*delim;
+	int					hdoc[2];
+	int					out_app;
+	int					out_trunc;
 	struct s_cmd_list	*next;
 	struct s_cmd_list	*prev;
 }				t_cmd;
-
-// typedef struct s_pipex
-// {
-// 	int		*pid;
-// 	int		*fd;
-// 	int		nb_cmd;
-// 	int		process;
-// 	int		infile;
-// 	int		heredoc;
-// 	int		outfile_app;
-// 	int		outfile_trunc;
-// 	char	**env_upd;
-// }			t_pipex;
 
 typedef struct s_msh_data
 {
