@@ -6,15 +6,27 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 21:25:56 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/10 22:45:51 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/11 16:40:51 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	msh_pwd(t_msh_data *m_data)
+int	msh_pwd(t_msh_data *m_data, t_cmd *cmd)
 {
-	printf("%s\n", msh_get_env(m_data, "PWD"));
+	char		*pwd;
+	int			out;
+
+	out = STDOUT_FILENO;
+	if (cmd->out_app >= 0)
+		out = cmd->out_app;
+	if (cmd->out_trunc >= 0)
+		out = cmd->out_trunc;
+
+	pwd = msh_get_env(m_data, "PWD");
+	//printf("%s\n", msh_get_env(m_data, "PWD"));
+	write(out, pwd, ft_strlen(pwd));
+	write(out, "\n", 1);
 	if (m_data->nb_cmd == 1)
 		return (SUCCESS);
 	exit(SUCCESS);

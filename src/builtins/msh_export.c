@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 10:24:41 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/10 22:45:31 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/11 16:37:48 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,19 @@
 
 // https://www.gnu.org/software/bash/manual/bash.html#index-export
 
-int	print_declared_vars(t_msh_data *m_d)
+int	print_declared_vars(t_msh_data *m_d, int out)
 {
 	t_env_list	*tmp;
 
 	tmp = m_d->env;
 	while (tmp)
 	{
-		printf("declare -x %s=%s\n", tmp->key, tmp->val);
+		write(out, "declare -x ", 12);
+		write(out, tmp->key, ft_strlen(tmp->key));
+		write(out, "=", 1);
+		write(out, tmp->val, ft_strlen(tmp->val));
+		write(out, "\n", 1);
+		// printf("declare -x %s=%s\n", tmp->key, tmp->val);
 		tmp = tmp->next;
 	}
 	return (SUCCESS);
@@ -47,9 +52,16 @@ int	msh_export(t_msh_data *m_d, t_cmd *cmd)
 	char		*key;
 	char		*val;
 	t_env_list	*tmp;
+	int			out;
+
+	out = STDOUT_FILENO;
+	if (cmd->out_app >= 0)
+		out = cmd->out_app;
+	if (cmd->out_trunc >= 0)
+		out = cmd->out_trunc;
 
 	if (count_args(cmd) == 1)
-		return (print_declared_vars(m_d));
+		return (print_declared_vars(m_d, out));
 	if (!ft_strchr(cmd->args[1], '='))
 		return (SUCCESS);
 	i = 0;

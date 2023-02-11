@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 21:00:02 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/11 15:31:06 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/11 16:40:08 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	msh_exec_builtin(t_cmd *cmd, t_msh_data *m_d)
 	if (ft_strncmp("env", cmd->args[0], 4) == 0)
 		msh_env(m_d, cmd);
 	else if (!ft_strncmp("pwd", cmd->args[0], 4))
-		msh_pwd(m_d);
+		msh_pwd(m_d, cmd);
 	else if (!ft_strncmp("echo", cmd->args[0], 5))
 		msh_echo(m_d, cmd);
 	else if (!ft_strncmp("cd", cmd->args[0], 3))

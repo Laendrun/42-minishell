@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:44:48 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/11 15:32:37 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/11 16:39:52 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		msh_env(t_msh_data *m_data, t_cmd *cmd);
 // ----------------------------------------------
 // builtins/msh_pwd.c
 // ----------------------------------------------
-int		msh_pwd(t_msh_data *m_data);
+int		msh_pwd(t_msh_data *m_data, t_cmd *cmd);
 char	*msh_getpwd(t_msh_data *m_data);
 void	msh_setpwd(t_msh_data *m_data, char *new_path);
 
