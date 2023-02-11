@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 14:22:06 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/11 18:23:15 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/11 18:37:37 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,7 @@
 # define ERR_CD_CD "shellusion: cd: No such file or directory"
 
 # define ERR_ENV_ARGS "shellusion: env: Too many arguments"
+
+# define ERR_LEX_DQUO "shellusion: lexer: Unclosed double quote"
 
 #endif

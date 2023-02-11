@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:05:50 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/10 22:38:05 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/11 18:55:18 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,17 @@ int	main(int ac, char **av, char **env)
 		rl_on_new_line();
 		rl = readline(m_data.prompt);
 		add_history(rl);
-		if (rl == 0 || ft_strncmp(rl, "exit2", 6) == 0)
+		if (rl)
 		{
-			write(1, "\n", 1);
-			break ;
+			msh_lex(&m_data, rl);
+			msh_free_tok(&m_data);
 		}
-		if (ft_strncmp(rl, "clear", 5) == 0)
-			msh_clear(&m_data);
-		msh_lex(&m_data, rl);
-		// msh_parser(&m_data);
-		msh_free_tok(&m_data);
+		if (!rl)
+			break ;
+		// msh_lex(&m_data, rl);
+		// msh_free_tok(&m_data);
 	}
-	//free(rl);
-	// msh_free_tok(&m_data);
-	// msh_free_env(&m_data);
-	// msh_terminate(&m_data);
 	exit(SUCCESS);
-	return (SUCCESS);
 }
 
 int	msh_get_gcode(void)

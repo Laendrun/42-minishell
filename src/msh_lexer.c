@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_lexer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:12:32 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/11 16:51:02 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/11 18:47:30 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 int	msh_lex(t_msh_data *m_d, char *line)
 {
 	unsigned int	i;
+	int				ret;
 
+	ret = EXIT_SUCCESS;
 	i = 0;
 	while (line && line[i])
 	{
@@ -24,15 +26,19 @@ int	msh_lex(t_msh_data *m_d, char *line)
 		while (line[i] && msh_isspace(line[i]))
 			i++;
 		if (line[i] && (line[i] == '\'' || line[i] == '\"'))
-			msh_lex_quotes(m_d, line, &i);
+			ret = msh_lex_quotes(m_d, line, &i);
 		else if (line[i] && (line[i] == '<' || line[i] == '>'))
 			msh_lex_redir(m_d, line, &i);
 		else if (line[i] && line[i] == '|')
 			msh_lex_pipe(m_d, line, &i);
 		else
 			msh_lex_word(m_d, line, &i);
+		if (ret != 0)
+			break ;
 	}
 	free(line);
+	if (ret != 0)
+		return (ret);
 	msh_tok_lstaddb(&m_d->tokens, msh_tok_lstnew(END, 0));
 	// print_tok(m_d);
 	msh_expand_var(m_d);
