@@ -24,6 +24,7 @@ BI_SRC = $(addprefix $(BI_DIR),	msh_exec_builtins.c \
 								msh_clear.c \
 								msh_export.c \
 								msh_unset.c \
+								msh_echo.c \
 								)
 
 LEX_SRC	= $(addprefix $(LEX_DIR),	msh_lex_pipe.c \
