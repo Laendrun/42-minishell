@@ -6,7 +6,7 @@
 /*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 18:51:04 by egauthey          #+#    #+#             */
-/*   Updated: 2023/02/10 21:41:34 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/11 16:52:24 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,30 +91,32 @@ check  if VAR type token exists in env, if yes  the value of of var is replaced 
 of the var in env. if it it does not exists NULL is returned.
 */
 
-int	msh_replace_var_in_var(t_msh_data *m_d)
-{
-	t_tok_list	*cur;
-	char		*new_val;
 
-	cur = m_d->tokens;
-	while (cur->next != NULL)
-	{
-		if (cur->type == VAR)
-		{
-			// new_val = ft_calloc(sizeof(char), (msh_get_env_var_len(m_d,cur->val) + 1));
-			new_val = msh_get_env(m_d,cur->val);
-			if (!new_val[0])
-			{
-				free(new_val);
-				return (0);
-			}
-			free(cur->val);
-			cur->val = new_val;
-		}
-		cur = cur->next;
-	}
-	return (SUCCESS);
-}
+
+// int	msh_replace_var_in_var(t_msh_data *m_d)
+// {
+// 	t_tok_list	*cur;
+// 	char		*new_val;
+
+// 	cur = m_d->tokens;
+// 	while (cur->next != NULL)
+// 	{
+// 		if (cur->type == VAR)
+// 		{
+// 			// new_val = ft_calloc(sizeof(char), (msh_get_env_var_len(m_d,cur->val) + 1));
+// 			new_val = msh_get_env(m_d, cur->val);
+// 			// if (!new_val[0])
+// 			// {
+// 			// 	free(new_val);
+// 			// 	return (0);
+// 			// }
+// 			free(cur->val);
+// 			cur->val = new_val;
+// 		}
+// 		cur = cur->next;
+// 	}
+// 	return (SUCCESS);
+// }
 
 int	value_error_code(t_tok_list *str_tok, int flg[3])
 {
@@ -131,18 +133,19 @@ int	value_error_code(t_tok_list *str_tok, int flg[3])
 	free(str_tok->val);
 	str_tok->val = NULL;
 	str_tok->val = ft_strjoin(str_joined, s_part[2]);
+	// printf("err code : %s\n", str_tok->val);
 	free(str_joined);
 	free(s_part[0]);
 	free(s_part[2]);
-	// free(replaced_var);
+	free(replaced_var);
 	return (SUCCESS);
 }
 
-// this function to check !!!
 int	check_error_code(t_msh_data *m_d, t_tok_list *tok)
 {
 	int	i;
 	int flags[3];
+	(void)m_d;
 
 	i = -1;
 	flags[0] = 0;
@@ -153,18 +156,13 @@ int	check_error_code(t_msh_data *m_d, t_tok_list *tok)
 		if (tok->val[i] == '$' && tok->val[i + 1] == '?' && tok->val[i - 1] != '\\')
 		{
 			flags[0] = i;
-			i++;
-			// while (tok->val[i] && !msh_isspace(tok->val[i]))
-			// {
-			// 	if (tok->val[i] == '$')
-			// 		break ;
-			// 	i++;
-			// }
-			// flags[1] = i;
+			i += 2;
+			flags[1] = i;
 		}
 	}
 	flags[2] = i;
-	value_error_code(tok, flags);
+	if (flags[0] != flags[1])
+		value_error_code(tok, flags);
 	i = -1;
 	while (tok->val[++i])
 		if (tok->val[i] == '$' && tok->val[i - 1] != '\\')
@@ -188,8 +186,8 @@ int	msh_replace_error_code(t_msh_data *m_d)
 
 int	msh_expand_var(t_msh_data *m_d)
 {
-	// msh_replace_error_code(m_d);
-	msh_replace_var_in_var(m_d);
+	msh_replace_error_code(m_d);
+	// msh_replace_var_in_var(m_d);
 	msh_replace_var_in_str(m_d);
 	return(SUCCESS);
 }

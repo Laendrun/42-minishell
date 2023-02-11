@@ -6,7 +6,7 @@
 /*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 10:59:28 by egauthey          #+#    #+#             */
-/*   Updated: 2023/02/10 12:28:14 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/11 16:15:57 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	get_nb_args(t_tok_list *d)
 	tmp = d;
 	while (tmp)
 	{
-		if (tmp->type == VAR || tmp->type == WORD || tmp->type == STR)
+		if (tmp->type == WORD || tmp->type == STR)
 			cpt++;
 		tmp = tmp->next;
 	}
@@ -114,7 +114,7 @@ int	create_cmd_lst(t_msh_data *m_d, int i)
 	{
 		if (tmp->type == PIPE || tmp->type == END)
 			break ;
-		if (tmp->type == VAR || tmp->type == WORD || tmp->type == STR)
+		if (tmp->type == WORD || tmp->type == STR)
 		{
 			// args[j] = ft_calloc(sizeof(char), (ft_strlen(tmp->val) + 1));
 			args[j] = ft_strdup(tmp->val);
