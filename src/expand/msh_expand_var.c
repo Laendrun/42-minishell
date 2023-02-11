@@ -6,7 +6,7 @@
 /*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 18:51:04 by egauthey          #+#    #+#             */
-/*   Updated: 2023/02/11 16:52:24 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/11 17:06:16 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	msh_flag_in_str_var(t_msh_data *m_d, t_tok_list *str_tok)
 	flags[2] = 0;
 	while (str_tok->val[++i])
 	{
-		if (str_tok->val[i] == '$' && str_tok->val[i + 1] != 0 && str_tok->val[i - 1] != '\\' /*&& str_tok->val[i + 1] != '$'*/)
+		if (str_tok->val[i] == '$' && str_tok->val[i + 1] != 0 && str_tok->val[i - 1] != '\\')
 		{
 			flags[0] = i;
 			i++;
@@ -145,7 +145,6 @@ int	check_error_code(t_msh_data *m_d, t_tok_list *tok)
 {
 	int	i;
 	int flags[3];
-	(void)m_d;
 
 	i = -1;
 	flags[0] = 0;
@@ -162,11 +161,13 @@ int	check_error_code(t_msh_data *m_d, t_tok_list *tok)
 	}
 	flags[2] = i;
 	if (flags[0] != flags[1])
+	{
 		value_error_code(tok, flags);
-	i = -1;
-	while (tok->val[++i])
-		if (tok->val[i] == '$' && tok->val[i - 1] != '\\')
-			check_error_code(m_d, tok);
+		i = -1;
+		while (tok->val[++i])
+			if (tok->val[i] == '$' && tok->val[i - 1] != '\\')
+				check_error_code(m_d, tok);
+	}
 	return (SUCCESS);
 }
 
