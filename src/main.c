@@ -6,7 +6,7 @@
 /*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:05:50 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/11 19:45:32 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/11 20:04:12 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,11 @@ int	main(int ac, char **av, char **env)
 		rl = readline(m_data.prompt);
 		add_history(rl);
 		if (rl)
-			new_line(&m_data, rl);
+		{
+			if (new_line(&m_data, rl) >= ERR_MALLOC)
+				break ;
+			msh_free_tok(&m_data);
+		}
 		if (!rl)
 			break ;
 	}
@@ -43,8 +47,9 @@ int	new_line(t_msh_data *m_d, char *line)
 {
 	int	ret;
 
+
 	ret = msh_lex(m_d, line);
-	if (ret != 0)
+	if (ret != EXIT_SUCCESS)
 		return (ret);
 	msh_expand_var(m_d);
 	msh_escape_char(m_d);
@@ -53,8 +58,7 @@ int	new_line(t_msh_data *m_d, char *line)
 	msh_create_commmands(m_d);
 	msh_pipex(m_d);
 	msh_pip_reset(m_d);
-	msh_free_tok(m_d);
-	return (EXIT_SUCCESS);
+	return (ret);
 }
 
 int	msh_get_gcode(void)

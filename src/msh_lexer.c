@@ -6,7 +6,7 @@
 /*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:12:32 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/11 19:46:39 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/11 20:03:28 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	msh_lex(t_msh_data *m_d, char *line)
 
 	ret = EXIT_SUCCESS;
 	i = 0;
-	while (line && line[i])
+	while (line && line[i] && ret == EXIT_SUCCESS)
 	{
 		if (line && msh_isspace(line[i]))
 			msh_tok_lstaddb(&m_d->tokens, msh_tok_lstnew(SEP, 0));
@@ -33,8 +33,6 @@ int	msh_lex(t_msh_data *m_d, char *line)
 			ret = msh_lex_pipe(m_d, line, &i);
 		else
 			ret = msh_lex_word(m_d, line, &i);
-		if (ret != 0)
-			break ;
 	}
 	free(line);
 	msh_tok_lstaddb(&m_d->tokens, msh_tok_lstnew(END, 0));
