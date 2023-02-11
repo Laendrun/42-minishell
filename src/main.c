@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:05:50 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/11 18:55:18 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/11 19:45:32 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,29 @@ int	main(int ac, char **av, char **env)
 		rl = readline(m_data.prompt);
 		add_history(rl);
 		if (rl)
-		{
-			msh_lex(&m_data, rl);
-			msh_free_tok(&m_data);
-		}
+			new_line(&m_data, rl);
 		if (!rl)
 			break ;
-		// msh_lex(&m_data, rl);
-		// msh_free_tok(&m_data);
 	}
-	exit(SUCCESS);
+	exit(EXIT_SUCCESS);
+}
+
+int	new_line(t_msh_data *m_d, char *line)
+{
+	int	ret;
+
+	ret = msh_lex(m_d, line);
+	if (ret != 0)
+		return (ret);
+	msh_expand_var(m_d);
+	msh_escape_char(m_d);
+	msh_handle_quotes(m_d);
+	msh_err_near_token(m_d);
+	msh_create_commmands(m_d);
+	msh_pipex(m_d);
+	msh_pip_reset(m_d);
+	msh_free_tok(m_d);
+	return (EXIT_SUCCESS);
 }
 
 int	msh_get_gcode(void)

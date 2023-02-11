@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:06:06 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/11 17:51:02 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/11 19:42:03 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	msh_pip_reset(t_msh_data *m_data);
 // ----------------------------------------------
 void	msh_set_gcode(int val);
 int		msh_get_gcode(void);
+int		new_line(t_msh_data *m_d, char *line);
 
 // ----------------------------------------------
 // msh_tok_list.c
