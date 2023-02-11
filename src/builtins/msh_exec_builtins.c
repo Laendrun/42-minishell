@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_exec_builtins.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby>                              +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 21:00:02 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/11 14:12:04 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/11 15:31:06 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	msh_exec_builtin(t_cmd *cmd, t_msh_data *m_d)
 		msh_env(m_d, cmd);
 	else if (!ft_strncmp("pwd", cmd->args[0], 4))
 		msh_pwd(m_d);
-	/*else if (!ft_strncmp("echo", cmd->args[0], 5))
-		printf("%sNot implemented yet%s\n", RED, RESET);*/
+	else if (!ft_strncmp("echo", cmd->args[0], 5))
+		msh_echo(m_d, cmd);
 	else if (!ft_strncmp("cd", cmd->args[0], 3))
 		msh_cd(m_d, cmd);
 	else if (!ft_strncmp("export", cmd->args[0], 7))
