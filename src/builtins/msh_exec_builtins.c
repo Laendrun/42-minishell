@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_exec_builtins.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 21:00:02 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/10 21:04:15 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/11 14:12:04 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int	msh_exec_builtin(t_cmd *cmd, t_msh_data *m_d)
 		msh_cd(m_d, cmd);
 	else if (!ft_strncmp("export", cmd->args[0], 7))
 		msh_export(m_d, cmd);
-	/*else if (!ft_strncmp("unset", cmd->args[0], 6))
-		msh_unset(m_d, "TMP");*/
+	else if (!ft_strncmp("unset", cmd->args[0], 6))
+		msh_unset(m_d, cmd);
 	else if (!ft_strncmp("exit", cmd->args[0], 5))
 		msh_exit(m_d, SUCCESS);
 	return (SUCCESS);

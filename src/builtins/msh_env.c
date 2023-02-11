@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:05:37 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/10 22:44:35 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/11 14:12:39 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	msh_env(t_msh_data *m_d, t_cmd *cmd)
 		return (ERROR);
 	}
 	tmp = m_d->env;
-	printf("%sBUILTIN%s\n", RED, RESET);
 	while (tmp)
 	{
 		printf("%s=%s\n", tmp->key, tmp->val);
