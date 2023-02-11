@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_lexer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:12:32 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/10 21:38:59 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/11 16:12:54 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ int	msh_lex(t_msh_data *m_d, char *line)
 			msh_lex_quotes(m_d, line, &i);
 		else if (line[i] && (line[i] == '<' || line[i] == '>'))
 			msh_lex_redir(m_d, line, &i);
-		else if (line[i] && line[i] == '$')
-			msh_lex_vars(m_d, line, &i);
 		else if (line[i] && line[i] == '|')
 			msh_lex_pipe(m_d, line, &i);
 		else
