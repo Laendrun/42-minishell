@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:35:46 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/10 16:10:12 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/11 21:21:03 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,6 @@ int	msh_init(t_msh_data *m_data, char **env)
 	m_data->nb_cmd = 0;
 	m_data->process = 0;
 	m_data->path = NULL;
-	// m_data->infile = -1;
-	// m_data->heredoc = -1;
-	// m_data->delim = NULL;
-	// m_data->outfile_app = -1;
-	// m_data->outfile_trunc = -1;
 	m_data->env_upd = NULL;
 	m_data->trunc_lst = NULL;
 	m_data->cmds = NULL;
@@ -49,6 +44,11 @@ int	msh_env_init(t_msh_data *m_data, char **env)
 		free(tmp[1]);
 		free(tmp);
 		env++;
+	}
+	if (!msh_env_ptr(m_data, "PATH"))
+	{
+		new = msh_env_lstnew(ft_strdup("PATH"), ft_strdup(getcwd(NULL, 0)));
+		msh_env_lstaddb(&m_data->env, new);
 	}
 	return (SUCCESS);
 }
