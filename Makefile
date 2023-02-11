@@ -59,6 +59,7 @@ DEBUG_SRC = $(addprefix $(DEBUG_DIR),	msh_print_utils.c \
 
 FREE_SRC = $(addprefix $(FREE_DIR),		msh_free.c \
 										msh_free2.c \
+										msh_errors.c \
 										)
 
 SRC =	main.c \

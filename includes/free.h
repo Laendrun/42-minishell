@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:42:59 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/10 17:17:07 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/11 17:46:36 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,10 @@ void	close_fd_tab_builtin(int *fd, int size, t_msh_data *d);
 // free/msh_free2.c
 // ----------------------------------------------
 void	msh_free_upd(t_msh_data *m_data);
+
+// ----------------------------------------------
+// free/msh_errors.
+// ----------------------------------------------
+int		msh_error(int ret, char *msg, int err_code);
 
 #endif

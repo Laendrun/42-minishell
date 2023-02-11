@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:05:37 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/11 16:34:58 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/11 18:22:24 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,11 @@ int	msh_env(t_msh_data *m_d, t_cmd *cmd)
 
 	if (count_args(cmd) > 1)
 	{
-		f_error("env: <args[1]>: ", strerror(ENOENT), m_d);
-		return (ERROR);
+		if (m_d->nb_cmd == 1)
+			return (msh_error(EXIT_FAILURE, ERR_ENV_ARGS, 1));
+		exit (msh_error(EXIT_FAILURE, ERR_ENV_ARGS, 1));
+		//f_error("env: <args[1]>: ", strerror(ENOENT), m_d);
+		// return (ERROR);
 	}
 	tmp = m_d->env;
 	while (tmp)

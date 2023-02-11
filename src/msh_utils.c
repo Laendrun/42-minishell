@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 20:54:27 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/04 15:42:10 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/11 17:51:11 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ char	*msh_chrdup(int c)
 }
 
 // move this to a separate msh_error.c file when possible
+/*
 int	msh_error(t_msh_data *m_d, int err_code, char *err_mes, char *sup)
 {
 	(void) sup;
@@ -36,4 +37,4 @@ int	msh_error(t_msh_data *m_d, int err_code, char *err_mes, char *sup)
 	ft_putstr_fd(RESET, 2);
 	ft_putstr_fd("\n", 2);
 	return (err_code);
-}
+}*/

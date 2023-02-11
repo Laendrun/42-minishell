@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:06:06 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/10 18:47:30 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/11 17:51:02 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,6 @@ int			msh_is_envvar_comp(t_tok_list *token);
 // msh_utils.c
 // ----------------------------------------------
 char		*msh_chrdup(int c);
-int			msh_error(t_msh_data *m_d, int err_code, char *err_mes, char *sup);
 
 // ----------------------------------------------
 // msh_env_utils.c
