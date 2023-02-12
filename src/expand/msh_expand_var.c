@@ -6,7 +6,7 @@
 /*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 18:51:04 by egauthey          #+#    #+#             */
-/*   Updated: 2023/02/12 13:55:21 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/12 16:31:57 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,62 +70,112 @@ of the var in env. if it it does not exists NULL is returned.
 // 	return (SUCCESS);
 // }
 
-int	msh_flag_in_str_var(t_msh_data *m_d, t_tok_list *tok)
+
+
+void	handle_var(int (*i)[2], t_tok_list *tok, char **ret, t_msh_data *m_d)
 {
-	int		i;
-	int		j;
-	char	*ret;
-	char	*env;
+	*ret = strjoin_free(*ret, ft_substr(tok->val, (*i)[1], (*i)[0] - (*i)[1]));
+	(*i)[0]++;
+	(*i)[1] = (*i)[0];
+	while (tok->val[(*i)[0]] && !msh_isspace(tok->val[(*i)[0]]) && tok->val[(*i)[0]] != '$')
+		(*i)[0]++;
+	*ret = strjoin_free(*ret, msh_get_env_free(m_d, ft_substr(tok->val, (*i)[1], (*i)[0] - (*i)[1])));
+	(*i)[1] = (*i)[0];
+	(*i)[0]--;
+}
+
+void	handle_error_code(int (*i)[2], t_tok_list *tok, char **ret)
+{
+	*ret = strjoin_free(*ret, ft_substr(tok->val, (*i)[1], (*i)[0] - (*i)[1]));
+	(*i)[0]++;
+	(*i)[1] = (*i)[0];
+	(*i)[0]++;
+	*ret = strjoin_free(*ret, ft_itoa(msh_get_gcode()));
+	(*i)[1] = (*i)[0];
+	(*i)[0]--;
+}
+
+int	msh_flag_in_str_var(t_msh_data *m_d, t_tok_list *tok, char *ret)
+{
+	int		i[2];
 	
-	i = -1;
-	ret = ft_strdup("");
-	j = 0;
-	while (tok->val[++i])
+	i[0] = -1;
+	i[1] = 0;
+	while (tok->val[++i[0]])
 	{
-		if (tok->val[i] == '$' && tok->val[i + 1] != 0 && tok->val[i - 1] != '\\')
+		if (tok->val[i[0]] == '$' && tok->val[i[0] + 1] != 0 && tok->val[i[0] - 1] != '\\')
 		{
-			if (tok->val[i + 1] == '?')
-			{
-				ret = strjoin_free(ret, ft_substr(tok->val, j, i - j));
-				i++;
-				j = i;
-				i++;
-				env = ft_itoa(msh_get_gcode());
-				ret = strjoin_free(ret, env);
-				j = i;
-				i--;
-			}
+			if (tok->val[i[0] + 1] == '?')
+				handle_error_code(&i, tok, &ret);
 			else 
-			{
-				ret = strjoin_free(ret, ft_substr(tok->val, j, i - j));
-				i++;
-				j = i;
-				while (tok->val[i] && !msh_isspace(tok->val[i]) && tok->val[i] != '$')
-					i++;
-				env = msh_get_env_free(m_d, ft_substr(tok->val, j, i - j));
-				ret = strjoin_free(ret, env);
-				j = i;
-				i--;
-			}
+				handle_var(&i, tok, &ret, m_d);
 		}
 	}
-	ret = strjoin_free(ret, ft_substr(tok->val, j, i - j));
+	ret = strjoin_free(ret, ft_substr(tok->val, i[1], i[0] - i[1]));
 	free(tok->val);
 	tok->val = ret;
 	return (SUCCESS);
 }
 
+// THE FUNCTION BEFORE NORM :O
+// int	msh_flag_in_str_var(t_msh_data *m_d, t_tok_list *tok, char *ret)
+// {
+// 	int		i;
+// 	int		j;
+// 	// char	*ret;
+// 	char	*env;
+	
+// 	i = -1;
+// 	// ret = ft_strdup("");
+// 	j = 0;
+// 	while (tok->val[++i])
+// 	{
+// 		if (tok->val[i] == '$' && tok->val[i + 1] != 0 && tok->val[i - 1] != '\\')
+// 		{
+// 			if (tok->val[i + 1] == '?')
+// 			{
+// 				ret = strjoin_free(ret, ft_substr(tok->val, j, i - j));
+// 				i++;
+// 				j = i;
+// 				i++;
+// 				ret = strjoin_free(ret, ft_itoa(msh_get_gcode()));
+// 				j = i;
+// 				i--;
+// 				// handle_error_code(&i, &j, tok, ret);
+// 			}
+// 			else 
+// 			{
+// 				ret = strjoin_free(ret, ft_substr(tok->val, j, i - j));
+// 				i++;
+// 				j = i;
+// 				while (tok->val[i] && !msh_isspace(tok->val[i]) && tok->val[i] != '$')
+// 					i++;
+// 				env = msh_get_env_free(m_d, ft_substr(tok->val, j, i - j));
+// 				ret = strjoin_free(ret, env);
+// 				j = i;
+// 				i--;
+// 				// handle_var(&i, &j, tok, ret);
+// 			}
+// 		}
+// 	}
+// 	ret = strjoin_free(ret, ft_substr(tok->val, j, i - j));
+// 	free(tok->val);
+// 	tok->val = ret;
+// 	return (SUCCESS);
+// }
 
 int	msh_replace_var_in_str(t_msh_data *m_d)
 {
 	t_tok_list	*cur;
+	char		*ret;
 
 	cur = m_d->tokens;
 	while (cur->next)
 	{
 		if ((cur->type == STR && cur->prev->type == DQUOTE) || cur->type == WORD)
 		{
-			msh_flag_in_str_var(m_d, cur);
+			ret = ft_strdup("");
+			msh_flag_in_str_var(m_d, cur, ret);
 		}
 		cur = cur->next;
 	}
@@ -216,49 +266,49 @@ of the var in env. if it it does not exists NULL is returned.
 // 	return (SUCCESS);
 // }
 
-int	check_error_code(t_tok_list *tok)
-{
-	int		i;
-	int		j;
-	char	*ret;
-	char	*env;
+// int	check_error_code(t_tok_list *tok)
+// {
+// 	int		i;
+// 	int		j;
+// 	char	*ret;
+// 	char	*env;
 	
-	i = -1;
-	ret = ft_strdup("");
-	j = 0;
-	while (tok->val[++i])
-	{
-		if (tok->val[i] == '$' && tok->val[i + 1] == '?' && tok->val[i - 1] != '\\')
-		{
-			ret = strjoin_free(ret, ft_substr(tok->val, j, i - j));
-			i++;
-			j = i;
-			i++;
-			env = ft_itoa(msh_get_gcode());
-			ret = strjoin_free(ret, env);
-			j = i;
-			i--;
-		}
-	}
-	ret = strjoin_free(ret, ft_substr(tok->val, j, i - j));
-	free(tok->val);
-	tok->val = ret;
-	return (SUCCESS);
-}
+// 	i = -1;
+// 	ret = ft_strdup("");
+// 	j = 0;
+// 	while (tok->val[++i])
+// 	{
+// 		if (tok->val[i] == '$' && tok->val[i + 1] == '?' && tok->val[i - 1] != '\\')
+// 		{
+// 			ret = strjoin_free(ret, ft_substr(tok->val, j, i - j));
+// 			i++;
+// 			j = i;
+// 			i++;
+// 			env = ft_itoa(msh_get_gcode());
+// 			ret = strjoin_free(ret, env);
+// 			j = i;
+// 			i--;
+// 		}
+// 	}
+// 	ret = strjoin_free(ret, ft_substr(tok->val, j, i - j));
+// 	free(tok->val);
+// 	tok->val = ret;
+// 	return (SUCCESS);
+// }
 
-int	msh_replace_error_code(t_msh_data *m_d)
-{
-	t_tok_list	*cur;
+// int	msh_replace_error_code(t_msh_data *m_d)
+// {
+// 	t_tok_list	*cur;
 
-	cur = m_d->tokens;
-	while (cur->next)
-	{
-		if ((cur->type == STR && cur->prev->type == DQUOTE) || cur->type == WORD)
-			check_error_code(cur);
-		cur = cur->next;
-	}
-	return (SUCCESS);
-}
+// 	cur = m_d->tokens;
+// 	while (cur->next)
+// 	{
+// 		if ((cur->type == STR && cur->prev->type == DQUOTE) || cur->type == WORD)
+// 			check_error_code(cur);
+// 		cur = cur->next;
+// 	}
+// 	return (SUCCESS);
+// }
 
 int	msh_expand_var(t_msh_data *m_d)
 {

@@ -6,7 +6,7 @@
 /*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/02/12 13:23:20 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/12 14:45:58 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,8 @@ int		msh_cmd_lstsize(t_cmd *lst);
 int	msh_expand_var(t_msh_data *m_d);
 int	msh_replace_var_in_var(t_msh_data *m_d);
 int	msh_replace_var_in_str(t_msh_data *m_d);
-int	msh_flag_in_str_var(t_msh_data *m_d, t_tok_list *str_tok);
+// int	msh_flag_in_str_var(t_msh_data *m_d, t_tok_list *str_tok);
+int	msh_flag_in_str_var(t_msh_data *m_d, t_tok_list *str_tok, char *ret);
 int	msh_malloc_new_str(t_msh_data *m_d, t_tok_list *str_tok, int flg[3]);
 int	msh_handle_quotes(t_msh_data *m_d);
 int	msh_escape_char(t_msh_data *m_d);
