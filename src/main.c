@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby>                              +#+  +:+       +#+        */
+/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:05:50 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/11 21:42:49 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/12 13:28:01 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int	main(int ac, char **av, char **env)
 int	new_line(t_msh_data *m_d, char *line)
 {
 	int	ret;
-
 
 	ret = msh_lex(m_d, line);
 	if (ret != EXIT_SUCCESS)

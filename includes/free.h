@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   free.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:42:59 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/11 17:46:36 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/12 13:23:16 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef FREE_H
 # define FREE_H
@@ -32,6 +33,7 @@ void	free_lst_in_trunc(t_msh_data *m_d);
 void	free_t_cmd(t_msh_data *d);
 void	free_args(char **tab);
 void	close_fd_tab_builtin(int *fd, int size, t_msh_data *d);
+char	*strjoin_free(char *s1, char *s2);
 
 // ----------------------------------------------
 // free/msh_free2.c

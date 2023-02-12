@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_echo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 15:30:03 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/11 16:33:26 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/11 22:12:05 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	msh_echo(t_msh_data *m_d, t_cmd *cmd)
 {
 	unsigned int	i;
 	int				out;
-
 
 	out = STDOUT_FILENO;
 	if (cmd->out_app >= 0)
