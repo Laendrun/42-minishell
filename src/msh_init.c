@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:35:46 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/10 16:10:12 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/11 21:43:07 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	msh_init(t_msh_data *m_data, char **env)
 {
+	int	ret;
+
 	m_data->name = "shellusion";
 	m_data->prompt = "shellusion-0.6> ";
 	m_data->env = NULL;
@@ -23,16 +25,11 @@ int	msh_init(t_msh_data *m_data, char **env)
 	m_data->nb_cmd = 0;
 	m_data->process = 0;
 	m_data->path = NULL;
-	// m_data->infile = -1;
-	// m_data->heredoc = -1;
-	// m_data->delim = NULL;
-	// m_data->outfile_app = -1;
-	// m_data->outfile_trunc = -1;
 	m_data->env_upd = NULL;
 	m_data->trunc_lst = NULL;
 	m_data->cmds = NULL;
-	msh_env_init(m_data, env);
-	return (SUCCESS);
+	ret = msh_env_init(m_data, env);
+	return (ret);
 }
 
 int	msh_env_init(t_msh_data *m_data, char **env)
@@ -44,13 +41,22 @@ int	msh_env_init(t_msh_data *m_data, char **env)
 	{
 		tmp = ft_split(*env, '=');
 		new = msh_env_lstnew(ft_strdup(tmp[0]), ft_strdup(tmp[1]));
+		if (!new)
+			return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
 		msh_env_lstaddb(&m_data->env, new);
 		free(tmp[0]);
 		free(tmp[1]);
 		free(tmp);
 		env++;
 	}
-	return (SUCCESS);
+	if (!msh_env_ptr(m_data, "PATH"))
+	{
+		new = msh_env_lstnew(ft_strdup("PATH"), ft_strdup(getcwd(NULL, 0)));
+		if (!new)
+			return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
+		msh_env_lstaddb(&m_data->env, new);
+	}
+	return (EXIT_SUCCESS);
 }
 
 void	msh_pip_reset(t_msh_data *m_data)
@@ -60,10 +66,6 @@ void	msh_pip_reset(t_msh_data *m_data)
 	m_data->nb_cmd = 0;
 	m_data->process = 0;
 	m_data->path = NULL;
-	// m_data->infile = -1;
-	// m_data->heredoc = -1;
-	// m_data->outfile_app = -1;
-	// m_data->outfile_trunc = -1;
 	m_data->env_upd = NULL;
 	m_data->trunc_lst = NULL;
 	m_data->cmds = NULL;

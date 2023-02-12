@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 14:22:06 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/04 14:43:53 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/11 20:09:38 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,21 @@
 
 // syntax error
 # define ERR_SYNT 258
+
+// malloc error
+# define ERR_MALLOC 260
+
+// ----------------------------------------------
+// Error messages
+// ----------------------------------------------
+# define ERR_CD_ARGS "shellusion: cd: Too many arguments"
+# define ERR_CD_CD "shellusion: cd: No such file or directory"
+
+# define ERR_ENV_ARGS "shellusion: env: Too many arguments"
+
+# define ERR_LEX_DQUO "shellusion: lexer: Unclosed double quote"
+# define ERR_LEX_SQUO "shellusion: lexer: Unclosed single quote"
+
+# define ERR_MALMES "shellusion: memory allocation error"
 
 #endif

@@ -5,10 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/26 13:06:06 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/12 13:09:51 by egauthey         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2023/02/12 13:23:20 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -49,6 +51,7 @@ void	msh_pip_reset(t_msh_data *m_data);
 // ----------------------------------------------
 void	msh_set_gcode(int val);
 int		msh_get_gcode(void);
+int		new_line(t_msh_data *m_d, char *line);
 
 // ----------------------------------------------
 // msh_tok_list.c
@@ -140,7 +143,6 @@ int			msh_is_envvar_comp(t_tok_list *token);
 // msh_utils.c
 // ----------------------------------------------
 char		*msh_chrdup(int c);
-int			msh_error(t_msh_data *m_d, int err_code, char *err_mes, char *sup);
 
 // ----------------------------------------------
 // msh_env_utils.c
