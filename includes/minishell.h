@@ -6,7 +6,7 @@
 /*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:06:06 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/11 19:42:03 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/12 12:30:32 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int			msh_env_lstsize(t_env_list *lst);
 // msh_lexer.c
 // ----------------------------------------------
 int			msh_lex(t_msh_data *m_data, char *line);
+void		insert_token(t_msh_data *m_d, int type, char *val, int *err);
 
 // ----------------------------------------------
 // msh_parser.c
