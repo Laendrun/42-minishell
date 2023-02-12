@@ -6,7 +6,7 @@
 /*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/02/12 14:45:58 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/12 16:34:26 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int			msh_env_lstsize(t_env_list *lst);
 // msh_lexer.c
 // ----------------------------------------------
 int			msh_lex(t_msh_data *m_data, char *line);
+void		insert_token(t_msh_data *m_d, int type, char *val, int *err);
 
 // ----------------------------------------------
 // msh_parser.c

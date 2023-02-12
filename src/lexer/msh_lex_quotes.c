@@ -6,7 +6,7 @@
 /*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:48:25 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/11 21:54:02 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/12 12:37:03 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,15 @@ int	msh_lex_squote(t_msh_data *m_data, char *line, unsigned int *i)
 	return (SUCCESS);
 }
 
-int	msh_lex_dquote(t_msh_data *m_data, char *line, unsigned int *i)
+int	msh_lex_dquote(t_msh_data *m_d, char *line, unsigned int *i)
 {
 	unsigned int	t;
 	char			*tmp;
-	t_tok_list		*new;
+	int				err;
 
 	t = *i;
-	new = msh_tok_lstnew(DQUOTE, 0);
-	if (!new)
-		return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
-	msh_tok_lstaddb(&m_data->tokens, new);
+	err = EXIT_SUCCESS;
+	insert_token(m_d, DQUOTE, 0, &err);
 	*i += 1;
 	while (ft_isprint(line[*i]) && !(line[*i] == '\"' && line[*i - 1] != '\\'))
 		*i += 1;
@@ -68,15 +66,11 @@ int	msh_lex_dquote(t_msh_data *m_data, char *line, unsigned int *i)
 	tmp = ft_substr(line, t + 1, *i - (t + 1));
 	if (!tmp)
 		return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
-	new = msh_tok_lstnew(STR, ft_strdup(tmp));
-	if (!new)
-		return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
-	msh_tok_lstaddb(&m_data->tokens, new);
-	new = msh_tok_lstnew(DQUOTE, 0);
-	if (!new)
-		return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
-	msh_tok_lstaddb(&m_data->tokens, new);
+	insert_token(m_d, STR, ft_strdup(tmp), &err);
+	insert_token(m_d, DQUOTE, 0, &err);
 	*i += 1;
 	free(tmp);
+	if (err)
+		return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
 	return (SUCCESS);
 }
