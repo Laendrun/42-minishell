@@ -6,7 +6,7 @@
 /*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:12:32 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/11 20:03:28 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/12 12:29:48 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,14 @@ int	msh_dop_type(int type)
 	if (type == GT)
 		return (DGT);
 	return (-10);
+}
+
+void	insert_token(t_msh_data *m_d, int type, char *val, int *err)
+{
+	t_tok_list	*new;
+
+	new = msh_tok_lstnew(type, val);
+	if (!new)
+		*err = ERR_MALLOC;
+	msh_tok_lstaddb(&m_d->tokens, new);
 }
