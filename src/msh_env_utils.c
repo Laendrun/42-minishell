@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_env_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 21:29:27 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/10 22:38:09 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/12 13:09:13 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,24 @@ char	*msh_get_env(t_msh_data *m_data, char *key)
 			return (ft_strdup(tmp->val));
 		tmp = tmp->next;
 	}
-	// return (NULL);
+	return (ft_strdup(""));
+}
+
+char	*msh_get_env_free(t_msh_data *m_data, char *key)
+{
+	t_env_list	*tmp;
+
+	tmp = m_data->env;
+	while (tmp)
+	{
+		if (ft_strncmp(tmp->key, key, ft_strlen(key) + 1) == 0)
+		{
+			free(key);
+			return (ft_strdup(tmp->val));
+		}
+		tmp = tmp->next;
+	}
+	free(key);
 	return (ft_strdup(""));
 }
 

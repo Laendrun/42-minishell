@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:06:06 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/10 18:47:30 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/12 13:09:51 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,7 @@ int			msh_get_env_var_len(t_msh_data *m_data, char *key);
 char		*msh_get_env(t_msh_data *m_data, char *key);
 int			msh_replace_val(t_msh_data *m_data, char *key, char *new_val);
 t_env_list	*msh_env_ptr(t_msh_data *m_data, char *key);
+char	*msh_get_env_free(t_msh_data *m_data, char *key);
 
 // ----------------------------------------------
 // msh_terminate.c
