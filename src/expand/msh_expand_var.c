@@ -6,7 +6,7 @@
 /*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 18:51:04 by egauthey          #+#    #+#             */
-/*   Updated: 2023/02/12 13:10:08 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/12 13:55:21 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,22 @@ int	msh_flag_in_str_var(t_msh_data *m_d, t_tok_list *tok)
 	i = -1;
 	ret = ft_strdup("");
 	j = 0;
-		while (tok->val[++i])
+	while (tok->val[++i])
+	{
+		if (tok->val[i] == '$' && tok->val[i + 1] != 0 && tok->val[i - 1] != '\\')
 		{
-			if (tok->val[i] == '$' && tok->val[i + 1] != 0 && tok->val[i - 1] != '\\')
+			if (tok->val[i + 1] == '?')
+			{
+				ret = strjoin_free(ret, ft_substr(tok->val, j, i - j));
+				i++;
+				j = i;
+				i++;
+				env = ft_itoa(msh_get_gcode());
+				ret = strjoin_free(ret, env);
+				j = i;
+				i--;
+			}
+			else 
 			{
 				ret = strjoin_free(ret, ft_substr(tok->val, j, i - j));
 				i++;
@@ -95,9 +108,10 @@ int	msh_flag_in_str_var(t_msh_data *m_d, t_tok_list *tok)
 				i--;
 			}
 		}
-		ret = strjoin_free(ret, ft_substr(tok->val, j, i - j));
-		free(tok->val);
-		tok->val = ret;
+	}
+	ret = strjoin_free(ret, ft_substr(tok->val, j, i - j));
+	free(tok->val);
+	tok->val = ret;
 	return (SUCCESS);
 }
 
@@ -150,55 +164,85 @@ of the var in env. if it it does not exists NULL is returned.
 // 	return (SUCCESS);
 // }
 
-int	value_error_code(t_tok_list *str_tok, int flg[3])
+// int	value_error_code(t_tok_list *str_tok, int flg[3])
+// {
+// 	char	*s_part[3];
+// 	char	*replaced_var;
+// 	char	*str_joined;
+
+// 	s_part[0] = ft_substr(str_tok->val, 0, flg[0]);
+// 	s_part[1] = ft_substr(str_tok->val, (flg[0] + 1), (flg[1] - flg[0] - 1));
+// 	s_part[2] = ft_substr(str_tok->val, flg[1], (flg[2] - flg[1]));
+// 	replaced_var = ft_itoa(msh_get_gcode());
+// 	free(s_part[1]);
+// 	str_joined = ft_strjoin(s_part[0], replaced_var);
+// 	free(str_tok->val);
+// 	str_tok->val = NULL;
+// 	str_tok->val = ft_strjoin(str_joined, s_part[2]);
+// 	free(str_joined);
+// 	free(s_part[0]);
+// 	free(s_part[2]);
+// 	free(replaced_var);
+// 	return (SUCCESS);
+// }
+
+// int	check_error_code(t_msh_data *m_d, t_tok_list *tok)
+// {
+// 	int	i;
+// 	int flags[3];
+
+// 	i = -1;
+// 	flags[0] = 0;
+// 	flags[1] = 0;
+// 	flags[2] = 0;
+// 	while (tok->val[++i])
+// 	{
+// 		if (tok->val[i] == '$' && tok->val[i + 1] == '?' && tok->val[i - 1] != '\\')
+// 		{
+// 			flags[0] = i;
+// 			i += 2;
+// 			flags[1] = i;
+// 		}
+// 	}
+// 	flags[2] = i;
+// 	if (flags[0] != flags[1])
+// 	{
+// 		value_error_code(tok, flags);
+// 		i = -1;
+// 		while (tok->val[++i])
+// 			if (tok->val[i] == '$' && tok->val[i - 1] != '\\')
+// 				check_error_code(m_d, tok);
+// 	}
+// 	return (SUCCESS);
+// }
+
+int	check_error_code(t_tok_list *tok)
 {
-	char	*s_part[3];
-	char	*replaced_var;
-	char	*str_joined;
-
-	s_part[0] = ft_substr(str_tok->val, 0, flg[0]);
-	s_part[1] = ft_substr(str_tok->val, (flg[0] + 1), (flg[1] - flg[0] - 1));
-	s_part[2] = ft_substr(str_tok->val, flg[1], (flg[2] - flg[1]));
-	replaced_var = ft_itoa(msh_get_gcode());
-	free(s_part[1]);
-	str_joined = ft_strjoin(s_part[0], replaced_var);
-	free(str_tok->val);
-	str_tok->val = NULL;
-	str_tok->val = ft_strjoin(str_joined, s_part[2]);
-	free(str_joined);
-	free(s_part[0]);
-	free(s_part[2]);
-	free(replaced_var);
-	return (SUCCESS);
-}
-
-int	check_error_code(t_msh_data *m_d, t_tok_list *tok)
-{
-	int	i;
-	int flags[3];
-
+	int		i;
+	int		j;
+	char	*ret;
+	char	*env;
+	
 	i = -1;
-	flags[0] = 0;
-	flags[1] = 0;
-	flags[2] = 0;
+	ret = ft_strdup("");
+	j = 0;
 	while (tok->val[++i])
 	{
 		if (tok->val[i] == '$' && tok->val[i + 1] == '?' && tok->val[i - 1] != '\\')
 		{
-			flags[0] = i;
-			i += 2;
-			flags[1] = i;
+			ret = strjoin_free(ret, ft_substr(tok->val, j, i - j));
+			i++;
+			j = i;
+			i++;
+			env = ft_itoa(msh_get_gcode());
+			ret = strjoin_free(ret, env);
+			j = i;
+			i--;
 		}
 	}
-	flags[2] = i;
-	if (flags[0] != flags[1])
-	{
-		value_error_code(tok, flags);
-		i = -1;
-		while (tok->val[++i])
-			if (tok->val[i] == '$' && tok->val[i - 1] != '\\')
-				check_error_code(m_d, tok);
-	}
+	ret = strjoin_free(ret, ft_substr(tok->val, j, i - j));
+	free(tok->val);
+	tok->val = ret;
 	return (SUCCESS);
 }
 
@@ -210,7 +254,7 @@ int	msh_replace_error_code(t_msh_data *m_d)
 	while (cur->next)
 	{
 		if ((cur->type == STR && cur->prev->type == DQUOTE) || cur->type == WORD)
-			check_error_code(m_d, cur);
+			check_error_code(cur);
 		cur = cur->next;
 	}
 	return (SUCCESS);
@@ -218,7 +262,7 @@ int	msh_replace_error_code(t_msh_data *m_d)
 
 int	msh_expand_var(t_msh_data *m_d)
 {
-	msh_replace_error_code(m_d);
+	// msh_replace_error_code(m_d);
 	
 	msh_replace_var_in_str(m_d);
 	return(SUCCESS);
