@@ -16,7 +16,7 @@
 // source: https://www.adminschoice.com/exit-error-codes-in-bash-and-linux-os
 
 // success
-# define EXIT_SUCCES 0
+# define EXIT_SUCCESS 0
 // failure, as defined by the program
 # define EXIT_FAILURE 1
 // command line usage error

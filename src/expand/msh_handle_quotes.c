@@ -49,5 +49,5 @@ int	msh_handle_quotes(t_msh_data *m_d)
 		cur = cur->next;
 	}
 	merge_str_wrd(m_d);
-	return (SUCCESS);
+	return (EXIT_SUCCESS);
 }

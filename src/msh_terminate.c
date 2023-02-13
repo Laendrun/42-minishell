@@ -18,8 +18,8 @@ void	msh_terminate(t_msh_data *m_data)
 		msh_free_tok(m_data);
 	if (m_data->cmds)
 		msh_free_cmds(m_data);
-	if (m_data->trunc_lst)
-		msh_free_trunc_lst(m_data);
+	// if (m_data->trunc_lst)
+	// 	msh_free_trunc_lst(m_data);
 	free(m_data->env_upd);
 	if (m_data->env)
 		msh_free_env(m_data);

@@ -63,10 +63,7 @@ int	msh_parsing(t_msh_data *m_d)
 	msh_err_near_token(m_d);
 	if (ret != EXIT_SUCCESS)
 		return (ret);
-	msh_create_commmands(m_d);
-	if (ret != EXIT_SUCCESS)
-		return (ret);
-	return (EXIT_SUCCESS);
+	return (ret);
 }
 
 int	new_line(t_msh_data *m_d, char *line)
@@ -76,13 +73,13 @@ int	new_line(t_msh_data *m_d, char *line)
 	ret = msh_lex(m_d, line);
 	if (ret != EXIT_SUCCESS)
 		return (ret);
-	// msh_parsing(m_d);
-	// if (ret != EXIT_SUCCESS)
-	// 	return (ret);
-	msh_expand_var(m_d);
-	msh_escape_char(m_d);
-	msh_handle_quotes(m_d);
-	msh_err_near_token(m_d);
+	ret = msh_parsing(m_d);
+	if (ret != EXIT_SUCCESS)
+		return (ret);
+	// msh_expand_var(m_d);
+	// msh_escape_char(m_d);
+	// msh_handle_quotes(m_d);
+	// msh_err_near_token(m_d);
 	msh_create_commmands(m_d);
 	msh_pipex(m_d);
 	msh_pip_reset(m_d);
