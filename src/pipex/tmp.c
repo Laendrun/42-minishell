@@ -191,7 +191,6 @@ char	**pip_get_path(char **env)
 		env++;
 	}
 	paths = ft_split(*env + 5, ':');
-	// if malloc
 	return (paths);
 }
 

@@ -52,12 +52,6 @@ typedef struct s_msh_data
 	int				nb_cmd;
 	int				process;
 	char			**path;
-	// int				infile;
-	// int				heredoc;
-	// char			*delim;
-	// int				hdoc[2];
-	// int				outfile_app;
-	// int				outfile_trunc;
 	char			**env_upd;
 	t_env_list		*env;
 	t_tok_list		*tokens;

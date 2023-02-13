@@ -47,7 +47,7 @@ int	msh_is_builtin(char *str)
 	t = (!ft_strncmp("export", str, 7) || t);
 	t = (!ft_strncmp("unset", str, 6) || t);
 	t = (!ft_strncmp("exit", str, 5) || t);
-	t = (!ft_strncmp("echo", str, 5) || t);
+	t = (!ft_strncmp("echo2", str, 6) || t);
 	return (t);
 }
 

@@ -62,4 +62,8 @@
 
 # define ERR_MALMES "shellusion: memory allocation error"
 
+# define ERR_PIPE "Error creating pipe :"
+# define ERR_CLOSE "Close error :"
+# define ERR_OPEN "Open error :"
+
 #endif

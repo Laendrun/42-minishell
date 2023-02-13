@@ -43,7 +43,7 @@ int	check_redir_start_end(t_msh_data *d)
 		printf("syntax error near unexpected token\n");
 		return (ERROR);
 	}
-	return (SUCCESS);
+	return (EXIT_SUCCESS);
 }
 
 int	remove_sep(t_msh_data *d)
@@ -64,5 +64,5 @@ int	msh_err_near_token(t_msh_data *d)
 {
 	remove_sep(d);
 	// check_redir_start_end(d);
-	return (SUCCESS);
+	return (EXIT_SUCCESS);
 }

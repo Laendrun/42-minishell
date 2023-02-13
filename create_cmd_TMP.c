@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   tmp_pars.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/10 10:59:28 by egauthey          #+#    #+#             */
-/*   Updated: 2023/02/13 11:56:39 by egauthey         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 
 char	**msh_make_env_tabstr(t_msh_data *m_d)
@@ -23,13 +11,13 @@ char	**msh_make_env_tabstr(t_msh_data *m_d)
 	tmp = m_d->env;
 	size = msh_env_lstsize(m_d->env);
 	env_str = malloc(sizeof(char *) * (size + 1));
-	if (!env_str)
-		return (NULL);
+	// if (!env_str)
+	// 	return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
 	while (tmp)
 	{
 		env_str[i] = malloc(strlen(tmp->key) + strlen(tmp->val) + 2);
-		if (!env_str[i])
-			return (NULL);
+		// if (!env_str[i])
+		// 	return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
 		ft_strcpy(env_str[i], tmp->key);
 		ft_strcat(env_str[i], "=");
 		ft_strcat(env_str[i], tmp->val);
@@ -64,8 +52,8 @@ t_tok_list **create_array_of_toklst(t_msh_data *m_d)
 
 	i = 0;
 	array = (t_tok_list **)malloc(sizeof(t_tok_list *) * m_d->nb_cmd);
-	if (!array)
-		return (NULL);
+	// if (!array)
+	// 	return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
 	cur = m_d->tokens;
 	while (cur)
 	{
@@ -109,8 +97,8 @@ int	create_cmd_lst(t_msh_data *m_d, int i)
 
 	nb_arg = get_nb_args(m_d->trunc_lst[i]);
 	args = ft_calloc(sizeof(char *), (nb_arg + 1));
-	if (!args)
-		return (msh_error(1, ERR_MALMES, ERR_MALLOC));
+	// if (!args)
+	// 	return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
 	tmp = m_d->trunc_lst[i];
 	j = 0;
 	while (tmp)
@@ -120,8 +108,8 @@ int	create_cmd_lst(t_msh_data *m_d, int i)
 		if (tmp->type == WORD || tmp->type == STR)
 		{
 			args[j] = ft_strdup(tmp->val);
-			if (!args[j])
-				return (msh_error(1, ERR_MALMES, ERR_MALLOC));
+			// if (!args[j])
+			// 	return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
 			j++;
 		}
 		tmp = tmp->next;
@@ -166,8 +154,7 @@ int	check_redir_type(t_tok_list *tmp, t_cmd *end)
 	{
 		end->heredoc = 1;
 		end->delim = tmp->next->val;
-		if (ft_here_doc(end) != 0)
-			return (EXIT_FAILURE);
+		ft_here_doc(end);
 	}
 	else if (tmp->type == GT)
 	{
@@ -200,8 +187,7 @@ int	set_redir_in_cmd_lst(t_msh_data *m_d, int i)
 		if ((tmp->type == LT || tmp->type == DLT || tmp->type == GT
 			|| tmp->type == DGT) && tmp->next->type == REDIR)
 			{
-				if (check_redir_type(tmp, end) != 0)
-					return (EXIT_FAILURE);
+				check_redir_type(tmp, end);
 			}
 		tmp = tmp->next;
 	}
@@ -211,26 +197,25 @@ int	set_redir_in_cmd_lst(t_msh_data *m_d, int i)
 int	cmd_preparation(t_msh_data *m_d)
 {
 	m_d->env_upd = msh_make_env_tabstr(m_d);
-	if (!m_d->env_upd)
-		return (msh_error(1, ERR_MALMES, ERR_MALLOC));
+	// malloc error ?
 	m_d->pid = malloc(sizeof(int) * m_d->nb_cmd);
 	if (!m_d->pid)
-		return (msh_error(1, ERR_MALMES, ERR_MALLOC));
+		return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
 	m_d->fd = malloc(sizeof(int) * (m_d->nb_cmd - 1) * 2);
 	if (!m_d->fd)
-		return (msh_error(1, ERR_MALMES, ERR_MALLOC));
+		return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
 	m_d->trunc_lst = create_array_of_toklst(m_d);
-	if (!m_d->trunc_lst)
-		return (msh_error(1, ERR_MALMES, ERR_MALLOC));
+	// if (!m_d->trunc_lst) ici ?
 	m_d->path = pip_get_path(m_d->env_upd);
+	// malloc error ?
 	if (!m_d->path)
-		return (msh_error(1, ERR_MALMES, ERR_MALLOC));
+		return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
 	return (EXIT_SUCCESS);
 }
 
 int	msh_create_commmands(t_msh_data *m_d)
 {
-	int		i;
+	int	i;
 
 	calculate_nb_cmds(m_d);
 	if (cmd_preparation(m_d) != 0)
@@ -240,8 +225,7 @@ int	msh_create_commmands(t_msh_data *m_d)
 	{
 		if (create_cmd_lst(m_d, i) != 0)
 			return (EXIT_FAILURE);
-		if (set_redir_in_cmd_lst(m_d, i) != 0 )
-			return (EXIT_FAILURE);
+		set_redir_in_cmd_lst(m_d, i);
 		i++;
 	}
 	return (EXIT_SUCCESS);

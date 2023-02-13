@@ -16,7 +16,6 @@
 int	merge_str_wrd(t_msh_data *m_d)
 {
 	t_tok_list	*cur;
-	// int			len;
 	char		*new_val;
 
 	cur = m_d->tokens;
@@ -25,8 +24,8 @@ int	merge_str_wrd(t_msh_data *m_d)
 		if ((cur->type == STR || cur->type == WORD) && (cur->next->type == STR || cur->next->type == WORD))
 		{
 			new_val = ft_strjoin(cur->val, cur->next->val);
-			// if (!new_val)
-			// 	return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
+			if (!new_val)
+				return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
 			free(cur->val);
 			cur->val = new_val;
 			cur->type = STR;
@@ -34,7 +33,7 @@ int	merge_str_wrd(t_msh_data *m_d)
 		}
 		cur = cur->next;
 	}
-	return (SUCCESS);
+	return (EXIT_SUCCESS);
 }
 
 int	msh_handle_quotes(t_msh_data *m_d)
@@ -48,6 +47,7 @@ int	msh_handle_quotes(t_msh_data *m_d)
 			msh_remove_tok(&m_d->tokens, cur);
 		cur = cur->next;
 	}
-	merge_str_wrd(m_d);
+	if (merge_str_wrd(m_d) != 0)
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

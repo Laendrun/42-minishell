@@ -13,8 +13,6 @@
 #include "minishell.h"
 
 static int	g_code = 0;
-// I think we should use extern int insted of static int
-// extern int are defined in the header file
 
 int	main(int ac, char **av, char **env)
 {
@@ -48,22 +46,17 @@ int	main(int ac, char **av, char **env)
 
 int	msh_parsing(t_msh_data *m_d)
 {
-	int	ret;
-
-	ret = EXIT_SUCCESS;
-	ret = msh_expand_var(m_d);
-	if (ret != EXIT_SUCCESS)
-		return (ret);
-	msh_escape_char(m_d);
-	if (ret != EXIT_SUCCESS)
-		return (ret);
-	msh_handle_quotes(m_d);
-	if (ret != EXIT_SUCCESS)
-		return (ret);
-	msh_err_near_token(m_d);
-	if (ret != EXIT_SUCCESS)
-		return (ret);
-	return (ret);
+	if (msh_expand_var(m_d) != 0)
+		return (EXIT_FAILURE);
+	if (msh_escape_char(m_d) != 0)
+		return (EXIT_FAILURE);
+	if (msh_handle_quotes(m_d) != 0)
+		return (EXIT_FAILURE);
+	if (msh_err_near_token(m_d) != 0)
+		return (EXIT_FAILURE);
+	if (msh_create_commmands(m_d) != 0)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
 
 int	new_line(t_msh_data *m_d, char *line)
@@ -73,14 +66,13 @@ int	new_line(t_msh_data *m_d, char *line)
 	ret = msh_lex(m_d, line);
 	if (ret != EXIT_SUCCESS)
 		return (ret);
-	ret = msh_parsing(m_d);
-	if (ret != EXIT_SUCCESS)
-		return (ret);
+	if (msh_parsing(m_d) != 0)
+		return (EXIT_FAILURE);
 	// msh_expand_var(m_d);
 	// msh_escape_char(m_d);
 	// msh_handle_quotes(m_d);
 	// msh_err_near_token(m_d);
-	msh_create_commmands(m_d);
+	// msh_create_commmands(m_d);
 	msh_pipex(m_d);
 	msh_pip_reset(m_d);
 	return (ret);
