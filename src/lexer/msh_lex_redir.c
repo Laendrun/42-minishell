@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_lex_redir.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby>                              +#+  +:+       +#+        */
+/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:45:36 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/12 12:29:43 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/13 10:14:31 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	get_redir(t_msh_data *m_d, char *line, unsigned int *i, int *err)
 
 int	msh_lex_redir(t_msh_data *m_d, char *line, unsigned int *i)
 {
-	int				err;
+	int	err;
 
 	err = EXIT_SUCCESS;
 	if (msh_get_op_type(line[*i]) == msh_get_op_type(line[*i + 1]))

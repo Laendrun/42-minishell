@@ -6,7 +6,7 @@
 /*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 10:59:28 by egauthey          #+#    #+#             */
-/*   Updated: 2023/02/11 16:15:57 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/13 11:56:39 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,13 @@ char	**msh_make_env_tabstr(t_msh_data *m_d)
 	tmp = m_d->env;
 	size = msh_env_lstsize(m_d->env);
 	env_str = malloc(sizeof(char *) * (size + 1));
-	if (!env_str)
-		return NULL;
+	// if (!env_str)
+	// 	return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
 	while (tmp)
 	{
 		env_str[i] = malloc(strlen(tmp->key) + strlen(tmp->val) + 2);
+		// if (!env_str[i])
+		// 	return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
 		ft_strcpy(env_str[i], tmp->key);
 		ft_strcat(env_str[i], "=");
 		ft_strcat(env_str[i], tmp->val);
@@ -62,6 +64,8 @@ t_tok_list **create_array_of_toklst(t_msh_data *m_d)
 
 	i = 0;
 	array = (t_tok_list **)malloc(sizeof(t_tok_list *) * m_d->nb_cmd);
+	// if (!array)
+	// 	return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
 	cur = m_d->tokens;
 	while (cur)
 	{
@@ -71,8 +75,6 @@ t_tok_list **create_array_of_toklst(t_msh_data *m_d)
 		if (cur->next !=  NULL)
 		{
 			cur = cur->next;
-			// cur->prev->next = NULL;
-			//the connection with prev is still there and the list is still connected I guess
 			i++;
 		}
 		else
@@ -106,8 +108,9 @@ int	create_cmd_lst(t_msh_data *m_d, int i)
 	int 		j;
 
 	nb_arg = get_nb_args(m_d->trunc_lst[i]);
-	// printf("%d\n", nb_arg);
 	args = ft_calloc(sizeof(char *), (nb_arg + 1));
+	// if (!args)
+	// 	return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
 	tmp = m_d->trunc_lst[i];
 	j = 0;
 	while (tmp)
@@ -116,10 +119,9 @@ int	create_cmd_lst(t_msh_data *m_d, int i)
 			break ;
 		if (tmp->type == WORD || tmp->type == STR)
 		{
-			// args[j] = ft_calloc(sizeof(char), (ft_strlen(tmp->val) + 1));
 			args[j] = ft_strdup(tmp->val);
-			// args[j] = tmp->val;
-			// printf("%s\n", args[j]);
+			// if (!args[i])
+			// 	return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
 			j++;
 		}
 		tmp = tmp->next;
@@ -150,7 +152,11 @@ void	ft_here_doc(t_cmd *end, t_msh_data *m_d)
 int	check_redir_type(t_tok_list *tmp, t_cmd *end, t_msh_data *m_d)
 {
 	if (tmp->type == LT)
+	{
 		end->infile = open(tmp->next->val, O_RDONLY);
+		if (end->infile < 0)
+			f_error("Open error :", strerror(errno), m_d);
+	}
 	else if (tmp->type == DLT)
 	{
 		end->heredoc = 1;
@@ -158,9 +164,17 @@ int	check_redir_type(t_tok_list *tmp, t_cmd *end, t_msh_data *m_d)
 		ft_here_doc(end, m_d);
 	}
 	else if (tmp->type == GT)
+	{
 		end->out_trunc = open(tmp->next->val, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		if (end->out_trunc < 0)
+			f_error("Open error :", strerror(errno), m_d);
+	}
 	else if (tmp->type == DGT)
+	{
 		end->out_app = open(tmp->next->val, O_CREAT | O_WRONLY | O_APPEND, 0644);
+		if (end->out_app < 0)
+			f_error("Open error :", strerror(errno), m_d);
+	}
 	return (SUCCESS);
 }
 
@@ -194,15 +208,21 @@ int	msh_create_commmands(t_msh_data *m_d)
 	calculate_nb_cmds(m_d);
 	m_d->env_upd = msh_make_env_tabstr(m_d);
 	m_d->pid = malloc(sizeof(int) * m_d->nb_cmd);
+	// if (!m_d->pid)
+	// 	return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
 	m_d->fd = malloc(sizeof(int) * (m_d->nb_cmd - 1) * 2);
+	// if (!m_d->fd)
+	// 	return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
 	m_d->trunc_lst = create_array_of_toklst(m_d);
+	// if (!m_d->trunc_lst) ici ?
 	m_d->path = pip_get_path(m_d->env_upd);
+	// if (!m_d->path)
+	// 	return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
 	i = 0;
-	// printf("nb cmd : %d\n", m_d->nb_cmd);
 	while (i < m_d->nb_cmd)
 	{
-		// print_tok_trunclst(m_d->trunc_lst[i]);
 		create_cmd_lst(m_d, i);
+		// if malloc
 		set_redir_in_cmd_lst(m_d, i);
 		i++;
 	}

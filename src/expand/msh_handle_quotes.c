@@ -6,7 +6,7 @@
 /*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 18:51:04 by egauthey          #+#    #+#             */
-/*   Updated: 2023/02/09 18:35:04 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/13 11:05:32 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int	merge_str_wrd(t_msh_data *m_d)
 {
 	t_tok_list	*cur;
-	int			len;
+	// int			len;
 	char		*new_val;
 
 	cur = m_d->tokens;
@@ -24,10 +24,10 @@ int	merge_str_wrd(t_msh_data *m_d)
 	{
 		if ((cur->type == STR || cur->type == WORD) && (cur->next->type == STR || cur->next->type == WORD))
 		{
-			len = ft_strlen(cur->val) + ft_strlen(cur->next->val);
-			new_val = malloc(sizeof(char) * (len + 1));
 			new_val = ft_strjoin(cur->val, cur->next->val);
-			// free(cur->val); // causes double free sometimes
+			// if (!new_val)
+			// 	return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
+			free(cur->val);
 			cur->val = new_val;
 			cur->type = STR;
 			msh_remove_tok(&m_d->tokens, cur->next);

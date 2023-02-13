@@ -6,7 +6,7 @@
 /*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 18:51:04 by egauthey          #+#    #+#             */
-/*   Updated: 2023/02/12 16:31:57 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/13 10:40:13 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,8 @@ int	msh_replace_var_in_str(t_msh_data *m_d)
 		if ((cur->type == STR && cur->prev->type == DQUOTE) || cur->type == WORD)
 		{
 			ret = ft_strdup("");
+			// if (!ret)
+			// 	return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
 			msh_flag_in_str_var(m_d, cur, ret);
 		}
 		cur = cur->next;

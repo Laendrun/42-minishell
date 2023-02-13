@@ -6,7 +6,7 @@
 /*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 18:51:04 by egauthey          #+#    #+#             */
-/*   Updated: 2023/02/10 21:09:26 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/13 11:10:04 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	escape_backslash(t_tok_list *cur)
 			|| cur->val[i[0] + 1] == '`' || cur->val[i[0] + 1] == '"'))
 		{
 			new_val = ft_calloc(sizeof(char), ft_strlen(cur->val));
+			// if (!new_val)
+			// 	return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
 			i[1] = 0;
 			i[2] = 0;
 			while (cur->val[i[1]])

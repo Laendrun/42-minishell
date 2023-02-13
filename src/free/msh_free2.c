@@ -6,7 +6,7 @@
 /*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 19:33:23 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/12 12:40:31 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/13 12:06:21 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,15 +133,15 @@ void	close_fd_tab(int *fd, int size, t_msh_data *d)
 	free(fd);
 }
 
-void	close_fd_tab_builtin(int *fd, int size, t_msh_data *d)
-{
-	int	i;
+// void	close_fd_tab_builtin(int *fd, int size, t_msh_data *d)
+// {
+// 	int	i;
 
-	(void) d;
-	i = 0;
-	while (i < size)
-	{
-		close(fd[i]);
-		i++;
-	}
-}
+// 	(void) d;
+// 	i = 0;
+// 	while (i < size)
+// 	{
+// 		close(fd[i]);
+// 		i++;
+// 	}
+// }

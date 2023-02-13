@@ -1,6 +1,16 @@
--rw-r--r--   1 egauthey  2022_lausanne     51 Feb  4 13:38 .gitignore
--rw-r--r--   1 egauthey  2022_lausanne     51 Feb  4 13:38 .gitignore
--rw-r--r--   1 egauthey  2022_lausanne     51 Feb  4 13:38 .gitignore
--rw-r--r--   1 egauthey  2022_lausanne     51 Feb  4 13:38 .gitignore
--rw-r--r--   1 egauthey  2022_lausanne     51 Feb  4 13:38 .gitignore
--rw-r--r--   1 egauthey  2022_lausanne     51 Feb  4 13:38 .gitignore
+total 192$$$$$
+drwxr-xr-x  15 egauthey  2022_lausanne    510 Feb 13 12:31 .$$$$$
+drwxr-xr-x   6 egauthey  2022_lausanne    204 Feb  8 11:54 ..$$$$$
+-rw-r--r--@  1 egauthey  2022_lausanne   6148 Feb  4 15:20 .DS_Store$$$$$
+drwxr-xr-x  15 egauthey  2022_lausanne    510 Feb 13 09:52 .git$$$$$
+-rw-r--r--   1 egauthey  2022_lausanne     51 Feb  4 13:38 .gitignore$$$$$
+drwxr-xr-x   3 egauthey  2022_lausanne    102 Feb  1 11:54 .vscode$$$$$
+-rw-r--r--   1 egauthey  2022_lausanne   3135 Feb 12 13:15 Makefile$$$$$
+-rw-r--r--   1 egauthey  2022_lausanne    227 Jan 30 10:36 README.md$$$$$
+-rw-r--r--   1 egauthey  2022_lausanne      0 Feb 13 12:31 file$$$$$
+-rw-r--r--   1 egauthey  2022_lausanne     50 Feb 12 16:36 file2$$$$$
+drwxr-xr-x  11 egauthey  2022_lausanne    374 Feb 12 16:33 includes$$$$$
+drwxr-xr-x   3 egauthey  2022_lausanne    102 Jan 30 10:36 libs$$$$$
+-rwxr-xr-x   1 egauthey  2022_lausanne  73544 Feb 13 12:31 minishell$$$$$
+drwxr-xr-x  21 egauthey  2022_lausanne    714 Feb 13 10:58 objs$$$$$
+drwxr-xr-x  22 egauthey  2022_lausanne    748 Feb 12 16:33 src$$$$$

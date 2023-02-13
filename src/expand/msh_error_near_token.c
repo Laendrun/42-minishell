@@ -6,7 +6,7 @@
 /*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 18:38:34 by egauthey          #+#    #+#             */
-/*   Updated: 2023/02/10 16:53:19 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/13 11:32:26 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ int	check_redir_start_end(t_msh_data *d)
 	t_tok_list	*cur;
 
 	cur = d->tokens;
-	if (cur->type >= PIPE)
+	if (cur && cur->type >= PIPE)
 	{
 		printf("syntax error near unexpected token\n");
 		return (ERROR);
 	}
 	while (cur->next)
 	{
-		if (cur->type >= PIPE && (cur->next->type >= PIPE || cur->prev->type >= PIPE))
+		if (cur->type >= PIPE && cur->next && cur->prev && (cur->next->type >= PIPE || cur->prev->type >= PIPE))
 		{
 			printf("syntax error near unexpected token\n");
 			return (ERROR);
@@ -38,7 +38,7 @@ int	check_redir_start_end(t_msh_data *d)
 		// }
 		cur = cur->next;
 	}
-	if (cur->prev->type >= PIPE)
+	if (cur->prev && cur->prev->type >= PIPE)
 	{
 		printf("syntax error near unexpected token\n");
 		return (ERROR);

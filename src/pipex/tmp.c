@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tmp.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 10:48:47 by egauthey          #+#    #+#             */
-/*   Updated: 2023/02/10 18:24:12 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/13 12:31:22 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,70 +20,133 @@ void	f_duplicate(int in, int out, t_msh_data *m_d)
 		f_error("Dup2 error out: ", strerror(errno), m_d);
 }
 
-void	f_pre_duplicate(t_msh_data *m_d, t_cmd *tmp)
+void	first_process(t_msh_data *m_d, t_cmd *tmp)
 {
-	if (m_d->process == 0)
+	if (tmp->infile != -1)
 	{
-		if (tmp->infile != -1)
-		{
-			if (m_d->nb_cmd == 1)
-			{
-				f_duplicate(tmp->infile, STDOUT_FILENO, m_d);
-				close(tmp->infile);
-			}
-			else
-				f_duplicate(tmp->infile, m_d->fd[1], m_d);
-		}
-		else if (tmp->heredoc == 1)
-		{
-			if (m_d->nb_cmd == 1)
-			{
-				f_duplicate(tmp->hdoc[0], STDOUT_FILENO, m_d);
-				close(tmp->hdoc[0]);
-			}
-			else
-				f_duplicate(tmp->hdoc[0], m_d->fd[1], m_d);
-		}
-		else if (tmp->out_app != -1)
-			f_duplicate(STDIN_FILENO, tmp->out_app, m_d);
-		else if (tmp->out_trunc != -1)
-			f_duplicate(STDIN_FILENO, tmp->out_trunc, m_d);
-		else if (m_d->nb_cmd == 1)
-			return ;
-		else
-			f_duplicate(STDIN_FILENO, m_d->fd[1], m_d);
-	}
-	else if (m_d->process == m_d->nb_cmd - 1)
-	{
-		if (tmp->out_app != -1)
-			f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_app, m_d);
-		else if (tmp->out_trunc != -1)
-			f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_trunc, m_d);
-		else if (tmp->infile != -1)
+		if (m_d->nb_cmd == 1)
 			f_duplicate(tmp->infile, STDOUT_FILENO, m_d);
-		else if (tmp->heredoc == 1)
+		else
+			f_duplicate(tmp->infile, m_d->fd[1], m_d);
+	}
+	else if (tmp->heredoc == 1)
+	{
+		if (m_d->nb_cmd == 1)
 		{
 			f_duplicate(tmp->hdoc[0], STDOUT_FILENO, m_d);
 			close(tmp->hdoc[0]);
 		}
 		else
-			f_duplicate(m_d->fd[(2 * m_d->process) - 2], STDOUT_FILENO, m_d);
+			f_duplicate(tmp->hdoc[0], m_d->fd[1], m_d);
+	}
+	else if (tmp->out_app != -1)
+		f_duplicate(STDIN_FILENO, tmp->out_app, m_d);
+	else if (tmp->out_trunc != -1)
+		f_duplicate(STDIN_FILENO, tmp->out_trunc, m_d);
+	else if (m_d->nb_cmd == 1)
+		return ;
+	else
+		f_duplicate(STDIN_FILENO, m_d->fd[1], m_d);
+}
+
+void	last_process(t_msh_data *m_d, t_cmd *tmp)
+{
+	if (tmp->out_app != -1)
+		f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_app, m_d);
+	else if (tmp->out_trunc != -1)
+		f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_trunc, m_d);
+	else if (tmp->infile != -1)
+		f_duplicate(tmp->infile, STDOUT_FILENO, m_d);
+	else if (tmp->heredoc == 1)
+	{
+		f_duplicate(tmp->hdoc[0], STDOUT_FILENO, m_d);
+		close(tmp->hdoc[0]);
+	}
+	else
+		f_duplicate(m_d->fd[(2 * m_d->process) - 2], STDOUT_FILENO, m_d);
+}
+
+void	middle_process(t_msh_data *m_d, t_cmd *tmp)
+{
+	if (tmp->out_app != -1)
+		f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_app, m_d);
+	else if (tmp->out_trunc != -1)
+		f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_trunc, m_d);
+	else if (tmp->infile != -1)
+		f_duplicate(tmp->infile, m_d->fd[(2 * m_d->process) + 1], m_d);
+	else if (tmp->heredoc == 1)
+	{
+		f_duplicate(tmp->hdoc[0], m_d->fd[(2 * m_d->process) + 1], m_d);
+		close(tmp->hdoc[0]);
+	}
+	else 
+		f_duplicate(m_d->fd[(2 * m_d->process) - 2], m_d->fd[(2 * m_d->process) + 1], m_d);
+}
+
+void	f_pre_duplicate(t_msh_data *m_d, t_cmd *tmp)
+{
+	if (m_d->process == 0)
+	{
+		first_process(m_d, tmp);
+		// if (tmp->infile != -1)
+		// {
+		// 	if (m_d->nb_cmd == 1)
+		// 		f_duplicate(tmp->infile, STDOUT_FILENO, m_d);
+		// 	else
+		// 		f_duplicate(tmp->infile, m_d->fd[1], m_d);
+		// }
+		// else if (tmp->heredoc == 1)
+		// {
+		// 	if (m_d->nb_cmd == 1)
+		// 	{
+		// 		f_duplicate(tmp->hdoc[0], STDOUT_FILENO, m_d);
+		// 		close(tmp->hdoc[0]);
+		// 	}
+		// 	else
+		// 		f_duplicate(tmp->hdoc[0], m_d->fd[1], m_d);
+		// }
+		// else if (tmp->out_app != -1)
+		// 	f_duplicate(STDIN_FILENO, tmp->out_app, m_d);
+		// else if (tmp->out_trunc != -1)
+		// 	f_duplicate(STDIN_FILENO, tmp->out_trunc, m_d);
+		// else if (m_d->nb_cmd == 1)
+		// 	return ;
+		// else
+		// 	f_duplicate(STDIN_FILENO, m_d->fd[1], m_d);
+	}
+	else if (m_d->process == m_d->nb_cmd - 1)
+	{
+		last_process(m_d, tmp);
+		// if (tmp->out_app != -1)
+		// 	f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_app, m_d);
+		// else if (tmp->out_trunc != -1)
+		// 	f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_trunc, m_d);
+		// else if (tmp->infile != -1)
+		// 	f_duplicate(tmp->infile, STDOUT_FILENO, m_d);
+		// else if (tmp->heredoc == 1)
+		// {
+		// 	f_duplicate(tmp->hdoc[0], STDOUT_FILENO, m_d);
+		// 	close(tmp->hdoc[0]);
+		// }
+		// else
+		// 	f_duplicate(m_d->fd[(2 * m_d->process) - 2], STDOUT_FILENO, m_d);
 	}
 	else
 	{
-		if (tmp->out_app != -1)
-			f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_app, m_d);
-		else if (tmp->out_trunc != -1)
-			f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_trunc, m_d);
-		else if (tmp->infile != -1)
-			f_duplicate(tmp->infile, m_d->fd[(2 * m_d->process) + 1], m_d);
-		else if (tmp->heredoc == 1)
-		{
-			f_duplicate(tmp->hdoc[0], m_d->fd[(2 * m_d->process) + 1], m_d);
-			close(tmp->hdoc[0]);
-		}
-		else 
-			f_duplicate(m_d->fd[(2 * m_d->process) - 2], m_d->fd[(2 * m_d->process) + 1], m_d);
+		middle_process(m_d, tmp);
+		// if (tmp->out_app != -1)
+		// 	f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_app, m_d);
+		// else if (tmp->out_trunc != -1)
+		// 	f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_trunc, m_d);
+		// else if (tmp->infile != -1)
+		// 	f_duplicate(tmp->infile, m_d->fd[(2 * m_d->process) + 1], m_d);
+		// else if (tmp->heredoc == 1)
+		// {
+		// 	f_duplicate(tmp->hdoc[0], m_d->fd[(2 * m_d->process) + 1], m_d);
+		// 	close(tmp->hdoc[0]);
+		// }
+		// else 
+		// 	f_duplicate(m_d->fd[(2 * m_d->process) - 2], m_d->fd[(2 * m_d->process) + 1], m_d);
 	}
 	close_fd_tab(m_d->fd, 2 * (m_d->nb_cmd - 1), m_d);
 }
@@ -106,7 +169,9 @@ char	*pip_get_exec(char *cmd, char **paths)
 	while (*paths)
 	{
 		path = ft_strjoin(*paths, "/");
+		// if malloc
 		path = ft_strjoin(path, cmd);
+		// if malloc
 		if (access(path, X_OK) == 0)
 			return (path);
 		paths++;
@@ -126,6 +191,7 @@ char	**pip_get_path(char **env)
 		env++;
 	}
 	paths = ft_split(*env + 5, ':');
+	// if malloc
 	return (paths);
 }
 
@@ -138,10 +204,7 @@ void	child_process(t_msh_data *m_d, t_cmd *tmp)
 		execve(tmp->args[0], tmp->args, m_d->env_upd);
 	}
 	else
-	{
 		msh_exec_builtin(tmp, m_d);
-		// close_fd_tab_builtin(m_d->fd, 2 * (m_d->nb_cmd - 1), m_d);
-	}
 }
 
 void	f_fork(t_msh_data *m_d, t_cmd *tmp)
