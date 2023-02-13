@@ -12,12 +12,13 @@
 
  #include "minishell.h"
 
-void	f_duplicate(int in, int out, t_msh_data *m_d)
+int	f_duplicate(int in, int out)
 {
 	if (dup2(in, STDIN_FILENO) < 0)
-		f_error("Dup2 error in : ", strerror(errno), m_d);
+		return(msh_error(1, ERR_DUP2, 1));
 	if (dup2(out, STDOUT_FILENO) < 0)
-		f_error("Dup2 error out: ", strerror(errno), m_d);
+		return(msh_error(1, ERR_DUP2, 1));
+	return (EXIT_SUCCESS);
 }
 
 void	first_process(t_msh_data *m_d, t_cmd *tmp)
@@ -25,65 +26,65 @@ void	first_process(t_msh_data *m_d, t_cmd *tmp)
 	if (tmp->infile != -1)
 	{
 		if (m_d->nb_cmd == 1)
-			f_duplicate(tmp->infile, STDOUT_FILENO, m_d);
+			f_duplicate(tmp->infile, STDOUT_FILENO);
 		else
-			f_duplicate(tmp->infile, m_d->fd[1], m_d);
+			f_duplicate(tmp->infile, m_d->fd[1]);
 	}
 	else if (tmp->heredoc == 1)
 	{
 		if (m_d->nb_cmd == 1)
 		{
-			f_duplicate(tmp->hdoc[0], STDOUT_FILENO, m_d);
+			f_duplicate(tmp->hdoc[0], STDOUT_FILENO);
 			close(tmp->hdoc[0]);
 		}
 		else
-			f_duplicate(tmp->hdoc[0], m_d->fd[1], m_d);
+			f_duplicate(tmp->hdoc[0], m_d->fd[1]);
 	}
 	else if (tmp->out_app != -1)
-		f_duplicate(STDIN_FILENO, tmp->out_app, m_d);
+		f_duplicate(STDIN_FILENO, tmp->out_app);
 	else if (tmp->out_trunc != -1)
-		f_duplicate(STDIN_FILENO, tmp->out_trunc, m_d);
+		f_duplicate(STDIN_FILENO, tmp->out_trunc);
 	else if (m_d->nb_cmd == 1)
 		return ;
 	else
-		f_duplicate(STDIN_FILENO, m_d->fd[1], m_d);
+		f_duplicate(STDIN_FILENO, m_d->fd[1]);
 }
 
 void	last_process(t_msh_data *m_d, t_cmd *tmp)
 {
 	if (tmp->out_app != -1)
-		f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_app, m_d);
+		f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_app);
 	else if (tmp->out_trunc != -1)
-		f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_trunc, m_d);
+		f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_trunc);
 	else if (tmp->infile != -1)
-		f_duplicate(tmp->infile, STDOUT_FILENO, m_d);
+		f_duplicate(tmp->infile, STDOUT_FILENO);
 	else if (tmp->heredoc == 1)
 	{
-		f_duplicate(tmp->hdoc[0], STDOUT_FILENO, m_d);
+		f_duplicate(tmp->hdoc[0], STDOUT_FILENO);
 		close(tmp->hdoc[0]);
 	}
 	else
-		f_duplicate(m_d->fd[(2 * m_d->process) - 2], STDOUT_FILENO, m_d);
+		f_duplicate(m_d->fd[(2 * m_d->process) - 2], STDOUT_FILENO);
 }
 
 void	middle_process(t_msh_data *m_d, t_cmd *tmp)
 {
 	if (tmp->out_app != -1)
-		f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_app, m_d);
+		f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_app);
 	else if (tmp->out_trunc != -1)
-		f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_trunc, m_d);
+		f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_trunc);
 	else if (tmp->infile != -1)
-		f_duplicate(tmp->infile, m_d->fd[(2 * m_d->process) + 1], m_d);
+		f_duplicate(tmp->infile, m_d->fd[(2 * m_d->process) + 1]);
 	else if (tmp->heredoc == 1)
 	{
-		f_duplicate(tmp->hdoc[0], m_d->fd[(2 * m_d->process) + 1], m_d);
+		f_duplicate(tmp->hdoc[0], m_d->fd[(2 * m_d->process) + 1]);
 		close(tmp->hdoc[0]);
 	}
 	else 
-		f_duplicate(m_d->fd[(2 * m_d->process) - 2], m_d->fd[(2 * m_d->process) + 1], m_d);
+		f_duplicate(m_d->fd[(2 * m_d->process) - 2], m_d->fd[(2 * m_d->process) + 1]);
 }
 
-void	f_pre_duplicate(t_msh_data *m_d, t_cmd *tmp)
+int	f_pre_duplicate(t_msh_data *m_d, t_cmd *tmp)
 {
 	if (m_d->process == 0)
 	{
@@ -148,7 +149,9 @@ void	f_pre_duplicate(t_msh_data *m_d, t_cmd *tmp)
 		// else 
 		// 	f_duplicate(m_d->fd[(2 * m_d->process) - 2], m_d->fd[(2 * m_d->process) + 1], m_d);
 	}
-	close_fd_tab(m_d->fd, 2 * (m_d->nb_cmd - 1), m_d);
+	if (close_fd_tab(m_d->fd, 2 * (m_d->nb_cmd - 1), m_d) != 0)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
 
 void	pip_no_exec(char *s)
@@ -169,9 +172,11 @@ char	*pip_get_exec(char *cmd, char **paths)
 	while (*paths)
 	{
 		path = ft_strjoin(*paths, "/");
-		// if malloc
+		if (!path)
+			return (NULL);
 		path = ft_strjoin(path, cmd);
-		// if malloc
+		if (!path)
+			return (NULL);
 		if (access(path, X_OK) == 0)
 			return (path);
 		paths++;
@@ -191,6 +196,8 @@ char	**pip_get_path(char **env)
 		env++;
 	}
 	paths = ft_split(*env + 5, ':');
+	if (!paths)
+		return (NULL);
 	return (paths);
 }
 
@@ -206,7 +213,7 @@ void	child_process(t_msh_data *m_d, t_cmd *tmp)
 		msh_exec_builtin(tmp, m_d);
 }
 
-void	f_fork(t_msh_data *m_d, t_cmd *tmp)
+int	f_fork(t_msh_data *m_d, t_cmd *tmp)
 {
 	if (m_d->nb_cmd == 1 && msh_is_builtin(tmp->args[0]))
 		msh_exec_builtin(tmp, m_d);
@@ -214,8 +221,9 @@ void	f_fork(t_msh_data *m_d, t_cmd *tmp)
 	{
 		m_d->pid[m_d->process] = fork();
 		if (m_d->pid[m_d->process] < 0)
-			f_error("Fork error : ", strerror(errno), m_d);
+			return (msh_error(1, ERR_FORK, 1));
 		if (!m_d->pid[m_d->process])
 			child_process(m_d, tmp);
 	}
+	return (EXIT_SUCCESS);
 }

@@ -65,5 +65,7 @@
 # define ERR_PIPE "Error creating pipe :"
 # define ERR_CLOSE "Close error :"
 # define ERR_OPEN "Open error :"
+# define ERR_FORK "Fork error : "
+# define ERR_DUP2 "Dup2 error : "
 
 #endif

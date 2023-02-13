@@ -98,28 +98,7 @@ void	f_error(char *str, char *erno, t_msh_data *d)
 	exit(0);
 }
 
-// void	free_args(char **tab)
-// {
-// 	int	i;
-
-// 	i = 1;
-// 	if (tab)
-// 	{
-// 		while (tab[i])
-// 		{
-// 			if (tab[i])
-// 			{
-// 				free_ptr(tab[i]);
-// 				tab[i] = NULL;
-// 			}
-// 			i++;
-// 		}
-// 		free(tab);
-// 		tab = NULL;
-// 	}
-// }
-
-void	close_fd_tab(int *fd, int size, t_msh_data *d)
+int	close_fd_tab(int *fd, int size)
 {
 	int	i;
 
@@ -127,21 +106,9 @@ void	close_fd_tab(int *fd, int size, t_msh_data *d)
 	while (i < size)
 	{
 		if (close(fd[i]) < 0)
-			f_error("Close error :", strerror(errno), d);
+			return(msh_error(1, ERR_CLOSE, 1));
 		i++;
 	}
 	free(fd);
+	return (EXIT_SUCCESS);
 }
-
-// void	close_fd_tab_builtin(int *fd, int size, t_msh_data *d)
-// {
-// 	int	i;
-
-// 	(void) d;
-// 	i = 0;
-// 	while (i < size)
-// 	{
-// 		close(fd[i]);
-// 		i++;
-// 	}
-// }

@@ -20,10 +20,10 @@ int	open_pipe(t_msh_data *m_d)
 	while (i < m_d->nb_cmd - 1)
 	{
 		if (pipe(&m_d->fd[2 * i]) == -1)
-			f_error("Error creating pipe :", strerror(errno), m_d);
+			return(msh_error(1, ERR_PIPE, 1));
 		i++;
 	}
-	return (SUCCESS);
+	return (EXIT_SUCCESS);
 }
 
 int	launch_process(t_msh_data *m_d)
@@ -38,8 +38,9 @@ int	launch_process(t_msh_data *m_d)
 			tmp = tmp->next;
 		m_d->process++;
 	}
-	close_fd_tab(m_d->fd, 2 * (m_d->nb_cmd - 1), m_d);
-	return (SUCCESS);
+	if (close_fd_tab(m_d->fd, 2 * (m_d->nb_cmd - 1), m_d) != 0)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
 
 int	pipex(t_msh_data *m_d)
@@ -55,8 +56,10 @@ int	pipex(t_msh_data *m_d)
 	// 		f_error("Error creating pipe :", strerror(errno), m_d);
 	// 	i++;
 	// }
-	open_pipe(m_d);
-	launch_process(m_d);
+	if (open_pipe(m_d) != 0)
+		return (EXIT_FAILURE);
+	if (launch_process(m_d) != 0)
+		return (EXIT_FAILURE);
 	// tmp = m_d->cmds;
 	// while (m_d->process < m_d->nb_cmd)
 	// {

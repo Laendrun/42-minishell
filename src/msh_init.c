@@ -74,5 +74,5 @@ void	msh_pip_reset(t_msh_data *m_data)
 	m_data->env_upd = NULL;
 	m_data->trunc_lst = NULL;
 	m_data->cmds = NULL;
-	msh_free_cmds(m_data);
+	// msh_free_cmds(m_data);
 }
