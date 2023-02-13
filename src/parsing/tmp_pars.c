@@ -141,8 +141,12 @@ void	ft_here_doc(t_cmd *end, t_msh_data *m_d)
 	while (line)
 	{
 		if (ft_strncmp(end->delim, line, (ft_strlen(end->delim) + 1)) == 0)
+		{
+			free(line);
 			break ;
+		}
 		ft_putstr_fd(ft_strcat(line, "\n"), end->hdoc[1]);
+		free(line);
 		line = readline(">");
 	}
 	if (close(end->hdoc[1]) < 0)

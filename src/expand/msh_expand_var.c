@@ -72,7 +72,7 @@ of the var in env. if it it does not exists NULL is returned.
 
 
 
-void	handle_var(int (*i)[2], t_tok_list *tok, char **ret, t_msh_data *m_d)
+int	handle_var(int (*i)[2], t_tok_list *tok, char **ret, t_msh_data *m_d)
 {
 	*ret = strjoin_free(*ret, ft_substr(tok->val, (*i)[1], (*i)[0] - (*i)[1]));
 	(*i)[0]++;
@@ -82,9 +82,10 @@ void	handle_var(int (*i)[2], t_tok_list *tok, char **ret, t_msh_data *m_d)
 	*ret = strjoin_free(*ret, msh_get_env_free(m_d, ft_substr(tok->val, (*i)[1], (*i)[0] - (*i)[1])));
 	(*i)[1] = (*i)[0];
 	(*i)[0]--;
+	return (EXIT_SUCCES);
 }
 
-void	handle_error_code(int (*i)[2], t_tok_list *tok, char **ret)
+int	handle_error_code(int (*i)[2], t_tok_list *tok, char **ret)
 {
 	*ret = strjoin_free(*ret, ft_substr(tok->val, (*i)[1], (*i)[0] - (*i)[1]));
 	(*i)[0]++;
@@ -93,6 +94,7 @@ void	handle_error_code(int (*i)[2], t_tok_list *tok, char **ret)
 	*ret = strjoin_free(*ret, ft_itoa(msh_get_gcode()));
 	(*i)[1] = (*i)[0];
 	(*i)[0]--;
+	return (EXIT_SUCCES);
 }
 
 int	msh_flag_in_str_var(t_msh_data *m_d, t_tok_list *tok, char *ret)
@@ -114,7 +116,7 @@ int	msh_flag_in_str_var(t_msh_data *m_d, t_tok_list *tok, char *ret)
 	ret = strjoin_free(ret, ft_substr(tok->val, i[1], i[0] - i[1]));
 	free(tok->val);
 	tok->val = ret;
-	return (SUCCESS);
+	return (EXIT_SUCCES);
 }
 
 // THE FUNCTION BEFORE NORM :O
@@ -167,17 +169,21 @@ int	msh_flag_in_str_var(t_msh_data *m_d, t_tok_list *tok, char *ret)
 int	msh_replace_var_in_str(t_msh_data *m_d)
 {
 	t_tok_list	*cur;
-	char		*ret;
+	char		*res;
+	// int			err;
 
+	// err = EXIT_SUCCES;
 	cur = m_d->tokens;
 	while (cur->next)
 	{
 		if ((cur->type == STR && cur->prev->type == DQUOTE) || cur->type == WORD)
 		{
-			ret = ft_strdup("");
-			// if (!ret)
-			// 	return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
-			msh_flag_in_str_var(m_d, cur, ret);
+			res = ft_strdup("");
+			if (!res)
+				return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
+			msh_flag_in_str_var(m_d, cur, res);
+			// if (err != EXIT_SUCCESS)
+			// 	return (err);
 		}
 		cur = cur->next;
 	}
@@ -314,8 +320,9 @@ of the var in env. if it it does not exists NULL is returned.
 
 int	msh_expand_var(t_msh_data *m_d)
 {
-	// msh_replace_error_code(m_d);
-	
+	int	ret;
+
+	ret = EXIT_SUCCES;
 	msh_replace_var_in_str(m_d);
-	return(SUCCESS);
+	return(ret);
 }

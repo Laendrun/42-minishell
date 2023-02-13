@@ -6,7 +6,7 @@
 /*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:34:05 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/11 22:12:01 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/13 12:50:33 by egauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	msh_is_builtin(char *str)
 	t = (!ft_strncmp("export", str, 7) || t);
 	t = (!ft_strncmp("unset", str, 6) || t);
 	t = (!ft_strncmp("exit", str, 5) || t);
-	t = (!ft_strncmp("echo2", str, 6) || t);
+	t = (!ft_strncmp("echo", str, 5) || t);
 	return (t);
 }
 
