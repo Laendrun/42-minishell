@@ -273,7 +273,7 @@ int	child_process(t_msh_data *m_d, t_cmd *tmp)
 	if (!msh_is_builtin(tmp->args[0]))
 	{
 		tmp->args[0] = pip_get_exec(tmp->args[0], m_d->path);
-		msh_set_gcode(execve(tmp->args[0], tmp->args, m_d->env_upd));
+		execve(tmp->args[0], tmp->args, m_d->env_upd);
 	}
 	else
 		msh_exec_builtin(tmp, m_d);

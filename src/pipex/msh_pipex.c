@@ -68,8 +68,11 @@ int	pipex(t_msh_data *m_d)
 	// 		tmp = tmp->next;
 	// 	m_d->process++;
 	// }
+	// printf("process: %d\n", m_d->process);
 	while (m_d->process--)
+	{
 		waitpid(m_d->pid[m_d->process], &status, 0);
+	}
 	// printf("status : %d\n", status);
 	// free(m_d->pid);
 	// free_tab_char(m_d->path);

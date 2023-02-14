@@ -13,7 +13,6 @@
 #include "minishell.h"
 
 // attention aux segfault
-
 int	check_redir_start_end(t_msh_data *d)
 {
 	t_tok_list	*cur;
@@ -21,27 +20,23 @@ int	check_redir_start_end(t_msh_data *d)
 	cur = d->tokens;
 	if (cur && cur->type >= PIPE)
 	{
-		printf("syntax error near unexpected token\n");
-		return (ERROR);
+		msh_error(1, ERR_NEAR_TOK, 258);
+			return (EXIT_FAILURE);
 	}
 	while (cur->next)
 	{
+		// to include or not to include ?
 		if (cur->type >= PIPE && cur->next && cur->prev && (cur->next->type >= PIPE || cur->prev->type >= PIPE))
 		{
-			printf("syntax error near unexpected token\n");
-			return (ERROR);
+			msh_error(1, ERR_NEAR_TOK, 258);
+			return (EXIT_FAILURE);
 		}
-		// if (cur->type > PIPE && cur->next->type != REDIR)
-		// {
-		// 	printf("syntax error near unexpected token\n");
-		// 	return (ERROR);
-		// }
 		cur = cur->next;
 	}
 	if (cur->prev && cur->prev->type >= PIPE)
 	{
-		printf("syntax error near unexpected token\n");
-		return (ERROR);
+		msh_error(1, ERR_NEAR_TOK, 258);
+			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
 }
@@ -57,12 +52,13 @@ int	remove_sep(t_msh_data *d)
 			msh_remove_tok(&d->tokens, cur);
 		cur = cur->next;
 	}
-	return (SUCCESS);
+	return (EXIT_SUCCESS);
 }
 
 int	msh_err_near_token(t_msh_data *d)
 {
 	remove_sep(d);
-	// check_redir_start_end(d);
+	if (check_redir_start_end(d) != 0)
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
