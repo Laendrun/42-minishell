@@ -45,5 +45,6 @@ void	msh_free_upd(t_msh_data *m_data);
 // free/msh_errors.
 // ----------------------------------------------
 int		msh_error(int ret, char *msg, int err_code);
+void	msh_error_cmd_not_found(char *msg, int err_code);
 
 #endif

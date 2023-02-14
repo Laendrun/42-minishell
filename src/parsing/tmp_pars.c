@@ -131,13 +131,14 @@ int	create_cmd_lst(t_msh_data *m_d, int i)
 	return (EXIT_SUCCESS);
 }
 
-int	ft_here_doc(t_cmd *end)
+int	ft_here_doc(t_msh_data *m_d, t_cmd *end)
 {
 	char	*line;
 
 	if (pipe(end->hdoc) < 0)
 		return(msh_error(1, ERR_PIPE, 1));
 	line = readline(">");
+	line = msh_var_in_hdoc(m_d, line);
 	while (line)
 	{
 		if (ft_strncmp(end->delim, line, (ft_strlen(end->delim) + 1)) == 0)
@@ -148,13 +149,14 @@ int	ft_here_doc(t_cmd *end)
 		ft_putstr_fd(ft_strcat(line, "\n"), end->hdoc[1]);
 		free(line);
 		line = readline(">");
+		line = msh_var_in_hdoc(m_d, line);
 	}
 	if (close(end->hdoc[1]) < 0)
 		return(msh_error(1, ERR_CLOSE, 1));
 	return (EXIT_SUCCESS);
 }
 
-int	check_redir_type(t_tok_list *tmp, t_cmd *end)
+int	check_redir_type(t_msh_data *m_d, t_tok_list *tmp, t_cmd *end)
 {
 	if (tmp->type == LT)
 	{
@@ -166,7 +168,7 @@ int	check_redir_type(t_tok_list *tmp, t_cmd *end)
 	{
 		end->heredoc = 1;
 		end->delim = tmp->next->val;
-		if (ft_here_doc(end) != 0)
+		if (ft_here_doc(m_d, end) != 0)
 			return (EXIT_FAILURE);
 	}
 	else if (tmp->type == GT)
@@ -200,7 +202,7 @@ int	set_redir_in_cmd_lst(t_msh_data *m_d, int i)
 		if ((tmp->type == LT || tmp->type == DLT || tmp->type == GT
 			|| tmp->type == DGT) && tmp->next->type == REDIR)
 			{
-				if (check_redir_type(tmp, end) != 0)
+				if (check_redir_type(m_d, tmp, end) != 0)
 					return (EXIT_FAILURE);
 			}
 		tmp = tmp->next;

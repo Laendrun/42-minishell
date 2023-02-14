@@ -38,7 +38,7 @@ int	launch_process(t_msh_data *m_d)
 			tmp = tmp->next;
 		m_d->process++;
 	}
-	if (close_fd_tab(m_d->fd, 2 * (m_d->nb_cmd - 1), m_d) != 0)
+	if (close_fd_tab(m_d->fd, 2 * (m_d->nb_cmd - 1)) != 0)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -70,16 +70,25 @@ int	pipex(t_msh_data *m_d)
 	// }
 	while (m_d->process--)
 		waitpid(m_d->pid[m_d->process], &status, 0);
+	printf("status : %d\n", status);
 	// free(m_d->pid);
 	// free_tab_char(m_d->path);
 	// free_tab_char(m_d->env_upd);
 	// free_t_cmd(m_d);
 	// free(m_d->trunc_lst);
-	return (WEXITSTATUS(status));
+
+	// msh_set_gcode(WEXITSTATUS(status));
+	msh_set_gcode(status);
+	return (EXIT_SUCCESS);
+	// return (WEXITSTATUS(status));
 }
 
 int	msh_pipex(t_msh_data *m_d)
 {
-	msh_set_gcode(pipex(m_d));
-	return (msh_get_gcode());
+	
+	// msh_set_gcode(pipex(m_d));
+	// return (msh_get_gcode());
+	if (pipex(m_d) != 0)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }

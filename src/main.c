@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static int	g_code = 0;
+int	g_code = 0;
 
 int	main(int ac, char **av, char **env)
 {

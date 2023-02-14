@@ -21,74 +21,133 @@ int	f_duplicate(int in, int out)
 	return (EXIT_SUCCESS);
 }
 
-void	first_process(t_msh_data *m_d, t_cmd *tmp)
+int	inf_first_process(t_msh_data *m_d, t_cmd *tmp)
+{
+	if (m_d->nb_cmd == 1)
+	{
+		if (f_duplicate(tmp->infile, STDOUT_FILENO) != 0)
+			return (EXIT_FAILURE);
+	}
+	else
+	{
+		if (f_duplicate(tmp->infile, m_d->fd[1]) != 0)
+			return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
+}
+
+int	hdoc_first_process(t_msh_data *m_d, t_cmd *tmp)
+{
+	if (m_d->nb_cmd == 1)
+	{
+		if (f_duplicate(tmp->hdoc[0], STDOUT_FILENO) != 0)
+			return (EXIT_FAILURE);
+		close(tmp->hdoc[0]);
+	}
+	else
+	{
+		if (f_duplicate(tmp->hdoc[0], m_d->fd[1]) != 0)
+			return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
+}
+
+int	first_process(t_msh_data *m_d, t_cmd *tmp)
 {
 	if (tmp->infile != -1)
 	{
-		if (m_d->nb_cmd == 1)
-			f_duplicate(tmp->infile, STDOUT_FILENO);
-		else
-			f_duplicate(tmp->infile, m_d->fd[1]);
+		// if (m_d->nb_cmd == 1)
+		// 	f_duplicate(tmp->infile, STDOUT_FILENO);
+		// else
+		// 	f_duplicate(tmp->infile, m_d->fd[1]);
+		inf_first_process(m_d, tmp);
 	}
 	else if (tmp->heredoc == 1)
 	{
-		if (m_d->nb_cmd == 1)
-		{
-			f_duplicate(tmp->hdoc[0], STDOUT_FILENO);
-			close(tmp->hdoc[0]);
-		}
-		else
-			f_duplicate(tmp->hdoc[0], m_d->fd[1]);
+		// if (m_d->nb_cmd == 1)
+		// {
+		// 	f_duplicate(tmp->hdoc[0], STDOUT_FILENO);
+		// 	close(tmp->hdoc[0]);
+		// }
+		// else
+		// 	f_duplicate(tmp->hdoc[0], m_d->fd[1]);
+		hdoc_first_process(m_d, tmp);
 	}
 	else if (tmp->out_app != -1)
 		f_duplicate(STDIN_FILENO, tmp->out_app);
 	else if (tmp->out_trunc != -1)
 		f_duplicate(STDIN_FILENO, tmp->out_trunc);
 	else if (m_d->nb_cmd == 1)
-		return ;
+		return (EXIT_SUCCESS);
 	else
 		f_duplicate(STDIN_FILENO, m_d->fd[1]);
+	return (EXIT_SUCCESS);
 }
 
-void	last_process(t_msh_data *m_d, t_cmd *tmp)
+int	last_process(t_msh_data *m_d, t_cmd *tmp)
 {
 	if (tmp->out_app != -1)
-		f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_app);
+	{
+		if (f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_app) != 0)
+			return (EXIT_FAILURE);
+	}
 	else if (tmp->out_trunc != -1)
-		f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_trunc);
+	{
+		if (f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_trunc) != 0)
+			return (EXIT_FAILURE);
+	}
 	else if (tmp->infile != -1)
-		f_duplicate(tmp->infile, STDOUT_FILENO);
+	{
+		if (f_duplicate(tmp->infile, STDOUT_FILENO) != 0)
+			return (EXIT_FAILURE);
+	}
 	else if (tmp->heredoc == 1)
 	{
-		f_duplicate(tmp->hdoc[0], STDOUT_FILENO);
+		if (f_duplicate(tmp->hdoc[0], STDOUT_FILENO) != 0)
+			return (EXIT_FAILURE);
 		close(tmp->hdoc[0]);
 	}
 	else
-		f_duplicate(m_d->fd[(2 * m_d->process) - 2], STDOUT_FILENO);
+		if (f_duplicate(m_d->fd[(2 * m_d->process) - 2], STDOUT_FILENO) != 0)
+			return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
 
-void	middle_process(t_msh_data *m_d, t_cmd *tmp)
+int	middle_process(t_msh_data *m_d, t_cmd *tmp)
 {
 	if (tmp->out_app != -1)
-		f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_app);
+	{
+		if (f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_app) != 0)
+			return (EXIT_FAILURE);
+	}
 	else if (tmp->out_trunc != -1)
-		f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_trunc);
+	{
+		if (f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_trunc) != 0)
+			return (EXIT_FAILURE);
+	}
 	else if (tmp->infile != -1)
+	{
 		f_duplicate(tmp->infile, m_d->fd[(2 * m_d->process) + 1]);
+			return (EXIT_FAILURE);
+	}
 	else if (tmp->heredoc == 1)
 	{
-		f_duplicate(tmp->hdoc[0], m_d->fd[(2 * m_d->process) + 1]);
+		if (f_duplicate(tmp->hdoc[0], m_d->fd[(2 * m_d->process) + 1]) != 0)
+			return (EXIT_FAILURE);
 		close(tmp->hdoc[0]);
 	}
-	else 
-		f_duplicate(m_d->fd[(2 * m_d->process) - 2], m_d->fd[(2 * m_d->process) + 1]);
+	else
+		f_duplicate(m_d->fd[(2 * m_d->process) - 2],
+			m_d->fd[(2 * m_d->process) + 1]);
+	return (EXIT_SUCCESS);
 }
 
 int	f_pre_duplicate(t_msh_data *m_d, t_cmd *tmp)
 {
 	if (m_d->process == 0)
 	{
-		first_process(m_d, tmp);
+		if (first_process(m_d, tmp) != 0)
+			return (EXIT_FAILURE);
 		// if (tmp->infile != -1)
 		// {
 		// 	if (m_d->nb_cmd == 1)
@@ -117,7 +176,8 @@ int	f_pre_duplicate(t_msh_data *m_d, t_cmd *tmp)
 	}
 	else if (m_d->process == m_d->nb_cmd - 1)
 	{
-		last_process(m_d, tmp);
+		if (last_process(m_d, tmp) != 0)
+			return (EXIT_FAILURE);
 		// if (tmp->out_app != -1)
 		// 	f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_app, m_d);
 		// else if (tmp->out_trunc != -1)
@@ -134,7 +194,8 @@ int	f_pre_duplicate(t_msh_data *m_d, t_cmd *tmp)
 	}
 	else
 	{
-		middle_process(m_d, tmp);
+		if (middle_process(m_d, tmp) != 0)
+			return (EXIT_FAILURE);
 		// if (tmp->out_app != -1)
 		// 	f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_app, m_d);
 		// else if (tmp->out_trunc != -1)
@@ -149,16 +210,21 @@ int	f_pre_duplicate(t_msh_data *m_d, t_cmd *tmp)
 		// else 
 		// 	f_duplicate(m_d->fd[(2 * m_d->process) - 2], m_d->fd[(2 * m_d->process) + 1], m_d);
 	}
-	if (close_fd_tab(m_d->fd, 2 * (m_d->nb_cmd - 1), m_d) != 0)
+	if (close_fd_tab(m_d->fd, 2 * (m_d->nb_cmd - 1)) != 0)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
 void	pip_no_exec(char *s)
 {
-	ft_putstr_fd("shellusion: ", STDERR_FILENO);
-	ft_putstr_fd(s, STDERR_FILENO);
-	ft_putstr_fd(" : command not found.\n", STDERR_FILENO);
+	char	*err;
+
+	err = ft_strjoin("shellusion: ", s);
+	msh_error_cmd_not_found(err, 127);
+	free(err);
+	// ft_putstr_fd("shellusion: ", STDERR_FILENO);
+	// ft_putstr_fd(s, STDERR_FILENO);
+	// ft_putstr_fd(" : command not found.\n", STDERR_FILENO);
 	exit(1);
 }
 
@@ -201,7 +267,7 @@ char	**pip_get_path(char **env)
 	return (paths);
 }
 
-void	child_process(t_msh_data *m_d, t_cmd *tmp)
+int	child_process(t_msh_data *m_d, t_cmd *tmp)
 {
 	f_pre_duplicate(m_d, tmp);
 	if (!msh_is_builtin(tmp->args[0]))
@@ -211,6 +277,7 @@ void	child_process(t_msh_data *m_d, t_cmd *tmp)
 	}
 	else
 		msh_exec_builtin(tmp, m_d);
+	return (EXIT_SUCCESS);
 }
 
 int	f_fork(t_msh_data *m_d, t_cmd *tmp)

@@ -43,6 +43,8 @@
 # define CYAN "\033[0;96m"
 # define WHITE "\033[0;97m"
 
+extern int	g_code;
+
 void	msh_pip_reset(t_msh_data *m_data);
 
 
@@ -118,6 +120,12 @@ char	**msh_make_env_tabstr(t_msh_data *m_d);
 int	msh_create_commmands(t_msh_data *m_d);
 int	msh_redir_op(t_msh_data *m_d);
 int	msh_err_near_token(t_msh_data *d);
+
+// ----------------------------------------------
+// parsing
+// ----------------------------------------------
+
+char	*msh_var_in_hdoc(t_msh_data *m_d, char *tok);
 
 // ----------------------------------------------
 // msh_pipex.c
