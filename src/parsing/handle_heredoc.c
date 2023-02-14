@@ -12,6 +12,8 @@
 
 #include "minishell.h"
 
+// heredoc expand VAR
+
 int	handle_var_hdoc(int (*i)[2], char *tok, char **ret, t_msh_data *m_d)
 {
 	*ret = ft_strjoin_free(*ret, ft_substr(tok, (*i)[1], (*i)[0] - (*i)[1]));
@@ -71,6 +73,34 @@ char	*msh_var_in_hdoc(t_msh_data *m_d, char *tok)
 	if (!ret)
 		return (NULL);
 	return (ret);
+}
+
+int	ft_here_doc(t_msh_data *m_d, t_cmd *end)
+{
+	char	*line;
+	char	*read;
+
+	if (pipe(end->hdoc) < 0)
+		return(msh_error(1, ERR_PIPE, 1));
+	read = readline(">");
+	line = msh_var_in_hdoc(m_d, read);
+	free(read);
+	while (read)
+	{
+		if (ft_strncmp(end->delim, line, (ft_strlen(end->delim) + 1)) == 0)
+		{
+			free(line);
+			break ;
+		}
+		ft_putstr_fd(ft_strcat(line, "\n"), end->hdoc[1]);
+		free(line);
+		read = readline(">");
+		line = msh_var_in_hdoc(m_d, read);
+		free(read);
+	}
+	if (close(end->hdoc[1]) < 0)
+		return(msh_error(1, ERR_CLOSE, 1));
+	return (EXIT_SUCCESS);
 }
 
 // int	check_if_outfile_trunc(t_msh_data *m_d)

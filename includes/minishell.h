@@ -126,6 +126,10 @@ int	msh_err_near_token(t_msh_data *d);
 // ----------------------------------------------
 
 char	*msh_var_in_hdoc(t_msh_data *m_d, char *tok);
+int		get_nb_args(t_tok_list *d);
+void	calculate_nb_cmds(t_msh_data *m_d);
+int	set_redir_in_cmd_lst(t_msh_data *m_d, int i);
+int	ft_here_doc(t_msh_data *m_d, t_cmd *end);
 
 // ----------------------------------------------
 // msh_pipex.c

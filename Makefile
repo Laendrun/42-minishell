@@ -43,10 +43,11 @@ EXPAND_SRC = $(addprefix $(EXPAND_DIR),	msh_expand_var.c \
 										msh_error_near_token.c \
 										)
 
-PARS_SRC = $(addprefix $(PARS_DIR),	msh_create_commands.c \
-									msh_cmds_lst.c \
-									msh_redir_op.c \
-									tmp_pars.c \
+PARS_SRC = $(addprefix $(PARS_DIR),	msh_create_cmds.c \
+									utils_create_cmd.c \
+									cmds_lst.c \
+									handle_heredoc.c \
+									old_create_commands.c \
 									)
 
 PIPEX_SRC = $(addprefix $(PIPEX_DIR),	msh_pipex.c \
