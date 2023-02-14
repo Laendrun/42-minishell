@@ -12,11 +12,6 @@
 
 #include "minishell.h"
 
-// int	msh_isbackslashn(int c)
-// {
-// 	return (c == 10 || c == 11 || c == 12 || c == 13 || c == 32);
-// }
-
 int	handle_var_hdoc(int (*i)[2], char *tok, char **ret, t_msh_data *m_d)
 {
 	*ret = ft_strjoin_free(*ret, ft_substr(tok, (*i)[1], (*i)[0] - (*i)[1]));

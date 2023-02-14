@@ -70,15 +70,15 @@ int	pipex(t_msh_data *m_d)
 	// }
 	while (m_d->process--)
 		waitpid(m_d->pid[m_d->process], &status, 0);
-	printf("status : %d\n", status);
+	// printf("status : %d\n", status);
 	// free(m_d->pid);
 	// free_tab_char(m_d->path);
 	// free_tab_char(m_d->env_upd);
 	// free_t_cmd(m_d);
 	// free(m_d->trunc_lst);
-
-	// msh_set_gcode(WEXITSTATUS(status));
-	msh_set_gcode(status);
+	if(WIFEXITED(status))
+		msh_set_gcode(WEXITSTATUS(status));
+	// msh_set_gcode(status);
 	return (EXIT_SUCCESS);
 	// return (WEXITSTATUS(status));
 }

@@ -41,6 +41,7 @@ void	handle_sigint(int sig)
 void	nothing(int v)
 {
 	(void)v;
+	rl_redisplay();
 }
 
 void	msh_sigint(void)

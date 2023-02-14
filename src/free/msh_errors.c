@@ -35,6 +35,7 @@ int	msh_error(int ret, char *msg, int err_code)
 
 void	msh_error_cmd_not_found(char *msg, int err_code)
 {
+	// (void)err_code;
 	ft_putstr_fd(msg, STDERR_FILENO);
 	ft_putstr_fd(": command not found\n", STDERR_FILENO);
 	msh_set_gcode(err_code);

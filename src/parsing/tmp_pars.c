@@ -134,12 +134,14 @@ int	create_cmd_lst(t_msh_data *m_d, int i)
 int	ft_here_doc(t_msh_data *m_d, t_cmd *end)
 {
 	char	*line;
+	char	*read;
 
 	if (pipe(end->hdoc) < 0)
 		return(msh_error(1, ERR_PIPE, 1));
-	line = readline(">");
-	line = msh_var_in_hdoc(m_d, line);
-	while (line)
+	read = readline(">");
+	line = msh_var_in_hdoc(m_d, read);
+	free(read);
+	while (read)
 	{
 		if (ft_strncmp(end->delim, line, (ft_strlen(end->delim) + 1)) == 0)
 		{
@@ -148,8 +150,9 @@ int	ft_here_doc(t_msh_data *m_d, t_cmd *end)
 		}
 		ft_putstr_fd(ft_strcat(line, "\n"), end->hdoc[1]);
 		free(line);
-		line = readline(">");
-		line = msh_var_in_hdoc(m_d, line);
+		read = readline(">");
+		line = msh_var_in_hdoc(m_d, read);
+		free(read);
 	}
 	if (close(end->hdoc[1]) < 0)
 		return(msh_error(1, ERR_CLOSE, 1));

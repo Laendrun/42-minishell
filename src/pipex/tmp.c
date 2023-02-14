@@ -225,7 +225,7 @@ void	pip_no_exec(char *s)
 	// ft_putstr_fd("shellusion: ", STDERR_FILENO);
 	// ft_putstr_fd(s, STDERR_FILENO);
 	// ft_putstr_fd(" : command not found.\n", STDERR_FILENO);
-	exit(1);
+	exit(127);
 }
 
 char	*pip_get_exec(char *cmd, char **paths)
@@ -273,7 +273,7 @@ int	child_process(t_msh_data *m_d, t_cmd *tmp)
 	if (!msh_is_builtin(tmp->args[0]))
 	{
 		tmp->args[0] = pip_get_exec(tmp->args[0], m_d->path);
-		execve(tmp->args[0], tmp->args, m_d->env_upd);
+		msh_set_gcode(execve(tmp->args[0], tmp->args, m_d->env_upd));
 	}
 	else
 		msh_exec_builtin(tmp, m_d);
