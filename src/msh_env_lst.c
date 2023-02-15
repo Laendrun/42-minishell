@@ -17,8 +17,8 @@ t_env_list	*msh_env_lstnew(char *key, char *val)
 	t_env_list	*new;
 
 	new = (t_env_list *) malloc(sizeof(t_env_list));
-	// if (!new)
-
+	if (!new)
+		return (NULL);
 	new->key = key;
 	new->val = val;
 	new->next = NULL;

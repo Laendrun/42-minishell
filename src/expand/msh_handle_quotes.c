@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-// pas sur qu'il faut merge les 2 en 1 seul token
 int	merge_str_wrd(t_msh_data *m_d)
 {
 	t_tok_list	*cur;
@@ -21,7 +20,8 @@ int	merge_str_wrd(t_msh_data *m_d)
 	cur = m_d->tokens;
 	while (cur)
 	{
-		if ((cur->type == STR || cur->type == WORD) && (cur->next->type == STR || cur->next->type == WORD))
+		if ((cur->type == STR || cur->type == WORD)
+			&& (cur->next->type == STR || cur->next->type == WORD))
 		{
 			new_val = ft_strjoin(cur->val, cur->next->val);
 			if (!new_val)

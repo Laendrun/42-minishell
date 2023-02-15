@@ -14,8 +14,7 @@
 
 // SIGINT (ctrl-c)
 // SIGQUIT (ctrl-\)
-// SIGHUP  (ctrl-d) 
-// SIG_IGN to ignore the signals
+// SIGHUP (ctrl-d)
 
 void	handle_sigint(int sig)
 {
@@ -27,14 +26,6 @@ void	handle_sigint(int sig)
 	g_code = 1;
 }
 
-// void	handle_sighup(int sig)
-// {
-// 	(void)sig;
-// 	write(1, "exit\n", 6);
-// 	exit(1);
-// }
-
-
 // if in child +> silence these motherfucking signals
 // write a function to set the signal handlers to be "nothing"
 // so they will finally shut and let us work in peace
@@ -45,16 +36,34 @@ void	nothing(int v)
 	rl_redisplay();
 }
 
+void	sigint_update(void)
+{
+	struct sigaction	action;
+
+	action.sa_handler = &nothing;
+	sigaction(SIGINT, &action, NULL);
+}
+
+// void	handle_sighup(void)
+// {
+// 	struct sigaction	action;
+
+// 	action.sa_handler = &nothing;
+// 	sigaction(SIGHUP, &action, NULL);
+// }
+
 void	msh_sigint(void)
 {
 	struct sigaction	action;
+
 	action.sa_handler = &handle_sigint;
 	sigaction(SIGINT, &action, NULL);
 }
 
-void	msh_sigquit()
+void	msh_sigquit(void)
 {
 	struct sigaction	action;
+
 	action.sa_handler = &nothing;
 	sigaction(SIGQUIT, &action, NULL);
 }

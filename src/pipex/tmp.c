@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
- #include "minishell.h"
+#include "minishell.h"
 
 int	f_duplicate(int in, int out)
 {
 	if (dup2(in, STDIN_FILENO) < 0)
-		return(msh_error(1, ERR_DUP2, 1));
+		return (msh_error(1, ERR_DUP2, 1));
 	if (dup2(out, STDOUT_FILENO) < 0)
-		return(msh_error(1, ERR_DUP2, 1));
+		return (msh_error(1, ERR_DUP2, 1));
 	return (EXIT_SUCCESS);
 }
 
@@ -42,7 +42,7 @@ int	heredoc_first_process(t_msh_data *m_d, t_cmd *tmp)
 	{
 		ret = f_duplicate(tmp->hdoc[0], STDOUT_FILENO);
 		if (close(tmp->hdoc[0]) < 0)
-			return(msh_error(1, ERR_CLOSE, 1));
+			return (msh_error(1, ERR_CLOSE, 1));
 	}
 	else
 		ret = f_duplicate(tmp->hdoc[0], m_d->fd[1]);
@@ -61,7 +61,7 @@ int	first_process(t_msh_data *m_d, t_cmd *tmp)
 	else if (tmp->out_app != -1)
 		ret = f_duplicate(STDIN_FILENO, tmp->out_app);
 	else if (tmp->out_trunc != -1)
-		ret =f_duplicate(STDIN_FILENO, tmp->out_trunc);
+		ret = f_duplicate(STDIN_FILENO, tmp->out_trunc);
 	else if (m_d->nb_cmd == 1)
 		return (ret);
 	else
@@ -84,7 +84,7 @@ int	last_process(t_msh_data *m_d, t_cmd *tmp)
 	{
 		ret = f_duplicate(tmp->hdoc[0], STDOUT_FILENO);
 		if (close(tmp->hdoc[0]) < 0)
-			return(msh_error(1, ERR_CLOSE, 1));
+			return (msh_error(1, ERR_CLOSE, 1));
 	}
 	else
 		ret = f_duplicate(m_d->fd[(2 * m_d->process) - 2], STDOUT_FILENO);
@@ -106,11 +106,11 @@ int	middle_process(t_msh_data *m_d, t_cmd *tmp)
 	{
 		ret = f_duplicate(tmp->hdoc[0], m_d->fd[(2 * m_d->process) + 1]);
 		if (close(tmp->hdoc[0]) < 0)
-			return(msh_error(1, ERR_CLOSE, 1));
+			return (msh_error(1, ERR_CLOSE, 1));
 	}
 	else
 		ret = f_duplicate(m_d->fd[(2 * m_d->process) - 2],
-			m_d->fd[(2 * m_d->process) + 1]);
+				m_d->fd[(2 * m_d->process) + 1]);
 	return (ret);
 }
 
@@ -137,9 +137,6 @@ void	pip_no_exec(char *s)
 	err = ft_strjoin("shellusion: ", s);
 	msh_error_cmd_not_found(err, 127);
 	free(err);
-	// ft_putstr_fd("shellusion: ", STDERR_FILENO);
-	// ft_putstr_fd(s, STDERR_FILENO);
-	// ft_putstr_fd(" : command not found.\n", STDERR_FILENO);
 	exit(ERR_NOEXEC);
 }
 
@@ -147,6 +144,9 @@ char	*pip_get_exec(char *cmd, char **paths)
 {
 	char	*path;
 
+	if ((ft_strncmp(cmd, "./", 2) == 0)
+		&& access(cmd, X_OK) == 0)
+		return (ft_strdup(cmd));
 	if ((ft_strncmp(cmd, "./", 2) == 0)
 		&& access(cmd, X_OK) == 0)
 		return (ft_strdup(cmd));

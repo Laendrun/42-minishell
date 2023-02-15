@@ -31,12 +31,13 @@ int	escape_backslash(t_tok_list *cur)
 	i[0] = 0;
 	while (cur->val[i[0]])
 	{
-		if (cur->val[i[0]] == '\\' && (cur->val[i[0] + 1] == '\\' || cur->val[i[0] + 1] == '$'
-			|| cur->val[i[0] + 1] == '`' || cur->val[i[0] + 1] == '"'))
+		if (cur->val[i[0]] == '\\' && (cur->val[i[0] + 1] == '\\'
+				|| cur->val[i[0] + 1] == '$' || cur->val[i[0] + 1] == '`'
+				|| cur->val[i[0] + 1] == '"'))
 		{
 			new_val = ft_calloc(sizeof(char), ft_strlen(cur->val));
 			if (!new_val)
-				return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
+				return (msh_error(1, ERR_MALMES, ERR_MALLOC));
 			i[1] = 0;
 			i[2] = 0;
 			while (cur->val[i[1]])
@@ -62,9 +63,10 @@ int	msh_escape_char(t_msh_data *m_d)
 	cur = m_d->tokens;
 	while (cur)
 	{
-		if ((cur->type == STR && cur->prev->type == DQUOTE) || cur->type == WORD)
+		if ((cur->type == STR && cur->prev->type == DQUOTE)
+				|| cur->type == WORD)
 			if (escape_backslash(cur) != 0)
-				return(EXIT_FAILURE);
+				return (EXIT_FAILURE);
 		cur = cur->next;
 	}
 	return (EXIT_SUCCESS);

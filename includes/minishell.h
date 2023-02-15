@@ -69,6 +69,8 @@ t_tok_list *msh_remove_tok(t_tok_list **lst, t_tok_list *tok_to_remove);
 // ----------------------------------------------
 
 void	msh_set_signals(void);
+void	sigint_update(void);
+void	handle_sighup(void);
 
 // ----------------------------------------------
 // msh_init.c

@@ -12,33 +12,6 @@
 
 #include "minishell.h"
 
-// void	msh_free_trunc(t_tok_list *trunc)
-// {
-// 	t_tok_list	*tmp;
- 
-// 	while (trunc)
-// 	{
-// 		tmp = trunc->next;
-// 		free(trunc->val);
-// 		trunc->val = NULL;
-// 		free(trunc);
-// 		trunc = NULL;
-// 		trunc = tmp;
-// 	}
-// }
- 
-// void	free_lst_in_trunc(t_msh_data *m_d)
-// {
-// 	int i = 0;
-// 	while (i < m_d->nb_cmd)
-// 	{
-// 		print_tok_trunclst(m_d->trunc_lst[i]);
-// 		// msh_free_trunc(m_d->trunc_lst[i]);
-// 		i++;
-// 	}
-// 	// free(m_d->trunc_lst);
-// }
-
 void	free_ptr(void *ptr)
 {
 	if (ptr != NULL)
@@ -57,7 +30,6 @@ void	free_tab_char(char **tab)
 		return ;
 	while (tab[i])
 	{
-		// printf("%s\n", tab[i]);
 		free_ptr(tab[i]);
 		tab[i] = NULL;
 		i++;
@@ -88,15 +60,15 @@ void	free_t_cmd(t_msh_data *d)
 	d->cmds = NULL;
 }
 
-void	f_error(char *str, char *erno, t_msh_data *d)
-{
-	ft_putstr_fd(str, 2);
-	ft_putstr_fd(erno, 2);
-	write(2, "\n", 1);
-	if (d->pid)
-		free(d->pid);
-	exit(0);
-}
+// void	f_error(char *str, char *erno, t_msh_data *d)
+// {
+// 	ft_putstr_fd(str, 2);
+// 	ft_putstr_fd(erno, 2);
+// 	write(2, "\n", 1);
+// 	if (d->pid)
+// 		free(d->pid);
+// 	exit(0);
+// }
 
 int	close_fd_tab(int *fd, int size)
 {
