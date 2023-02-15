@@ -71,6 +71,7 @@ SRC =	main.c \
 		msh_is2.c \
 		msh_utils.c \
 		msh_env_utils.c \
+		msh_env_utils2.c \
 		msh_set_signals.c \
 		msh_signals_utils.c \
 

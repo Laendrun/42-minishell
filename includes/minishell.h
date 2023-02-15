@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 18:46:45 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/15 20:46:39 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/15 22:12:38 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@
 # include "pipex.h"
 
 # define SUCCESS 0
-# define ERROR 1
 
 # define RESET "\033[0;39m"
 # define GRAY "\033[0;90m"
@@ -157,5 +156,10 @@ char		*msh_get_env(t_msh_data *m_data, char *key);
 int			msh_replace_val(t_msh_data *m_data, char *key, char *new_val);
 t_env_list	*msh_env_ptr(t_msh_data *m_data, char *key);
 char		*msh_get_env_free(t_msh_data *m_data, char *key);
+
+// ----------------------------------------------
+// msh_env_utils2.c
+// ----------------------------------------------
+void		insert_env(t_msh_data *m_d, char *key, char *val, int *err);
 
 #endif
