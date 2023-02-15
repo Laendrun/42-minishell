@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_escape_char.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 18:51:04 by egauthey          #+#    #+#             */
-/*   Updated: 2023/02/13 11:10:04 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/15 19:58:43 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,7 @@ int	escape_backslash(t_tok_list *cur)
 			i[1] = 0;
 			i[2] = 0;
 			while (cur->val[i[1]])
-			{
 				escape_back_loop(&i, new_val, cur);
-				// if (i[1] == i[0])
-				// 	i[2]++;
-				// new_val[i[1]] = cur->val[i[1] + i[2]];
-				// i[1]++;
-			}
 			free(cur->val);
 			cur->val = new_val;
 		}
@@ -64,7 +58,7 @@ int	msh_escape_char(t_msh_data *m_d)
 	while (cur)
 	{
 		if ((cur->type == STR && cur->prev->type == DQUOTE)
-				|| cur->type == WORD)
+			|| cur->type == WORD)
 			if (escape_backslash(cur) != 0)
 				return (EXIT_FAILURE);
 		cur = cur->next;

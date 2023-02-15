@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 19:33:23 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/15 17:11:33 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/15 19:59:56 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	msh_error(int ret, char *msg, int err_code)
 		write(STDERR_FILENO, msg, ft_strlen(msg));
 		write(STDERR_FILENO, "\n", 1);
 		msh_set_gcode(err_code);
-		
 	}
 	return (ret);
 }
@@ -50,26 +49,3 @@ int	export_key_error(char *key, char *val)
 	msh_set_gcode(1);
 	return (EXIT_FAILURE);
 }
-
-// int	msh_error(int ret, char *msg, int err_code)
-// {
-// 	if (msg)
-// 	{
-// 		write(STDERR_FILENO, msg, ft_strlen(msg));
-// 		write(STDERR_FILENO, "\n", 1);
-// 		msh_set_gcode(err_code);
-// 		return (ret);
-// 	}
-// 	if (errno)
-// 	{
-// 		if (msg)
-// 			perror(msg);
-// 		else
-// 			perror("Error: ");
-// 		msh_set_gcode(1);
-// 		// why not set the code to errno instead of 1 ?
-// 	}
-// 	return (ret);
-// }
-
-

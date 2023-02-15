@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_free2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 19:33:23 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/13 12:06:21 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/15 20:04:47 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	free_t_cmd(t_msh_data *d)
 	tmp = d->cmds;
 	if (!tmp)
 		return ;
-	while(tmp)
+	while (tmp)
 	{
 		if (tmp->args != NULL)
 		{
@@ -78,7 +78,7 @@ int	close_fd_tab(int *fd, int size)
 	while (i < size)
 	{
 		if (close(fd[i]) < 0)
-			return(msh_error(1, ERR_CLOSE, 1));
+			return (msh_error(1, ERR_CLOSE, 1));
 		i++;
 	}
 	free(fd);

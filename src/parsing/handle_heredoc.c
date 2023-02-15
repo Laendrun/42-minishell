@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_redir_op.c                                     :+:      :+:    :+:   */
+/*   handle_heredoc.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 18:51:04 by egauthey          #+#    #+#             */
-/*   Updated: 2023/02/10 16:12:43 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/15 20:05:22 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,19 +104,6 @@ int	ft_here_doc(t_msh_data *m_d, t_cmd *end)
 	line = msh_var_in_hdoc(m_d, read);
 	free(read);
 	heredoc_loop(line, read, m_d, end);
-	// while (read)
-	// {
-	// 	if (ft_strncmp(end->delim, line, (ft_strlen(end->delim) + 1)) == 0 /*|| line == NULL*/)
-	// 	{
-	// 		free(line);
-	// 		break ;
-	// 	}
-	// 	ft_putstr_fd(ft_strcat(line, "\n"), end->hdoc[1]);
-	// 	free(line);
-	// 	read = readline(">");
-	// 	line = msh_var_in_hdoc(m_d, read);
-	// 	free(read);
-	// }
 	if (close(end->hdoc[1]) < 0)
 		return (msh_error(1, ERR_CLOSE, 1));
 	return (EXIT_SUCCESS);

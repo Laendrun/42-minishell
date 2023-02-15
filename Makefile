@@ -41,9 +41,9 @@ EXPAND_SRC = $(addprefix $(EXPAND_DIR),	msh_expand_var.c \
 
 PARS_SRC = $(addprefix $(PARS_DIR),	msh_create_cmds.c \
 									utils_create_cmd.c \
+									utils_create_cmd2.c \
 									cmds_lst.c \
 									handle_heredoc.c \
-									old_create_commands.c \
 									)
 
 PIPEX_SRC = $(addprefix $(PIPEX_DIR),	msh_pipex.c \
@@ -69,7 +69,6 @@ SRC =	main.c \
 		msh_is2.c \
 		msh_utils.c \
 		msh_env_utils.c \
-		msh_terminate.c \
 		msh_set_signals.c \
 		msh_signals_utils.c \
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_expand_var.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 18:51:04 by egauthey          #+#    #+#             */
-/*   Updated: 2023/02/13 10:40:13 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/15 20:03:22 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,8 @@ int	msh_expand_var(t_msh_data *m_d)
 // 	j = 0;
 // 	while (tok->val[++i])
 // 	{
-// 		if (tok->val[i] == '$' && tok->val[i + 1] != 0 && tok->val[i - 1] != '\\')
+// 		if (tok->val[i] == '$' && tok->val[i + 1] != 0 
+//			&& tok->val[i - 1] != '\\')
 // 		{
 // 			if (tok->val[i + 1] == '?')
 // 			{
@@ -140,7 +141,8 @@ int	msh_expand_var(t_msh_data *m_d)
 // 				ret = strjoin_free(ret, ft_substr(tok->val, j, i - j));
 // 				i++;
 // 				j = i;
-// 				while (tok->val[i] && !msh_isspace(tok->val[i]) && tok->val[i] != '$')
+// 				while (tok->val[i] && !msh_isspace(tok->val[i]) 
+// 				&& tok->val[i] != '$')
 // 					i++;
 // 				env = msh_get_env_free(m_d, ft_substr(tok->val, j, i - j));
 // 				ret = strjoin_free(ret, env);
@@ -157,8 +159,8 @@ int	msh_expand_var(t_msh_data *m_d)
 // }
 
 /*
-check  if VAR type token exists in env, if yes  the value of of var is replaced by the value
-of the var in env. if it it does not exists NULL is returned.
+check  if VAR type token exists in env, if yes  the value of of var is replaced 
+by the value of the var in env. if it it does not exists NULL is returned.
 */
 
 // int	msh_malloc_new_str(t_msh_data *m_d, t_tok_list *str_tok, int flg[3])
@@ -195,11 +197,13 @@ of the var in env. if it it does not exists NULL is returned.
 // 	flags[2] = 0;
 // 	while (str_tok->val[++i])
 // 	{
-// 		if (str_tok->val[i] == '$' && str_tok->val[i + 1] != 0 && str_tok->val[i - 1] != '\\')
+// 		if (str_tok->val[i] == '$' && str_tok->val[i + 1] != 0 
+//			&& str_tok->val[i - 1] != '\\')
 // 		{
 // 			flags[0] = i;
 // 			i++;
-// 			while (str_tok->val[i] && !msh_isspace(str_tok->val[i]) && str_tok->val[i] != '$')
+// 			while (str_tok->val[i] && !msh_isspace(str_tok->val[i]) 
+///				&& str_tok->val[i] != '$')
 // 				i++;
 // 			flags[1] = i;
 // 			// i--;
@@ -215,8 +219,9 @@ of the var in env. if it it does not exists NULL is returned.
 // }
 
 /*
-check  if VAR type token exists in env, if yes  the value of of var is replaced by the value
-of the var in env. if it it does not exists NULL is returned.
+check  if VAR type token exists in env, if yes  the value of of 
+var is replaced by the value of the var in env. if it it does 
+not exists NULL is returned.
 */
 
 // int	msh_replace_var_in_var(t_msh_data *m_d)
@@ -229,7 +234,8 @@ of the var in env. if it it does not exists NULL is returned.
 // 	{
 // 		if (cur->type == VAR)
 // 		{
-// 			// new_val = ft_calloc(sizeof(char), (msh_get_env_var_len(m_d,cur->val) + 1));
+// 			// new_val = ft_calloc(sizeof(char), 
+//			// (msh_get_env_var_len(m_d,cur->val) + 1));
 // 			new_val = msh_get_env(m_d, cur->val);
 // 			// if (!new_val[0])
 // 			// {
@@ -277,7 +283,8 @@ of the var in env. if it it does not exists NULL is returned.
 // 	flags[2] = 0;
 // 	while (tok->val[++i])
 // 	{
-// 		if (tok->val[i] == '$' && tok->val[i + 1] == '?' && tok->val[i - 1] != '\\')
+// 		if (tok->val[i] == '$' && tok->val[i + 1] == '?' 
+//			&& tok->val[i - 1] != '\\')
 // 		{
 // 			flags[0] = i;
 // 			i += 2;
@@ -308,7 +315,8 @@ of the var in env. if it it does not exists NULL is returned.
 // 	j = 0;
 // 	while (tok->val[++i])
 // 	{
-// 		if (tok->val[i] == '$' && tok->val[i + 1] == '?' && tok->val[i - 1] != '\\')
+// 		if (tok->val[i] == '$' && tok->val[i + 1] == '?' 
+///			&& tok->val[i - 1] != '\\')
 // 		{
 // 			ret = strjoin_free(ret, ft_substr(tok->val, j, i - j));
 // 			i++;
@@ -333,7 +341,8 @@ of the var in env. if it it does not exists NULL is returned.
 // 	cur = m_d->tokens;
 // 	while (cur->next)
 // 	{
-// 		if ((cur->type == STR && cur->prev->type == DQUOTE) || cur->type == WORD)
+// 		if ((cur->type == STR && cur->prev->type == DQUOTE) 
+// 			|| cur->type == WORD)
 // 			check_error_code(cur);
 // 		cur = cur->next;
 // 	}

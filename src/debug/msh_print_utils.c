@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:31:08 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/15 19:57:32 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/15 20:00:35 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	print_tok_trunclst(t_tok_list *d)
 
 void	print_array_lst(t_msh_data *m_d)
 {
-	unsigned int	i;
+	int	i;
 
 	i = 0;
 	while (i < m_d->nb_cmd)
