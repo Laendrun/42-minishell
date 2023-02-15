@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_env_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 21:29:27 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/12 13:09:13 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/15 14:09:02 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	msh_replace_val(t_msh_data *m_data, char *key, char *new_val)
 	if (!var)
 		return (1);
 	tmp = var->val;
-	var->val = ft_strdup(new_val);
+	var->val = new_val;
 	free(tmp);
 	return (SUCCESS);
 }
