@@ -14,6 +14,7 @@
 
 // SIGINT (ctrl-c)
 // SIGQUIT (ctrl-\)
+// SIGHUP (ctrl-d)
 
 void	handle_sigint(int sig)
 {
@@ -34,6 +35,22 @@ void	nothing(int v)
 	(void)v;
 	rl_redisplay();
 }
+
+void	sigint_update(void)
+{
+	struct sigaction	action;
+
+	action.sa_handler = &nothing;
+	sigaction(SIGINT, &action, NULL);
+}
+
+// void	handle_sighup(void)
+// {
+// 	struct sigaction	action;
+
+// 	action.sa_handler = &nothing;
+// 	sigaction(SIGHUP, &action, NULL);
+// }
 
 void	msh_sigint(void)
 {

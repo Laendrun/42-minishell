@@ -53,6 +53,8 @@ char	*msh_var_in_hdoc(t_msh_data *m_d, char *tok)
 	int		i[2];
 	char	*ret;
 
+	if (!tok)
+		return (NULL);
 	ret = ft_strdup("");
 	i[0] = -1;
 	i[1] = 0;
@@ -88,7 +90,7 @@ int	ft_here_doc(t_msh_data *m_d, t_cmd *end)
 	free(read);
 	while (read)
 	{
-		if (ft_strncmp(end->delim, line, (ft_strlen(end->delim) + 1)) == 0)
+		if (ft_strncmp(end->delim, line, (ft_strlen(end->delim) + 1)) == 0 /*|| line == NULL*/)
 		{
 			free(line);
 			break ;

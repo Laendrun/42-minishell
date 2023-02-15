@@ -65,6 +65,7 @@ int	pipex(t_msh_data *m_d)
 
 int	msh_pipex(t_msh_data *m_d)
 {
+	sigint_update();
 	if (pipex(m_d) != 0)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
