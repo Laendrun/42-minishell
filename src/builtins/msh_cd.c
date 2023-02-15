@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 21:23:18 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/11 18:19:41 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/15 13:18:09 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	msh_cd(t_msh_data *m_d, t_cmd *cmd)
 		return (msh_error(EXIT_FAILURE, ERR_CD_ARGS, 1));
 	if (dir[0] != '/')
 	{
+		// free the thing
 		dir = ft_strjoin("/", dir);
 		dir = ft_strjoin(msh_getpwd(m_d), dir);
 	}
@@ -41,6 +42,3 @@ int	msh_cd(t_msh_data *m_d, t_cmd *cmd)
 		return(EXIT_SUCCESS);
 	exit(EXIT_SUCCESS);
 }
-
-
-// EXIT_FAILURE => ret, ERR_CD_ARG =>, 0 =>, 1 =>
