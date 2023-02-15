@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:05:50 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/12 13:28:01 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/15 16:29:52 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,10 @@ int	new_line(t_msh_data *m_d, char *line)
 	int	ret;
 
 	ret = msh_lex(m_d, line);
+	free(line);
 	if (ret != EXIT_SUCCESS)
 		return (ret);
+	msh_tok_lstaddb(&m_d->tokens, msh_tok_lstnew(END, 0));
 	if (msh_parsing(m_d) != 0)
 		return (EXIT_FAILURE);
 	if (msh_pipex(m_d) != 0)

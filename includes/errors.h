@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 14:22:06 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/15 13:31:41 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/15 16:57:03 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,24 +52,27 @@
 // ----------------------------------------------
 // Error messages
 // ----------------------------------------------
-# define ERR_CD_ARGS "shellusion: cd: Too many arguments"
-# define ERR_CD_CD "shellusion: cd: No such file or directory"
+# define ERR_CD_ARGS "shellusion: cd: too many arguments"
+# define ERR_CD_CD "shellusion: cd: no such file or directory"
 
-# define ERR_ENV_ARGS "shellusion: env: Too many arguments"
+# define ERR_ENV_ARGS "shellusion: env: too many arguments"
 
-# define ERR_LEX_DQUO "shellusion: lexer: Unclosed double quote"
-# define ERR_LEX_SQUO "shellusion: lexer: Unclosed single quote"
+# define ERR_LEX_DQUO "shellusion: lexer: unclosed double quote"
+# define ERR_LEX_SQUO "shellusion: lexer: unclosed single quote"
 
-# define ERR_EXIT_ARGS "shellusion: exit: Too many arguments"
+# define ERR_EXP_KEY1 "shellusion: export: `"
+# define ERR_EXP_KEY2 "': not a valid identifier\n"
+
+# define ERR_EXIT_ARGS "shellusion: exit: too many arguments"
 
 # define ERR_MALMES "shellusion: memory allocation error"
 
 # define ERR_NEAR_TOK "shellusion: syntax error near unexpected token"
 
-# define ERR_PIPE "Error creating pipe :"
-# define ERR_CLOSE "Close error :"
-# define ERR_OPEN "Open error :"
-# define ERR_FORK "Fork error : "
-# define ERR_DUP2 "Dup2 error : "
+# define ERR_PIPE "error creating pipe :"
+# define ERR_CLOSE "close error :"
+# define ERR_OPEN "open error :"
+# define ERR_FORK "fork error : "
+# define ERR_DUP2 "dup2 error : "
 
 #endif

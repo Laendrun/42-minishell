@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:42:59 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/12 13:23:16 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/15 16:56:05 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,6 @@ void	msh_free_upd(t_msh_data *m_data);
 // ----------------------------------------------
 int		msh_error(int ret, char *msg, int err_code);
 void	msh_error_cmd_not_found(char *msg, int err_code);
+int		export_key_error(char *key, char *val);
 
 #endif
