@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/02/12 16:34:26 by egauthey         ###   ########.fr       */
+/*   Created: 2023/02/15 18:46:45 by saeby             #+#    #+#             */
+/*   Updated: 2023/02/15 18:48:20 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -43,17 +41,12 @@
 # define CYAN "\033[0;96m"
 # define WHITE "\033[0;97m"
 
-extern int	g_code;
-
-void	msh_pip_reset(t_msh_data *m_data);
-
-
 // ----------------------------------------------
 // main.c
 // ----------------------------------------------
-void	msh_set_gcode(int val);
-int		msh_get_gcode(void);
-int		new_line(t_msh_data *m_d, char *line);
+void		msh_set_gcode(int val);
+int			msh_get_gcode(void);
+int			new_line(t_msh_data *m_d, char *line);
 
 // ----------------------------------------------
 // msh_tok_list.c
@@ -62,21 +55,22 @@ t_tok_list	*msh_tok_lstnew(int type, char *val);
 void		msh_tok_lstaddb(t_tok_list **lst, t_tok_list *new);
 t_tok_list	*msh_tok_lstlast(t_tok_list *lst);
 int			msh_tok_lstsize(t_tok_list *lst);
-t_tok_list *msh_remove_tok(t_tok_list **lst, t_tok_list *tok_to_remove);
+t_tok_list	*msh_remove_tok(t_tok_list **lst, t_tok_list *tok_to_remove);
 
 // ----------------------------------------------
 // msh_set_signals.c
 // ----------------------------------------------
 
-void	msh_set_signals(void);
-void	sigint_update(void);
-void	handle_sighup(void);
+void		msh_set_signals(void);
+void		sigint_update(void);
+void		handle_sighup(void);
 
 // ----------------------------------------------
 // msh_init.c
 // ----------------------------------------------
 int			msh_init(t_msh_data *m_data, char **env);
 int			msh_env_init(t_msh_data *m_data, char **env);
+void		msh_pip_reset(t_msh_data *m_data);
 
 // ----------------------------------------------
 // msh_env_lst.c
@@ -101,50 +95,45 @@ int			msh_parser(t_msh_data *m_data);
 // msh_cmds_lst.c
 // ----------------------------------------------
 
-t_cmd	*msh_cmd_lstnew(char *cmd, char **args);
-void	msh_cmd_lstaddb(t_cmd **lst, t_cmd *new);
-t_cmd	*msh_cmd_lstlast(t_cmd *lst);
-int		msh_cmd_lstsize(t_cmd *lst);
+t_cmd		*msh_cmd_lstnew(char *cmd, char **args);
+void		msh_cmd_lstaddb(t_cmd **lst, t_cmd *new);
+t_cmd		*msh_cmd_lstlast(t_cmd *lst);
+int			msh_cmd_lstsize(t_cmd *lst);
 
 // ----------------------------------------------
 // msh_expand_var.c
 // ----------------------------------------------
 
-int	msh_expand_var(t_msh_data *m_d);
-int	msh_replace_var_in_var(t_msh_data *m_d);
-int	msh_replace_var_in_str(t_msh_data *m_d);
-// int	msh_flag_in_str_var(t_msh_data *m_d, t_tok_list *str_tok);
-int	msh_flag_in_str_var(t_msh_data *m_d, t_tok_list *str_tok, char *ret);
-int	msh_malloc_new_str(t_msh_data *m_d, t_tok_list *str_tok, int flg[3]);
-int	msh_handle_quotes(t_msh_data *m_d);
-int	msh_escape_char(t_msh_data *m_d);
-char	**msh_make_env_tabstr(t_msh_data *m_d);
-int	msh_create_commmands(t_msh_data *m_d);
-int	msh_redir_op(t_msh_data *m_d);
-int	msh_err_near_token(t_msh_data *d);
+int			msh_expand_var(t_msh_data *m_d);
+int			msh_replace_var_in_var(t_msh_data *m_d);
+int			msh_replace_var_in_str(t_msh_data *m_d);
+int			msh_flag_in_str_var(t_msh_data *m_d, t_tok_list *tok, char *ret);
+int			msh_malloc_new_str(t_msh_data *m_d, t_tok_list *tok, int flg[3]);
+int			msh_handle_quotes(t_msh_data *m_d);
+int			msh_escape_char(t_msh_data *m_d);
+char		**msh_make_env_tabstr(t_msh_data *m_d);
+int			msh_create_commmands(t_msh_data *m_d);
+int			msh_redir_op(t_msh_data *m_d);
+int			msh_err_near_token(t_msh_data *d);
 
 // ----------------------------------------------
 // parsing
 // ----------------------------------------------
 
-char	*msh_var_in_hdoc(t_msh_data *m_d, char *tok);
-int		get_nb_args(t_tok_list *d);
-void	calculate_nb_cmds(t_msh_data *m_d);
-int	set_redir_in_cmd_lst(t_msh_data *m_d, int i);
-int	ft_here_doc(t_msh_data *m_d, t_cmd *end);
+char		*msh_var_in_hdoc(t_msh_data *m_d, char *tok);
+int			get_nb_args(t_tok_list *d);
+void		calculate_nb_cmds(t_msh_data *m_d);
+int			set_redir_in_cmd_lst(t_msh_data *m_d, int i);
+int			ft_here_doc(t_msh_data *m_d, t_cmd *end);
 
 // ----------------------------------------------
 // msh_pipex.c
 // ----------------------------------------------
 
-int	msh_pipex(t_msh_data *m_d);
-int	pipex(t_msh_data *m_d);
-// void	f_fork(t_msh_data *m_d);
-int	f_fork(t_msh_data *m_d, t_cmd *tmp);
-// void	f_error(char *str, char *erno, t_msh_data *d);
-// void	free_tab_char(char **str);
-// void	close_fd_tab(int *fd, int size, t_msh_data *d);
-char	**pip_get_path(char **env);
+int			msh_pipex(t_msh_data *m_d);
+int			pipex(t_msh_data *m_d);
+int			f_fork(t_msh_data *m_d, t_cmd *tmp);
+char		**pip_get_path(char **env);
 
 // ----------------------------------------------
 // msh_is.c
@@ -167,7 +156,7 @@ int			msh_get_env_var_len(t_msh_data *m_data, char *key);
 char		*msh_get_env(t_msh_data *m_data, char *key);
 int			msh_replace_val(t_msh_data *m_data, char *key, char *new_val);
 t_env_list	*msh_env_ptr(t_msh_data *m_data, char *key);
-char	*msh_get_env_free(t_msh_data *m_data, char *key);
+char		*msh_get_env_free(t_msh_data *m_data, char *key);
 
 // ----------------------------------------------
 // msh_terminate.c

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:35:46 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/13 10:08:56 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/15 18:43:50 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	msh_init(t_msh_data *m_data, char **env)
 	m_data->trunc_lst = NULL;
 	m_data->cmds = NULL;
 	ret = msh_env_init(m_data, env);
+	if (ret != EXIT_SUCCESS)
+		return (msh_error(ret, ERR_INIT, EXIT_FAILURE));
 	return (ret);
 }
 

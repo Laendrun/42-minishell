@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:05:50 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/15 16:29:52 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/15 18:44:33 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,8 @@ int	main(int ac, char **av, char **env)
 	(void) ac;
 	(void) av;
 	ret = msh_init(&m_data, env);
-	if (ret != 0)
-		exit(EXIT_FAILURE);
 	printf("\e[1;1H\e[2J");
-	while (1)
+	while (1 && ret == EXIT_SUCCESS)
 	{
 		msh_set_signals();
 		rl_on_new_line();
@@ -41,7 +39,7 @@ int	main(int ac, char **av, char **env)
 		if (!rl)
 			break ;
 	}
-	exit(EXIT_SUCCESS);
+	exit(ret);
 }
 
 int	msh_parsing(t_msh_data *m_d)

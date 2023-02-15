@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 14:22:06 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/15 16:57:03 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/15 18:42:43 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@
 # define ERR_OPEN "open error :"
 # define ERR_FORK "fork error : "
 # define ERR_DUP2 "dup2 error : "
+# define ERR_INIT "shellusion: initialization error"
 
 #endif
