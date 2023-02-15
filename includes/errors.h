@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby>                              +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 14:22:06 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/11 20:09:38 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/15 13:31:41 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,11 @@
 # define ERR_LEX_DQUO "shellusion: lexer: Unclosed double quote"
 # define ERR_LEX_SQUO "shellusion: lexer: Unclosed single quote"
 
+# define ERR_EXIT_ARGS "shellusion: exit: Too many arguments"
+
 # define ERR_MALMES "shellusion: memory allocation error"
 
-#define ERR_NEAR_TOK "shellusion: syntax error near unexpected token"
+# define ERR_NEAR_TOK "shellusion: syntax error near unexpected token"
 
 # define ERR_PIPE "Error creating pipe :"
 # define ERR_CLOSE "Close error :"
