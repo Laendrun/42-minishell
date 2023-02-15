@@ -28,7 +28,7 @@ int	msh_lex_squote(t_msh_data *m_data, char *line, unsigned int *i)
 	t = *i;
 	new = msh_tok_lstnew(SQUOTE, 0);
 	if (!new)
-		return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
+		return (msh_error(1, ERR_MALMES, ERR_MALLOC));
 	msh_tok_lstaddb(&m_data->tokens, new);
 	*i += 1;
 	while (ft_isprint(line[*i]) && line[*i] != '\'')
@@ -38,11 +38,11 @@ int	msh_lex_squote(t_msh_data *m_data, char *line, unsigned int *i)
 	tmp = ft_substr(line, t + 1, *i - (t + 1));
 	new = msh_tok_lstnew(STR, ft_strdup(tmp));
 	if (!new)
-		return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
+		return (msh_error(1, ERR_MALMES, ERR_MALLOC));
 	msh_tok_lstaddb(&m_data->tokens, new);
 	new = msh_tok_lstnew(SQUOTE, 0);
 	if (!new)
-		return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
+		return (msh_error(1, ERR_MALMES, ERR_MALLOC));
 	msh_tok_lstaddb(&m_data->tokens, new);
 	*i += 1;
 	free(tmp);

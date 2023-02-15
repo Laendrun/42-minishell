@@ -18,7 +18,7 @@ int	handle_var_hdoc(int (*i)[2], char *tok, char **ret, t_msh_data *m_d)
 {
 	*ret = ft_strjoin_free(*ret, ft_substr(tok, (*i)[1], (*i)[0] - (*i)[1]));
 	if (!*ret)
-		return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
+		return (msh_error(1, ERR_MALMES, ERR_MALLOC));
 	(*i)[0]++;
 	(*i)[1] = (*i)[0];
 	while (tok[(*i)[0]] && !msh_isspace(tok[(*i)[0]]) && tok[(*i)[0]] != '$')
@@ -26,7 +26,7 @@ int	handle_var_hdoc(int (*i)[2], char *tok, char **ret, t_msh_data *m_d)
 	*ret = ft_strjoin_free(*ret, msh_get_env_free(m_d,
 				ft_substr(tok, (*i)[1], (*i)[0] - (*i)[1])));
 	if (!*ret)
-		return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
+		return (msh_error(1, ERR_MALMES, ERR_MALLOC));
 	(*i)[1] = (*i)[0];
 	(*i)[0]--;
 	return (EXIT_SUCCESS);
@@ -36,13 +36,13 @@ int	handle_error_code_hdoc(int (*i)[2], char **tok, char **ret)
 {
 	*ret = ft_strjoin_free(*ret, ft_substr(*tok, (*i)[1], (*i)[0] - (*i)[1]));
 	if (!*ret)
-		return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
+		return (msh_error(1, ERR_MALMES, ERR_MALLOC));
 	(*i)[0]++;
 	(*i)[1] = (*i)[0];
 	(*i)[0]++;
 	*ret = ft_strjoin_free(*ret, ft_itoa(msh_get_gcode()));
 	if (!*ret)
-		return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
+		return (msh_error(1, ERR_MALMES, ERR_MALLOC));
 	(*i)[1] = (*i)[0];
 	(*i)[0]--;
 	return (EXIT_SUCCESS);

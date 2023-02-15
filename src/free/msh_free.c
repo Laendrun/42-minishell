@@ -55,19 +55,6 @@ void	msh_free_cmds(t_msh_data *m_data)
 	}
 }
 
-// void	msh_free_trunc_lst(t_msh_data *m_data)
-// { // free this
-// 	//t_tok_list	*tmp;
-// 	int			i;
-
-// 	i = 0;
-// 	while (i < m_data->nb_cmd)
-// 	{
-// 		printf("%s\n", m_data->trunc_lst[i]->val);
-// 		i++;
-// 	}
-// }
-
 char	*ft_strjoin_free(char *s1, char *s2)
 {
 	char	*ret;
