@@ -193,6 +193,7 @@ int	child_process(t_msh_data *m_d, t_cmd *tmp)
 	f_pre_duplicate(m_d, tmp);
 	if (!msh_is_builtin(tmp->args[0]))
 	{
+		// sigint_update();
 		tmp->args[0] = pip_get_exec(tmp->args[0], m_d->path);
 		execve(tmp->args[0], tmp->args, m_d->env_upd);
 	}
