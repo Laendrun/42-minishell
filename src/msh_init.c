@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:35:46 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/15 18:43:50 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/15 20:56:55 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int	msh_env_init(t_msh_data *m_data, char **env)
 			return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
 		msh_env_lstaddb(&m_data->env, new);
 	}
+	set_shlvl(m_data);
 	return (EXIT_SUCCESS);
 }
 
@@ -76,4 +77,22 @@ void	msh_pip_reset(t_msh_data *m_data)
 	m_data->env_upd = NULL;
 	m_data->trunc_lst = NULL;
 	m_data->cmds = NULL;
+}
+
+void	set_shlvl(t_msh_data *m_d)
+{
+	t_env_list	*new;
+	int			curlvl;
+
+	if (!msh_env_ptr(m_d, "SHLVL"))
+	{
+		new = msh_env_lstnew(ft_strdup("SHLVL"), ft_strdup("1"));
+		msh_env_lstaddb(&m_d->env, new);
+	}
+	else
+	{
+		curlvl = ft_atoi(msh_get_env(m_d, "SHLVL"));
+		curlvl++;
+		msh_replace_val(m_d, "SHLVL", ft_itoa(curlvl));
+	}
 }

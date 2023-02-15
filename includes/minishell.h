@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 18:46:45 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/15 20:17:46 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/15 20:46:39 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void		handle_sighup(void);
 int			msh_init(t_msh_data *m_data, char **env);
 int			msh_env_init(t_msh_data *m_data, char **env);
 void		msh_pip_reset(t_msh_data *m_data);
+void		set_shlvl(t_msh_data *m_d);
 
 // ----------------------------------------------
 // msh_env_lst.c
