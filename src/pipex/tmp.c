@@ -21,7 +21,7 @@ int	f_duplicate(int in, int out)
 	return (EXIT_SUCCESS);
 }
 
-int	inf_first_process(t_msh_data *m_d, t_cmd *tmp)
+int	infile_first_process(t_msh_data *m_d, t_cmd *tmp)
 {
 	if (m_d->nb_cmd == 1)
 	{
@@ -36,7 +36,7 @@ int	inf_first_process(t_msh_data *m_d, t_cmd *tmp)
 	return (EXIT_SUCCESS);
 }
 
-int	hdoc_first_process(t_msh_data *m_d, t_cmd *tmp)
+int	heredoc_first_process(t_msh_data *m_d, t_cmd *tmp)
 {
 	if (m_d->nb_cmd == 1)
 	{
@@ -60,7 +60,7 @@ int	first_process(t_msh_data *m_d, t_cmd *tmp)
 		// 	f_duplicate(tmp->infile, STDOUT_FILENO);
 		// else
 		// 	f_duplicate(tmp->infile, m_d->fd[1]);
-		inf_first_process(m_d, tmp);
+		infile_first_process(m_d, tmp);
 	}
 	else if (tmp->heredoc == 1)
 	{
@@ -71,7 +71,7 @@ int	first_process(t_msh_data *m_d, t_cmd *tmp)
 		// }
 		// else
 		// 	f_duplicate(tmp->hdoc[0], m_d->fd[1]);
-		hdoc_first_process(m_d, tmp);
+		heredoc_first_process(m_d, tmp);
 	}
 	else if (tmp->out_app != -1)
 		f_duplicate(STDIN_FILENO, tmp->out_app);

@@ -68,12 +68,8 @@ int	new_line(t_msh_data *m_d, char *line)
 		return (ret);
 	if (msh_parsing(m_d) != 0)
 		return (EXIT_FAILURE);
-	// msh_expand_var(m_d);
-	// msh_escape_char(m_d);
-	// msh_handle_quotes(m_d);
-	// msh_err_near_token(m_d);
-	// msh_create_commmands(m_d);
-	msh_pipex(m_d);
+	if (msh_pipex(m_d) != 0)
+		return (EXIT_FAILURE);
 	msh_pip_reset(m_d);
 	return (ret);
 }

@@ -45,7 +45,8 @@ int	launch_process(t_msh_data *m_d)
 
 int	pipex(t_msh_data *m_d)
 {
-	int		status;
+	int	status;
+	int	last_status;
 	// int		i;
 	// t_cmd	*tmp;
 
@@ -72,6 +73,8 @@ int	pipex(t_msh_data *m_d)
 	while (m_d->process--)
 	{
 		waitpid(m_d->pid[m_d->process], &status, 0);
+		if (m_d->process == m_d->nb_cmd - 1)
+			last_status = status;
 	}
 	// printf("status : %d\n", status);
 	// free(m_d->pid);
@@ -79,8 +82,8 @@ int	pipex(t_msh_data *m_d)
 	// free_tab_char(m_d->env_upd);
 	// free_t_cmd(m_d);
 	// free(m_d->trunc_lst);
-	if(WIFEXITED(status))
-		msh_set_gcode(WEXITSTATUS(status));
+	if(WIFEXITED(last_status))
+		msh_set_gcode(WEXITSTATUS(last_status));
 	// msh_set_gcode(status);
 	return (EXIT_SUCCESS);
 	// return (WEXITSTATUS(status));

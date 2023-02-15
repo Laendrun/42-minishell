@@ -18,7 +18,7 @@ int	check_redir_start_end(t_msh_data *d)
 	t_tok_list	*cur;
 
 	cur = d->tokens;
-	if (cur && cur->type >= PIPE)
+	if (cur && cur->type == PIPE)
 	{
 		msh_error(1, ERR_NEAR_TOK, 258);
 			return (EXIT_FAILURE);
@@ -26,7 +26,7 @@ int	check_redir_start_end(t_msh_data *d)
 	while (cur->next)
 	{
 		// to include or not to include ?
-		if (cur->type >= PIPE && cur->next && cur->prev && (cur->next->type >= PIPE || cur->prev->type >= PIPE))
+		if (cur->type >= PIPE && cur->prev && cur->prev->type >= PIPE)
 		{
 			msh_error(1, ERR_NEAR_TOK, 258);
 			return (EXIT_FAILURE);
