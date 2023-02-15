@@ -53,9 +53,9 @@ char	*msh_var_in_hdoc(t_msh_data *m_d, char *tok)
 	int		i[2];
 	char	*ret;
 
-	// if (!tok)
-	// 	return (NULL);
 	ret = ft_strdup("");
+	if (!tok)
+		return (NULL);
 	i[0] = -1;
 	i[1] = 0;
 	while (tok[++i[0]])
@@ -73,8 +73,6 @@ char	*msh_var_in_hdoc(t_msh_data *m_d, char *tok)
 		}
 	}
 	ret = ft_strjoin_free(ret, ft_substr(tok, i[1], i[0] - i[1]));
-	if (!ret)
-		return (NULL);
 	return (ret);
 }
 
@@ -90,10 +88,7 @@ void	heredoc_loop(char *line, char *read, t_msh_data *m_d, t_cmd *end)
 		ft_putstr_fd(ft_strcat(line, "\n"), end->hdoc[1]);
 		free(line);
 		read = readline(">");
-		if (read != NULL)
-			line = msh_var_in_hdoc(m_d, read);
-		else
-			line = NULL;
+		line = msh_var_in_hdoc(m_d, read);
 		free(read);
 	}
 }
