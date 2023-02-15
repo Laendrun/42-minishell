@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 20:09:10 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/15 20:18:42 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/15 22:48:04 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ char	**pip_get_path(char **env)
 {
 	char	**paths;
 	char	*tmp;
+	char	*tmp2;
 
 	while (*env)
 	{
@@ -40,9 +41,13 @@ char	**pip_get_path(char **env)
 	}
 	if (!*env)
 	{
-		tmp = (char *) ft_calloc(sizeof(char), ft_strlen(getcwd(NULL, 0)) + 1);
-		ft_strlcat(tmp, getcwd(NULL, 0), ft_strlen(getcwd(NULL, 0)));
+		tmp2 = getcwd(NULL, 0);
+		tmp = (char *) malloc(sizeof(char) * ft_strlen(tmp2) + 1);
+		ft_strlcat(tmp, tmp2, ft_strlen(tmp2));
+		tmp[ft_strlen(tmp2)] = 0;
 		paths = ft_split(tmp, ':');
+		free(tmp);
+		free(tmp2);
 	}
 	else
 		paths = ft_split(*env + 5, ':');

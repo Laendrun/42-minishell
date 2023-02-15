@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 10:24:41 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/15 19:54:57 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/15 22:50:33 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	print_declared_vars(t_msh_data *m_d, int out)
 
 static void	replace(t_msh_data *m_d, char *key, char *val)
 {
-	msh_replace_val(m_d, key, val);
+	msh_replace_val(m_d, key, ft_strdup(val));
 }
 
 static int	create(t_msh_data *m_d, char *key, char *val)

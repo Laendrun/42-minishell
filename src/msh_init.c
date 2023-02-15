@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:35:46 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/15 21:55:11 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/15 22:18:59 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,14 @@ int	msh_init(t_msh_data *m_data, char **env)
 int	msh_env_init(t_msh_data *m_data, char **env)
 {
 	char		**tmp;
-	t_env_list	*new;
+	int			err;
+	char		*tmp2;
 
+	err = EXIT_SUCCESS;
 	while (*env)
 	{
 		tmp = ft_split(*env, '=');
-		new = msh_env_lstnew(ft_strdup(tmp[0]), ft_strdup(tmp[1]));
-		if (!new)
-			return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
-		msh_env_lstaddb(&m_data->env, new);
+		insert_env(m_data, ft_strdup(tmp[0]), ft_strdup(tmp[1]), &err);
 		free(tmp[0]);
 		free(tmp[1]);
 		free(tmp);
@@ -53,12 +52,13 @@ int	msh_env_init(t_msh_data *m_data, char **env)
 	}
 	if (!msh_env_ptr(m_data, "PATH"))
 	{
-		new = msh_env_lstnew(ft_strdup("PATH"), ft_strdup(getcwd(NULL, 0)));
-		if (!new)
-			return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
-		msh_env_lstaddb(&m_data->env, new);
+		tmp2 = getcwd(NULL, 0);
+		insert_env(m_data, ft_strdup("PATH"), ft_strdup(tmp2), &err);
+		free(tmp2);
 	}
 	set_shlvl(m_data);
+	if (err != EXIT_SUCCESS)
+		return (msh_error(err, ERR_MALMES, EXIT_FAILURE));
 	return (EXIT_SUCCESS);
 }
 
