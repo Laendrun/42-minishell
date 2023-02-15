@@ -53,8 +53,8 @@ char	*msh_var_in_hdoc(t_msh_data *m_d, char *tok)
 	int		i[2];
 	char	*ret;
 
-	if (!tok)
-		return (NULL);
+	// if (!tok)
+	// 	return (NULL);
 	ret = ft_strdup("");
 	i[0] = -1;
 	i[1] = 0;
@@ -78,6 +78,26 @@ char	*msh_var_in_hdoc(t_msh_data *m_d, char *tok)
 	return (ret);
 }
 
+void	heredoc_loop(char *line, char *read, t_msh_data *m_d, t_cmd *end)
+{
+	while (read)
+	{
+		if (ft_strncmp(end->delim, line, (ft_strlen(end->delim) + 1)) == 0)
+		{
+			free(line);
+			break ;
+		}
+		ft_putstr_fd(ft_strcat(line, "\n"), end->hdoc[1]);
+		free(line);
+		read = readline(">");
+		if (read != NULL)
+			line = msh_var_in_hdoc(m_d, read);
+		else
+			line = NULL;
+		free(read);
+	}
+}
+
 int	ft_here_doc(t_msh_data *m_d, t_cmd *end)
 {
 	char	*line;
@@ -88,19 +108,20 @@ int	ft_here_doc(t_msh_data *m_d, t_cmd *end)
 	read = readline(">");
 	line = msh_var_in_hdoc(m_d, read);
 	free(read);
-	while (read)
-	{
-		if (ft_strncmp(end->delim, line, (ft_strlen(end->delim) + 1)) == 0 /*|| line == NULL*/)
-		{
-			free(line);
-			break ;
-		}
-		ft_putstr_fd(ft_strcat(line, "\n"), end->hdoc[1]);
-		free(line);
-		read = readline(">");
-		line = msh_var_in_hdoc(m_d, read);
-		free(read);
-	}
+	heredoc_loop(line, read, m_d, end);
+	// while (read)
+	// {
+	// 	if (ft_strncmp(end->delim, line, (ft_strlen(end->delim) + 1)) == 0 /*|| line == NULL*/)
+	// 	{
+	// 		free(line);
+	// 		break ;
+	// 	}
+	// 	ft_putstr_fd(ft_strcat(line, "\n"), end->hdoc[1]);
+	// 	free(line);
+	// 	read = readline(">");
+	// 	line = msh_var_in_hdoc(m_d, read);
+	// 	free(read);
+	// }
 	if (close(end->hdoc[1]) < 0)
 		return (msh_error(1, ERR_CLOSE, 1));
 	return (EXIT_SUCCESS);
