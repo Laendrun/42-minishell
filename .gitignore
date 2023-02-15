@@ -2,3 +2,5 @@ objs/*
 libs/libft/*.o
 libs/libft/libft.a
 minishell
+file
+file2

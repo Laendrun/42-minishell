@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 19:33:23 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/15 19:59:56 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/15 20:12:55 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,14 @@ int	export_key_error(char *key, char *val)
 	ft_putstr_fd(ERR_EXP_KEY2, 2);
 	msh_set_gcode(1);
 	return (EXIT_FAILURE);
+}
+
+void	pip_no_exec(char *s)
+{
+	char	*err;
+
+	err = ft_strjoin("shellusion: ", s);
+	msh_error_cmd_not_found(err, 127);
+	free(err);
+	exit(ERR_NOEXEC);
 }

@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:42:59 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/15 18:46:33 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/15 20:13:23 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ void	msh_free_upd(t_msh_data *m_data);
 int		msh_error(int ret, char *msg, int err_code);
 void	msh_error_cmd_not_found(char *msg, int err_code);
 int		export_key_error(char *key, char *val);
+void	pip_no_exec(char *s);
 
 #endif

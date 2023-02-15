@@ -48,6 +48,8 @@ PARS_SRC = $(addprefix $(PARS_DIR),	msh_create_cmds.c \
 
 PIPEX_SRC = $(addprefix $(PIPEX_DIR),	msh_pipex.c \
 										process.c \
+										process2.c \
+										process3.c \
 										tmp.c \
 										)
 

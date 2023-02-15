@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 18:46:45 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/15 20:03:55 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/15 20:17:46 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include "free.h"
 # include "debug.h"
 # include "errors.h"
+# include "pipex.h"
 
 # define SUCCESS 0
 # define ERROR 1
@@ -131,15 +132,6 @@ int			get_nb_args(t_tok_list *d);
 void		calculate_nb_cmds(t_msh_data *m_d);
 int			set_redir_in_cmd_lst(t_msh_data *m_d, int i);
 int			ft_here_doc(t_msh_data *m_d, t_cmd *end);
-
-// ----------------------------------------------
-// msh_pipex.c
-// ----------------------------------------------
-
-int			msh_pipex(t_msh_data *m_d);
-int			pipex(t_msh_data *m_d);
-int			f_fork(t_msh_data *m_d, t_cmd *tmp);
-char		**pip_get_path(char **env);
 
 // ----------------------------------------------
 // msh_is.c / msh_is2.c
