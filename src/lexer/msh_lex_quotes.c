@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_lex_quotes.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby>                              +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:48:25 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/12 12:37:03 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/15 17:26:29 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,5 @@ int	msh_lex_dquote(t_msh_data *m_d, char *line, unsigned int *i)
 	free(tmp);
 	if (err)
 		return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
-	return (SUCCESS);
+	return (EXIT_SUCCESS);
 }

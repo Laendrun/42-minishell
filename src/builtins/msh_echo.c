@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_echo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 15:30:03 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/11 22:12:05 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/15 17:31:40 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	msh_echo(t_msh_data *m_d, t_cmd *cmd)
 	if (count_args(cmd) == 1)
 	{
 		write(out, "\n", 1);
+		msh_set_gcode(EXIT_SUCCESS);
 		if (m_d->nb_cmd == 1)
 			return (SUCCESS);
 		exit(SUCCESS);
@@ -33,6 +34,7 @@ int	msh_echo(t_msh_data *m_d, t_cmd *cmd)
 
 	if (count_args(cmd) == 2  && !ft_strncmp(cmd->args[1], "-n", 3))
 	{
+		msh_set_gcode(EXIT_SUCCESS);
 		if (m_d->nb_cmd == 1)
 			return (SUCCESS);
 		exit(SUCCESS);
@@ -48,6 +50,7 @@ int	msh_echo(t_msh_data *m_d, t_cmd *cmd)
 				write(out, " ", 1);
 			i++;
 		}
+		msh_set_gcode(EXIT_SUCCESS);
 		if (m_d->nb_cmd == 1)
 			return (SUCCESS);
 		exit(SUCCESS);
@@ -64,6 +67,7 @@ int	msh_echo(t_msh_data *m_d, t_cmd *cmd)
 			i++;
 		}
 		write(out, "\n", 1);
+		msh_set_gcode(EXIT_SUCCESS);
 		if (m_d->nb_cmd == 1)
 			return (SUCCESS);
 		exit(SUCCESS);

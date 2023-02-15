@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 10:48:47 by egauthey          #+#    #+#             */
-/*   Updated: 2023/02/15 17:18:52 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/15 17:21:26 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ char	*pip_get_exec(char *cmd, char **paths)
 {
 	char	*path;
 
-	if ((ft_strncmp(cmd, "./", 2) == 0)
+	if ((ft_strncmp(cmd, "/", 1) == 0)
 		&& access(cmd, X_OK) == 0)
 		return (ft_strdup(cmd));
 	if ((ft_strncmp(cmd, "./", 2) == 0)
