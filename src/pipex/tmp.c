@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tmp.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 10:48:47 by egauthey          #+#    #+#             */
-/*   Updated: 2023/02/13 12:31:22 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/15 14:40:16 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,7 @@ char	*pip_get_exec(char *cmd, char **paths)
 char	**pip_get_path(char **env)
 {
 	char	**paths;
+	char	*tmp;
 
 	while (*env)
 	{
@@ -176,9 +177,14 @@ char	**pip_get_path(char **env)
 			break ;
 		env++;
 	}
-	paths = ft_split(*env + 5, ':');
-	if (!paths)
-		return (NULL);
+	if (!*env)
+	{
+		tmp = (char *) ft_calloc(sizeof(char), ft_strlen(getcwd(NULL, 0)) + 1);
+		ft_strlcat(tmp, getcwd(NULL, 0), ft_strlen(getcwd(NULL, 0)));
+		paths = ft_split(tmp, ':');
+	}
+	else
+		paths = ft_split(*env + 5, ':');
 	return (paths);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_unset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby>                              +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 10:46:44 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/11 21:31:37 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/15 14:26:20 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	msh_unset(t_msh_data *m_d, t_cmd *cmd)
 {
 	t_env_list	*var;
 
-	if (count_args(cmd) == 2 && ft_strncmp(cmd->args[1], "PATH", 5) != 0)
+	if (count_args(cmd) == 2 /*&& ft_strncmp(cmd->args[1], "PATH", 5) != 0*/)
 	{
 		var = msh_env_ptr(m_d, cmd->args[1]);
 		if (!var->prev)
