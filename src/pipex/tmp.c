@@ -147,6 +147,9 @@ char	*pip_get_exec(char *cmd, char **paths)
 	if ((ft_strncmp(cmd, "/", 1) == 0)
 		&& access(cmd, X_OK) == 0)
 		return (ft_strdup(cmd));
+	if ((ft_strncmp(cmd, "./", 2) == 0)
+		&& access(cmd, X_OK) == 0)
+		return (ft_strdup(cmd));
 	while (*paths)
 	{
 		path = ft_strjoin(*paths, "/");
