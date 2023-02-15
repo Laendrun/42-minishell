@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:35:46 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/15 20:56:55 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/15 21:55:11 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	set_shlvl(t_msh_data *m_d)
 {
 	t_env_list	*new;
 	int			curlvl;
+	char		*curval;
 
 	if (!msh_env_ptr(m_d, "SHLVL"))
 	{
@@ -91,7 +92,9 @@ void	set_shlvl(t_msh_data *m_d)
 	}
 	else
 	{
-		curlvl = ft_atoi(msh_get_env(m_d, "SHLVL"));
+		curval = msh_get_env(m_d, "SHLVL");
+		curlvl = ft_atoi(curval);
+		free(curval);
 		curlvl++;
 		msh_replace_val(m_d, "SHLVL", ft_itoa(curlvl));
 	}
