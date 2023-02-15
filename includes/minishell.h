@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 18:46:45 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/15 18:48:20 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/15 18:56:02 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,12 @@
 void		msh_set_gcode(int val);
 int			msh_get_gcode(void);
 int			new_line(t_msh_data *m_d, char *line);
+
+// ----------------------------------------------
+// signals
+// ----------------------------------------------
+void		handle_sigint(int sig);
+void		nothing(int v);
 
 // ----------------------------------------------
 // msh_tok_list.c

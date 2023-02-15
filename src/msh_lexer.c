@@ -6,11 +6,13 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:12:32 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/15 17:23:26 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/15 18:53:43 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	skip_spaces(t_msh_data *m_d, char *line, unsigned int *i);
 
 int	msh_lex(t_msh_data *m_d, char *line)
 {
@@ -22,12 +24,9 @@ int	msh_lex(t_msh_data *m_d, char *line)
 	while (line && line[i] && ret == EXIT_SUCCESS)
 	{
 		if (line[i] && msh_isspace(line[i]))
-			msh_tok_lstaddb(&m_d->tokens, msh_tok_lstnew(SEP, 0));
-		while (line[i] && msh_isspace(line[i]))
-			i++;
+			skip_spaces(m_d, line, &i);
 		if (!ft_strncmp(line + i, "export", 6))
 		{
-			i += 7;
 			ret = msh_lex_export(m_d, line, &i);
 			break ;
 		}
@@ -71,4 +70,11 @@ void	insert_token(t_msh_data *m_d, int type, char *val, int *err)
 	if (!new)
 		*err = ERR_MALLOC;
 	msh_tok_lstaddb(&m_d->tokens, new);
+}
+
+static void	skip_spaces(t_msh_data *m_d, char *line, unsigned int *i)
+{
+	msh_tok_lstaddb(&m_d->tokens, msh_tok_lstnew(SEP, 0));
+	while (line[*i] && msh_isspace(line[*i]))
+		*i += 1;
 }

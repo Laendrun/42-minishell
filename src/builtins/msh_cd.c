@@ -6,21 +6,20 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 21:23:18 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/15 14:09:43 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/15 19:15:27 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static char	*set_dir(t_msh_data *m_d, char *dir);
+static int	end(t_msh_data *m_d, int status, char *dir);
+
 int	msh_cd(t_msh_data *m_d, t_cmd *cmd)
 {
-	char		*dir;
-	char		*tmp;
-	char		*pwd;
+	char	*dir;
 
 	dir = msh_get_env(m_d, "HOME");
-	tmp = NULL;
-	pwd = NULL;
 	if (count_args(cmd) == 2)
 	{
 		free(dir);
@@ -32,24 +31,36 @@ int	msh_cd(t_msh_data *m_d, t_cmd *cmd)
 		return (msh_error(EXIT_FAILURE, ERR_CD_ARGS, 1));
 	}
 	if (dir[0] != '/')
-	{
-		tmp = ft_strjoin("/", dir);
-		pwd = msh_getpwd(m_d);
-		dir = ft_strjoin(pwd, tmp);
-		free(tmp);
-		free(pwd);
-	}
-
+		dir = set_dir(m_d, dir);
 	if (chdir(dir) != 0)
-	{
-		free(dir);
-		if (m_d->nb_cmd == 1)
-			return (msh_error(EXIT_FAILURE, ERR_CD_CD, 1));
-		exit(msh_error(EXIT_FAILURE, ERR_CD_CD, 1));
-	}
-	free(dir);
+		return (end(m_d, EXIT_FAILURE, dir));
 	msh_setpwd(m_d, getcwd(NULL, 0));
-	if (m_d->nb_cmd == 1)
-		return(EXIT_SUCCESS);
-	exit(EXIT_SUCCESS);
+	return (end(m_d, EXIT_SUCCESS, dir));
+}
+
+static char	*set_dir(t_msh_data *m_d, char *dir)
+{
+	char	*tmp;
+	char	*pwd;
+
+	tmp = ft_strjoin("/", dir);
+	pwd = msh_getpwd(m_d);
+	dir = ft_strjoin(pwd, tmp);
+	free(tmp);
+	free(pwd);
+	return (dir);
+}
+
+static int	end(t_msh_data *m_d, int status, char *dir)
+{
+	free(dir);
+	if (status == EXIT_SUCCESS && m_d->nb_cmd == 1)
+		return (status);
+	else if (status == EXIT_SUCCESS && m_d->nb_cmd > 1)
+		exit(status);
+	if (status != EXIT_SUCCESS && m_d->nb_cmd == 1)
+		return (msh_error(EXIT_FAILURE, ERR_CD_CD, EXIT_FAILURE));
+	else if (status != EXIT_SUCCESS && m_d->nb_cmd > 1)
+		exit(msh_error(EXIT_FAILURE, ERR_CD_CD, EXIT_FAILURE));
+	return (EXIT_FAILURE);
 }

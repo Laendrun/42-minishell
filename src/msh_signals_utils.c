@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_terminate.c                                    :+:      :+:    :+:   */
+/*   msh_signals_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/31 14:15:34 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/15 18:57:09 by saeby            ###   ########.fr       */
+/*   Created: 2023/02/15 18:54:19 by saeby             #+#    #+#             */
+/*   Updated: 2023/02/15 18:55:52 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	msh_terminate(t_msh_data *m_data)
+void	handle_sigint(int sig)
 {
-	if (m_data->tokens)
-		msh_free_tok(m_data);
-	if (m_data->cmds)
-		msh_free_cmds(m_data);
-	free(m_data->env_upd);
-	if (m_data->env)
-		msh_free_env(m_data);
+	(void)sig;
+	write(1, "\n", 1);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+	msh_set_gcode(1);
+}
+
+void	nothing(int v)
+{
+	(void)v;
+	rl_redisplay();
 }

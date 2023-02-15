@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_tok_lst.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:24:56 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/13 10:57:18 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/15 18:57:33 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	msh_tok_lstsize(t_tok_list *lst)
 	return (i);
 }
 
-t_tok_list *msh_remove_tok(t_tok_list **lst, t_tok_list *tok_to_remove)
+t_tok_list	*msh_remove_tok(t_tok_list **lst, t_tok_list *tok_to_remove)
 {
 	if (!(*lst) || !tok_to_remove)
 		return (NULL);

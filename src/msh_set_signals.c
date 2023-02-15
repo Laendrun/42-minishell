@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 20:54:27 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/15 18:45:35 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/15 18:55:24 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,9 @@
 // SIGQUIT (ctrl-\)
 // SIGHUP (ctrl-d)
 
-void	handle_sigint(int sig)
-{
-	(void)sig;
-	write(1, "\n", 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-	msh_set_gcode(1);
-}
-
 // if in child +> silence these motherfucking signals
 // write a function to set the signal handlers to be "nothing"
 // so they will finally shut and let us work in peace
-
-void	nothing(int v)
-{
-	(void)v;
-	rl_redisplay();
-}
 
 void	sigint_update(void)
 {
