@@ -47,46 +47,20 @@ int	pipex(t_msh_data *m_d)
 {
 	int	status;
 	int	last_status;
-	// int		i;
-	// t_cmd	*tmp;
-
-	// i = 0;
-	// while (i < m_d->nb_cmd - 1)
-	// {
-	// 	if (pipe(&m_d->fd[2 * i]) == -1)
-	// 		f_error("Error creating pipe :", strerror(errno), m_d);
-	// 	i++;
-	// }
 	if (open_pipe(m_d) != 0)
 		return (EXIT_FAILURE);
 	if (launch_process(m_d) != 0)
 		return (EXIT_FAILURE);
-	// tmp = m_d->cmds;
-	// while (m_d->process < m_d->nb_cmd)
-	// {
-	// 	f_fork(m_d, tmp);
-	// 	if (tmp->next != NULL)
-	// 		tmp = tmp->next;
-	// 	m_d->process++;
-	// }
-	// printf("process: %d\n", m_d->process);
 	while (m_d->process--)
 	{
 		waitpid(m_d->pid[m_d->process], &status, 0);
 		if (m_d->process == m_d->nb_cmd - 1)
 			last_status = status;
 	}
-	// printf("status : %d\n", status);
-	// free(m_d->pid);
-	// free_tab_char(m_d->path);
-	// free_tab_char(m_d->env_upd);
-	// free_t_cmd(m_d);
-	// free(m_d->trunc_lst);
 	if(WIFEXITED(last_status))
 		msh_set_gcode(WEXITSTATUS(last_status));
 	// msh_set_gcode(status);
 	return (EXIT_SUCCESS);
-	// return (WEXITSTATUS(status));
 }
 
 int	msh_pipex(t_msh_data *m_d)
