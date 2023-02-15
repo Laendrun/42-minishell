@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-t_tok_list **create_array_of_toklst(t_msh_data *m_d)
+t_tok_list	**create_array_of_toklst(t_msh_data *m_d)
 {
 	t_tok_list	*cur;
 	t_tok_list	**array;
@@ -28,15 +28,27 @@ t_tok_list **create_array_of_toklst(t_msh_data *m_d)
 		array[i] = cur;
 		while (cur->next && cur->type != PIPE)
 			cur = cur->next;
-		if (cur->next !=  NULL)
+		if (cur->next != NULL)
 		{
 			cur = cur->next;
 			i++;
 		}
 		else
-			break;
+			break ;
 	}
 	return (array);
+}
+
+int	set_args(t_tok_list	*tmp, char **args, int *j)
+{
+	if (tmp->type == WORD || tmp->type == STR)
+	{
+		args[(*j)] = ft_strdup(tmp->val);
+		if (!args[(*j)])
+			return (msh_error(1, ERR_MALMES, ERR_MALLOC));
+		(*j)++;
+	}
+	return (EXIT_SUCCESS);
 }
 
 int	create_cmd_lst(t_msh_data *m_d, int i)
@@ -45,7 +57,7 @@ int	create_cmd_lst(t_msh_data *m_d, int i)
 	char		**args;
 	int			nb_arg;
 	t_tok_list	*tmp;
-	int 		j;
+	int			j;
 
 	nb_arg = get_nb_args(m_d->trunc_lst[i]);
 	args = ft_calloc(sizeof(char *), (nb_arg + 1));
@@ -57,13 +69,8 @@ int	create_cmd_lst(t_msh_data *m_d, int i)
 	{
 		if (tmp->type == PIPE || tmp->type == END)
 			break ;
-		if (tmp->type == WORD || tmp->type == STR)
-		{
-			args[j] = ft_strdup(tmp->val);
-			if (!args[j])
-				return (msh_error(1, ERR_MALMES, ERR_MALLOC));
-			j++;
-		}
+		if (set_args(tmp, args, &j) != 0)
+			return (EXIT_FAILURE);
 		tmp = tmp->next;
 	}
 	new = msh_cmd_lstnew(NULL, args);
@@ -103,7 +110,7 @@ int	msh_create_commmands(t_msh_data *m_d)
 	{
 		if (create_cmd_lst(m_d, i) != 0)
 			return (EXIT_FAILURE);
-		if (set_redir_in_cmd_lst(m_d, i) != 0 )
+		if (set_redir_in_cmd_lst(m_d, i) != 0)
 			return (EXIT_FAILURE);
 		i++;
 	}
@@ -129,3 +136,36 @@ int	msh_create_commmands(t_msh_data *m_d)
 	// 	printf("out trunc : %d\n", tmp->out_trunc);
 	// 	tmp = tmp->next;
 	// }
+
+// BEFORE NORM
+// 	int	create_cmd_lst(t_msh_data *m_d, int i)
+// {
+// 	t_cmd		*new;
+// 	char		**args;
+// 	int			nb_arg;
+// 	t_tok_list	*tmp;
+// 	int			j;
+
+// 	nb_arg = get_nb_args(m_d->trunc_lst[i]);
+// 	args = ft_calloc(sizeof(char *), (nb_arg + 1));
+// 	if (!args)
+// 		return (msh_error(1, ERR_MALMES, ERR_MALLOC));
+// 	tmp = m_d->trunc_lst[i];
+// 	j = 0;
+// 	while (tmp)
+// 	{
+// 		if (tmp->type == PIPE || tmp->type == END)
+// 			break ;
+// 		// if (tmp->type == WORD || tmp->type == STR)
+// 		// {
+// 		// 	args[j] = ft_strdup(tmp->val);
+// 		// 	if (!args[j])
+// 		// 		return (msh_error(1, ERR_MALMES, ERR_MALLOC));
+// 		// 	j++;
+// 		// }
+// 		tmp = tmp->next;
+// 	}
+// 	new = msh_cmd_lstnew(NULL, args);
+// 	msh_cmd_lstaddb(&m_d->cmds, new);
+// 	return (EXIT_SUCCESS);
+// }

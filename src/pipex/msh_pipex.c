@@ -20,7 +20,7 @@ int	open_pipe(t_msh_data *m_d)
 	while (i < m_d->nb_cmd - 1)
 	{
 		if (pipe(&m_d->fd[2 * i]) == -1)
-			return(msh_error(1, ERR_PIPE, 1));
+			return (msh_error(1, ERR_PIPE, 1));
 		i++;
 	}
 	return (EXIT_SUCCESS);
@@ -47,6 +47,7 @@ int	pipex(t_msh_data *m_d)
 {
 	int	status;
 	int	last_status;
+
 	if (open_pipe(m_d) != 0)
 		return (EXIT_FAILURE);
 	if (launch_process(m_d) != 0)
@@ -57,17 +58,13 @@ int	pipex(t_msh_data *m_d)
 		if (m_d->process == m_d->nb_cmd - 1)
 			last_status = status;
 	}
-	if(WIFEXITED(last_status))
+	if (WIFEXITED(last_status))
 		msh_set_gcode(WEXITSTATUS(last_status));
-	// msh_set_gcode(status);
 	return (EXIT_SUCCESS);
 }
 
 int	msh_pipex(t_msh_data *m_d)
 {
-	
-	// msh_set_gcode(pipex(m_d));
-	// return (msh_get_gcode());
 	if (pipex(m_d) != 0)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);

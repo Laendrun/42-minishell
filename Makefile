@@ -6,7 +6,6 @@ INC_DIR = includes/
 SRC_DIR = src/
 BI_DIR = builtins/
 LEX_DIR = lexer/
-SYNT_DIR = syntax/
 EXPAND_DIR = expand/
 DEBUG_DIR = debug/
 PIPEX_DIR = pipex/
@@ -31,10 +30,6 @@ LEX_SRC	= $(addprefix $(LEX_DIR),	msh_lex_pipe.c \
 									msh_lex_quotes.c \
 									msh_lex_redir.c \
 									msh_lex_word.c \
-									)
-
-SYNT_SRC = $(addprefix $(SYNT_DIR),	msh_check_syntax.c \
-									msh_syntax_helper.c \
 									)
 
 EXPAND_SRC = $(addprefix $(EXPAND_DIR),	msh_expand_var.c \
@@ -78,15 +73,14 @@ SRC =	main.c \
 OBJ := $(SRC:%.c=%.o)
 BI_OBJ := $(BI_SRC:%.c=%.o)
 LEX_OBJ := $(LEX_SRC:%.c=%.o)
-SYNT_OBJ := $(SYNT_SRC:%.c=%.o)
 EXPAND_OBJ := $(EXPAND_SRC:%.c=%.o)
 DEBUG_OBJ := $(DEBUG_SRC:%.c=%.o)
 PIPEX_OBJ := $(PIPEX_SRC:%.c=%.o)
 FREE_OBJ := $(FREE_SRC:%.c=%.o)
 PARS_OBJ := $(PARS_SRC:%.c=%.o)
 
-SRCS = $(addprefix $(SRC_DIR), $(SRC) $(BI_SRC) $(LEX_SRC) $(SYNT_SRC) $(EXPAND_SRC) $(DEBUG_SRC) $(PIPEX_SRC) $(FREE_SRC) $(PARS_SRC))
-OBJS = $(addprefix $(OBJ_DIR), $(OBJ) $(BI_OBJ) $(LEX_OBJ) $(SYNT_OBJ) $(EXPAND_OBJ) $(DEBUG_OBJ) $(PIPEX_OBJ) $(FREE_OBJ) $(PARS_OBJ)) 
+SRCS = $(addprefix $(SRC_DIR), $(SRC) $(BI_SRC) $(LEX_SRC) $(EXPAND_SRC) $(DEBUG_SRC) $(PIPEX_SRC) $(FREE_SRC) $(PARS_SRC))
+OBJS = $(addprefix $(OBJ_DIR), $(OBJ) $(BI_OBJ) $(LEX_OBJ) $(EXPAND_OBJ) $(DEBUG_OBJ) $(PIPEX_OBJ) $(FREE_OBJ) $(PARS_OBJ)) 
 
 CCFLAGS = -Wall -Wextra -Werror
 
@@ -118,7 +112,6 @@ $(OBJ_DIR):
 	@mkdir $(OBJ_DIR)
 	@mkdir $(OBJ_DIR)/$(BI_DIR)
 	@mkdir $(OBJ_DIR)/$(LEX_DIR)
-	@mkdir $(OBJ_DIR)/$(SYNT_DIR)
 	@mkdir $(OBJ_DIR)/$(EXPAND_DIR)
 	@mkdir $(OBJ_DIR)/$(DEBUG_DIR)
 	@mkdir $(OBJ_DIR)/$(PIPEX_DIR)

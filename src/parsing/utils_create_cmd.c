@@ -16,8 +16,8 @@ char	**msh_make_env_tabstr(t_msh_data *m_d)
 {
 	int			i;
 	int			size;
-	t_env_list *tmp;
-	char 		**env_str;
+	t_env_list	*tmp;
+	char		**env_str;
 
 	i = 0;
 	tmp = m_d->env;
@@ -72,13 +72,32 @@ int	get_nb_args(t_tok_list *d)
 	return (cpt);
 }
 
+int	check_redir_outfile(t_tok_list *tmp, t_cmd *end)
+{
+	if (tmp->type == GT)
+	{
+		end->out_trunc = open(tmp->next->val,
+				O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		if (end->out_trunc < 0)
+			return (msh_error(1, ERR_OPEN, 1));
+	}
+	else if (tmp->type == DGT)
+	{
+		end->out_app = open(tmp->next->val,
+				O_CREAT | O_WRONLY | O_APPEND, 0644);
+		if (end->out_app < 0)
+			return (msh_error(1, ERR_OPEN, 1));
+	}
+	return (EXIT_SUCCESS);
+}
+
 int	check_redir_type(t_msh_data *m_d, t_tok_list *tmp, t_cmd *end)
 {
 	if (tmp->type == LT)
 	{
 		end->infile = open(tmp->next->val, O_RDONLY);
 		if (end->infile < 0)
-			return(msh_error(1, ERR_OPEN, 1));
+			return (msh_error(1, ERR_OPEN, 1));
 	}
 	else if (tmp->type == DLT)
 	{
@@ -87,18 +106,22 @@ int	check_redir_type(t_msh_data *m_d, t_tok_list *tmp, t_cmd *end)
 		if (ft_here_doc(m_d, end) != 0)
 			return (EXIT_FAILURE);
 	}
-	else if (tmp->type == GT)
-	{
-		end->out_trunc = open(tmp->next->val, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-		if (end->out_trunc < 0)
-			return(msh_error(1, ERR_OPEN, 1));
-	}
-	else if (tmp->type == DGT)
-	{
-		end->out_app = open(tmp->next->val, O_CREAT | O_WRONLY | O_APPEND, 0644);
-		if (end->out_app < 0)
-			return(msh_error(1, ERR_OPEN, 1));
-	}
+	if (check_redir_outfile(tmp, end) != 0)
+		return (EXIT_FAILURE);
+	// else if (tmp->type == GT)
+	// {
+	// 	end->out_trunc = open(tmp->next->val,
+	// 			O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	// 	if (end->out_trunc < 0)
+	// 		return (msh_error(1, ERR_OPEN, 1));
+	// }
+	// else if (tmp->type == DGT)
+	// {
+	// 	end->out_app = open(tmp->next->val,
+	// 			O_CREAT | O_WRONLY | O_APPEND, 0644);
+	// 	if (end->out_app < 0)
+	// 		return (msh_error(1, ERR_OPEN, 1));
+	// }
 	return (EXIT_SUCCESS);
 }
 
@@ -116,14 +139,12 @@ int	set_redir_in_cmd_lst(t_msh_data *m_d, int i)
 		if (tmp->type == PIPE || tmp->type == END)
 			break ;
 		if ((tmp->type == LT || tmp->type == DLT || tmp->type == GT
-			|| tmp->type == DGT) && tmp->next->type == REDIR)
-			{
-				if (check_redir_type(m_d, tmp, end) != 0)
-					return (EXIT_FAILURE);
-			}
+				|| tmp->type == DGT) && tmp->next->type == REDIR)
+		{
+			if (check_redir_type(m_d, tmp, end) != 0)
+				return (EXIT_FAILURE);
+		}
 		tmp = tmp->next;
 	}
 	return (EXIT_SUCCESS);
 }
-
-

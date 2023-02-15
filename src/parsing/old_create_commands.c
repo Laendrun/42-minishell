@@ -78,7 +78,8 @@
 // 		{
 // 			cur = cur->next;
 // 			// cur->prev->next = NULL;
-// 			//the connection with prev is still there and the list is still connected I guess
+// 			//the connection with prev is still 
+// 				there and the list is still connected I guess
 // 			i++;
 // 		}
 // 		else
@@ -123,7 +124,8 @@
 // 			break ;
 // 		if (tmp->type == VAR || tmp->type == WORD || tmp->type == STR)
 // 		{
-// 			// args[j] = ft_calloc(sizeof(char), (ft_strlen(tmp->val) + 1));
+// 			// args[j] = ft_calloc(sizeof(char),
+								// (ft_strlen(tmp->val) + 1));
 // 			args[j] = ft_strdup(tmp->val);
 // 			// args[j] = tmp->val;
 // 			// printf("%s\n", args[j]);
@@ -169,5 +171,3 @@
 // 	// }
 // 	return (SUCCESS);
 // }
-
-

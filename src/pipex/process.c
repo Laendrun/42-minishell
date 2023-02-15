@@ -52,11 +52,14 @@
 // 	else if (m_d->process == m_d->nb_cmd - 1)
 // 	{
 // 		if (m_d->outfile_app != -1)
-// 			f_duplicate(m_d->fd[(2 * m_d->process) - 2], m_d->outfile_app, m_d);
+// 			f_duplicate(m_d->fd[(2 * m_d->process) - 2],
+// 									m_d->outfile_app, m_d);
 // 		else if (m_d->outfile_trunc != -1)
-// 			f_duplicate(m_d->fd[(2 * m_d->process) - 2], m_d->outfile_trunc, m_d);
+// 			f_duplicate(m_d->fd[(2 * m_d->process) - 2],
+									// m_d->outfile_trunc, m_d);
 // 		else
-// 			f_duplicate(m_d->fd[(2 * m_d->process) - 2], STDOUT_FILENO, m_d);
+// 			f_duplicate(m_d->fd[(2 * m_d->process) - 2],
+									// STDOUT_FILENO, m_d);
 // 	}
 // 	else
 // 		f_duplicate(m_d->fd[(2 * m_d->process) - 2],

@@ -23,7 +23,8 @@ int	handle_var_hdoc(int (*i)[2], char *tok, char **ret, t_msh_data *m_d)
 	(*i)[1] = (*i)[0];
 	while (tok[(*i)[0]] && !msh_isspace(tok[(*i)[0]]) && tok[(*i)[0]] != '$')
 		(*i)[0]++;
-	*ret = ft_strjoin_free(*ret, msh_get_env_free(m_d, ft_substr(tok, (*i)[1], (*i)[0] - (*i)[1])));
+	*ret = ft_strjoin_free(*ret, msh_get_env_free(m_d,
+				ft_substr(tok, (*i)[1], (*i)[0] - (*i)[1])));
 	if (!*ret)
 		return (msh_error(ERR_MALLOC, ERR_MALMES, ERR_MALLOC));
 	(*i)[1] = (*i)[0];
@@ -81,7 +82,7 @@ int	ft_here_doc(t_msh_data *m_d, t_cmd *end)
 	char	*read;
 
 	if (pipe(end->hdoc) < 0)
-		return(msh_error(1, ERR_PIPE, 1));
+		return (msh_error(1, ERR_PIPE, 1));
 	read = readline(">");
 	line = msh_var_in_hdoc(m_d, read);
 	free(read);
@@ -99,7 +100,7 @@ int	ft_here_doc(t_msh_data *m_d, t_cmd *end)
 		free(read);
 	}
 	if (close(end->hdoc[1]) < 0)
-		return(msh_error(1, ERR_CLOSE, 1));
+		return (msh_error(1, ERR_CLOSE, 1));
 	return (EXIT_SUCCESS);
 }
 
@@ -112,7 +113,8 @@ int	ft_here_doc(t_msh_data *m_d, t_cmd *end)
 // 	{
 // 		if (tmp->type == GT && (tmp->next->type == REDIR))
 // 		{
-// 			m_d->outfile_trunc = open(tmp->next->val, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+// 			m_d->outfile_trunc = open(tmp->next->val,
+// 				O_CREAT | O_WRONLY | O_TRUNC, 0644);
 // 			// printf("open trunc : %d\n", m_d->outfile_trunc);
 // 			break ;
 // 		}
@@ -131,7 +133,8 @@ int	ft_here_doc(t_msh_data *m_d, t_cmd *end)
 // 		// printf("type : %d val : %s\n", tmp->type, tmp->val);
 // 		if (tmp->type == DGT && (tmp->next->type == REDIR))
 // 		{
-// 			m_d->outfile_app = open(tmp->next->val, O_CREAT | O_WRONLY | O_APPEND, 0644);
+// 			m_d->outfile_app = 
+// 				open(tmp->next->val, O_CREAT | O_WRONLY | O_APPEND, 0644);
 // 			// printf("open : %d\n", m_d->outfile_app);
 // 			break ;
 // 		}
@@ -206,7 +209,8 @@ int	ft_here_doc(t_msh_data *m_d, t_cmd *end)
 // 		tmp = m_d->trunc_lst[i];
 // 		while (tmp)
 // 		{
-// 			if (tmp->type == GT || tmp->type == DGT || tmp->type == LT || tmp->type == DLT)
+// 			if (tmp->type == GT || tmp->type == DGT 
+// 				|| tmp->type == LT || tmp->type == DLT)
 // 			{
 // 				printf("ambiguous redirection.\n");
 // 				return (ERROR);
