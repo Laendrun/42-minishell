@@ -23,196 +23,111 @@ int	f_duplicate(int in, int out)
 
 int	infile_first_process(t_msh_data *m_d, t_cmd *tmp)
 {
+	int	ret;
+
+	ret = EXIT_SUCCESS;
 	if (m_d->nb_cmd == 1)
-	{
-		if (f_duplicate(tmp->infile, STDOUT_FILENO) != 0)
-			return (EXIT_FAILURE);
-	}
+		ret = f_duplicate(tmp->infile, STDOUT_FILENO);
 	else
-	{
-		if (f_duplicate(tmp->infile, m_d->fd[1]) != 0)
-			return (EXIT_FAILURE);
-	}
-	return (EXIT_SUCCESS);
+		ret = f_duplicate(tmp->infile, m_d->fd[1]);
+	return (ret);
 }
 
 int	heredoc_first_process(t_msh_data *m_d, t_cmd *tmp)
 {
+	int	ret;
+
+	ret = EXIT_SUCCESS;
 	if (m_d->nb_cmd == 1)
 	{
-		if (f_duplicate(tmp->hdoc[0], STDOUT_FILENO) != 0)
-			return (EXIT_FAILURE);
-		close(tmp->hdoc[0]);
+		ret = f_duplicate(tmp->hdoc[0], STDOUT_FILENO);
+		if (close(tmp->hdoc[0]) < 0)
+			return(msh_error(1, ERR_CLOSE, 1));
 	}
 	else
-	{
-		if (f_duplicate(tmp->hdoc[0], m_d->fd[1]) != 0)
-			return (EXIT_FAILURE);
-	}
-	return (EXIT_SUCCESS);
+		ret = f_duplicate(tmp->hdoc[0], m_d->fd[1]);
+	return (ret);
 }
 
 int	first_process(t_msh_data *m_d, t_cmd *tmp)
 {
+	int	ret;
+
+	ret = EXIT_SUCCESS;
 	if (tmp->infile != -1)
-	{
-		// if (m_d->nb_cmd == 1)
-		// 	f_duplicate(tmp->infile, STDOUT_FILENO);
-		// else
-		// 	f_duplicate(tmp->infile, m_d->fd[1]);
-		infile_first_process(m_d, tmp);
-	}
+		ret = infile_first_process(m_d, tmp);
 	else if (tmp->heredoc == 1)
-	{
-		// if (m_d->nb_cmd == 1)
-		// {
-		// 	f_duplicate(tmp->hdoc[0], STDOUT_FILENO);
-		// 	close(tmp->hdoc[0]);
-		// }
-		// else
-		// 	f_duplicate(tmp->hdoc[0], m_d->fd[1]);
-		heredoc_first_process(m_d, tmp);
-	}
+		ret = heredoc_first_process(m_d, tmp);
 	else if (tmp->out_app != -1)
-		f_duplicate(STDIN_FILENO, tmp->out_app);
+		ret = f_duplicate(STDIN_FILENO, tmp->out_app);
 	else if (tmp->out_trunc != -1)
-		f_duplicate(STDIN_FILENO, tmp->out_trunc);
+		ret =f_duplicate(STDIN_FILENO, tmp->out_trunc);
 	else if (m_d->nb_cmd == 1)
-		return (EXIT_SUCCESS);
+		return (ret);
 	else
-		f_duplicate(STDIN_FILENO, m_d->fd[1]);
-	return (EXIT_SUCCESS);
+		ret = f_duplicate(STDIN_FILENO, m_d->fd[1]);
+	return (ret);
 }
 
 int	last_process(t_msh_data *m_d, t_cmd *tmp)
 {
+	int	ret;
+
+	ret = EXIT_SUCCESS;
 	if (tmp->out_app != -1)
-	{
-		if (f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_app) != 0)
-			return (EXIT_FAILURE);
-	}
+		ret = f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_app);
 	else if (tmp->out_trunc != -1)
-	{
-		if (f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_trunc) != 0)
-			return (EXIT_FAILURE);
-	}
+		ret = f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_trunc);
 	else if (tmp->infile != -1)
-	{
-		if (f_duplicate(tmp->infile, STDOUT_FILENO) != 0)
-			return (EXIT_FAILURE);
-	}
+		ret = f_duplicate(tmp->infile, STDOUT_FILENO);
 	else if (tmp->heredoc == 1)
 	{
-		if (f_duplicate(tmp->hdoc[0], STDOUT_FILENO) != 0)
-			return (EXIT_FAILURE);
-		close(tmp->hdoc[0]);
+		ret = f_duplicate(tmp->hdoc[0], STDOUT_FILENO);
+		if (close(tmp->hdoc[0]) < 0)
+			return(msh_error(1, ERR_CLOSE, 1));
 	}
 	else
-		if (f_duplicate(m_d->fd[(2 * m_d->process) - 2], STDOUT_FILENO) != 0)
-			return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+		ret = f_duplicate(m_d->fd[(2 * m_d->process) - 2], STDOUT_FILENO);
+	return (ret);
 }
 
 int	middle_process(t_msh_data *m_d, t_cmd *tmp)
 {
+	int	ret;
+
+	ret = EXIT_SUCCESS;
 	if (tmp->out_app != -1)
-	{
-		if (f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_app) != 0)
-			return (EXIT_FAILURE);
-	}
+		ret = f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_app);
 	else if (tmp->out_trunc != -1)
-	{
-		if (f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_trunc) != 0)
-			return (EXIT_FAILURE);
-	}
+		ret = f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_trunc);
 	else if (tmp->infile != -1)
-	{
-		f_duplicate(tmp->infile, m_d->fd[(2 * m_d->process) + 1]);
-			return (EXIT_FAILURE);
-	}
+		ret = f_duplicate(tmp->infile, m_d->fd[(2 * m_d->process) + 1]);
 	else if (tmp->heredoc == 1)
 	{
-		if (f_duplicate(tmp->hdoc[0], m_d->fd[(2 * m_d->process) + 1]) != 0)
-			return (EXIT_FAILURE);
-		close(tmp->hdoc[0]);
+		ret = f_duplicate(tmp->hdoc[0], m_d->fd[(2 * m_d->process) + 1]);
+		if (close(tmp->hdoc[0]) < 0)
+			return(msh_error(1, ERR_CLOSE, 1));
 	}
 	else
-		f_duplicate(m_d->fd[(2 * m_d->process) - 2],
+		ret = f_duplicate(m_d->fd[(2 * m_d->process) - 2],
 			m_d->fd[(2 * m_d->process) + 1]);
-	return (EXIT_SUCCESS);
+	return (ret);
 }
 
 int	f_pre_duplicate(t_msh_data *m_d, t_cmd *tmp)
 {
+	int	ret;
+
+	ret = EXIT_SUCCESS;
 	if (m_d->process == 0)
-	{
-		if (first_process(m_d, tmp) != 0)
-			return (EXIT_FAILURE);
-		// if (tmp->infile != -1)
-		// {
-		// 	if (m_d->nb_cmd == 1)
-		// 		f_duplicate(tmp->infile, STDOUT_FILENO, m_d);
-		// 	else
-		// 		f_duplicate(tmp->infile, m_d->fd[1], m_d);
-		// }
-		// else if (tmp->heredoc == 1)
-		// {
-		// 	if (m_d->nb_cmd == 1)
-		// 	{
-		// 		f_duplicate(tmp->hdoc[0], STDOUT_FILENO, m_d);
-		// 		close(tmp->hdoc[0]);
-		// 	}
-		// 	else
-		// 		f_duplicate(tmp->hdoc[0], m_d->fd[1], m_d);
-		// }
-		// else if (tmp->out_app != -1)
-		// 	f_duplicate(STDIN_FILENO, tmp->out_app, m_d);
-		// else if (tmp->out_trunc != -1)
-		// 	f_duplicate(STDIN_FILENO, tmp->out_trunc, m_d);
-		// else if (m_d->nb_cmd == 1)
-		// 	return ;
-		// else
-		// 	f_duplicate(STDIN_FILENO, m_d->fd[1], m_d);
-	}
+		ret = first_process(m_d, tmp);
 	else if (m_d->process == m_d->nb_cmd - 1)
-	{
-		if (last_process(m_d, tmp) != 0)
-			return (EXIT_FAILURE);
-		// if (tmp->out_app != -1)
-		// 	f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_app, m_d);
-		// else if (tmp->out_trunc != -1)
-		// 	f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_trunc, m_d);
-		// else if (tmp->infile != -1)
-		// 	f_duplicate(tmp->infile, STDOUT_FILENO, m_d);
-		// else if (tmp->heredoc == 1)
-		// {
-		// 	f_duplicate(tmp->hdoc[0], STDOUT_FILENO, m_d);
-		// 	close(tmp->hdoc[0]);
-		// }
-		// else
-		// 	f_duplicate(m_d->fd[(2 * m_d->process) - 2], STDOUT_FILENO, m_d);
-	}
+		ret = last_process(m_d, tmp);
 	else
-	{
-		if (middle_process(m_d, tmp) != 0)
-			return (EXIT_FAILURE);
-		// if (tmp->out_app != -1)
-		// 	f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_app, m_d);
-		// else if (tmp->out_trunc != -1)
-		// 	f_duplicate(m_d->fd[(2 * m_d->process) - 2], tmp->out_trunc, m_d);
-		// else if (tmp->infile != -1)
-		// 	f_duplicate(tmp->infile, m_d->fd[(2 * m_d->process) + 1], m_d);
-		// else if (tmp->heredoc == 1)
-		// {
-		// 	f_duplicate(tmp->hdoc[0], m_d->fd[(2 * m_d->process) + 1], m_d);
-		// 	close(tmp->hdoc[0]);
-		// }
-		// else 
-		// 	f_duplicate(m_d->fd[(2 * m_d->process) - 2], m_d->fd[(2 * m_d->process) + 1], m_d);
-	}
+		ret = middle_process(m_d, tmp);
 	if (close_fd_tab(m_d->fd, 2 * (m_d->nb_cmd - 1)) != 0)
 		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+	return (ret);
 }
 
 void	pip_no_exec(char *s)
@@ -225,7 +140,7 @@ void	pip_no_exec(char *s)
 	// ft_putstr_fd("shellusion: ", STDERR_FILENO);
 	// ft_putstr_fd(s, STDERR_FILENO);
 	// ft_putstr_fd(" : command not found.\n", STDERR_FILENO);
-	exit(127);
+	exit(ERR_NOEXEC);
 }
 
 char	*pip_get_exec(char *cmd, char **paths)
