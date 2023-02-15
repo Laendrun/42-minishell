@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_print_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:31:08 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/10 11:59:54 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/15 19:57:32 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,29 +54,12 @@ void	print_tok_trunclst(t_tok_list *d)
 
 void	print_array_lst(t_msh_data *m_d)
 {
-	int	i = 0;
-	while(i < m_d->nb_cmd)
+	unsigned int	i;
+
+	i = 0;
+	while (i < m_d->nb_cmd)
 	{
 		print_tok_trunclst(m_d->trunc_lst[i]);
 		i++;
 	}
 }
-
-
-
-
-// //reverse order to test prev
-// void	print_simpl_tok(t_msh_data *m_data)
-// {
-// 	t_tok_list	*token;
-
-// 	printf("%sSimplified tokens: \n%s", YELLOW, RESET);
-// 	token = m_data->s_tok;
-// 	token = msh_tok_lstlast(token);
-
-// 	while (token)
-// 	{
-// 		printf("Type: %d - Value: %s\n", token->type, token->val);
-// 		token = token->prev;
-// 	}
-// }
