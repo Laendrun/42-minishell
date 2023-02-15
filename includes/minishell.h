@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 18:46:45 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/15 18:56:02 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/15 19:54:17 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,13 +142,14 @@ int			f_fork(t_msh_data *m_d, t_cmd *tmp);
 char		**pip_get_path(char **env);
 
 // ----------------------------------------------
-// msh_is.c
+// msh_is.c / msh_is2.c
 // ----------------------------------------------
 int			msh_isspace(int c);
 int			msh_isoperator(int c);
 int			msh_isspec(int c);
 int			msh_is_builtin(char *str);
 int			msh_is_envvar_comp(t_tok_list *token);
+int			str_isalnum(char *s);
 
 // ----------------------------------------------
 // msh_utils.c

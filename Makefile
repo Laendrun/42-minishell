@@ -66,6 +66,7 @@ SRC =	main.c \
 		msh_lexer.c \
 		msh_parser.c \
 		msh_is.c \
+		msh_is2.c \
 		msh_utils.c \
 		msh_env_utils.c \
 		msh_terminate.c \

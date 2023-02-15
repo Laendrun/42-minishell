@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 10:24:41 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/15 17:09:37 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/15 19:54:57 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ int	print_declared_vars(t_msh_data *m_d, int out)
 	return (SUCCESS);
 }
 
-void	replace(t_msh_data *m_d, char *key, char *val)
+static void	replace(t_msh_data *m_d, char *key, char *val)
 {
 	msh_replace_val(m_d, key, val);
 }
 
-int	create(t_msh_data *m_d, char *key, char *val)
+static int	create(t_msh_data *m_d, char *key, char *val)
 {
 	t_env_list	*new;
 
@@ -47,18 +47,13 @@ int	create(t_msh_data *m_d, char *key, char *val)
 	return (EXIT_SUCCESS);
 }
 
-static int	str_isalnum(char *s)
+static void	set_out(t_cmd *cmd, int *out)
 {
-	unsigned int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		if (!ft_isalnum(s[i]))
-			return (0);
-		i++;
-	}
-	return (1);
+	*out = STDOUT_FILENO;
+	if (cmd->out_app >= 0)
+		*out = cmd->out_app;
+	if (cmd->out_trunc >= 0)
+		*out = cmd->out_trunc;
 }
 
 int	msh_export(t_msh_data *m_d, t_cmd *cmd)
@@ -66,19 +61,13 @@ int	msh_export(t_msh_data *m_d, t_cmd *cmd)
 	int		out;
 	char	*val;
 
-	out = STDOUT_FILENO;
-	if (cmd->out_app >= 0)
-		out = cmd->out_app;
-	if (cmd->out_trunc >= 0)
-		out = cmd->out_trunc;
-
+	set_out(cmd, &out);
 	if (count_args(cmd) == 1)
 		return (print_declared_vars(m_d, out));
 	if (!str_isalnum(cmd->args[1]) && m_d->nb_cmd == 1)
 		return (export_key_error(cmd->args[1], cmd->args[2]));
 	else if (!str_isalnum(cmd->args[1]) && m_d->nb_cmd > 1)
 		exit(export_key_error(cmd->args[1], cmd->args[2]));
-
 	if (cmd->args[2][0] == '\'')
 		val = ft_strtrim(cmd->args[2], "\'");
 	else if (cmd->args[2][0] == '\"')
