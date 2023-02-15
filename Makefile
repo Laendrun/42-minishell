@@ -90,6 +90,44 @@ CCFLAGS = -Wall -Wextra -Werror
 
 all: libft $(NAME)
 
+ascii:
+	@echo "\n\033[1m\033[38;5;196m   sSSSs     h    h   eEEEe    l\033[0m"  # Bold text in bright red
+	@echo "\033[1m\033[38;5;202m  S     S    H    H   E        L\033[0m"  # Bold text in orange
+	@echo "\033[1m\033[38;5;226m  S          H    H   E        L\033[0m"  # Bold text in yellow
+	@echo "\033[1m\033[38;5;82m   SSSs      HHHHHH   EEEEe    L\033[0m"    # Bold text in green
+	@echo "\033[1m\033[38;5;45m       S     H    H   E        L\033[0m"    # Bold text in blue
+	@echo "\033[1m\033[38;5;93m  S     S    H    H   E        L\033[0m"  # Bold text in pink
+	@echo "\033[1m\033[38;5;196m   sSSSs     h    h   eEEEe    LLLLLl\033[0m\n"  # Bold text in bright red
+
+
+
+loading_bar:
+	@printf 'Compiling your code: '
+	# @printf '   \033[1;32m                                                               (0%%)'
+	@sleep 0.1
+	@printf '\r   \033[1;32m████████\033[0m                                                  (10%%)'
+	@sleep 0.1
+	@printf '\r   \033[1;32m██████████████\033[0m                                              (20%%)'
+	@sleep 0.1
+	@printf '\r   \033[1;32m██████████████\033[0m                                          (30%%)'
+	@sleep 0.1
+	@printf '\r   \033[1;32m██████████████████\033[0m                                      (40%%)'
+	@sleep 0.1
+	@printf '\r   \033[1;32m██████████████████████\033[0m                                  (50%%)'
+	@sleep 0.1
+	@printf '\r   \033[1;32m██████████████████████████\033[0m                              (60%%)'
+	@sleep 0.1
+	@printf '\r   \033[1;32m██████████████████████████████\033[0m                          (70%%)'
+	@sleep 0.1
+	@printf '\r   \033[1;32m██████████████████████████████████\033[0m                      (80%%)'
+	@sleep 0.1
+	@printf '\r   \033[1;32m██████████████████████████████████████\033[0m                  (90%%)'
+	@sleep 0.1
+	@printf '\r   \033[1;32m██████████████████████████████████████████\033[0m              (100%%)'
+	@printf '\n'
+
+
+
 $(NAME): $(SRCS) $(OBJ_DIR) $(OBJS)
 #	gcc $(CCFLAGS) $(OBJS) -L$(LIBFT) -lft -lreadline -o $(NAME)
 	gcc $(CCFLAGS) $(OBJS) -L$(LIBFT) -L$(HOME)/.brew/Cellar/readline/8.2.1/lib -lft -lreadline -o $(NAME)

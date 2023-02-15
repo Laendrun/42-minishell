@@ -21,31 +21,19 @@ int	f_duplicate(int in, int out)
 	return (EXIT_SUCCESS);
 }
 
-int	infile_first_process(t_msh_data *m_d, t_cmd *tmp)
+int	f_pre_duplicate(t_msh_data *m_d, t_cmd *tmp)
 {
 	int	ret;
 
 	ret = EXIT_SUCCESS;
-	if (m_d->nb_cmd == 1)
-		ret = f_duplicate(tmp->infile, STDOUT_FILENO);
+	if (m_d->process == 0)
+		ret = first_process(m_d, tmp);
+	else if (m_d->process == m_d->nb_cmd - 1)
+		ret = last_process(m_d, tmp);
 	else
-		ret = f_duplicate(tmp->infile, m_d->fd[1]);
-	return (ret);
-}
-
-int	heredoc_first_process(t_msh_data *m_d, t_cmd *tmp)
-{
-	int	ret;
-
-	ret = EXIT_SUCCESS;
-	if (m_d->nb_cmd == 1)
-	{
-		ret = f_duplicate(tmp->hdoc[0], STDOUT_FILENO);
-		if (close(tmp->hdoc[0]) < 0)
-			return (msh_error(1, ERR_CLOSE, 1));
-	}
-	else
-		ret = f_duplicate(tmp->hdoc[0], m_d->fd[1]);
+		ret = middle_process(m_d, tmp);
+	if (close_fd_tab(m_d->fd, 2 * (m_d->nb_cmd - 1)) != 0)
+		return (EXIT_FAILURE);
 	return (ret);
 }
 

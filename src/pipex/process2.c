@@ -74,19 +74,3 @@ char	*pip_get_exec(char *cmd, char **paths)
 	pip_no_exec(cmd);
 	return (NULL);
 }
-
-int	f_pre_duplicate(t_msh_data *m_d, t_cmd *tmp)
-{
-	int	ret;
-
-	ret = EXIT_SUCCESS;
-	if (m_d->process == 0)
-		ret = first_process(m_d, tmp);
-	else if (m_d->process == m_d->nb_cmd - 1)
-		ret = last_process(m_d, tmp);
-	else
-		ret = middle_process(m_d, tmp);
-	if (close_fd_tab(m_d->fd, 2 * (m_d->nb_cmd - 1)) != 0)
-		return (EXIT_FAILURE);
-	return (ret);
-}

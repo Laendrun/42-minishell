@@ -12,6 +12,34 @@
 
 #include "minishell.h"
 
+int	infile_first_process(t_msh_data *m_d, t_cmd *tmp)
+{
+	int	ret;
+
+	ret = EXIT_SUCCESS;
+	if (m_d->nb_cmd == 1)
+		ret = f_duplicate(tmp->infile, STDOUT_FILENO);
+	else
+		ret = f_duplicate(tmp->infile, m_d->fd[1]);
+	return (ret);
+}
+
+int	heredoc_first_process(t_msh_data *m_d, t_cmd *tmp)
+{
+	int	ret;
+
+	ret = EXIT_SUCCESS;
+	if (m_d->nb_cmd == 1)
+	{
+		ret = f_duplicate(tmp->hdoc[0], STDOUT_FILENO);
+		if (close(tmp->hdoc[0]) < 0)
+			return (msh_error(1, ERR_CLOSE, 1));
+	}
+	else
+		ret = f_duplicate(tmp->hdoc[0], m_d->fd[1]);
+	return (ret);
+}
+
 int	first_process(t_msh_data *m_d, t_cmd *tmp)
 {
 	int	ret;
