@@ -18,10 +18,10 @@ int	msh_echo(t_msh_data *m_d, t_cmd *cmd)
 	int				out;
 
 	out = STDOUT_FILENO;
-	if (cmd->out_app >= 0)
-		out = cmd->out_app;
 	if (cmd->out_trunc >= 0)
 		out = cmd->out_trunc;
+	if (cmd->out_app >= 0)
+		out = cmd->out_app;
 
 	if (count_args(cmd) == 1)
 	{

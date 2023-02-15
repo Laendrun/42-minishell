@@ -22,8 +22,8 @@ int	check_redir_start_end(t_msh_data *d)
 		return (msh_error(1, ERR_NEAR_TOK, 258));
 	while (cur->next)
 	{
-		if (cur->type >= PIPE && cur->prev && cur->prev->type >= PIPE)
-			return (msh_error(1, ERR_NEAR_TOK, 258));
+		// if (cur->type >= PIPE && cur->prev && cur->prev->type >= PIPE)
+		// 	return (msh_error(1, ERR_NEAR_TOK, 258));
 		cur = cur->next;
 	}
 	if (cur->prev && cur->prev->type >= PIPE)
