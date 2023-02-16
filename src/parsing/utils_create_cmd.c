@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 10:59:28 by egauthey          #+#    #+#             */
-/*   Updated: 2023/02/15 20:08:00 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/16 18:05:30 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,14 @@ int	check_redir_outfile(t_tok_list *tmp, t_cmd *end)
 		end->out_trunc = open(tmp->next->val,
 				O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		if (end->out_trunc < 0)
-			return (msh_error(1, ERR_OPEN, 1));
+			return (open_error(tmp->next->val));
 	}
 	else if (tmp->type == DGT)
 	{
 		end->out_app = open(tmp->next->val,
 				O_CREAT | O_WRONLY | O_APPEND, 0644);
 		if (end->out_app < 0)
-			return (msh_error(1, ERR_OPEN, 1));
+			return (open_error(tmp->next->val));
 	}
 	return (EXIT_SUCCESS);
 }

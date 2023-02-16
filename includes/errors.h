@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 14:22:06 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/16 15:01:54 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/16 18:05:58 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,10 @@
 
 # define ERR_PIPE "error creating pipe :"
 # define ERR_CLOSE "close error :"
-# define ERR_OPEN "bash"
-# define ERR_FORK "fork error : "
-# define ERR_DUP2 "dup2 error : "
+# define SH_NAME "shellusion: "
+# define ERR_PERM ": Permission denied\n"
+# define ERR_FORK "fork error: "
+# define ERR_DUP2 "dup2 error: "
 # define ERR_INIT "shellusion: initialization error"
 
 #endif

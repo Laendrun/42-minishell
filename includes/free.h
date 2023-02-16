@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:42:59 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/15 20:13:23 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/16 18:04:58 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,6 @@ void	msh_error_cmd_not_found(char *msg, int err_code);
 int		export_key_error(char *key, char *val);
 void	pip_no_exec(char *s);
 int		msh_error_no_such_file(char *msg, int err_code);
+int		open_error(char *cmd);
 
 #endif
