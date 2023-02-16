@@ -37,3 +37,11 @@ void	backslash_n(int v)
 	msh_set_gcode(130);
 	rl_redisplay();
 }
+
+void	sigquit_update(void)
+{
+	struct sigaction	action;
+
+	action.sa_handler = &nothing;
+	sigaction(SIGQUIT, &action, NULL);
+}

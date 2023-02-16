@@ -71,6 +71,7 @@ void		msh_set_signals(void);
 void		sigint_update(void);
 void		handle_sighup(void);
 void		backslash_n(int v);
+void		sigquit_update(void);
 
 // ----------------------------------------------
 // msh_init.c
