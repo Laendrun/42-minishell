@@ -63,9 +63,18 @@ int	pipex(t_msh_data *m_d)
 	return (EXIT_SUCCESS);
 }
 
+void	sigquit_update(void)
+{
+	struct sigaction	action;
+
+	action.sa_handler = &nothing;
+	sigaction(SIGQUIT, &action, NULL);
+}
+
 int	msh_pipex(t_msh_data *m_d)
 {
 	sigint_update();
+	sigquit_update();
 	if (pipex(m_d) != 0)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
