@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 21:23:18 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/15 21:50:30 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/16 13:26:34 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,13 @@ int	msh_cd(t_msh_data *m_d, t_cmd *cmd)
 	if (count_args(cmd) == 2)
 	{
 		free(dir);
-		dir = cmd->args[1];
+		dir = set_dir(m_d, cmd->args[1]);
 	}
 	else if (count_args(cmd) > 2)
 	{
 		free(dir);
 		return (msh_error(EXIT_FAILURE, ERR_CD_ARGS, 1));
 	}
-	dir = set_dir(m_d, dir);
 	if (chdir(dir) != 0)
 		return (end(m_d, EXIT_FAILURE, dir));
 	msh_setpwd(m_d, getcwd(NULL, 0));

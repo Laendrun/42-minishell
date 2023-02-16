@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 21:25:56 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/15 19:56:14 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/16 13:05:12 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	msh_pwd(t_msh_data *m_data, t_cmd *cmd)
 	pwd = msh_get_env(m_data, "PWD");
 	write(out, pwd, ft_strlen(pwd));
 	write(out, "\n", 1);
+	free(pwd);
 	if (m_data->nb_cmd == 1)
 		return (SUCCESS);
 	exit(SUCCESS);
