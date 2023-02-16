@@ -25,6 +25,8 @@ void	handle_sigint(int sig)
 void	nothing(int v)
 {
 	(void)v;
+	ft_putstr_fd("Quit: 3\n", 1);
+	msh_set_gcode(131);
 	rl_redisplay();
 }
 
@@ -32,5 +34,14 @@ void	backslash_n(int v)
 {
 	(void)v;
 	write(1, "\n", 1);
+	msh_set_gcode(130);
 	rl_redisplay();
+}
+
+void	sigquit_update(void)
+{
+	struct sigaction	action;
+
+	action.sa_handler = &nothing;
+	sigaction(SIGQUIT, &action, NULL);
 }
