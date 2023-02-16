@@ -1,3 +1,38 @@
+# COLOURS
+
+_END		=	\e[0m
+_BOLD		=	\e[1m
+_DIM		=	\e[2m
+_UNDER		=	\e[4m
+_REV		=	\e[7m
+
+_GREY		=	\e[30m
+_RED		=	\e[31m
+_GREEN		=	\e[32m
+_YELLOW		=	\e[33m
+_BLUE		=	\e[34m
+_PURPLE		=	\e[35m
+_CYAN		=	\e[36m
+_WHITE		=	\e[37m
+
+_IGREY		=	\e[40m
+_IRED		=	\e[41m
+_IGREEN		=	\e[42m
+_IYELLOW	=	\e[43m
+_IBLUE		=	\e[44m
+_IPURPLE	=	\e[45m
+_ICYAN		=	\e[46m
+_IWHITE		=	\e[47m
+
+_MOFF		=	\e[?25l
+_MON		=	\e[?25h
+_MUP		=	\e[1A
+_ERASE		=	\e[K
+
+LNB = $(shell ls -l . | grep -F .c | wc -l)
+# $(eval LNB=$(shell echo $$(($(LNB)))))
+LCNT = 1
+
 NAME = libft.a
 CC = gcc
 CCFLAGS = -Wextra -Werror -Wall
@@ -73,16 +108,26 @@ OBJS := $(SRC:%.c=%.o)
 all: $(NAME)
 
 %.o: %.c
-	$(CC) -I. $(CCFLAGS) -o $@ -c $?
+	@$(CC) -I. $(CCFLAGS) -o $@ -c $?
+	@printf "$(_ERASE)\r"
+	@printf "$(_YELLOW)$<$(_END)\n"
+	@for i in $$(seq 1 $(LCNT)); \
+	do \
+		printf "$(_GREEN)█$(_END)"; \
+	done
+	$(eval LCNT=$(shell echo $$(($(LCNT)+1))))
+	@printf "\r$(_MUP)"
 
 $(NAME): $(OBJS)
-	ar rcs $(NAME) $(OBJS)
-	ranlib $(NAME)
+	@printf "\n\n$(_BOLD)$(_WHITE)libft ready$(_END)\n"
+	@ar rcs $(NAME) $(OBJS)
+	@ranlib $(NAME)
+	@printf "$(_BOLD)$(_GREEN)OK! $(_END)$(_DIM)$(_WHITE)($(NAME)$(_END))\n\n"
 
 clean:
-	rm -f $(OBJS)
+	@rm -f $(OBJS)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all

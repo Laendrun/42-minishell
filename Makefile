@@ -1,3 +1,37 @@
+# COLOURS
+
+_END		=	\e[0m
+_BOLD		=	\e[1m
+_DIM		=	\e[2m
+_UNDER		=	\e[4m
+_REV		=	\e[7m
+
+_GREY		=	\e[30m
+_RED		=	\e[31m
+_GREEN		=	\e[32m
+_YELLOW		=	\e[33m
+_BLUE		=	\e[34m
+_PURPLE		=	\e[35m
+_CYAN		=	\e[36m
+_WHITE		=	\e[37m
+
+_IGREY		=	\e[40m
+_IRED		=	\e[41m
+_IGREEN		=	\e[42m
+_IYELLOW	=	\e[43m
+_IBLUE		=	\e[44m
+_IPURPLE	=	\e[45m
+_ICYAN		=	\e[46m
+_IWHITE		=	\e[47m
+
+_MOFF		=	\e[?25l
+_MON		=	\e[?25h
+_MUP		=	\e[1A
+_ERASE		=	\e[K
+
+NB = $(shell find . -type f | grep .c | grep src/ | wc -l)
+CNT = 1
+
 NAME = minishell
 
 # Directories
@@ -98,52 +132,37 @@ ascii:
 	@echo "\033[1m\033[38;5;45m  S     S    H    H   E        L        L         u     u\033[0m"  # Bold text in pink
 	@echo "\033[1m\033[38;5;45m   sSSSs     h    h   eEEEe    LLLLLl   LLLLLLl     uUu\033[0m\n"  # Bold text in bright red
 
-loading_bar:
-	@printf 'Compiling your code: '
-	@printf '     \033[1;32m                                                                  (0%%)'
-	@sleep 0.1
-	@printf '\r   \033[1;32m████\033[0m                                                       (10%%)'
-	@sleep 0.1
-	@printf '\r   \033[1;32m█████████\033[0m                                                   (20%%)'
-	@sleep 0.1
-	@printf '\r   \033[1;32m███████████████\033[0m                                             (30%%)'
-	@sleep 0.1
-	@printf '\r   \033[1;32m████████████████████\033[0m                                        (40%%)'
-	@sleep 0.1
-	@printf '\r   \033[1;32m██████████████████████████\033[0m                                  (50%%)'
-	@sleep 0.1
-	@printf '\r   \033[1;32m████████████████████████████████\033[0m                            (60%%)'
-	@sleep 0.1
-	@printf '\r   \033[1;32m██████████████████████████████████████\033[0m                      (70%%)'
-	@sleep 0.1
-	@printf '\r   \033[1;32m██████████████████████████████████████████████\033[0m              (80%%)'
-	@sleep 0.1
-	@printf '\r   \033[1;32m████████████████████████████████████████████████████\033[0m        (90%%)'
-	@sleep 0.1
-	@printf '\r   \033[1;32m████████████████████████████████████████████████████████████\033[0m(100%%)'
-	@printf '\n'
-
-
-
-$(NAME): $(SRCS) $(OBJ_DIR) $(OBJS)
-#	gcc $(CCFLAGS) $(OBJS) -L$(LIBFT) -lft -lreadline -o $(NAME)
-	gcc $(CCFLAGS) $(OBJS) -L$(LIBFT) -L$(HOME)/.brew/Cellar/readline/8.2.1/lib -lft -lreadline -o $(NAME)
+$(NAME): ascii $(SRCS) $(OBJ_DIR) $(OBJS)
+	@printf "\n\n$(_BOLD)$(_WHITE)shellusion ready$(_END)\n"
+	@gcc $(CCFLAGS) $(OBJS) -L$(LIBFT) -L$(HOME)/.brew/Cellar/readline/8.2.1/lib -lft -lreadline -o $(NAME)
+	@printf "$(_BOLD)$(_GREEN)OK! $(_END)$(_DIM)$(_WHITE)(./$(NAME))$(_END)\n\n"
 
 debug: $(SRCS) $(OBJ_DIR) $(OBJS)
 	gcc $(CCFLAGS) -fsanitize=address -g3 $(OBJS) -L$(LIBFT) -L$(HOME)/.brew/Cellar/readline/8.2.1/lib -lft -lreadline -o $(NAME)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-#	gcc $(CCFLAGS) -I$(INC_DIR) -I$(LIBFT) $< -c -o $@
-	gcc $(CCFLAGS) -I$(INC_DIR) -I$(LIBFT) -I$(HOME)/.brew/Cellar/readline/8.2.1/include $< -c -o $@
+	@gcc $(CCFLAGS) -I$(INC_DIR) -I$(LIBFT) -I$(HOME)/.brew/Cellar/readline/8.2.1/include $< -c -o $@
+	@printf "$(_ERASE)\r"
+	@printf "$(_YELLOW)$<$(_END)\n"
+	@for i in $$(seq 1 $(CNT)); \
+	do \
+		printf "$(_BOLD)$(_GREEN)█$(_END)"; \
+	done
+	$(eval CNT=$(shell echo $$(($(CNT)+1))))
+	@printf "\r$(_MUP)"
 
 clean:
-	rm -f $(OBJS)
-	rm -rf $(OBJ_DIR)
-	make clean -C $(LIBFT)
+	@printf "$(_BOLD)$(_WHITE)Removing $(_RED)$(NAME)$(_WHITE) objects$(_END)\n"
+	@rm -f $(OBJS)
+	@rm -rf $(OBJ_DIR)
+	@printf "$(_BOLD)$(_WHITE)Removing $(_RED)libft$(_WHITE) objects$(_END)\n"
+	@make clean -C $(LIBFT)
 
 fclean: clean
-	rm -f $(NAME)
-	rm -f $(LIBFT)libft.a
+	@printf "$(_BOLD)$(_WHITE)Removing $(_RED)$(NAME)$(_WHITE) (./$(NAME))$(_END)\n"
+	@rm -f $(NAME)
+	@printf "$(_BOLD)$(_WHITE)Removing $(_RED)libft.a$(_WHITE) (./$(LIBFT)libft.a)$(_END)\n"
+	@rm -f $(LIBFT)libft.a
 
 re: fclean all
 
@@ -158,4 +177,4 @@ $(OBJ_DIR):
 	@mkdir $(OBJ_DIR)/$(PARS_DIR)
 
 libft:
-	make -C $(LIBFT)
+	@make -C $(LIBFT)
