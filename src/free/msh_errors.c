@@ -59,3 +59,12 @@ void	pip_no_exec(char *s)
 	free(err);
 	exit(ERR_NOEXEC);
 }
+
+int	msh_error_no_such_file(char *msg, int err_code)
+{
+	ft_putstr_fd("shellusion: ", STDERR_FILENO);
+	ft_putstr_fd(msg, STDERR_FILENO);
+	ft_putstr_fd(" : No such file or directory\n", STDERR_FILENO);
+	msh_set_gcode(err_code);
+	return (err_code);
+}

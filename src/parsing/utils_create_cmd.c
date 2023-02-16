@@ -69,7 +69,7 @@ int	check_redir_type(t_msh_data *m_d, t_tok_list *tmp, t_cmd *end)
 	{
 		end->infile = open(tmp->next->val, O_RDONLY);
 		if (end->infile < 0)
-			return (msh_error(1, ERR_OPEN, 1));
+			return (msh_error_no_such_file(tmp->next->val, 1));
 	}
 	else if (tmp->type == DLT)
 	{

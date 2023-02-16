@@ -59,19 +59,25 @@ int	msh_parsing(t_msh_data *m_d)
 
 int	new_line(t_msh_data *m_d, char *line)
 {
-	int	ret;
-
-	ret = msh_lex(m_d, line);
+	if (msh_lex(m_d, line) != 0)
+	{
+		free(line);
+		return(EXIT_FAILURE);
+	}
 	free(line);
-	if (ret != EXIT_SUCCESS)
-		return (ret);
 	msh_tok_lstaddb(&m_d->tokens, msh_tok_lstnew(END, 0));
 	if (msh_parsing(m_d) != 0)
+	{
+		msh_pip_reset(m_d);
 		return (EXIT_FAILURE);
+	}
 	if (msh_pipex(m_d) != 0)
+	{
+		msh_pip_reset(m_d);
 		return (EXIT_FAILURE);
+	}
 	msh_pip_reset(m_d);
-	return (ret);
+	return (EXIT_SUCCESS);
 }
 
 int	msh_get_gcode(void)

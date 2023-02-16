@@ -81,6 +81,5 @@ int	close_fd_tab(int *fd, int size)
 			return (msh_error(1, ERR_CLOSE, 1));
 		i++;
 	}
-	free(fd);
 	return (EXIT_SUCCESS);
 }

@@ -64,11 +64,18 @@ int	msh_env_init(t_msh_data *m_data, char **env)
 
 void	msh_pip_reset(t_msh_data *m_data)
 {
-	free(m_data->pid);
-	free_tab_char(m_data->path);
-	free_tab_char(m_data->env_upd);
-	free_t_cmd(m_data);
-	free(m_data->trunc_lst);
+	if (m_data->fd)
+		free(m_data->fd);
+	if (m_data->pid)
+		free(m_data->pid);
+	if (m_data->path)
+		free_tab_char(m_data->path);
+	if (m_data->env_upd)
+		free_tab_char(m_data->env_upd);
+	if (m_data->cmds)
+		free_t_cmd(m_data);
+	if (m_data->trunc_lst)
+		free(m_data->trunc_lst);
 	m_data->fd = NULL;
 	m_data->pid = NULL;
 	m_data->nb_cmd = 0;

@@ -43,5 +43,6 @@ int		msh_error(int ret, char *msg, int err_code);
 void	msh_error_cmd_not_found(char *msg, int err_code);
 int		export_key_error(char *key, char *val);
 void	pip_no_exec(char *s);
+int		msh_error_no_such_file(char *msg, int err_code);
 
 #endif

@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-// attention aux segfault
 int	check_redir_start_end(t_msh_data *d)
 {
 	t_tok_list	*cur;

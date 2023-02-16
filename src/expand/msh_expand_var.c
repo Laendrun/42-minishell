@@ -21,7 +21,7 @@ int	handle_var(int (*i)[2], t_tok_list *tok, char **ret, t_msh_data *m_d)
 	(*i)[0]++;
 	(*i)[1] = (*i)[0];
 	while (tok->val[(*i)[0]] && !msh_isspace(tok->val[(*i)[0]])
-			&& tok->val[(*i)[0]] != '$')
+			&& tok->val[(*i)[0]] != '$' && tok->val[(*i)[0]] != '\'')
 		(*i)[0]++;
 	*ret = ft_strjoin_free(*ret, msh_get_env_free(m_d,
 				ft_substr(tok->val, (*i)[1], (*i)[0] - (*i)[1])));

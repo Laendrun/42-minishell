@@ -73,7 +73,7 @@
 
 # define ERR_PIPE "error creating pipe :"
 # define ERR_CLOSE "close error :"
-# define ERR_OPEN "open error :"
+# define ERR_OPEN "bash"
 # define ERR_FORK "fork error : "
 # define ERR_DUP2 "dup2 error : "
 # define ERR_INIT "shellusion: initialization error"

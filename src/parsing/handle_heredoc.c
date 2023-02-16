@@ -87,6 +87,8 @@ void	heredoc_loop(char *line, char *read, t_msh_data *m_d, t_cmd *end)
 		}
 		ft_putstr_fd(ft_strcat(line, "\n"), end->hdoc[1]);
 		free(line);
+		if (msh_get_gcode() != 0)
+			return ;
 		read = readline(">");
 		line = msh_var_in_hdoc(m_d, read);
 		free(read);
@@ -98,6 +100,7 @@ int	ft_here_doc(t_msh_data *m_d, t_cmd *end)
 	char	*line;
 	char	*read;
 
+	msh_set_gcode(0);
 	if (pipe(end->hdoc) < 0)
 		return (msh_error(1, ERR_PIPE, 1));
 	read = readline(">");
