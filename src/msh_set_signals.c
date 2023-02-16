@@ -48,7 +48,7 @@ void	msh_sigquit(void)
 {
 	struct sigaction	action;
 
-	action.sa_handler = &nothing;
+	action.sa_handler = SIG_IGN;
 	sigaction(SIGQUIT, &action, NULL);
 }
 

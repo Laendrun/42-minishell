@@ -100,8 +100,6 @@ ascii:
 	@echo "\033[1m\033[38;5;93m  S     S    H    H   E        L\033[0m"  # Bold text in pink
 	@echo "\033[1m\033[38;5;196m   sSSSs     h    h   eEEEe    LLLLLl\033[0m\n"  # Bold text in bright red
 
-
-
 loading_bar:
 	@printf 'Compiling your code: '
 	@printf '     \033[1;32m                                                                  (0%%)'
