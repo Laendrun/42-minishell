@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 14:22:06 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/16 13:46:52 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/16 15:01:54 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@
 # define ERR_CD_CD1 "shellusion: cd: "
 # define ERR_CD_CD2 ": no such file or directory\n"
 # define ERR_CD_CD3 ": Not a directory\n"
+# define ERR_CD_HOME "shellusion: cd: HOME not set\n"
 
 # define ERR_ENV_ARGS "shellusion: env: too many arguments"
 

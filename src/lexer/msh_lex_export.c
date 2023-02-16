@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 17:23:15 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/15 18:49:29 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/16 16:15:49 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int	msh_lex_export(t_msh_data *m_d, char *line, unsigned int *i)
 
 	err = EXIT_SUCCESS;
 	*i += 7;
-	if (!ft_strchr(line + *i, '='))
-		return (EXIT_SUCCESS);
 	insert_token(m_d, WORD, ft_strdup("export"), &err);
 	insert_token(m_d, SEP, 0, &err);
+	if (!ft_strchr(line + *i, '='))
+		return (EXIT_SUCCESS);
 	t = *i;
 	while (line[*i] != '=')
 		*i += 1;
