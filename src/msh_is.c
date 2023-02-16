@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_is.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:34:05 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/13 12:50:33 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/16 16:16:52 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,11 @@ int	msh_is_builtin(char *str)
 	t = !ft_strncmp("env", str, 4);
 	t = (!ft_strncmp("pwd", str, 4) || t);
 	t = (!ft_strncmp("cd", str, 3) || t);
-	t = (!ft_strncmp("export", str, 7) || t);
+	t = (!ft_strncmp("export", str, 8) || t);
 	t = (!ft_strncmp("unset", str, 6) || t);
 	t = (!ft_strncmp("exit", str, 5) || t);
 	t = (!ft_strncmp("echo", str, 5) || t);
+	t = (!ft_strncmp("clear", str, 6) || t);
 	return (t);
 }
 

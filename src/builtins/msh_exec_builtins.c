@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 21:00:02 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/15 13:48:29 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/16 16:18:36 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	msh_exec_builtin(t_cmd *cmd, t_msh_data *m_d)
 		ret = msh_unset(m_d, cmd);
 	else if (!ft_strncmp("exit", cmd->args[0], 5))
 		ret = msh_exit(m_d, cmd);
+	else if (!ft_strncmp("clear", cmd->args[0], 6))
+		ret = msh_clear(m_d);
 	return (ret);
 }
 
