@@ -27,3 +27,10 @@ void	nothing(int v)
 	(void)v;
 	rl_redisplay();
 }
+
+void	backslash_n(int v)
+{
+	(void)v;
+	write(1, "\n", 1);
+	rl_redisplay();
+}

@@ -24,7 +24,7 @@ void	sigint_update(void)
 {
 	struct sigaction	action;
 
-	action.sa_handler = &nothing;
+	action.sa_handler = &backslash_n;
 	sigaction(SIGINT, &action, NULL);
 }
 
