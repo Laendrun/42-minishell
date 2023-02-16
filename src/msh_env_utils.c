@@ -6,18 +6,11 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 21:29:27 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/15 14:09:02 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/16 18:17:53 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*
-Loop/browse through the env linked list to
-find the value associated with the
-key provided and return
-the length of the string value.
-*/
 
 int	msh_get_env_var_len(t_msh_data *m_data, char *key)
 {
@@ -36,12 +29,6 @@ int	msh_get_env_var_len(t_msh_data *m_data, char *key)
 	}
 	return (0);
 }
-
-/*
-Loop/browse through the env linked list to
-find the value associated with the
-key provided.
-*/
 
 char	*msh_get_env(t_msh_data *m_data, char *key)
 {

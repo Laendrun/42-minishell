@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 19:33:23 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/15 20:04:47 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/16 18:16:07 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,6 @@ void	free_t_cmd(t_msh_data *d)
 	}
 	d->cmds = NULL;
 }
-
-// void	f_error(char *str, char *erno, t_msh_data *d)
-// {
-// 	ft_putstr_fd(str, 2);
-// 	ft_putstr_fd(erno, 2);
-// 	write(2, "\n", 1);
-// 	if (d->pid)
-// 		free(d->pid);
-// 	exit(0);
-// }
 
 int	close_fd_tab(int *fd, int size)
 {

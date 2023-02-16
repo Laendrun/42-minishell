@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 10:24:41 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/15 22:50:33 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/16 18:12:04 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // https://www.gnu.org/software/bash/manual/bash.html#index-export
 
-int	print_declared_vars(t_msh_data *m_d, int out)
+static int	print_declared_vars(t_msh_data *m_d, int out)
 {
 	t_env_list	*tmp;
 

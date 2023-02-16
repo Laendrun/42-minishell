@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:34:05 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/16 16:16:52 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/16 18:20:41 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,6 @@
 int	msh_isspace(int c)
 {
 	return (c == 9 || c == 10 || c == 11 || c == 12 || c == 13 || c == 32);
-}
-
-int	msh_isoperator(int c)
-{
-	return (c == 38 || c == 60 || c == 62 || c == 124 || c == 45);
-}
-
-// (, ), {, }, [, ]
-// ., @, +, !, ?, ^ 
-// *, #, _, ;, :, =
-// ,, /, %, \, $, ~
-int	msh_isspec(int c)
-{
-	int	t;
-
-	t = (c == 40 || c == 41 || c == 123 || c == 125 || c == 91 || c == 93);
-	t = (t || c == 46 || c == 64 || c == 43 || c == 33 || c == 63 || c == 94);
-	t = (t || c == 42 || c == 35 || c == 95 || c == 59 || c == 58 || c == 61);
-	t = (t || c == 44 || c == 47 || c == 37 || c == 92 || c == 36 || c == 126);
-	return (t);
 }
 
 int	msh_is_builtin(char *str)
@@ -62,4 +42,18 @@ int	msh_is_envvar_comp(t_tok_list *token)
 	t = (t || token->type != GT);
 	t = (t || ft_strncmp(token->val, "$", 2));
 	return (t);
+}
+
+int	str_isalnum(char *s)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (!ft_isalnum(s[i]))
+			return (0);
+		i++;
+	}
+	return (1);
 }

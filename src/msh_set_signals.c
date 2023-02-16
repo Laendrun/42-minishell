@@ -6,19 +6,11 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 20:54:27 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/15 18:55:24 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/16 18:32:20 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// SIGINT (ctrl-c)
-// SIGQUIT (ctrl-\)
-// SIGHUP (ctrl-d)
-
-// if in child +> silence these motherfucking signals
-// write a function to set the signal handlers to be "nothing"
-// so they will finally shut and let us work in peace
 
 void	sigint_update(void)
 {
@@ -27,14 +19,6 @@ void	sigint_update(void)
 	action.sa_handler = &backslash_n;
 	sigaction(SIGINT, &action, NULL);
 }
-
-// void	handle_sighup(void)
-// {
-// 	struct sigaction	action;
-
-// 	action.sa_handler = &nothing;
-// 	sigaction(SIGHUP, &action, NULL);
-// }
 
 void	msh_sigint(void)
 {

@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 10:59:28 by egauthey          #+#    #+#             */
-/*   Updated: 2023/02/16 14:56:22 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/16 18:17:09 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,56 +116,3 @@ int	msh_create_commmands(t_msh_data *m_d)
 	}
 	return (EXIT_SUCCESS);
 }
-
-// print_array_lst(m_d);
-
-	// t_cmd *tmp;
-	// tmp = m_d->cmds;
-	// while(tmp)
-	// {
-	// 	i = 0;
-	// 	while (tmp->args[i])
-	// 	{
-	// 		printf("%d : %s\n", i, tmp->args[i]);
-	// 		i++;
-	// 	}
-	// 	printf("inf : %d\n", tmp->infile);
-	// 	printf("hdoc : %d\n", tmp->heredoc);
-	// 	printf("delim : %s\n", tmp->delim);
-	// 	printf("out app : %d\n", tmp->out_app);
-	// 	printf("out trunc : %d\n", tmp->out_trunc);
-	// 	tmp = tmp->next;
-	// }
-
-// BEFORE NORM
-// 	int	create_cmd_lst(t_msh_data *m_d, int i)
-// {
-// 	t_cmd		*new;
-// 	char		**args;
-// 	int			nb_arg;
-// 	t_tok_list	*tmp;
-// 	int			j;
-
-// 	nb_arg = get_nb_args(m_d->trunc_lst[i]);
-// 	args = ft_calloc(sizeof(char *), (nb_arg + 1));
-// 	if (!args)
-// 		return (msh_error(1, ERR_MALMES, ERR_MALLOC));
-// 	tmp = m_d->trunc_lst[i];
-// 	j = 0;
-// 	while (tmp)
-// 	{
-// 		if (tmp->type == PIPE || tmp->type == END)
-// 			break ;
-// 		// if (tmp->type == WORD || tmp->type == STR)
-// 		// {
-// 		// 	args[j] = ft_strdup(tmp->val);
-// 		// 	if (!args[j])
-// 		// 		return (msh_error(1, ERR_MALMES, ERR_MALLOC));
-// 		// 	j++;
-// 		// }
-// 		tmp = tmp->next;
-// 	}
-// 	new = msh_cmd_lstnew(NULL, args);
-// 	msh_cmd_lstaddb(&m_d->cmds, new);
-// 	return (EXIT_SUCCESS);
-// }

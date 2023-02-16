@@ -50,7 +50,6 @@ PIPEX_SRC = $(addprefix $(PIPEX_DIR),	msh_pipex.c \
 										process.c \
 										process2.c \
 										process3.c \
-										tmp.c \
 										)
 
 DEBUG_SRC = $(addprefix $(DEBUG_DIR),	msh_print_utils.c \
@@ -67,9 +66,7 @@ SRC =	main.c \
 		msh_env_lst.c \
 		msh_tok_lst.c \
 		msh_lexer.c \
-		msh_parser.c \
 		msh_is.c \
-		msh_is2.c \
 		msh_utils.c \
 		msh_env_utils.c \
 		msh_env_utils2.c \

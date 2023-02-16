@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:05:50 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/15 18:44:33 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/16 18:10:47 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	new_line(t_msh_data *m_d, char *line)
 	if (msh_lex(m_d, line) != 0)
 	{
 		free(line);
-		return(EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	}
 	free(line);
 	msh_tok_lstaddb(&m_d->tokens, msh_tok_lstnew(END, 0));
