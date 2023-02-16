@@ -92,13 +92,13 @@ CCFLAGS = -Wall -Wextra -Werror
 all: libft $(NAME)
 
 ascii:
-	@echo "\n\033[1m\033[38;5;196m   sSSSs     h    h   eEEEe    l\033[0m"  # Bold text in bright red
-	@echo "\033[1m\033[38;5;202m  S     S    H    H   E        L\033[0m"  # Bold text in orange
-	@echo "\033[1m\033[38;5;226m  S          H    H   E        L\033[0m"  # Bold text in yellow
-	@echo "\033[1m\033[38;5;82m   SSSs      HHHHHH   EEEEe    L\033[0m"    # Bold text in green
-	@echo "\033[1m\033[38;5;45m       S     H    H   E        L\033[0m"    # Bold text in blue
-	@echo "\033[1m\033[38;5;93m  S     S    H    H   E        L\033[0m"  # Bold text in pink
-	@echo "\033[1m\033[38;5;196m   sSSSs     h    h   eEEEe    LLLLLl\033[0m\n"  # Bold text in bright red
+	@echo "\n\033[1m\033[38;5;45m   sSSSs     h    h   eEEEe    l        l        u       u\033[0m"  # Bold text in bright red
+	@echo "\033[1m\033[38;5;45m  S     S    H    H   E        L        L        U       U\033[0m"  # Bold text in orange
+	@echo "\033[1m\033[38;5;45m  S          H    H   E        L        L        U       U\033[0m"  # Bold text in yellow
+	@echo "\033[1m\033[38;5;45m   SSSs      HHHHHH   EEEEe    L        L        U       U\033[0m"    # Bold text in green
+	@echo "\033[1m\033[38;5;45m       S     H    H   E        L        L        U       U\033[0m"    # Bold text in blue
+	@echo "\033[1m\033[38;5;45m  S     S    H    H   E        L        L         u     u\033[0m"  # Bold text in pink
+	@echo "\033[1m\033[38;5;45m   sSSSs     h    h   eEEEe    LLLLLl   LLLLLLl     uUu\033[0m\n"  # Bold text in bright red
 
 loading_bar:
 	@printf 'Compiling your code: '
