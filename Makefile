@@ -124,13 +124,13 @@ CCFLAGS = -Wall -Wextra -Werror
 all: libft $(NAME)
 
 ascii:
-	@echo "\n\033[1m\033[38;5;45m   sSSSs     h    h   eEEEe    l        l        u       u\033[0m"  # Bold text in bright red
-	@echo "\033[1m\033[38;5;45m  S     S    H    H   E        L        L        U       U\033[0m"  # Bold text in orange
-	@echo "\033[1m\033[38;5;45m  S          H    H   E        L        L        U       U\033[0m"  # Bold text in yellow
-	@echo "\033[1m\033[38;5;45m   SSSs      HHHHHH   EEEEe    L        L        U       U\033[0m"    # Bold text in green
-	@echo "\033[1m\033[38;5;45m       S     H    H   E        L        L        U       U\033[0m"    # Bold text in blue
-	@echo "\033[1m\033[38;5;45m  S     S    H    H   E        L        L         u     u\033[0m"  # Bold text in pink
-	@echo "\033[1m\033[38;5;45m   sSSSs     h    h   eEEEe    LLLLLl   LLLLLLl     uUu\033[0m\n"  # Bold text in bright red
+	@echo "\n\033[1m\033[38;5;45m   sSSSs     h    h   eEEEe    l        l        u       u      sSSSs      I        oOOOo        nNNNn\033[0m"
+	@echo "\033[1m\033[38;5;45m  S     S    H    H   E        L        L        U       U     S     S     I       O     O      N     N\033[0m"
+	@echo "\033[1m\033[38;5;45m  S          H    H   E        L        L        U       U     S           I       O     O      N     N\033[0m"
+	@echo "\033[1m\033[38;5;45m   SSSs      HHHHHH   EEEEe    L        L        U       U      SSSs       I       O     O      N     N\033[0m"
+	@echo "\033[1m\033[38;5;45m       S     H    H   E        L        L        U       U          S      I       O     O      N     N\033[0m"
+	@echo "\033[1m\033[38;5;45m  S     S    H    H   E        L        L         u     u      S     S     I       O     O      N     N\033[0m"
+	@echo "\033[1m\033[38;5;45m   sSSSs     h    h   eEEEe    LLLLLl   LLLLLLl     uUu         sSSSs      I        OoooO       N     N\033[0m\n"
 
 $(NAME): ascii $(SRCS) $(OBJ_DIR) $(OBJS)
 	@printf "\n\n$(_BOLD)$(_WHITE)shellusion ready$(_END)\n"
