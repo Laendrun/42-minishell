@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 10:24:41 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/16 18:12:04 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/17 11:51:35 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ int	msh_export(t_msh_data *m_d, t_cmd *cmd)
 	set_out(cmd, &out);
 	if (count_args(cmd) == 1)
 		return (print_declared_vars(m_d, out));
+	if (count_args(cmd) == 2)
+		return (EXIT_SUCCESS);
 	if (!str_isalnum(cmd->args[1]) && m_d->nb_cmd == 1)
 		return (export_key_error(cmd->args[1], cmd->args[2]));
 	else if (!str_isalnum(cmd->args[1]) && m_d->nb_cmd > 1)
