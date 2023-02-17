@@ -20,7 +20,8 @@ int	msh_lex_word(t_msh_data *m_d, char *line, unsigned int *i)
 
 	t = *i;
 	while (!msh_isspace(line[*i]) && line[*i]
-		&& line[*i] != '|' && line[*i] != '<' && line[*i] != '>')
+		&& line[*i] != '|' && line[*i] != '<' && line[*i] != '>'
+		&& line[*i] != '\'' && line[*i] != '\"')
 		*i += 1;
 	tmp = ft_substr(line, t, *i - t);
 	if (!tmp)

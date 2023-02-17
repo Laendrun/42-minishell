@@ -21,7 +21,7 @@ int	check_redir_start_end(t_msh_data *d)
 		return (msh_error(1, ERR_NEAR_TOK, 258));
 	if (cur && (cur->type == GT || cur->type == DGT
 			|| cur->type == LT || cur->type == DLT)
-			&& !cur->next->val[0])
+		&& !cur->next->val[0])
 		return (msh_error(1, ERR_NEAR_TOK, 258));
 	while (cur->next)
 	{
