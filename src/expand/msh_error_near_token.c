@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_error_near_token.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egauthey <egauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 18:38:34 by egauthey          #+#    #+#             */
-/*   Updated: 2023/02/13 11:32:26 by egauthey         ###   ########.fr       */
+/*   Updated: 2023/02/17 10:24:12 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ int	check_redir_start_end(t_msh_data *d)
 
 	cur = d->tokens;
 	if (cur && cur->type == PIPE)
+		return (msh_error(1, ERR_NEAR_TOK, 258));
+	if (cur && (cur->type == GT || cur->type == DGT
+			|| cur->type == LT || cur->type == DLT)
+			&& !cur->next->val[0])
 		return (msh_error(1, ERR_NEAR_TOK, 258));
 	while (cur->next)
 	{

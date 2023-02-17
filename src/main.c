@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
+/*   By: saeby <saeby>                              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:05:50 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/16 18:10:47 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/17 10:24:33 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	msh_parsing(t_msh_data *m_d)
 		return (EXIT_FAILURE);
 	if (msh_handle_quotes(m_d) != 0)
 		return (EXIT_FAILURE);
+	// print_tok(m_d);
 	if (msh_err_near_token(m_d) != 0)
 		return (EXIT_FAILURE);
 	if (msh_create_commmands(m_d) != 0)
