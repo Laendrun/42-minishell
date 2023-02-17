@@ -39,7 +39,7 @@ int	main(int ac, char **av, char **env)
 		if (!rl)
 			break ;
 	}
-	exit(ret);
+	return (ret);
 }
 
 int	msh_parsing(t_msh_data *m_d)
@@ -50,7 +50,6 @@ int	msh_parsing(t_msh_data *m_d)
 		return (EXIT_FAILURE);
 	if (msh_handle_quotes(m_d) != 0)
 		return (EXIT_FAILURE);
-	// print_tok(m_d);
 	if (msh_err_near_token(m_d) != 0)
 		return (EXIT_FAILURE);
 	if (msh_create_commmands(m_d) != 0)
