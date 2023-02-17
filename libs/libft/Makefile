@@ -110,7 +110,7 @@ all: $(NAME)
 %.o: %.c
 	@$(CC) -I. $(CCFLAGS) -o $@ -c $?
 	@printf "$(_ERASE)\r"
-	@printf "$(_YELLOW)$<$(_END)\n"
+	@printf "$(_WHITE)$<$(_END)\n"
 	@for i in $$(seq 1 $(LCNT)); \
 	do \
 		printf "$(_GREEN)█$(_END)"; \

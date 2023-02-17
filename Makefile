@@ -143,7 +143,7 @@ debug: $(SRCS) $(OBJ_DIR) $(OBJS)
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@gcc $(CCFLAGS) -I$(INC_DIR) -I$(LIBFT) -I$(HOME)/.brew/Cellar/readline/8.2.1/include $< -c -o $@
 	@printf "$(_ERASE)\r"
-	@printf "$(_YELLOW)$<$(_END)\n"
+	@printf "$(_WHITE)$<$(_END)\n"
 	@for i in $$(seq 1 $(CNT)); \
 	do \
 		printf "$(_BOLD)$(_GREEN)█$(_END)"; \

@@ -6,7 +6,7 @@
 /*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 18:51:04 by egauthey          #+#    #+#             */
-/*   Updated: 2023/02/16 18:16:50 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/17 13:09:12 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ char	*msh_var_in_hdoc(t_msh_data *m_d, char *tok)
 	int		i[2];
 	char	*ret;
 
-	ret = ft_strdup("");
 	if (!tok)
 		return (NULL);
+	ret = ft_strdup("");
 	i[0] = -1;
 	i[1] = 0;
 	while (tok[++i[0]])

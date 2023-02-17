@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saeby <saeby>                              +#+  +:+       +#+        */
+/*   By: saeby <saeby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:35:46 by saeby             #+#    #+#             */
-/*   Updated: 2023/02/17 10:25:14 by saeby            ###   ########.fr       */
+/*   Updated: 2023/02/17 13:10:08 by saeby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	msh_init(t_msh_data *m_data, char **env)
 	int	ret;
 
 	m_data->name = "shellusion";
-	m_data->prompt = "\033[0;96mshellusion-1.1>\033[0;39m ";
+	m_data->prompt = "\033[0;96mshellusion-1.2>\033[0;39m ";
 	m_data->env = NULL;
 	m_data->tokens = NULL;
 	m_data->fd = NULL;
